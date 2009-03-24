@@ -1,0 +1,23 @@
+
+Setting up the selenium server:
+
+Download the selenium rc server from http://seleniumhq.org/download/
+Unzip the file and cd into selenium-remote-control-1.0-beta-2/selenium-server-1.0-beta-2
+
+Run the selenium server with this command
+
+$ java -jar selenium-server.jar -browserSessionReuse -forcedBrowserModeRestofLine *firefox3 /usr/lib/firefox/fefox 
+
+
+Optional:
+
+Download the selenium-core from http://seleniumhq.org/download/
+Unzip the file on the test server machine
+Link the selenium-core directory to the xsp tests directory
+
+# Note the name change in the link
+$ ln -s /home/users/linux/selenium-core /usr/share/mono/lib/xsp/tests/selenium-server
+
+This url should resolve properly:
+http://<testserver>.mono.lab.novell.com:8080/selenium-server/core/Blank.html
+
