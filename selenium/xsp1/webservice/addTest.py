@@ -7,6 +7,7 @@ sys.path.append('../..')
 from selenium import selenium
 from monotesting import *
 
+testcaseid = 837262
 
 class addTest(unittest.TestCase):
     def setUp(self):
@@ -29,11 +30,11 @@ class addTest(unittest.TestCase):
         sel.wait_for_page_to_load("30000")
         try: 
             self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
-            #testopia.passtestcase(testcaseid)
+            passTestCase(testcaseid)
 
         except AssertionError, e:
             self.verificationErrors.append(str(e))
-            #testopia.failtestcase(testcaseid) 
+            failTestCase(testcaseid)
 
     
     def tearDown(self):

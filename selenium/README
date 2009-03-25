@@ -1,4 +1,27 @@
+######################################################################
+#
+#   You must create two python modules (creds.py,defaults.py)
 
+$ cat creds.py
+
+username=youruser
+password=yourpassword
+
+$ cat defaults.py
+
+base_url = 'http://mono-mac1.provo.novell.com'
+testrunid = None
+
+rc_server = 'localhost'
+rc_port = 4444
+rc_browser = '*chrome'
+
+xsp1_port = 8081
+xsp2_port = 8082
+graffiti_port = 8083
+
+
+####################################################################
 Setting up the selenium server:
 
 Download the selenium rc server from http://seleniumhq.org/download/
@@ -11,6 +34,7 @@ $ java -jar selenium-server.jar -browserSessionReuse -forcedBrowserModeRestofLin
 Are there any firefox options that we can use to increase preformance?
 
 
+####################################################################
 Optional:
 
 Download the selenium-core from http://seleniumhq.org/download/
