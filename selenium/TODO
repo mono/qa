@@ -1,0 +1,13 @@
+
+Things to do for complete automated testing of asp.net:
+
+ * Complete thorough test cases for xsp1
+ * Complete thorough test cases for xsp2
+ * Complete thorough test cases for mojoportal
+ * Complete thorough test cases for graffiti
+ * Complete thorough test cases for asp.net apps
+
+ * Added script/args values to automation section ofthe test cases in Testopia that we can use
+ * Integrate bugzilla python xmlrpc to mark tests as pass/fail
+ * 
+ * Integrate Selenium Grid
