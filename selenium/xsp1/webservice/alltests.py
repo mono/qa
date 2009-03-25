@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import unittest
 
-from addTest import addTest
-from echoTest import echoTest
+from addTest import *
+from echoTest import *
 
 if __name__ == '__main__':
     unittest.main()
