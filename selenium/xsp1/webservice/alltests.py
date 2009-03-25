@@ -1,8 +1,12 @@
 #!/usr/bin/python
-import unittest
+import sys,unittest
 
 from addTest import *
 from echoTest import *
 
+sys.path.append('../..')
+from monotesting import *
+
+
 if __name__ == '__main__':
-    unittest.main()
+    monotesting_main()

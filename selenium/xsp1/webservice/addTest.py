@@ -27,8 +27,13 @@ class addTest(unittest.TestCase):
         sel.type("b", "8361")
         sel.click("//input[@value='Invoke']")
         sel.wait_for_page_to_load("30000")
-        try: self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
-        except AssertionError, e: self.verificationErrors.append(str(e))
+        try: 
+            self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
+            #testopia.passtestcase(testcaseid)
+
+        except AssertionError, e:
+            self.verificationErrors.append(str(e))
+            #testopia.failtestcase(testcaseid) 
 
     
     def tearDown(self):
@@ -36,4 +41,5 @@ class addTest(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
-	unittest.main()
+    monotesting_main()
+    #unittest.main()
