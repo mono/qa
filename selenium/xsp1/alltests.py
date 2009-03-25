@@ -9,6 +9,7 @@ sys.path.append('..')
 from webservice.alltests import *
 from auth.alltests import *
 from databinding.alltests import *
+from handlers.alltest import *
 
 
 if __name__ == '__main__':
