@@ -1,21 +1,19 @@
 #!/usr/bin/env python
 
 import sys
+sys.path.append('../../..')
+from selenium.selenium import selenium
+from selenium.seleniumTestCase import *
+from common.monotesting import *
+
 import unittest, time, re
 
-sys.path.append('../..')
-from selenium import selenium
-from monotesting import *
 
-testcaseid = 837262
-
-class addTest(unittest.TestCase):
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
-        self.selenium.start()
+class addTest(seleniumTestCase):
+    testcaseid = 837262
 
     def test_add(self):
+        if not self.canRun: return
         sel = self.selenium
         sel.open("/index.aspx")
         sel.click("link=TestService.asmx")
@@ -30,17 +28,11 @@ class addTest(unittest.TestCase):
         sel.wait_for_page_to_load("30000")
         try: 
             self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
-            passTestCase(testcaseid)
 
         except AssertionError, e:
             self.verificationErrors.append(str(e))
-            failTestCase(testcaseid)
 
     
-    def tearDown(self):
-        self.selenium.stop()
-        self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     monotesting_main()
-    #monotesting_main()

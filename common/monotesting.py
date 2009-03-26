@@ -6,10 +6,11 @@
 # Author: Rusty Howell (rhowell@novell.com)
 #
 
-import sys
+import sys,re
 import unittest
 import getopt
 from testopia import Testopia
+
 import creds
 from defaults import *
 
@@ -65,7 +66,8 @@ def loadargs(cmdargs):
         if o == '--base_url':
             base_url = a
         elif o == '--testrunid':
-            testrunid = int(a)
+            if a == '': testrunid = None
+            else: testrunid = int(a)
         elif o == '--xsp1_port':
             xsp1_port = int(a)
         elif o == '--xsp2_port':
@@ -129,81 +131,6 @@ def log(msg):
         f.write(msg)
         f.close()
 
-#####################################################################
-#
-#     Testopia helper functions
-#
-BUG_STATUS = {'IDLE':1,
-            'PASSED':2,
-            'FAILED':3,
-            'RUNNING':4,
-            'PAUSED':5,
-            'BLOCKED':6
-            }
-
-#----------------------------------------------------------------------
-def getTestopia():
-    global mytestopia
-
-    host='bugzilla.novell.com'
-    ssl=True
-    port=443
-
-    if mytestopia == None:
-        mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl,port=port)
-    return mytestopia
-
-#----------------------------------------------------------------------
-def getTestRun():
-    global testrun
-    log("Getting test run")
-    if testrunid == None or testrunid == 0:
-        log("Error: getTestRun(): testrunid == None")
-        testrun = None
-    elif testrun == None:
-        testrun = getTestopia().testrun_get(testrunid)
-    return testrun
-
-#----------------------------------------------------------------------
-def updateTestCase(testcaseid,success):
-    '''success is a bool'''
-    if success:
-        __updateTestCase(testcaseid,"PASSED")
-    else:
-        __updateTestCase(testcaseid,"FAILED")
-
-#----------------------------------------------------------------------
-def passTestCase(testcaseid):
-    __updateTestCase(testcaseid,"PASSED")
-
-#----------------------------------------------------------------------
-def failTestCase(testcaseid):
-    __updateTestCase(testcaseid,"FAILED")
-
-#----------------------------------------------------------------------
-def __updateTestCase(testcaseid,status):
-
-    if testcaseid == None:
-        log("Error: __updateTestCase(): testcaseid == None")
-        return
-
-    if getTestRun() == None:
-        log("Error: __updateTestCase(): getTestRun() == None")
-        return 
-
-    log("   Setting testcase #%d status to %s" % (testcaseid,status))
-    
-    tr = getTestRun()
-    getTestopia().testcaserun_update_alt(
-            tr['run_id'],
-            testcaseid,
-            tr['build_id'],
-            tr['environment_id'],
-            case_run_status_id=BUG_STATUS[status])
-
-def __resetTestRun(testrunid):
-    '''TODO: Resets status of all test cases to IDLE'''
-    pass
 
 ####################################################################
 #
@@ -212,15 +139,14 @@ def __resetTestRun(testrunid):
 
 def monotesting_main():
     loadargs(sys.argv[1:])
+    sys.argv = sys.argv[:1]
+    if debug:
+        sys.argv.append('-v')
     unittest.main()
 
 #----------------------------------------------------------------------
 
 if __name__ == '__main__':
-
-    if sys.argv[1] != 'reset':
-        sys.exit(1)
-
-    loadargs(sys.argv[2:])
-    __resetTestRun(testrunid)
+    print "Do not execute this module directly"
+    sys.exit(1)
 
