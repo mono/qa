@@ -48,7 +48,7 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'logfile=':'Write debug output to this file'}
 
 #----------------------------------------------------------------------
-def loadargs():
+def loadargs(cmdargs):
     global base_url,testrunid,xsp1_port,xsp2_port
     global rc_server,rc_port,rc_browser
     global graffiti_port, debug, logfile
@@ -57,7 +57,7 @@ def loadargs():
     shortargs = ''
     showvalues = False
 
-    opts,args = getopt.getopt(sys.argv[1:],shortargs,longargs)
+    opts,args = getopt.getopt(cmdargs,shortargs,longargs)
     #print  opts
     #print args
 
@@ -125,8 +125,9 @@ def log(msg):
         print msg
 
     if logfile != None:
-        # TODO: write message to logfile
-        pass
+        f = open(logfile,'a') # open using append
+        f.write(msg)
+        f.close()
 
 #####################################################################
 #
@@ -200,19 +201,26 @@ def __updateTestCase(testcaseid,status):
             tr['environment_id'],
             case_run_status_id=BUG_STATUS[status])
 
+def __resetTestRun(testrunid):
+    '''TODO: Resets status of all test cases to IDLE'''
+    pass
+
 ####################################################################
 #
 #    main methods
 #
 
 def monotesting_main():
-    loadargs()
-    sys.argv = sys.argv[:1]
+    loadargs(sys.argv[1:])
     unittest.main()
 
 #----------------------------------------------------------------------
 
 if __name__ == '__main__':
-    print "\nDo not call this module directly\n"
-    sys.exit(1)
+
+    if sys.argv[1] != 'reset':
+        sys.exit(1)
+
+    loadargs(sys.argv[2:])
+    __resetTestRun(testrunid)
 
