@@ -9,6 +9,7 @@ import unittest, time, re
 
 class arrayTest(unittest.TestCase):
     def setUp(self):
+        self.testcaseid = None
         self.verificationErrors = []
         self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
         self.selenium.start()
@@ -33,7 +34,8 @@ class arrayTest(unittest.TestCase):
     
     def tearDown(self):
         self.selenium.stop()
+        updateTestCase(self.testcaseid,len(self.verificationErrors) == 0)
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
-    unittest.main()
+    monotesting_main()

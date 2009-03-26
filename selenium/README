@@ -4,8 +4,8 @@
 
 $ cat creds.py
 
-username=youruser
-password=yourpassword
+username='youruser'
+password='yourpassword'
 
 $ cat defaults.py
 
@@ -19,6 +19,9 @@ rc_browser = '*chrome'
 xsp1_port = 8081
 xsp2_port = 8082
 graffiti_port = 8083
+
+logfile = None
+debug = False
 
 
 ####################################################################
@@ -46,4 +49,14 @@ $ ln -s /home/users/linux/selenium-core /usr/share/mono/lib/xsp/tests/selenium-s
 
 This url should resolve properly:
 http://<testserver>.mono.lab.novell.com:8080/selenium-server/core/Blank.html
+
+##################################################################
+DESIGN PATTERNS
+
+This might be the easiest way to code the pass/fail updating for Testopia
+
+    tearDown(self):
+        self.selenium.stop()
+        updateTestCase(self.testcaseid,len(self.verificationErrors) == 0) #This method call
+        self.assertEqual([], self.verificationErrors)
 

@@ -43,19 +43,22 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'rc_port=':'Port number that the RC server is using',
         'rc_browser=':'Browser that RC server should use',
         'showvalues':'Prints the current values',
-        'help':'Prints this help message'}
+        'help':'Prints this help message',
+        'debug':'Prints debug messages (implies --showvalues)',
+        'logfile=':'Write debug output to this file'}
 
 #----------------------------------------------------------------------
 def loadargs():
     global base_url,testrunid,xsp1_port,xsp2_port
     global rc_server,rc_port,rc_browser
-    global graffiti_port
+    global graffiti_port, debug, logfile
 
     longargs = value_args.keys()
     shortargs = ''
+    showvalues = False
 
     opts,args = getopt.getopt(sys.argv[1:],shortargs,longargs)
-    #print opts
+    #print  opts
     #print args
 
     for o,a in opts:
@@ -77,16 +80,24 @@ def loadargs():
         elif o == '--rc_browser':
             rc_browser = a
         elif o == '--showvalues':
-            printValues()
+            showvalues = True
+        elif o == '--debug':
+            debug = True
+        elif o == '--logfile':
+            print 'WARNING: --logfile is not yet implemented'
+            logfile = None
         elif o == '--help':
             usage()
             sys.exit(0)
+
+    if showvalues or debug:
+        printValues()
 
 #----------------------------------------------------------------------
 def printValues():
     print "Current values:"
     print "base_url = %s" % base_url
-    print "testrunid = %d" % testrunid
+    print "testrunid = %s" % str(testrunid)
 
     print "\nxsp1_port = %d" % xsp1_port
     print "xsp2_port = %d" % xsp2_port
@@ -96,6 +107,9 @@ def printValues():
     print "rc_port = %d" % rc_port
     print "rc_browser = %s\n" % rc_browser
 
+    print "debug = %s" % debug
+    print "logfile = %s\n" % logfile
+
 #----------------------------------------------------------------------
 def usage():
     print "\nUsage: %s [OPTIONS]\n" % sys.argv[0]
@@ -104,6 +118,15 @@ def usage():
         print '     ',
         print ('--'+ k).ljust(25),v.ljust(50)
     print ''
+
+#----------------------------------------------------------------------
+def log(msg):
+    if debug:
+        print msg
+
+    if logfile != None:
+        # TODO: write message to logfile
+        pass
 
 #####################################################################
 #
@@ -132,11 +155,21 @@ def getTestopia():
 #----------------------------------------------------------------------
 def getTestRun():
     global testrun
+    log("Getting test run")
     if testrunid == None or testrunid == 0:
+        log("Error: getTestRun(): testrunid == None")
         testrun = None
     elif testrun == None:
         testrun = getTestopia().testrun_get(testrunid)
     return testrun
+
+#----------------------------------------------------------------------
+def updateTestCase(testcaseid,success):
+    '''success is a bool'''
+    if success:
+        __updateTestCase(testcaseid,"PASSED")
+    else:
+        __updateTestCase(testcaseid,"FAILED")
 
 #----------------------------------------------------------------------
 def passTestCase(testcaseid):
@@ -150,11 +183,14 @@ def failTestCase(testcaseid):
 def __updateTestCase(testcaseid,status):
 
     if testcaseid == None:
+        log("Error: __updateTestCase(): testcaseid == None")
         return
 
     if getTestRun() == None:
+        log("Error: __updateTestCase(): getTestRun() == None")
         return 
-    #print "Setting status to %s" % status
+
+    log("   Setting testcase #%d status to %s" % (testcaseid,status))
     
     tr = getTestRun()
     getTestopia().testcaserun_update_alt(

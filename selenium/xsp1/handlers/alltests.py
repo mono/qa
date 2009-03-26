@@ -8,6 +8,8 @@ from emptyTest import *
 from webhandlerTest import *
 
 
+sys.path.append('../..')
+from monotesting import *
 
 if __name__ == '__main__':
-    unittest.main()
+    monotesting_main()

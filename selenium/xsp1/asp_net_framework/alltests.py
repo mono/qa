@@ -7,4 +7,4 @@ from serialTest import *
 
 
 if __name__ == '__main__':
-    unittest.main()
+    monotesting_main()

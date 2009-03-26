@@ -35,6 +35,7 @@ class loginTest(unittest.TestCase):
     
     def tearDown(self):
         self.selenium.stop()
+        updateTestCase(self.testcaseid,len(self.verificationErrors) == 0)
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
