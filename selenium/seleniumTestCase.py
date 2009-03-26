@@ -37,6 +37,6 @@ class seleniumTestCase(monoTestCase):
         if not self.canRun:
             return
         self.selenium.stop()
-        self.updateTestCase(self.testcaseid,self.verificationErrors)
+        self.updateTestCase(self.verificationErrors)
         self.assertEqual([], self.verificationErrors)
 
