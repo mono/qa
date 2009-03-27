@@ -6,6 +6,8 @@ Things to do for complete automated testing of asp.net:
  * Complete thorough test cases for mojoportal
  * Complete thorough test cases for graffiti
  * Complete thorough test cases for asp.net apps
+ 
+ * Add warnings for test cases that weren't run because they're not in the testopia test run
 
  * Added cmd line option that will set isautomated=True on all test cases that are run
 

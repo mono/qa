@@ -15,7 +15,7 @@ class WebService_TestService_AddTest(seleniumTestCase):
     def test_add(self):
         if not self.canRun:
             return
-        try: 
+        try:
             sel = self.selenium
             sel.open("/index.aspx")
             sel.click("link=TestService.asmx")
@@ -33,7 +33,7 @@ class WebService_TestService_AddTest(seleniumTestCase):
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
-    
+
 
 if __name__ == "__main__":
     monotesting_main()

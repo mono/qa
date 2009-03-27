@@ -49,6 +49,7 @@ class monoTestCase(unittest.TestCase):
 
     #----------------------------------------------------------------------
     def isTestCaseInTestRun(self):
+        global testrunid
         if testrunid == None:
             log("Testrunid is None; isTestCaseInTestRun == true")
             return True
@@ -69,7 +70,7 @@ class monoTestCase(unittest.TestCase):
         log(str(errorsList))
         success = (len(errorsList) == 0)
         if success:
-            self.__updateTestCase(self.testcaseid,"PASSED")
+            self.__updateTestCase("PASSED")
         else:
             print errorsList
             msg =''
@@ -107,3 +108,5 @@ class monoTestCase(unittest.TestCase):
                 case_run_status_id=BUG_STATUS[status],
                 notes=msg)
 
+
+# vim:ts=4:expandtab:
