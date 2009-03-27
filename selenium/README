@@ -51,9 +51,10 @@ This url should resolve properly:
 http://<testserver>.mono.lab.novell.com:8080/selenium-server/core/Blank.html
 
 ##################################################################
-DESIGN PATTERNS
+Design Patterns
 
 See qa/selenium/xsp1/web_service/test_service/addTest.py for design patterns
+ and naming conventions
 
 ##################################################################
 Project Rules
