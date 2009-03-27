@@ -60,3 +60,14 @@ This might be the easiest way to code the pass/fail updating for Testopia
         updateTestCase(self.testcaseid,len(self.verificationErrors) == 0) #This method call
         self.assertEqual([], self.verificationErrors)
 
+
+##################################################################
+Project Rules
+
+* For every .py, there should be a corresponding .html that contains the selenium
+  IDE importable test case
+* Each .py file in the project (other than the selenium, testopia and empty
+  files), needs to have a vim mode line as the very last line of the file. See
+  qa/selenium/xsp1/web_service/test_service/addTest.py for an example modeline.
+
+

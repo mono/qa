@@ -37,3 +37,8 @@ class WebService_TestService_EchoTest(seleniumTestCase):
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+
+
+# vim:ts=4:expandtab:

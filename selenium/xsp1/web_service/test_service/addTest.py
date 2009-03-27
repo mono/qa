@@ -36,3 +36,9 @@ class WebService_TestService_AddTest(seleniumTestCase):
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+
+
+
+# vim:ts=4:expandtab:
