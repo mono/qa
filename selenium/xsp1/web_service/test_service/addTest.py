@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-sys.path.append('../../..')
+sys.path.append('../../../..')
 from selenium.selenium import selenium
 from selenium.seleniumTestCase import *
 from common.monotesting import *
@@ -9,7 +9,7 @@ from common.monotesting import *
 import unittest, time, re
 
 
-class webservice_testservice_addTest(seleniumTestCase):
+class WebService_TestService_AddTest(seleniumTestCase):
     testcaseid = 837262
 
     def test_add(self):

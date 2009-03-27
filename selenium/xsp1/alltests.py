@@ -10,7 +10,7 @@ from common.monotesting import *
 # Add child test suites to test suite
 #from auth.alltests import *
 #from databinding.alltests import *
-from webservice.alltests import *
+from web_service.alltests import *
 #from handlers.alltests import *
 #from customcontrols.alltests import *
 #from htmlcontrols.alltests import *

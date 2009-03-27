@@ -1,12 +1,14 @@
 #!/usr/bin/python
-import sys,unittest
+import sys
 
-from addTest import *
-from echoTest import *
 
 
 sys.path.append('../../..')
 from common.monotesting import *
+
+# sub directories
+# Add child test suites to test suite
+from test_service.alltests import *
 
 
 if __name__ == '__main__':

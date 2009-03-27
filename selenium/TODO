@@ -7,7 +7,13 @@ Things to do for complete automated testing of asp.net:
  * Complete thorough test cases for graffiti
  * Complete thorough test cases for asp.net apps
 
- * Added script/args values to automation section ofthe test cases in Testopia that we can use
+ * Added cmd line option that will set isautomated=True on all test cases that are run
+
+DONE
+ * Added script/args values to automation section of the test cases in Testopia that we can use
  * Integrate bugzilla python xmlrpc to mark tests as pass/fail
- * 
+
+
+FUTURE
+ * Investigate Testopia.testcaserun_update() update_bugs
  * Integrate Selenium Grid
