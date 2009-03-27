@@ -53,13 +53,7 @@ http://<testserver>.mono.lab.novell.com:8080/selenium-server/core/Blank.html
 ##################################################################
 DESIGN PATTERNS
 
-This might be the easiest way to code the pass/fail updating for Testopia
-
-    tearDown(self):
-        self.selenium.stop()
-        updateTestCase(self.testcaseid,len(self.verificationErrors) == 0) #This method call
-        self.assertEqual([], self.verificationErrors)
-
+See qa/selenium/xsp1/web_service/test_service/addTest.py for design patterns
 
 ##################################################################
 Project Rules
