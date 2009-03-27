@@ -1,39 +1,39 @@
 #!/usr/bin/env python
 
+
 import sys
-sys.path.append('../..')
-from selenium import selenium
-from monotesting import *
+sys.path.append('../../..')
+from selenium.selenium import selenium
+from selenium.seleniumTestCase import *
+from common.monotesting import *
 
 import unittest, time, re
 
-class serialTest(unittest.TestCase):
-    def setUp(self):
-        self.verificationErrors = []
-        self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
-        self.selenium.start()
-    
+class AspNetFramework_SerialTest(seleniumTestCase):
+    testcaseid = 837578
+
     def test_new(self):
-        sel = self.selenium
-        sel.open("/")
-        sel.click("link=serial")
-        sel.wait_for_page_to_load("30000")
-        sel.click("//html/body/form/input[2]")
-        sel.wait_for_page_to_load("30000")
-        try: self.assertEqual("Old value: 0", sel.get_text("//html/body/form/span/b"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        sel.click("//html/body/form/input[2]")
-        sel.wait_for_page_to_load("30000")
-        try: self.assertEqual("Old value: 1", sel.get_text("//html/body/form/span/b"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        sel.click("//html/body/form/input[2]")
-        sel.wait_for_page_to_load("30000")
-        try: self.assertEqual("Old value: 2", sel.get_text("//html/body/form/span/b"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-    
-    def tearDown(self):
-        self.selenium.stop()
-        self.assertEqual([], self.verificationErrors)
+        try:
+            sel = self.selenium
+            sel.open("/")
+            sel.click("link=serial")
+            sel.wait_for_page_to_load("30000")
+
+            for ix in range(30):
+                sel.click("_ctl2")
+                sel.wait_for_page_to_load("30000")
+
+                try:
+                    self.assertEqual("Old value: " + str(ix), sel.get_text("//html/body/form/span/b"))
+                except AssertionError, e:
+                    self.verificationErrors.append(str(e))
+
+        except AssertionError, e:
+            self.verificationErrors.append(str(e))
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+
+# vim:ts=4:expandtab:

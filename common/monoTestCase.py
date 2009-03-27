@@ -73,10 +73,7 @@ class monoTestCase(unittest.TestCase):
             self.__updateTestCase("PASSED")
         else:
             print errorsList
-            msg =''
-            for (i,e) in enumerate(errorsList):
-                msg += '''[%d]: %s''' % (i,e)
-            self.__updateTestCase("FAILED",msg)
+            self.__updateTestCase("FAILED",errorsList)
 
     #----------------------------------------------------------------------
     def passTestCase(self):
@@ -84,10 +81,10 @@ class monoTestCase(unittest.TestCase):
 
     #----------------------------------------------------------------------
     def failTestCase(self,msg=None):
-        self.__updateTestCase("FAILED",msg)
+        self.__updateTestCase("FAILED",[msg])
 
     #----------------------------------------------------------------------
-    def __updateTestCase(self,status,msg=None):
+    def __updateTestCase(self,status,errorsList=None):
 
         if self.testcaseid == None:
             log("Error: __updateTestCase(): testcaseid == None")
@@ -105,8 +102,19 @@ class monoTestCase(unittest.TestCase):
                 self.testcaseid,
                 tr['build_id'],
                 tr['environment_id'],
-                case_run_status_id=BUG_STATUS[status],
-                notes=msg)
+                case_run_status_id=BUG_STATUS[status])
+
+        if errorsList != None:
+            for (i,e) in enumerate(errorsList):
+                e = e.replace('\'','\"')
+                msg = '''[%d]: %s''' % (i,e)
+                self.getTestopia().testcaserun_update_alt(
+                    tr['run_id'],
+                    self.testcaseid,
+                    tr['build_id'],
+                    tr['environment_id'],
+                    notes=msg)
+
 
 
 # vim:ts=4:expandtab:
