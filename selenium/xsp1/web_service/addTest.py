@@ -9,7 +9,7 @@ from common.monotesting import *
 import unittest, time, re
 
 
-class addTest(seleniumTestCase):
+class webservice_testservice_addTest(seleniumTestCase):
     testcaseid = 837262
 
     def test_add(self):
