@@ -12,7 +12,10 @@ import unittest, time, re
 class AspNetFramework_SerialTest(seleniumTestCase):
     testcaseid = 837578
 
-    def test_new(self):
+    def test(self):
+        if not self.canRun:
+            return
+
         try:
             sel = self.selenium
             sel.open("/")

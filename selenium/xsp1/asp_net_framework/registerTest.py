@@ -37,44 +37,26 @@ class AspNetFramework_RegisterTest(seleniumTestCase):
             except AssertionError, e:
                 self.verificationErrors.append(str(e))
 
-            # click the "Change" button and make sure the text changes
-            sel.click("//html/body/form/p[3]/input")
-            sel.wait_for_page_to_load("30000")
+            for ix in range(2):
+                # click the "Change" button and make sure the text changes
+                sel.click("//html/body/form/p[3]/input")
+                sel.wait_for_page_to_load("30000")
 
-            try:
-                self.assertEqual("Message text changed!", sel.get_text("//*[@id=\"Message\"]"))
-            except AssertionError, e:
-                self.verificationErrors.append(str(e))
+                try:
+                    self.assertEqual("Message text changed!", sel.get_text("//*[@id=\"Message\"]"))
+                except AssertionError, e:
+                    self.verificationErrors.append(str(e))
 
-            try:
-                self.assertEqual("Message text changed2!", sel.get_text("//*[@id=\"Message2\"]"))
-            except AssertionError, e:
-                self.verificationErrors.append(str(e))
+                try:
+                    self.assertEqual("Message text changed2!", sel.get_text("//*[@id=\"Message2\"]"))
+                except AssertionError, e:
+                    self.verificationErrors.append(str(e))
 
-            try:
-                self.assertEqual("Text changed!", sel.get_text("//*[@id=\"Three\"]"))
-            except AssertionError, e:
-                self.verificationErrors.append(str(e))
+                try:
+                    self.assertEqual("Text changed!", sel.get_text("//*[@id=\"Three\"]"))
+                except AssertionError, e:
+                    self.verificationErrors.append(str(e))
 
-
-            # click the "Change" button a second time and make sure the text doesn't change
-            sel.click("//html/body/form/p[3]/input")
-            sel.wait_for_page_to_load("30000")
-
-            try:
-                self.assertEqual("Message text changed!", sel.get_text("//*[@id=\"Message\"]"))
-            except AssertionError, e:
-                self.verificationErrors.append(str(e))
-
-            try:
-                self.assertEqual("Message text changed2!", sel.get_text("//*[@id=\"Message2\"]"))
-            except AssertionError, e:
-                self.verificationErrors.append(str(e))
-
-            try:
-                self.assertEqual("Text changed!", sel.get_text("//*[@id=\"Three\"]"))
-            except AssertionError, e:
-                self.verificationErrors.append(str(e))
         except AssertionError, e:
             self.verificationErrors.append(str(e))
 
