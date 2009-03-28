@@ -14,8 +14,8 @@ Things to do for complete automated testing of asp.net:
 DONE
  * Added script/args values to automation section of the test cases in Testopia that we can use
  * Integrate bugzilla python xmlrpc to mark tests as pass/fail
-
+ * Investigate Testopia.testcaserun_update(update_bugs=True) 
+        - DO NOT WANT - It reopens ALL associated bugs.
 
 FUTURE
- * Investigate Testopia.testcaserun_update() update_bugs
  * Integrate Selenium Grid

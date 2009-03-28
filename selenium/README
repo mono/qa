@@ -13,6 +13,7 @@ base_url = 'http://mono-mac1.provo.novell.com'
 testrunid = None
 
 rc_server = 'localhost'
+rc_server = 'c4170.mono.lab.novell.com' # Do not prepend with http://
 rc_port = 4444
 rc_browser = '*chrome'
 
