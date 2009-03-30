@@ -51,6 +51,7 @@ value_args = {'base_url=':'URL of the webserver being tested',
 #----------------------------------------------------------------------
 def loadargs(cmdargs):
     global base_url,testrunid,xsp1_port,xsp2_port
+    global xsp1_url,xsp2_url,graffiti_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, debug, logfile
 
@@ -70,10 +71,13 @@ def loadargs(cmdargs):
             else: testrunid = int(a)
         elif o == '--xsp1_port':
             xsp1_port = int(a)
+            xsp1_url = "%s:%s" % (base_url,xsp1_port)
         elif o == '--xsp2_port':
             xsp2_port = int(a)
+            xsp2_url = "%s:%s" % (base_url,xsp2_port)
         elif o == '--graffiti_port':
             graffiti_port = int(a)
+            graffiti_url = "%s:%s" % (base_url,graffiti_port)
 
         elif o == '--rc_server':
             rc_server = a
