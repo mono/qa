@@ -1,6 +1,6 @@
 ######################################################################
 #
-#   You must create two python modules (creds.py,defaults.py)
+#   You must create two python modules in the common directory (creds.py,defaults.py)
 
 $ cat creds.py
 
@@ -9,7 +9,7 @@ password='yourpassword'
 
 $ cat defaults.py
 
-base_url = 'http://mono-mac1.provo.novell.com'
+base_url = None
 testrunid = None
 
 rc_server = 'localhost'
@@ -33,7 +33,7 @@ Unzip the file and cd into selenium-remote-control-1.0-beta-2/selenium-server-1.
 
 Run the selenium server with this command
 
-$ java -jar selenium-server.jar -browserSessionReuse -forcedBrowserModeRestofLine *firefox3 /usr/lib/firefox/firefox [options]
+$ java -jar selenium-server.jar -forcedBrowserModeRestofLine *firefox3 /usr/lib/firefox/firefox [options]
 
 Are there any firefox options that we can use to increase preformance?
 
