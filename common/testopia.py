@@ -92,7 +92,11 @@ class Driver(object):
 		try:
 			return eval(cmd)
 		except xmlrpclib.Error, e:
-			print "Error while executing cmd \'%s\' --> %s" % ( verb + "(" + params + ")", e)
+
+			# Don't print out exception. It prints out username, password in clear text!
+
+			#print "Error while executing cmd \'%s\' --> %s" % ( verb + "(" + params + ")", e)
+			print "XMLRPC error while executing cmd \'%s\' " % ( verb + "(" + params + ")")
 
 
 	################################ Testopia #################################
