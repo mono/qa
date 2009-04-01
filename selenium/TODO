@@ -13,7 +13,7 @@ Things to do for complete automated testing of asp.net:
 
 BUGS
  * Fix command line parameters not working
-
+ * Catch protocol error (password display)
 
 FUTURE
  * Integrate Selenium Grid
