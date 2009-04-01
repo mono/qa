@@ -72,8 +72,10 @@ class Driver(object):
 
 		Example: t = Testopia('jdoe@novell.com', 'jdoepassword')
 		"""
+		#self.server = xmlrpclib.ServerProxy("http" + ("", "s")[ssl] +\
+		#			"://%s:%s@%s:%d/%s" % (username, password, host, port, resource), verbose = VERBOSE)
 		self.server = xmlrpclib.ServerProxy("http" + ("", "s")[ssl] +\
-					"://%s:%s@%s:%d/%s" % (username, password, host, port, resource), verbose = VERBOSE)
+					"://%s:%s@%s/%s" % (username, password, host, resource), verbose = VERBOSE)
 
 
 	def do_command(self, verb, args):
@@ -92,9 +94,7 @@ class Driver(object):
 		try:
 			return eval(cmd)
 		except xmlrpclib.Error, e:
-
 			# Don't print out exception. It prints out username, password in clear text!
-
 			#print "Error while executing cmd \'%s\' --> %s" % ( verb + "(" + params + ")", e)
 			print "XMLRPC error while executing cmd \'%s\' " % ( verb + "(" + params + ")")
 

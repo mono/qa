@@ -27,7 +27,7 @@ class monoTestCase(unittest.TestCase):
 
     #----------------------------------------------------------------------
     def getTestopia(self):
-        host='bugzilla.novell.com'
+        host='apibugzilla.novell.com'
         ssl=True
         port=443
 
