@@ -67,17 +67,16 @@ def loadargs(cmdargs):
         if o == '--base_url':
             base_url = a
         elif o == '--testrunid':
-            if a == '': testrunid = None
-            else: testrunid = int(a)
+            if a == '' or a == 'None': 
+	       testrunid = None
+            else:
+	       testrunid = int(a)
         elif o == '--xsp1_port':
             xsp1_port = int(a)
-            xsp1_url = "%s:%s" % (base_url,xsp1_port)
         elif o == '--xsp2_port':
             xsp2_port = int(a)
-            xsp2_url = "%s:%s" % (base_url,xsp2_port)
         elif o == '--graffiti_port':
             graffiti_port = int(a)
-            graffiti_url = "%s:%s" % (base_url,graffiti_port)
 
         elif o == '--rc_server':
             rc_server = a
@@ -95,6 +94,10 @@ def loadargs(cmdargs):
         elif o == '--help':
             usage()
             sys.exit(0)
+
+        xsp1_url = "%s:%s" % (base_url,xsp1_port)
+        xsp2_url = "%s:%s" % (base_url,xsp2_port)
+        graffiti_url = "%s:%s" % (base_url,graffiti_port)
 
     if showvalues or debug:
         printValues()
