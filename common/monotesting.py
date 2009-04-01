@@ -36,11 +36,11 @@ testrun = None
 #
 
 value_args = {'base_url=':'URL of the webserver being tested',
-        'testrunid=':'Test run id in Testopia',
+        'testrunid=':'Test run id in Testopia (use 0 or None to disable Testopia)',
         'xsp1_port=':'Port number that xsp1 is running on',
         'xsp2_port=':'Port number that xsp2 is running on',
         'graffiti_port=':'Port number that graffiti is running on',
-        'rc_server=':'URL of the Selenium RC server',
+        'rc_server=':'ip or dns of the Selenium RC server (do not prepend with \'http\')',
         'rc_port=':'Port number that the RC server is using',
         'rc_browser=':'Browser that RC server should use',
         'showvalues':'Prints the current values',
@@ -67,10 +67,10 @@ def loadargs(cmdargs):
         if o == '--base_url':
             base_url = a
         elif o == '--testrunid':
-            if a == '' or a == 'None': 
-	       testrunid = None
+            if a == '' or a == 'None' or a == '0':
+                testrunid = None
             else:
-	       testrunid = int(a)
+                testrunid = int(a)
         elif o == '--xsp1_port':
             xsp1_port = int(a)
         elif o == '--xsp2_port':
@@ -89,8 +89,7 @@ def loadargs(cmdargs):
         elif o == '--debug':
             debug = True
         elif o == '--logfile':
-            print 'WARNING: --logfile is not yet implemented'
-            logfile = None
+            logfile = a
         elif o == '--help':
             usage()
             sys.exit(0)
@@ -123,19 +122,23 @@ def printValues():
 def usage():
     print "\nUsage: %s [OPTIONS]\n" % sys.argv[0]
 
-    for (k,v) in value_args.items():
+    options = value_args.items()
+    options.sort()
+
+    for (k,v) in options:
         print '     ',
         print ('--'+ k).ljust(25),v.ljust(50)
     print ''
 
 #----------------------------------------------------------------------
 def log(msg):
+    global logfile
     if debug:
         print msg
 
     if logfile != None:
         f = open(logfile,'a') # open using append
-        f.write(msg)
+        f.writelines(msg + '\n')
         f.close()
 
 
