@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>web_dropdownlist</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">web_dropdownlist</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=web_dropdownlist</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//*[@id=&quot;ddl&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>//*[@id=&quot;ddl&quot;]</td>
+	<td>Item 1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>lbl</td>
+	<td>You selected 'Item 1' (index #0).</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ddl</td>
+	<td>label=Item 4</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>//*[@id=&quot;ddl&quot;]</td>
+	<td>Item 4</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>lbl</td>
+	<td>You selected 'Item 4' (index #3).</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ddl</td>
+	<td>label=Item 2</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>//*[@id=&quot;ddl&quot;]</td>
+	<td>Item 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>lbl</td>
+	<td>You selected 'Item 2' (index #1).</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ddl</td>
+	<td>label=Item 3</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>//*[@id=&quot;ddl&quot;]</td>
+	<td>Item 3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>lbl</td>
+	<td>You selected 'Item 3' (index #2).</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
