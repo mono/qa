@@ -10,7 +10,7 @@ from common.monotesting import *
 import unittest, time, re
 
 class WebControls_WebCheckBoxList(seleniumTestCase):
-    testcaseid = 
+    testcaseid = 838899
 
     def test(self):
         sel = self.selenium

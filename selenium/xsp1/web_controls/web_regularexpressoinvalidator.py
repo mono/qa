@@ -10,7 +10,7 @@ from common.monotesting import *
 import unittest, time, re
 
 class WebControls_WebRegularExpressionValidator(seleniumTestCase):
-    testcaseid =
+    testcaseid = 838908
 
     def test(self):
         sel = self.selenium
