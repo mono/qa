@@ -9,10 +9,10 @@ from common.monotesting import *
 import unittest, time, re
 
 
-class DataBinding_arrayTest(seleniumTestCase):
+class DataBinding_ArrayTest(seleniumTestCase):
     testcaseid = 839038
 
-    def test_new(self):
+    def test(self):
         sel = self.selenium
         sel.open("/")
         sel.click("link=databind-arraylist")
