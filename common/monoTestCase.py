@@ -29,10 +29,11 @@ class monoTestCase(unittest.TestCase):
     def getTestopia(self):
         host='apibugzilla.novell.com'
         ssl=True
-        port=443
+        #port=443
 
         if self.mytestopia == None:
-            self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl,port=port)
+            #self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl,port=port)
+            self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl)
         return self.mytestopia
 
     #----------------------------------------------------------------------
