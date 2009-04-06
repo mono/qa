@@ -11,7 +11,6 @@ import unittest
 import getopt
 from testopia import Testopia
 
-import creds
 from defaults import *
 
 #################################################################
@@ -107,13 +106,13 @@ def printValues():
     print "base_url = %s" % base_url
     print "testrunid = %s" % str(testrunid)
 
-    print "\nxsp1_port = %d" % xsp1_port
-    print "xsp2_port = %d" % xsp2_port
-    print "graffiti_port = %d" % graffiti_port
+    print "\nxsp1_port = %s" % str(xsp1_port)
+    print "xsp2_port = %s" % str(xsp2_port)
+    print "graffiti_port = %s" % str(graffiti_port)
 
     print "\nrc_server = %s" % rc_server
-    print "rc_port = %d" % rc_port
-    print "rc_browser = %s\n" % rc_browser
+    print "rc_port = %s" % str(rc_port)
+    print "rc_browser = %s\n" % str(rc_browser)
 
     print "debug = %s" % debug
     print "logfile = %s\n" % logfile
@@ -142,14 +141,53 @@ def log(msg):
         f.close()
 
 
+def check_args():
+    quit = False
+    if base_url == '' or base_url == None:
+        print "ERROR: base_url is not set"
+        quit = True
+    if xsp1_port == None or xsp1_port == 0:
+        print "ERROR: xsp1_port is not set"
+        quit = True
+    if xsp2_port == None or xsp2_port == 0:
+        print "ERROR: xsp2_port is not set"
+        quit = True
+    if graffiti_port == None or graffiti_port == 0:
+        print "ERROR: graffiti_port is not set"
+        quit = True
+    if rc_server == None or rc_server == '':
+        print "ERROR: rc_server is not set"
+        quit = True
+    if rc_port == None or rc_port == 0:
+        print "ERROR: rc_port is not set"
+        quit = True
+    if rc_browser == None or rc_browser == '':
+        print "ERROR: rc_browser is not set"
+        quit = True
+
+    if quit:
+        print "\nExiting\n"
+        sys.exit(1)
+
 ####################################################################
 #
 #    main methods
 #
 
-def monotesting_main():
+def monotesting_main(xsp1_tmp_port=None):
+    global xsp1_port,xsp1_url
     loadargs(sys.argv[1:])
     sys.argv = sys.argv[:1]
+
+    if xsp1_tmp_port != None:
+        print "Changing xsp1_port to " + str(xsp1_tmp_port)
+        xsp1_port = int(xsp1_tmp_port)
+        xsp1_url = "%s:%s" % (base_url,xsp1_port)
+    
+    check_args()
+
+    printValues()
+
     if debug:
         sys.argv.append('-v')
     unittest.main()

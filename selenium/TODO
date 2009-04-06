@@ -1,26 +1,30 @@
 
 Things to do for complete automated testing of asp.net:
 
- * Complete thorough test cases for xsp1
- * Complete thorough test cases for xsp2
- * Complete thorough test cases for mojoportal
- * Complete thorough test cases for graffiti
- * Complete thorough test cases for asp.net apps
- * Add warnings for test cases that weren't run because they're not in the testopia test run
- * Added cmd line option that will set isautomated=True in Testopia on all test cases that are run
- * Move the creds.py file to ~/.testopia_credentials so that we don't accidentally check in our creds to svn.
+ Tese cases:
+     * Complete thorough test cases for xsp1
+     * Complete thorough test cases for xsp2
+     * Complete thorough test cases for mojoportal
+     * Complete thorough test cases for graffiti
+     * Complete thorough test cases for asp.net apps
+
+ Framework features:
+     * Add warnings for test cases that weren't run because they're not in the testopia test run
+     * Added cmd line option that will set isautomated=True in Testopia on all test cases that are run
+     * Move the creds.py file to ~/.testopia_credentials so that we don't accidentally check in our creds to svn.
 
 
 BUGS
- * Fix command line parameters not working
- * Catch protocol error (password display)
 
 FUTURE
  * Integrate Selenium Grid
 
 
 DONE
+ * Fix command line parameters not working
  * Added script/args values to automation section of the test cases in Testopia that we can use
  * Integrate bugzilla python xmlrpc to mark tests as pass/fail
  * Investigate Testopia.testcaserun_update(update_bugs=True) 
         - DO NOT WANT - It reopens ALL associated bugs.
+ * Catch protocol error (password display)
+ * Fix --testrunid option

@@ -4,7 +4,9 @@ import unittest
 from defaults import *
 from testopia import Testopia
 import creds
-from monotesting import *
+#from monotesting import *
+import monotesting as mono
+from monotesting import log
 
 BUG_STATUS = {'IDLE':1,
             'PASSED':2,
@@ -30,39 +32,39 @@ class monoTestCase(unittest.TestCase):
         host='apibugzilla.novell.com'
         ssl=True
         #port=443
+        port = None
 
         if self.mytestopia == None:
-            #self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl,port=port)
-            self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl)
+            self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl,port=port)
         return self.mytestopia
 
     #----------------------------------------------------------------------
     def getTestRun(self):
-        global testrun
-        log("Getting test run")
-        if testrunid == None or testrunid == 0:
-            log("Error: getTestRun(): testrunid == None")
+        testrun = None
+        #log("Getting test run")
+        if mono.testrunid == None or mono.testrunid == 0:
+            #log("Warning: getTestRun(): testrunid == None")
             testrun = None
         elif testrun == None:
-            testrun = self.getTestopia().testrun_get(testrunid)
+            testrun = self.getTestopia().testrun_get(mono.testrunid)
         return testrun
 
 
     #----------------------------------------------------------------------
     def isTestCaseInTestRun(self):
-        global testrunid
-        if testrunid == None:
+        #global testrunid
+        if mono.testrunid == None:
             log("Testrunid is None; isTestCaseInTestRun == true")
             return True
 
-        list = self.getTestopia().testrun_get_test_cases(testrunid)
+        list = self.getTestopia().testrun_get_test_cases(mono.testrunid)
         testcase_list = [tc['case_id'] for tc in list]
 
         if self.testcaseid in testcase_list:
-            log("Testcase %s found in test run %s" % (self.testcaseid,testrunid))
+            log("Testcase %s found in test run %s" % (self.testcaseid,mono.testrunid))
             return True
         
-        log("Testcase %s NOT found in test run %s" % (self.testcaseid,testrunid))
+        log("Testcase %s NOT found in test run %s" % (self.testcaseid,mono.testrunid))
         return False
 
     #----------------------------------------------------------------------
@@ -88,11 +90,11 @@ class monoTestCase(unittest.TestCase):
     def __updateTestCase(self,status,errorsList=None):
 
         if self.testcaseid == None:
-            log("Error: __updateTestCase(): testcaseid == None")
+            log("WARNING: __updateTestCase(): testcaseid == None; TESTOPIA WILL NOT BE UPDATED")
             return
 
         if self.getTestRun() == None:
-            log("Error: __updateTestCase(): getTestRun() == None")
+            log("WARNING: __updateTestCase(): getTestRun() returned None; TESTOPIA WILL NOT BE UPDATED")
             return 
 
         log("   Setting testcase #%d status to %s" % (self.testcaseid,status))
