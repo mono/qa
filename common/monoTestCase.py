@@ -70,12 +70,11 @@ class monoTestCase(unittest.TestCase):
     #----------------------------------------------------------------------
     def updateTestCase(self,errorsList):
 
-        log(str(errorsList))
         success = (len(errorsList) == 0)
         if success:
             self.__updateTestCase("PASSED")
         else:
-            print errorsList
+            log('errorsList = ' % errorsList)
             self.__updateTestCase("FAILED",errorsList)
 
     #----------------------------------------------------------------------

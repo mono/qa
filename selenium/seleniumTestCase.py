@@ -22,7 +22,7 @@ from selenium import selenium
 class seleniumTestCase(monoTestCase):
 
     def setUp(self):
-        #print "monoTestCase.setUp()"
+        log("monoTestCase.setUp()")
         self.canRun = self.isTestCaseInTestRun()
         if not self.canRun:
             return
@@ -33,15 +33,15 @@ class seleniumTestCase(monoTestCase):
             self.selenium = selenium(mono.rc_server, mono.rc_port, mono.rc_browser, mono.xsp1_url)
             self.selenium.start()
         except Exception, e:
-            #log('-'*60)
-            #log(traceback.print_exc(file=sys.stdout))
-            #log('-'*60)
+            log('-'*60)
+            log(traceback.print_exc(file=sys.stdout))
+            log('-'*60)
             self.updateTestCase([('setUp: ' + str(e))])
             raise e
 
     def tearDown(self):
-        #print "monoTestCase.tearDown()"
-        print self.failureException
+        log("monoTestCase.tearDown()")
+        #print self.failureException
         if not self.canRun:
             return
         self.selenium.stop()
