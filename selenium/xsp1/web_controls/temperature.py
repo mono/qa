@@ -44,7 +44,7 @@ class WebControls_Temperature(seleniumTestCase):
         sel.click("//*[@id=\"btn\"]")
         sel.wait_for_page_to_load("30000")
         self.failUnless(sel.is_element_present("//*[@id=\"result\"]"))
-        self.assertEqual("Converting 23 from Farenheit to Farenheit gives -350", sel.get_text("result"))
+        self.assertEqual("Converting 23 from Kelvin to Celsius gives -350", sel.get_text("result"))
 
 if __name__ == "__main__":
     monotesting_main()
