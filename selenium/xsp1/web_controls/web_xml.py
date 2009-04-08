@@ -12,7 +12,7 @@ import unittest, time, re
 class WebControls_WebXML(seleniumTestCase):
    testcaseid = 838910
     
-    def test(self):
+   def test(self):
         sel = self.selenium
         sel.open("/")
         sel.click("link=web_xml")

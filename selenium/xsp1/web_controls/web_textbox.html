@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>web_textbox</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">web_textbox</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=web_textbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//*[@id=&quot;txt1&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>txt1</td>
+	<td>This is <br />multiline text</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//*[@id=&quot;txt2&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>txt2</td>
+	<td>This is a single line</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//*[@id=&quot;txt3&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>txt3</td>
+	<td>password</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
