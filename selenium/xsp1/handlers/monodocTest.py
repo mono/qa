@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 
+
 import sys
-sys.path.append('../..')
-from selenium import selenium
-from monotesting import *
+sys.path.append('../../..')
+from selenium.selenium import selenium
+from selenium.seleniumTestCase import *
+from common.monotesting import *
 
 import unittest, time, re
 
-class monodocTest(unittest.TestCase):
-    def setUp(self):
-        self.testcaseid = None
-        self.verificationErrors = []
-        self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
-        self.selenium.start()
-    
-    def test_new(self):
+class Handlers_MonoDoc(seleniumTestCase):
+    testcaseid = 840265 
+
+    def test(self):
         sel = self.selenium
         sel.open("/")
         sel.click("link=monodoc.ashx")
@@ -30,10 +28,9 @@ class monodocTest(unittest.TestCase):
         except AssertionError, e:
             self.verificationErrors.append(str(e))
             failTestCase(self.testcaseid)
-    
-    def tearDown(self):
-        self.selenium.stop()
-        self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+# vim:ts=4:expandtab:

@@ -7,7 +7,7 @@ from common.monotesting import *
 from asyncTest import *
 from chunkedTest import *
 from emptyTest import *
-#from monodocTest import *
+from monodocTest import *
 from webhandlerTest import *
 
 if __name__ == '__main__':
