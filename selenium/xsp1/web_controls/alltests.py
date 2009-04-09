@@ -7,7 +7,7 @@ from common.monotesting import *
 from calendar import *
 from datalist import *
 from dbpage1 import *
-#from dbpage2 import *
+from dbpage2 import *
 from listitem import *
 from temperature import *
 from validator1 import *
