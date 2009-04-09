@@ -1,30 +1,23 @@
 #!/usr/bin/env python
 
+
 import sys
-sys.path.append('../..')
-from selenium import selenium
-from monotesting import *
+sys.path.append('../../..')
+from selenium.selenium import selenium
+from selenium.seleniumTestCase import *
+from common.monotesting import *
 
 import unittest, time, re
 
-class webhandlerTest(unittest.TestCase):
-    def setUp(self):
-        self.testcaseid = None
-        self.verificationErrors = []
-        self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
-        self.selenium.start()
-    
-    def test_new(self):
+class Hanlders_WebHandler(seleniumTestCase):
+    testcaseid = 840264 
+
+    def test(self):
         sel = self.selenium
         sel.open("/")
         sel.click("link=webhandler.ashx")
         sel.wait_for_page_to_load("30000")
-        try:
-            self.assertEqual("Hi there!", sel.get_text("//html/body/h1"))
-            passTestCase(self.testcaseid)
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
-            failTestCase(self.testcaseid)
+        self.assertEqual("Hi there!", sel.get_text("//h1"))
     
     def tearDown(self):
         self.selenium.stop()
@@ -32,3 +25,6 @@ class webhandlerTest(unittest.TestCase):
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+# vim:ts=4:expandtab:
