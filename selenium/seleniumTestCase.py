@@ -25,6 +25,7 @@ class seleniumTestCase(monoTestCase):
         log("monoTestCase.setUp()")
         self.canRun = self.isTestCaseInTestRun()
         if not self.canRun:
+            print "Test case #%d is not found in the test run.... skipping" % self.testcaseid
             return
 
         try:

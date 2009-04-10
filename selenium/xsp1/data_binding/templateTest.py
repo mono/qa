@@ -1,19 +1,17 @@
 #!/usr/bin/env python
 
+
 import sys
-sys.path.append('../..')
-from selenium import selenium
-from monotesting import *
+sys.path.append('../../..')
+from selenium.selenium import selenium
+from selenium.seleniumTestCase import *
+from common.monotesting import *
 
 import unittest, time, re
 
-class templateTest(unittest.TestCase):
-    def setUp(self):
-        self.testcaseid = None
-        self.verificationErrors = []
-        self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
-        self.selenium.start()
-    
+class templateTest(seleniumTestCase):
+    testcaseid = 840312 
+
     def test_new(self):
         sel = self.selenium
         sel.open("/")
@@ -23,11 +21,9 @@ class templateTest(unittest.TestCase):
         except AssertionError, e: self.verificationErrors.append(str(e))
         try: self.assertEqual("even", sel.get_text("//html/body/form/table/tbody/tr[5]/td/b"))
         except AssertionError, e: self.verificationErrors.append(str(e))
-    
-    def tearDown(self):
-        self.selenium.stop()
-        updateTestCase(self.testcaseid,len(self.verificationErrors) == 0)
-        self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+# vim:ts=4:expandtab:

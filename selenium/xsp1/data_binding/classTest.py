@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 
+
 import sys
-sys.path.append('../..')
-from selenium import selenium
-from monotesting import *
+sys.path.append('../../..')
+from selenium.selenium import selenium
+from selenium.seleniumTestCase import *
+from common.monotesting import *
 
 import unittest, time, re
 
-class classTest(unittest.TestCase):
-    def setUp(self):
-        self.testcaseid = None
-        self.verificationErrors = []
-        self.selenium = selenium(rc_server, rc_port, rc_browser, xsp1_url)
-        self.selenium.start()
+class classTest(seleniumTestCase):
+    testcaseid = 840313 
     
-    def test_new(self):
+    def test(self):
         sel = self.selenium
         sel.open("/")
         sel.click("link=databind-class")
@@ -27,11 +25,9 @@ class classTest(unittest.TestCase):
         sel.wait_for_page_to_load("30000")
         try: self.assertEqual("Selected option: Five 5", sel.get_text("//*[@id=\"msg\"]"))
         except AssertionError, e: self.verificationErrors.append(str(e))
-    
-    def tearDown(self):
-        self.selenium.stop()
-        updateTestCase(self.testcaseid,len(self.verificationErrors) == 0)
-        self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
     monotesting_main()
+
+
+# vim:ts=4:expandtab:

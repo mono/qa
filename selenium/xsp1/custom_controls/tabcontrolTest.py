@@ -9,7 +9,7 @@ from common.monotesting import *
 
 import unittest, time, re
 
-class AspNetFramework_RegisterTest(seleniumTestCase):
+class CustomControls_RegisterTest(seleniumTestCase):
     testcaseid = 837902
 
     def test(self):
