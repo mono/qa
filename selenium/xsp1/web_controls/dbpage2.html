@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>dbpage2</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">dbpage2</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=dbpage2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[1]/td[2]</td>
+	<td>Joe Doe</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[5]/td[3]</td>
+	<td>The Swamp, 12314</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Insert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_dbID</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_dbName</td>
+	<td>Rupert Monkey</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_dbAddress</td>
+	<td>Mono Town</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>tabs_insertSubmit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Browse</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[6]/td[1]</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[6]/td[2]</td>
+	<td>Rupert Monkey</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[6]/td[3]</td>
+	<td>Mono Town</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Update</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_updateID</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_updateName</td>
+	<td>Rupert Ximian</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_updateAddress</td>
+	<td>South Mono Town</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>tabs_updateSubmit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Browse</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[6]/td[1]</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[6]/td[2]</td>
+	<td>Rupert Ximian</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[@id='tabs_browse']/tbody/tr[6]/td[3]</td>
+	<td>South Mono Town</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tabs_deleteID</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>tabs_deleteSubmit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>tabs_confirmDelete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Browse</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>Rupert Ximian</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>South Mono Town</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
