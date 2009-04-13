@@ -12,6 +12,7 @@ Things to do for complete automated testing of asp.net:
      * Add warnings for test cases that weren't run because they're not in the testopia test run
      * Added cmd line option that will set isautomated=True in Testopia on all test cases that are run
      * Move the creds.py file to ~/.testopia_credentials so that we don't accidentally check in our creds to svn.
+     * Implement logging module for better debug output
 
 
 BUGS

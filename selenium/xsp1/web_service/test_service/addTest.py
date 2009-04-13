@@ -3,14 +3,23 @@
 import sys
 sys.path.append('../../../..')
 from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
+#from selenium.seleniumTestCase import *
+from selenium.xsp1 import xsp1TestCase
+
 from common.monotesting import *
 
 import unittest, time, re
 
 
-class WebService_TestService_AddTest(seleniumTestCase):
-    testcaseid = 837262
+class WebService_TestService_AddTest(xsp1TestCase.xsp1TestCase):
+    def __init__(self):
+     
+        if monotesting.is_xsp1:
+            self.testcaseid = 837262
+            #self.url = base_url + xsp1_port
+        else:
+            self.testcaseid = 111111 # xsp2 test case id
+            #self.url = base_url + xsp2_port
 
     def test_add(self):
         if not self.canRun:

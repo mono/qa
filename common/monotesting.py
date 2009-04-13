@@ -23,6 +23,7 @@ from defaults import *
 xsp1_url = '%s:%s' % (base_url,xsp1_port)
 xsp2_url = '%s:%s' % (base_url,xsp2_port)
 graffiti_url = '%s:%s' % (base_url,graffiti_port)
+usexsp2 = False
 
 # Testopia variables
 mytestopia = None
@@ -45,7 +46,8 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'showvalues':'Prints the current values',
         'help':'Prints this help message',
         'debug':'Prints debug messages (implies --showvalues)',
-        'logfile=':'Write debug output to this file'}
+        'logfile=':'Write debug output to this file',
+        'usexsp2':'Use xsp2 port'}
 
 #----------------------------------------------------------------------
 def loadargs(cmdargs):
@@ -53,6 +55,7 @@ def loadargs(cmdargs):
     global xsp1_url,xsp2_url,graffiti_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, debug, logfile
+    global usexsp2
 
     longargs = value_args.keys()
     shortargs = ''
@@ -89,6 +92,8 @@ def loadargs(cmdargs):
             debug = True
         elif o == '--logfile':
             logfile = a
+        elif o == '--usexsp2':
+            usexsp2 = True
         elif o == '--help':
             usage()
             sys.exit(0)
@@ -115,7 +120,8 @@ def printValues():
     print "rc_browser = %s\n" % str(rc_browser)
 
     print "debug = %s" % debug
-    print "logfile = %s\n" % logfile
+    print "logfile = %s" % logfile
+    print "usexsp2 = %s\n" % str(usexsp2)
 
 #----------------------------------------------------------------------
 def usage():
@@ -198,3 +204,4 @@ if __name__ == '__main__':
     print "Do not execute this module directly"
     sys.exit(1)
 
+# vim:ts=4:expandtab:
