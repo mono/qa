@@ -4,16 +4,10 @@ import unittest
 import traceback
 
 sys.path.append('../..')
-#from common.defaults import *
-#from common.monotesting import *
 import common.monotesting as mono
-
-
 from common.monotesting import log
-
 from common.monoTestCase import monoTestCase
-
-from selenium.seleniumTestCase import *
+from selenium.seleniumTestCase import seleniumTestCase
 
 
 ####################################################################
@@ -22,7 +16,8 @@ from selenium.seleniumTestCase import *
 #
 
 class xsp1TestCase(seleniumTestCase):
-    def __init__(self):
+    def __init__(self,methodname='runTest'):
+        seleniumTestCase.__init__(self,methodname)
         if mono.usexsp2:
             self.port = mono.xsp2_port
         else:

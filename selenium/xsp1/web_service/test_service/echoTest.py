@@ -2,15 +2,19 @@
 
 import sys
 sys.path.append('../../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1 import xsp1TestCase
 
 import unittest, time, re
 
+class WebService_TestService_EchoTest(xsp1TestCase.xsp1TestCase):
+    def __init__(self,methodname='test_new'):
+        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
+        if not mono.usexsp2:
+            self.testcaseid = 426296
+        else:
+            self.testcaseid = 841152
 
-class WebService_TestService_EchoTest(seleniumTestCase):
-    testcaseid = 426296
 
     def test_new(self):
         print "derived class.test()"
@@ -31,12 +35,11 @@ class WebService_TestService_EchoTest(seleniumTestCase):
             self.failUnless(re.search(r"^[\s\S]*this is a test[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
 
         except Exception, e:
-            print "test_new() except"
             self.verificationErrors.append(str(e))
     
 
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 

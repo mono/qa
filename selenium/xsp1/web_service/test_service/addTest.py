@@ -6,22 +6,21 @@ from selenium.selenium import selenium
 #from selenium.seleniumTestCase import *
 from selenium.xsp1 import xsp1TestCase
 
-from common.monotesting import *
+import common.monotesting as mono
 
 import unittest, time, re
 
 
 class WebService_TestService_AddTest(xsp1TestCase.xsp1TestCase):
-    def __init__(self):
+    def __init__(self,methodname='runTest'):
+        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
      
-        if monotesting.is_xsp1:
+        if not mono.usexsp2:
             self.testcaseid = 837262
-            #self.url = base_url + xsp1_port
         else:
-            self.testcaseid = 111111 # xsp2 test case id
-            #self.url = base_url + xsp2_port
+            self.testcaseid = 841146
 
-    def test_add(self):
+    def runTest(self):
         if not self.canRun:
             return
         try:
@@ -38,14 +37,14 @@ class WebService_TestService_AddTest(xsp1TestCase.xsp1TestCase):
             sel.click("//input[@value='Invoke']")
             sel.wait_for_page_to_load("30000")
             self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
+            #log("AddTest completed successfully")
 
-        except AssertionError, e:
+        except Exception,e:
             self.verificationErrors.append(str(e))
 
 
-
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 

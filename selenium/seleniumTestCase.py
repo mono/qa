@@ -21,8 +21,12 @@ from selenium import selenium
 
 class seleniumTestCase(monoTestCase):
 
+    def __init__(self,methodname='runTest'):
+        monoTestCase.__init__(self,methodname)
+        #self.verificationErrors = []
+
     def setUp(self):
-        log("monoTestCase.setUp()")
+        log("\nmonoTestCase.setUp()")
         self.canRun = self.isTestCaseInTestRun()
         if not self.canRun:
             print "Test case #%d is not found in the test run.... skipping" % self.testcaseid
@@ -30,8 +34,9 @@ class seleniumTestCase(monoTestCase):
 
         try:
             self.verificationErrors = []
-            log("Creating test case(base_url='%s',rc_server='%s',xsp1_url='%s')" % (mono.base_url,mono.rc_server,self.port))
-            self.selenium = selenium(mono.rc_server, mono.rc_port, mono.rc_browser, self.port)
+            url = "%s:%s" % (mono.base_url,self.port)
+            log("Creating test case(base_url='%s',rc_server='%s',url='%s')" % (mono.base_url,mono.rc_server,url))
+            self.selenium = selenium(mono.rc_server, mono.rc_port, mono.rc_browser,url)
             self.selenium.start()
         except Exception, e:
             log('-'*60)

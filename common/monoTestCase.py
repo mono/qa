@@ -1,5 +1,6 @@
 
 import unittest
+import pdb
 
 from defaults import *
 from testopia import Testopia
@@ -22,9 +23,9 @@ BUG_STATUS = {'IDLE':1,
 
 class monoTestCase(unittest.TestCase):
 
-    def __init__(self,tmp):
+    def __init__(self,methodname="runTest"):
+        unittest.TestCase.__init__(self,methodname)
         self.mytestopia = None
-        unittest.TestCase.__init__(self,tmp)
 
 
     #----------------------------------------------------------------------
@@ -70,11 +71,12 @@ class monoTestCase(unittest.TestCase):
     #----------------------------------------------------------------------
     def updateTestCase(self,errorsList):
 
+        #pdb.set_trace()
         success = (len(errorsList) == 0)
         if success:
             self.__updateTestCase("PASSED")
         else:
-            log('errorsList = ' % errorsList)
+            log('errorsList = %s' % str(errorsList))
             self.__updateTestCase("FAILED",errorsList)
 
     #----------------------------------------------------------------------

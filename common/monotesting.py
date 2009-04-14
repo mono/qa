@@ -9,6 +9,8 @@
 import sys,re
 import unittest
 import getopt
+import traceback
+import pdb
 from testopia import Testopia
 
 from defaults import *
@@ -180,16 +182,10 @@ def check_args():
 #    main methods
 #
 
-def monotesting_main(xsp1_tmp_port=None):
-    global xsp1_port,xsp1_url
+def monotesting_main():
     loadargs(sys.argv[1:])
     sys.argv = sys.argv[:1]
 
-    if xsp1_tmp_port != None:
-        print "Changing xsp1_port to " + str(xsp1_tmp_port)
-        xsp1_port = int(xsp1_tmp_port)
-        xsp1_url = "%s:%s" % (base_url,xsp1_port)
-    
     check_args()
 
     printValues()
