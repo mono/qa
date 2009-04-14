@@ -4,20 +4,19 @@ import sys
 sys.path.append('../../../..')
 import common.monotesting as mono
 from selenium.xsp1 import xsp1TestCase
+#from selenium.selenium import selenium
 
 import unittest, time, re
 
 class WebService_TestService_EchoTest(xsp1TestCase.xsp1TestCase):
-    def __init__(self,methodname='test_new'):
+    def __init__(self,methodname='test'):
         xsp1TestCase.xsp1TestCase.__init__(self,methodname)
         if not mono.usexsp2:
             self.testcaseid = 426296
         else:
             self.testcaseid = 841152
 
-
-    def test_new(self):
-        print "derived class.test()"
+    def test(self):
         if not self.canRun:
             return
         try: 
@@ -36,12 +35,10 @@ class WebService_TestService_EchoTest(xsp1TestCase.xsp1TestCase):
 
         except Exception, e:
             self.verificationErrors.append(str(e))
-    
+
 
 if __name__ == "__main__":
     mono.monotesting_main()
-
-
 
 
 # vim:ts=4:expandtab:
