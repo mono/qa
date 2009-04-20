@@ -1,0 +1,12 @@
+Just trying to incorporate this selenium stuff with the moonlight testing
+
+Not sure if this will work.
+
+Very basic features:
+	* open a url
+	* log errors send to stdout
+
+Extra features:
+	* Take screenshot of Firefox window
+	* Figure out a new testing framework for Moonlight 2.0
+
