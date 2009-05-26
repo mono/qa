@@ -1,5 +1,8 @@
 #!/usr/bin/python
-import unittest
+import unittest,sys
+sys.path.append('../../..')
+
+from common.monotesting import *
 
 from button import *
 from htmlAnchor import *
