@@ -4,7 +4,6 @@ import sys
 sys.path.append('../../../..')
 import common.monotesting as mono
 from selenium.xsp1 import xsp1TestCase
-#from selenium.selenium import selenium
 
 import unittest, time, re
 
