@@ -1,9 +1,14 @@
 
+import sys
+import os
 import unittest
 import pdb
 
 from defaults import *
 from testopia import Testopia
+
+creds_dir = os.path.join(os.environ['HOME'],'.bugzilla')
+sys.path = [creds_dir] + sys.path
 import creds
 #from monotesting import *
 import monotesting as mono
