@@ -3,14 +3,18 @@
 
 import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1 import xsp1TestCase
 
 import unittest, time, re
 
-class AspNetFramework_TransferTest(seleniumTestCase):
-    testcaseid = 837584
+class AspNetFramework_TransferTest(xsp1TestCase.xsp1TestCase):
+    def __init__(self,methodname='test'):
+        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
+        if not mono.usexsp2:
+            self.testcaseid = 837584 # xsp1 test case id
+        else:
+            self.testcaseid = 861582 # xsp2 test case id
 
     def test(self):
         if not self.canRun:
@@ -36,7 +40,7 @@ class AspNetFramework_TransferTest(seleniumTestCase):
 
 
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 

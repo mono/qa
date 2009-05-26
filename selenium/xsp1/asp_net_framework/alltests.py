@@ -12,6 +12,8 @@ from session1 import *
 from transferTest import *
 from typeDesc import *
 
+sys.path.append('../../../..')
+import common.monotesting as mono
 
 if __name__ == '__main__':
-    monotesting_main()
+    mono.monotesting_main()

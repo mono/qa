@@ -3,14 +3,18 @@
 
 import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1 import xsp1TestCase
 
 import unittest, time, re
 
-class AspNetFramework_SerialTest(seleniumTestCase):
-    testcaseid = 837578
+class AspNetFramework_SerialTest(xsp1TestCase.xsp1TestCase):
+    def __init__(self,methodname='test'):
+        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
+        if not mono.usexsp2:
+            self.testcaseid = 837578 # xsp1 test case id
+        else:
+            self.testcaseid = 861579 # xsp2 test case id
 
     def test(self):
         if not self.canRun:
@@ -35,7 +39,7 @@ class AspNetFramework_SerialTest(seleniumTestCase):
             self.verificationErrors.append(str(e))
 
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 
