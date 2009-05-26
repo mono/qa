@@ -1,8 +1,11 @@
 ######################################################################
 #
-#   You must create two python modules in the common directory (creds.py,defaults.py)
+#   You must create two python modules (creds.py,defaults.py)
+#
+#   1. ~/.bugzilla/creds.py
+#    2. ../common/defaults.py
 
-$ cat creds.py
+$ cat ~/.bugzilla/creds.py
 
 username='youruser'
 password='yourpassword'
@@ -66,4 +69,4 @@ Project Rules
   files), needs to have a vim mode line as the very last line of the file. See
   qa/selenium/xsp1/web_service/test_service/addTest.py for an example modeline.
 
-
+# vim:ts=4:expandtab:
