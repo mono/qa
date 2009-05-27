@@ -27,7 +27,13 @@ class AspNetFramework_includeTest(xsp1TestCase.xsp1TestCase):
             self.failUnless(sel.is_text_present("This is a default One!"))
             self.assertEqual("This is a default Two!", sel.get_text("Message2"))
             self.assertEqual("This is a label!", sel.get_text("Three"))
-            sel.click("_ctl2")
+
+            if not mono.usexsp2:
+                buttonName = "_ctl2"
+            else:
+                buttonName = "ctl02"
+            sel.click(buttonName)
+
             sel.wait_for_page_to_load("30000")
             self.failUnless(sel.is_text_present("Message text changed!"))
             try:
