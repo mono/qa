@@ -23,7 +23,10 @@ class HtmlControls_HtmlInputRadioButton(xsp1TestCase.xsp1TestCase):
             sel.open("/")
             sel.click("link=htmlinputradiobutton")
             sel.wait_for_page_to_load("30000")
-            self.assertEqual("One\n Two\n Three\n One bis\n Two bis", sel.get_text("_ctl1"))
+            if not mono.usexsp2:
+                self.assertEqual("One\n Two\n Three\n One bis\n Two bis", sel.get_text("_ctl1"))
+            else:
+                self.assertEqual("//<![CDATA[ var theForm; if (document.getElementById) { theForm = document.getElementById ('ctl01'); } else { theForm = document.ctl01; } //]]> \n One\n Two\n Three\n One bis\n Two bis", sel.get_text("ctl01"))
             self.failUnless(sel.is_checked("//*[@id=\"rb3\"]"))
             sel.click("rb1")
             self.failIf(sel.is_checked("//*[@id=\"rb3\"]"))
