@@ -3,41 +3,60 @@
 
 import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1 import xsp1TestCase
 
 import unittest, time, re
 
-class CustomControls_RegisterTest(seleniumTestCase):
-    testcaseid = 837902
+class CustomControls_RegisterTest(xsp1TestCase.xsp1TestCase):
+    def __init__(self,methodname='test'):
+        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
+        if not mono.usexsp2:
+            self.testcaseid = 837902 # xsp1 test case id
+        else:
+            self.testcaseid = 861725 # xsp2 test case id
 
     def test(self):
-        sel = self.selenium
-        sel.open("/")
-        sel.click("link=tabcontrol")
-        sel.wait_for_page_to_load("30000")
-        sel.click("submit")
-        sel.wait_for_page_to_load("30000")
-        sel.type("name", "Google")
-
+        if not self.canRun:
+            return
         try:
-            self.assertEqual("Mono Project", sel.get_table("//form[@id='_ctl1']/table[2].0.1"))
-        except AssertionError, e:
-            self.verificationErrors.append(str(e))
+            sel = self.selenium
+            sel.open("/")
+            sel.click("link=tabcontrol")
+            sel.wait_for_page_to_load("30000")
+            sel.click("submit")
+            sel.wait_for_page_to_load("30000")
 
-        sel.type("url", "http://google.com")
-        sel.click("submit")
-        sel.wait_for_page_to_load("30000")
+            try:
+                if not mono.usexsp2:
+                    monoProjectXPath = "//form[@id='_ctl1']/table[2].0.1"
+                else:
+                    monoProjectXPath = "//form[@id='ctl01']/table[2].0.1"
 
-        try:
-            self.assertEqual("Google", sel.get_table("//form[@id='_ctl1']/table[2].0.3"))
-        except AssertionError, e:
+                self.assertEqual("Mono Project", sel.get_table(monoProjectXPath))
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
+
+            sel.type("name", "Google")
+            sel.type("url", "http://google.com")
+            sel.click("submit")
+            sel.wait_for_page_to_load("30000")
+
+            try:
+                if not mono.usexsp2:
+                    googleXPath = "//form[@id='_ctl1']/table[2].0.3"
+                else:
+                    googleXPath = "//form[@id='ctl01']/table[2].0.3"
+
+                self.assertEqual("Google", sel.get_table(googleXPath))
+            except AssertionError, e:
+                self.verificationErrors.append(str(e))
+        except Exception,e:
             self.verificationErrors.append(str(e))
 
 
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 
