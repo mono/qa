@@ -13,7 +13,7 @@ class HtmlControls_HtmlInputFile(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838541
         else:
-            self.testcaseid = None
+            self.testcaseid = 861713
 
     def test(self):
         if not self.canRun:

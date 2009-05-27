@@ -13,7 +13,7 @@ class Handlers_WebHandler(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 840264
         else:
-            self.testcaseid = None
+            self.testcaseid = 861702 
 
     def test(self):
         if not self.canRun:

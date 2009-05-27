@@ -13,7 +13,7 @@ class HtmlControls_HtmlButton(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838536
         else:
-            self.testcaseid = None
+            self.testcaseid = 861707 
 
     def test(self):
         if not self.canRun:

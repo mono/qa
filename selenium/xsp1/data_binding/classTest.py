@@ -13,7 +13,7 @@ class classTest(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 840313
         else:
-            self.testcaseid = None
+            self.testcaseid = 861688 
 
     def test(self):
         if not self.canRun:

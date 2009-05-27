@@ -13,7 +13,7 @@ class DataBinding_AttributeTest(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 839039
         else:
-            self.testcaseid = 841152
+            self.testcaseid = 861686 
 
     def test(self):
         if not self.canRun:

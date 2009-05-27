@@ -13,7 +13,7 @@ class HtmlControls_HtmlInputImage(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838543
         else:
-            self.testcaseid = None
+            self.testcaseid = 861715
 
     def test(self):
         if not self.canRun:

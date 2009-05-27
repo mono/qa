@@ -13,7 +13,7 @@ class HtmlControls_HtmlInputCheckbox(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838540
         else:
-            self.testcaseid = None
+            self.testcaseid = 861712
 
     def test(self):
         if not self.canRun:

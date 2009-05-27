@@ -13,7 +13,7 @@ class Handlers_MonoDoc(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 840265
         else:
-            self.testcaseid = None
+            self.testcaseid = 861700 
 
     def test(self):
         if not self.canRun:

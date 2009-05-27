@@ -13,7 +13,7 @@ class HtmlControls_HtmlGeneric(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838537
         else:
-            self.testcaseid = None
+            self.testcaseid = 861709
 
     def test(self):
         if not self.canRun:

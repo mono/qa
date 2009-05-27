@@ -13,7 +13,7 @@ class Handlers_Chunked(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 840262
         else:
-            self.testcaseid = None
+            self.testcaseid = 861697 
 
     def test(self):
         if not self.canRun:

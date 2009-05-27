@@ -13,7 +13,7 @@ class HtmlControls_HtmlTextArea(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838547
         else:
-            self.testcaseid = None
+            self.testcaseid = 861720 
 
     def test(self):
         if not self.canRun:

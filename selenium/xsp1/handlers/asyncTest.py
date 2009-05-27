@@ -13,7 +13,7 @@ class Handlers_Async(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 840261
         else:
-            self.testcaseid = None
+            self.testcaseid = 861696 
 
     def test(self):
         if not self.canRun:

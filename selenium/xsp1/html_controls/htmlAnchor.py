@@ -13,7 +13,7 @@ class HtmlControls_HtmlAnchor(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838535
         else:
-            self.testcaseid = None
+            self.testcaseid = 861706 
 
     def test(self):
         if not self.canRun:

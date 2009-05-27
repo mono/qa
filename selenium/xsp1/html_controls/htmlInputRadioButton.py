@@ -13,7 +13,7 @@ class HtmlControls_HtmlInputRadioButton(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838544
         else:
-            self.testcaseid = None
+            self.testcaseid = 861716
 
     def test(self):
         if not self.canRun:
