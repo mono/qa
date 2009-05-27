@@ -12,7 +12,7 @@ class WebControls_WebRadioButtonList(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838907
         else:
-            self.testcaseid = None
+            self.testcaseid = 861814
 
     def test(self):
         if not self.canRun:

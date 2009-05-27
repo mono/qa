@@ -13,7 +13,7 @@ class WebControls_WebXML(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838910
         else:
-            self.testcaseid = None
+            self.testcaseid = 861811
 
     def test(self):
         if not self.canRun:

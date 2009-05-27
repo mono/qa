@@ -12,7 +12,7 @@ class WebControls_WebPanel(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 839931
         else:
-            self.testcaseid = None
+            self.testcaseid = 861812
 
     def test(self):
         if not self.canRun:

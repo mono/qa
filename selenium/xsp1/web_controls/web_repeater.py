@@ -13,7 +13,7 @@ class WebControls_WebRepeater(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 839934
         else:
-            self.testcaseid = None
+            self.testcaseid = 861807
 
     def test(self):
         if not self.canRun:

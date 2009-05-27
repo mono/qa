@@ -12,7 +12,7 @@ class WebControls_WebRegularExpressionValidator(xsp1TestCase.xsp1TestCase):
         if not mono.usexsp2:
             self.testcaseid = 838908
         else:
-            self.testcaseid = None
+            self.testcaseid = 861816
 
     def test(self):
         if not self.canRun:

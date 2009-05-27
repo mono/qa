@@ -1,45 +1,54 @@
 #!/usr/bin/env python
 
-
 import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
-
+import common.monotesting as mono
+from selenium.xsp1 import xsp1TestCase
 import unittest, time, re
 
-class WebControls_WebListBox(seleniumTestCase):
-    testcaseid = 838905
+class WebControls_WebListBox(xsp1TestCase.xsp1TestCase):
+    def __init__(self,methodname='test'):
+        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
+        if not mono.usexsp2:
+            self.testcaseid = 838905
+        else:
+            self.testcaseid = 861820
 
     def test(self):
-        sel = self.selenium
-        sel.open("/")
-        sel.click("link=web_listbox")
-        sel.wait_for_page_to_load("30000")
-        self.failUnless(sel.is_text_present("Single selection"))
-        self.failUnless(sel.is_text_present("Multiple selection"))
-        sel.select("lbs", "label=3")
-        self.assertEqual("3", sel.get_selected_value("//*[@id=\"lbs\"]"))
-        sel.select("lbs", "label=5")
-        self.assertEqual("5", sel.get_selected_value("//*[@id=\"lbs\"]"))
-        sel.add_selection("lbm", "label=2")
-        self.assertEqual("2", sel.get_selected_value("//*[@id=\"lbm\"]"))
-        sel.remove_selection("lbm", "label=2")
-        sel.add_selection("lbm", "label=4")
-        self.assertEqual("4", sel.get_selected_value("//*[@id=\"lbm\"]"))
-        sel.add_selection("lbm", "label=1")
-        self.assertEqual(["1", "4"], sel.get_selected_values("//*[@id=\"lbm\"]"))
-        sel.remove_selection("lbm", "label=1")
-        sel.remove_selection("lbm", "label=4")
-        sel.add_selection("lbm", "label=5")
-        sel.add_selection("lbm", "label=6")
-        sel.add_selection("lbm", "label=7")
-        sel.add_selection("lbm", "label=8")
-        self.assertEqual(["5", "6", "7", "8"], sel.get_selected_values("//*[@id=\"lbm\"]"))
+        if not self.canRun:
+            return
+        try:
+            sel = self.selenium
+            sel.open("/")
+            sel.click("link=web_listbox")
+            sel.wait_for_page_to_load("30000")
+            self.failUnless(sel.is_text_present("Single selection"))
+            self.failUnless(sel.is_text_present("Multiple selection"))
+            sel.select("lbs", "label=3")
+            self.assertEqual("3", sel.get_selected_value("//*[@id=\"lbs\"]"))
+            sel.select("lbs", "label=5")
+            self.assertEqual("5", sel.get_selected_value("//*[@id=\"lbs\"]"))
+            sel.add_selection("lbm", "label=2")
+            self.assertEqual("2", sel.get_selected_value("//*[@id=\"lbm\"]"))
+            sel.remove_selection("lbm", "label=2")
+            sel.add_selection("lbm", "label=4")
+            self.assertEqual("4", sel.get_selected_value("//*[@id=\"lbm\"]"))
+            sel.add_selection("lbm", "label=1")
+            self.assertEqual(["1", "4"], sel.get_selected_values("//*[@id=\"lbm\"]"))
+            sel.remove_selection("lbm", "label=1")
+            sel.remove_selection("lbm", "label=4")
+            sel.add_selection("lbm", "label=5")
+            sel.add_selection("lbm", "label=6")
+            sel.add_selection("lbm", "label=7")
+            sel.add_selection("lbm", "label=8")
+            self.assertEqual(["5", "6", "7", "8"], sel.get_selected_values("//*[@id=\"lbm\"]"))
     
+        except Exception,e:
+            self.verificationErrors.append(str(e))
+
+
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 # vim:ts=4:expandtab:
