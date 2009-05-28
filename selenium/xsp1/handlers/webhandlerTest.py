@@ -11,6 +11,7 @@ class Handlers_WebHandler (xsp1TestCase):
     xsp2TestCaseId = 861702
 
     def test(self):
+        HeadingXpath = "//h1"
         if not self.canRun:
             return
         try: 
@@ -18,7 +19,7 @@ class Handlers_WebHandler (xsp1TestCase):
             sel.open("/")
             sel.click("link=webhandler.ashx")
             sel.wait_for_page_to_load("30000")
-            self.assertEqual("Hi there!", sel.get_text("//h1"))
+            self.assertEqual("Hi there!", sel.get_text(HeadingXpath))
 
         except Exception,e:
             self.verificationErrors.append(str(e))

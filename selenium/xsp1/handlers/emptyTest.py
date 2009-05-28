@@ -11,15 +11,16 @@ class Handlers_Empty(xsp1TestCase):
     xsp2TestCaseId = 861699
 
     def test(self):
+        BodyXpath = "//html"
         if not self.canRun:
             return
         try:
             sel = self.selenium
             sel.open("/")
             sel.click("link=empty.ashx")
-            try: self.failUnless(sel.is_element_present("//html"))
+            try: self.failUnless(sel.is_element_present(BodyXpath))
             except AssertionError, e: self.verificationErrors.append(str(e))
-            try: self.failUnless(sel.is_element_present("//body"))
+            try: self.failUnless(sel.is_element_present(BodyXpath))
             except AssertionError, e: self.verificationErrors.append(str(e))
 
         except Exception,e:
