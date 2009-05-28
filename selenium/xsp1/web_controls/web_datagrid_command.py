@@ -7,8 +7,8 @@ import common.monotesting as mono
 from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
 class WebControls_WebDataGridCommand(xsp1TestCase):
-    xsp1TestCaseId = 839926 # xsp1 test case id
-    xsp2TestCaseId = 861806 # xsp2 test case id
+    xsp1TestCaseId = 839926
+    xsp2TestCaseId = 861806
 
     def test(self):
         if not self.canRun:

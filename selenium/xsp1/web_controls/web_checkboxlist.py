@@ -1,19 +1,15 @@
 #!/usr/bin/env python
 
-import sys
+import sys, unittest, time, re
+
 sys.path.append('../../..')
 import common.monotesting as mono
-from selenium.xsp1 import xsp1TestCase
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
 
-class WebControls_WebCheckBoxList(xsp1TestCase.xsp1TestCase):
-    def __init__(self,methodname='test'):
-        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
-        if not mono.usexsp2:
-            self.testcaseid = 838899 # xsp1 test case id
-        else:
-            self.testcaseid = 861803 # xsp2 test case id
+class WebControls_WebCheckBoxList(xsp1TestCase):
+    xsp1TestCaseId = 838899
+    xsp2TestCaseId = 861803
 
     def _checkAndTest(self, sel, locator):
         self.failIf(sel.is_checked(locator))

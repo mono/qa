@@ -1,19 +1,15 @@
 #!/usr/bin/env python
 
-import sys
+import sys, unittest, time, re
+
 sys.path.append('../../..')
 import common.monotesting as mono
-from selenium.xsp1 import xsp1TestCase
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
 
-class WebControls_Calendar(xsp1TestCase.xsp1TestCase):
-    def __init__(self,methodname='test'):
-        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
-        if not mono.usexsp2:
-            self.testcaseid = 838895 # xsp1 test case id
-        else:
-            self.testcaseid = 861728 # xsp2 test case id
+class WebControls_Calendar(xsp1TestCase):
+    xsp1TestCaseId = 838895
+    xsp2TestCaseId = 861728
 
     def test(self):
         if not self.canRun:
