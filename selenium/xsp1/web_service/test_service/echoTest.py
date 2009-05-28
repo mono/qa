@@ -1,20 +1,14 @@
 #!/usr/bin/env python
 
-import sys
+import sys, unittest, time, re
+
 sys.path.append('../../../..')
 import common.monotesting as mono
-from selenium.xsp1 import xsp1TestCase
-#from selenium.selenium import selenium
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
-
-class WebService_TestService_EchoTest(xsp1TestCase.xsp1TestCase):
-    def __init__(self,methodname='test'):
-        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
-        if not mono.usexsp2:
-            self.testcaseid = 426296
-        else:
-            self.testcaseid = 841152
+class WebService_TestService_EchoTest(xsp1TestCase):
+    xsp1TestCaseId = 426296
+    xsp2TestCaseId = 841152
 
     def test(self):
         if not self.canRun:

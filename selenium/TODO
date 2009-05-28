@@ -11,7 +11,6 @@ Things to do for complete automated testing of asp.net:
  Framework features:
      * Add warnings for test cases that weren't run because they're not in the testopia test run
      * Added cmd line option that will set isautomated=True in Testopia on all test cases that are run
-     * Move the creds.py file to ~/.testopia_credentials so that we don't accidentally check in our creds to svn.
      * Implement logging module for better debug output
 
 
@@ -22,6 +21,8 @@ FUTURE
 
 
 DONE
+ * Restructured xsp1 test case to be more friendly
+ * Move the creds.py file to ~/.testopia_credentials so that we don't accidentally check in our creds to svn.
  * Fix command line parameters not working
  * Added script/args values to automation section of the test cases in Testopia that we can use
  * Integrate bugzilla python xmlrpc to mark tests as pass/fail
