@@ -1,19 +1,14 @@
 #!/usr/bin/env python
 
-import sys
+import sys, unittest, time, re
+
 sys.path.append('../../..')
 import common.monotesting as mono
-from selenium.xsp1 import xsp1TestCase
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
-
-class HtmlControls_HtmlImage(xsp1TestCase.xsp1TestCase):
-    def __init__(self,methodname='test'):
-        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
-        if not mono.usexsp2:
-            self.testcaseid = 838538
-        else:
-            self.testcaseid = 861710
+class HtmlControls_HtmlImage(xsp1TestCase):
+    xsp1TestCaseId = 838538
+    xsp2TestCaseId = 861710
 
     def test(self):
         if not self.canRun:

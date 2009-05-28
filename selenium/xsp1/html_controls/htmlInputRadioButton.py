@@ -1,19 +1,14 @@
 #!/usr/bin/env python
 
-import sys
+import sys, unittest, time, re
+
 sys.path.append('../../..')
 import common.monotesting as mono
-from selenium.xsp1 import xsp1TestCase
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
-
-class HtmlControls_HtmlInputRadioButton(xsp1TestCase.xsp1TestCase):
-    def __init__(self,methodname='test'):
-        xsp1TestCase.xsp1TestCase.__init__(self,methodname)
-        if not mono.usexsp2:
-            self.testcaseid = 838544
-        else:
-            self.testcaseid = 861716
+class HtmlControls_HtmlInputRadioButton(xsp1TestCase):
+    xsp1TestCaseId = 838544
+    xsp2TestCaseId = 861716
 
     def test(self):
         if not self.canRun:
