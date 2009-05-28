@@ -18,6 +18,16 @@ class WebControls_WebRegularExpressionValidator(xsp1TestCase.xsp1TestCase):
         if not self.canRun:
             return
         try:
+            if not mono.usexsp2:
+                EnterButton = "_ctl11"
+                ctl4 = "_ctl4"
+                ctl7 = "_ctl7"
+                ctl10 = "_ctl10"
+            else:
+                EnterButton = "ctl11"
+                ctl4 = "ctl04"
+                ctl7 = "ctl07"
+                ctl10 = "ctl10"
             sel = self.selenium
             sel.open("/")
             sel.click("link=web_regularexpressionvalidator")
@@ -25,44 +35,44 @@ class WebControls_WebRegularExpressionValidator(xsp1TestCase.xsp1TestCase):
             sel.type("year", "2002")
             sel.type("zipcode", "84606")
             sel.type("email", "someone@somewhere.com")
-            sel.click("_ctl11")
+            sel.click(EnterButton)
             sel.wait_for_page_to_load("30000")
             self.assertEqual("Entered data is valid.", sel.get_text("message"))
             sel.type("year", "200")
-            sel.click("_ctl11")
+            sel.click(EnterButton)
             self.assertEqual("Entered data is valid.", sel.get_text("message"))
             sel.type("year", "20")
-            sel.click("_ctl11")
+            sel.click(EnterButton)
             sel.wait_for_page_to_load("30000")
-            self.failIf(sel.is_visible("_ctl4"))
+            self.failIf(sel.is_visible(ctl4))
             sel.type("year", "AD")
-            sel.click("_ctl11")
-            self.failUnless(sel.is_visible("_ctl4"))
+            sel.click(EnterButton)
+            self.failUnless(sel.is_visible(ctl4))
             sel.type("year", "2002")
-            sel.click("_ctl11")
+            sel.click(EnterButton)
             sel.wait_for_page_to_load("30000")
             sel.type("zipcode", "84606123")
-            sel.click("_ctl11")
-            self.failUnless(sel.is_visible("_ctl7"))
+            sel.click(EnterButton)
+            self.failUnless(sel.is_visible(ctl7))
             sel.type("zipcode", "846o6123")
-            sel.click("_ctl11")
-            self.failUnless(sel.is_visible("_ctl7"))
+            sel.click(EnterButton)
+            self.failUnless(sel.is_visible(ctl7))
             sel.type("zipcode", "84606-1234")
-            sel.click("_ctl11")
+            sel.click(EnterButton)
             sel.wait_for_page_to_load("30000")
             self.assertEqual("Entered data is valid.", sel.get_text("message"))
             sel.type("email", "someone#somewhere.com")
-            sel.click("_ctl11")
-            self.failUnless(sel.is_visible("_ctl10"))
+            sel.click(EnterButton)
+            self.failUnless(sel.is_visible(ctl10))
             sel.type("email", "someone@somewhere")
-            sel.click("_ctl11")
-            self.assertEqual("invalid format!", sel.get_text("_ctl10"))
+            sel.click(EnterButton)
+            self.assertEqual("invalid format!", sel.get_text(ctl10))
             sel.type("email", "someone@somewhere.edu")
-            sel.click("_ctl11")
+            sel.click(EnterButton)
             sel.wait_for_page_to_load("30000")
-            self.failIf(sel.is_visible("_ctl4"))
-            self.failIf(sel.is_visible("_ctl7"))
-            self.failIf(sel.is_visible("_ctl10"))
+            self.failIf(sel.is_visible(ctl4))
+            self.failIf(sel.is_visible(ctl7))
+            self.failIf(sel.is_visible(ctl10))
             self.assertEqual("Entered data is valid.", sel.get_text("message"))
 
         except Exception,e:
