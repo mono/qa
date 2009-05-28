@@ -4,18 +4,17 @@ import unittest
 import traceback
 
 filepath = os.path.realpath(__file__)
-print "filepath = %s" % filepath
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
-print "basepath = %s" % basepath
+#basepath is the absolute path of the trunk/qa directory
 
 sys.path.append(basepath)
-print sys.path
 
 import common.monotesting as mono
 from common.monotesting import log
 from common.monoTestCase import monoTestCase
 from selenium.seleniumTestCase import seleniumTestCase
 
+log("sys.path = %s" % (str(sys.path))
 
 ####################################################################
 #
