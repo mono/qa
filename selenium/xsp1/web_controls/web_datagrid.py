@@ -18,6 +18,8 @@ class WebControls_WebDataGrid(xsp1TestCase):
         
 
     def test(self):
+        if not self.canRun:
+            return
         try:
             sel = self.selenium
             sel.open("/")
@@ -36,6 +38,7 @@ class WebControls_WebDataGrid(xsp1TestCase):
             self._verifyRow(mexicoRowXPath, "Mexico", "America", "mx")
 
         except Exception,e:
+            print str(e)
             self.verificationErrors.append(str(e))
 
 
