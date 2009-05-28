@@ -14,7 +14,7 @@ from common.monotesting import log
 from common.monoTestCase import monoTestCase
 from selenium.seleniumTestCase import seleniumTestCase
 
-log("sys.path = %s" % (str(sys.path))
+log("sys.path = %s" % (str(sys.path)))
 
 ####################################################################
 #
