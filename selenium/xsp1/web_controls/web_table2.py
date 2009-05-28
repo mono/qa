@@ -14,12 +14,16 @@ class WebControls_WebTable2(xsp1TestCase):
         if not self.canRun:
             return
         try:
+            if not mono.usexsp2:
+                FormCtl = "_ctl1"
+            else:
+                FormCtl = "ctl01"
             sel = self.selenium
             sel.open("/")
             sel.click("link=web_table2")
             sel.wait_for_page_to_load("30000")
             self.failUnless(sel.is_element_present("//html/body/form/table"))
-            self.assertEqual("TEST", sel.get_text("//form[@id='_ctl1']/table/tbody/tr/td"))
+            self.assertEqual("TEST", sel.get_text("//form[@id='" + FormCtl + "']/table/tbody/tr/td"))
 
         except Exception,e:
             self.verificationErrors.append(str(e))
