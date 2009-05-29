@@ -11,6 +11,10 @@ class WebControls_WebPlaceHolder(xsp1TestCase):
     xsp2TestCaseId = 861813
 
     def test(self):
+        if not mono.usexsp2:
+            ctl2 = "//*[@id=\"_ctl2\"]"
+        else:
+            ctl2 = "//*[@id=\"ctl02\"]"
         if not self.canRun:
             return
         try:
@@ -18,16 +22,9 @@ class WebControls_WebPlaceHolder(xsp1TestCase):
             sel.open("/")
             sel.click("link=web_placeholder")
             sel.wait_for_page_to_load("30000")
-            if not mono.usexsp2:
-                self.failIf(sel.is_checked("//*[@id=\"_ctl2\"]"))
-                sel.click("_ctl2")
-            else:
-                self.failIf(sel.is_checked("//*[@id=\"ctl02\"]"))
-                sel.click("ctl02")
-            if not mono.usexsp2:
-                self.failUnless(sel.is_checked("//*[@id=\"_ctl2\"]"))
-            else:
-                self.failUnless(sel.is_checked("//*[@id=\"ctl02\"]"))
+            self.failIf(sel.is_checked(ctl2))
+            sel.click(ctl2)
+            self.failUnless(sel.is_checked(ctl2))
             sel.click("link=Mono project Home Page")
             sel.wait_for_page_to_load("30000")
             self.assertEqual("Main Page - Mono", sel.get_title())

@@ -11,19 +11,21 @@ class WebControls_WebRegularExpressionValidator(xsp1TestCase):
     xsp2TestCaseId = 861816
 
     def test(self):
+    
+        if not mono.usexsp2:
+            EnterButton = "_ctl11"
+            ctl4 = "_ctl4"
+            ctl7 = "_ctl7"
+            ctl10 = "_ctl10"
+        else:
+            EnterButton = "ctl11"
+            ctl4 = "ctl04"
+            ctl7 = "ctl07"
+            ctl10 = "ctl10"
+            
         if not self.canRun:
             return
         try:
-            if not mono.usexsp2:
-                EnterButton = "_ctl11"
-                ctl4 = "_ctl4"
-                ctl7 = "_ctl7"
-                ctl10 = "_ctl10"
-            else:
-                EnterButton = "ctl11"
-                ctl4 = "ctl04"
-                ctl7 = "ctl07"
-                ctl10 = "ctl10"
             sel = self.selenium
             sel.open("/")
             sel.click("link=web_regularexpressionvalidator")

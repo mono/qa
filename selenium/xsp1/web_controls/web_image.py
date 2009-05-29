@@ -11,6 +11,7 @@ class WebControls_WebImage(xsp1TestCase):
     xsp2TestCaseId = 861817
 
     def test(self):
+        TestElementXpath = "//*[@id=\"im\"]"
         if not self.canRun:
             return
         try:
@@ -18,7 +19,7 @@ class WebControls_WebImage(xsp1TestCase):
             sel.open("/")
             sel.click("link=web_image")
             sel.wait_for_page_to_load("30000")
-            self.failUnless(sel.is_element_present("//*[@id=\"im\"]"))
+            self.failUnless(sel.is_element_present(TestElementXpath))
 
         except Exception,e:
             self.verificationErrors.append(str(e))

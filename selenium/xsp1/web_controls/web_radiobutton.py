@@ -10,6 +10,9 @@ class WebControls_WebRadioButton(xsp1TestCase):
     xsp1TestCaseId = 839933
     xsp2TestCaseId = 861815
 
+    def ControlXPath(self, idx):
+            return "//*[@id=\"r" + idx + "\"]"
+
     def test(self):
         if not self.canRun:
             return
@@ -18,19 +21,19 @@ class WebControls_WebRadioButton(xsp1TestCase):
             sel.open("/")
             sel.click("link=web_radiobutton")
             sel.wait_for_page_to_load("30000")
-            self.failUnless(sel.is_checked("//*[@id=\"r1\"]"))
+            self.failUnless(sel.is_checked(self.ControlXPath("1")))
             sel.click("r2")
-            self.failUnless(sel.is_checked("//*[@id=\"r2\"]"))
-            self.failIf(sel.is_checked("//*[@id=\"r1\"]"))
+            self.failUnless(sel.is_checked(self.ControlXPath("2")))
+            self.failIf(sel.is_checked(self.ControlXPath("1")))
             sel.click("r3")
-            self.failUnless(sel.is_checked("//*[@id=\"r3\"]"))
-            self.failIf(sel.is_checked("//*[@id=\"r2\"]"))
-            self.failIf(sel.is_checked("//*[@id=\"r1\"]"))
-            self.failIf(sel.is_checked("//*[@id=\"r4\"]"))
-            self.failUnless(sel.is_checked("//*[@id=\"r5\"]"))
+            self.failUnless(sel.is_checked(self.ControlXPath("3")))
+            self.failIf(sel.is_checked(self.ControlXPath("2")))
+            self.failIf(sel.is_checked(self.ControlXPath("1")))
+            self.failIf(sel.is_checked(self.ControlXPath("4")))
+            self.failUnless(sel.is_checked(self.ControlXPath("5")))
             sel.click("r4")
-            self.failUnless(sel.is_checked("//*[@id=\"r4\"]"))
-            self.failIf(sel.is_checked("//*[@id=\"r5\"]"))
+            self.failUnless(sel.is_checked(self.ControlXPath("4")))
+            self.failIf(sel.is_checked(self.ControlXPath("5")))
     
         except Exception,e:
             self.verificationErrors.append(str(e))
