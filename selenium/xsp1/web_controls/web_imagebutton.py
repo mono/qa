@@ -1,29 +1,37 @@
 #!/usr/bin/env python
 
+import sys, unittest, time, re
 
-import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
 
-class WebControls_WebImageButton(seleniumTestCase):
-    testcaseid = 838904
+class WebControls_WebImageButton(xsp1TestCase):
+    xsp1TestCaseId = 838904
+    xsp2TestCaseId = 863230
 
     def test(self):
-        sel = self.selenium
-        sel.open("/")
-        sel.click("link=web_imagebutton")
-        sel.wait_for_page_to_load("30000")
-        self.failUnless(sel.is_element_present("//*[@id=\"imgButton\"]"))
-        sel.click("imgButton")
-        sel.wait_for_page_to_load("30000")
-        self.failUnless(sel.is_element_present("//*[@id=\"imgButton\"]"))
-    
+        if not self.canRun:
+            return
+        try:
+            imageButtonXPath = "//*[@id=\"imgButton\"]"
+
+            sel = self.selenium
+            sel.open("/")
+            sel.click("link=web_imagebutton")
+            sel.wait_for_page_to_load("30000")
+            self.failUnless(sel.is_element_present(imageButtonXPath))
+            #sel.click("imgButton")
+            for ix in range(5):
+                sel.click(imageButtonXPath)
+                sel.wait_for_page_to_load("30000")
+                self.failUnless(sel.is_element_present(imageButtonXPath))
+        except Exception,e:
+            self.verificationErrors.append(str(e))
+
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 # vim:ts=4:expandtab:

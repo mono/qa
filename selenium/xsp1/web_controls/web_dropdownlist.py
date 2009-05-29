@@ -1,45 +1,52 @@
 #!/usr/bin/env python
 
+import sys, unittest, time, re
 
-import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
-
-class WebControls_WebDropDownList(seleniumTestCase):
-    testcaseid = 838903
+class WebControls_WebDropDownList(xsp1TestCase):
+    xsp1TestCaseId = 838903
+    xsp2TestCaseId = 863176
 
     def test(self):
-        sel = self.selenium
-        sel.open("/")
-        sel.click("link=web_dropdownlist")
-        sel.wait_for_page_to_load("30000")
-        self.failUnless(sel.is_element_present("//*[@id=\"ddl\"]"))
-        self.assertEqual("Item 1", sel.get_selected_label("//*[@id=\"ddl\"]"))
-        sel.click("btn")
-        sel.wait_for_page_to_load("30000")
-        self.assertEqual("You selected 'Item 1' (index #0).", sel.get_text("lbl"))
-        sel.select("ddl", "label=Item 4")
-        self.assertEqual("Item 4", sel.get_selected_label("//*[@id=\"ddl\"]"))
-        sel.click("btn")
-        sel.wait_for_page_to_load("30000")
-        self.assertEqual("You selected 'Item 4' (index #3).", sel.get_text("lbl"))
-        sel.select("ddl", "label=Item 2")
-        self.assertEqual("Item 2", sel.get_selected_label("//*[@id=\"ddl\"]"))
-        sel.click("btn")
-        sel.wait_for_page_to_load("30000")
-        self.assertEqual("You selected 'Item 2' (index #1).", sel.get_text("lbl"))
-        sel.select("ddl", "label=Item 3")
-        self.assertEqual("Item 3", sel.get_selected_label("//*[@id=\"ddl\"]"))
-        sel.click("btn")
-        sel.wait_for_page_to_load("30000")
-        self.assertEqual("You selected 'Item 3' (index #2).", sel.get_text("lbl"))
-    
+        if not self.canRun:
+            return
+        try:
+            dropDownListXPath = "//*[@id=\"ddl\"]"
+            labelXPath = "//*[@id=\"lbl\"]"
+            buttonXPath = "//*[@id=\"btn\"]"
+            
+            sel = self.selenium
+            sel.open("/")
+            sel.click("link=web_dropdownlist")
+            sel.wait_for_page_to_load("30000")
+            self.failUnless(sel.is_element_present(dropDownListXPath))
+            self.assertEqual("Item 1", sel.get_selected_label(dropDownListXPath))
+            sel.click(buttonXPath)
+            sel.wait_for_page_to_load("30000")
+            self.assertEqual("You selected 'Item 1' (index #0).", sel.get_text(labelXPath))
+            sel.select(dropDownListXPath, "label=Item 4")
+            self.assertEqual("Item 4", sel.get_selected_label(dropDownListXPath))
+            sel.click(buttonXPath)
+            sel.wait_for_page_to_load("30000")
+            self.assertEqual("You selected 'Item 4' (index #3).", sel.get_text(labelXPath))
+            sel.select(dropDownListXPath, "label=Item 2")
+            self.assertEqual("Item 2", sel.get_selected_label(dropDownListXPath))
+            sel.click(buttonXPath)
+            sel.wait_for_page_to_load("30000")
+            self.assertEqual("You selected 'Item 2' (index #1).", sel.get_text(labelXPath))
+            sel.select(dropDownListXPath, "label=Item 3")
+            self.assertEqual("Item 3", sel.get_selected_label(dropDownListXPath))
+            sel.click(buttonXPath)
+            sel.wait_for_page_to_load("30000")
+            self.assertEqual("You selected 'Item 3' (index #2).", sel.get_text(labelXPath))
+        except Exception,e:
+            self.verificationErrors.append(str(e))
+
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 # vim:ts=4:expandtab:

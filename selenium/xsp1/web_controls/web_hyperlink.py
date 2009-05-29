@@ -1,29 +1,36 @@
 #!/usr/bin/env python
 
+import sys, unittest, time, re
 
-import sys
 sys.path.append('../../..')
-from selenium.selenium import selenium
-from selenium.seleniumTestCase import *
-from common.monotesting import *
+import common.monotesting as mono
+from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
-import unittest, time, re
 
-class WebControls_WebHyperLink(seleniumTestCase):
-    testcaseid = 839927
+class WebControls_WebHyperLink(xsp1TestCase):
+    xsp1TestCaseId = 839927
+    xsp2TestCaseId = 863229
 
     def test(self):
-        sel = self.selenium
-        sel.open("/")
-        sel.click("link=web_hyperlink")
-        sel.wait_for_page_to_load("30000")
-        self.failUnless(sel.is_element_present("//html/body/a/img"))
-        sel.click("//img[@alt='Ximian']")
-        sel.wait_for_page_to_load("30000")
-        self.assertEqual("Linux OS | SUSE Linux Enterprise", sel.get_title())
+        if not self.canRun:
+            return
+        try:
+            imageXPath = "//img[@alt='Ximian']"
+
+            sel = self.selenium
+            sel.open("/")
+            sel.click("link=web_hyperlink")
+            sel.wait_for_page_to_load("30000")
+            self.failUnless(sel.is_element_present(imageXPath))
+            sel.click(imageXPath)
+            sel.wait_for_page_to_load("30000")
+            self.assertEqual("Linux OS | SUSE Linux Enterprise", sel.get_title())
+        except Exception,e:
+            self.verificationErrors.append(str(e))
+
 
 if __name__ == "__main__":
-    monotesting_main()
+    mono.monotesting_main()
 
 
 # vim:ts=4:expandtab:
