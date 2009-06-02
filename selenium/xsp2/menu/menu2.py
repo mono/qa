@@ -10,34 +10,44 @@ from selenium.xsp2.xsp2TestCase import xsp2TestCase
 class menu_menu2(xsp2TestCase):
     testcaseid = 863393
 
-    def _isMenuRed(self, jsLocator):
+    def _isMenuNormal(self, jsLocator):
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        return (className == "Menu12_1 Menu12_3")
+
+    def _isMenuHovered(self, jsLocator):
         className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
         return (className == "Menu12_1 Menu12_3 Menu12_11")
 
-    def _isMenuItemRed(self, jsLocator):
+    def _isMenuItemNormal(self, jsLocator):
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        return (className == "Menu12_1 Menu12_6")
+
+    def _isMenuItemHovered(self, jsLocator):
         className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
         return (className == "Menu12_1 Menu12_6 Menu12_13")
 
-    def _isMenuItemYellow(self, jsLocator):
+    def _isMenuItemSelected(self, jsLocator):
         className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
         return (className == "Menu12_1 Menu12_6 Menu12_9")
 
     def _hoverMenuTest(self, jsLocator):
         sel = self.selenium
         locatorXPath = "//*[@" + jsLocator + "]"
+        self.failUnless(self._isMenuNormal(jsLocator))
         sel.mouse_over(locatorXPath)
-        self.failUnless(self._isMenuRed(jsLocator))
+        self.failUnless(self._isMenuHovered(jsLocator))
         sel.mouse_out(locatorXPath)
-        self.failIf(self._isMenuRed(jsLocator))
+        self.failIf(self._isMenuHovered(jsLocator))
 
     def _hoverSelectMenuItemTest(self, jsLocator):
         sel = self.selenium
         locatorXPath = "//*[@" + jsLocator + "]"
+        self.failUnless(self._isMenuItemNormal(jsLocator))
         sel.mouse_over(locatorXPath)
-        self.failUnless(self._isMenuItemRed(jsLocator))
+        self.failUnless(self._isMenuItemHovered(jsLocator))
         sel.click(locatorXPath)
         sel.wait_for_page_to_load("30000")
-        self.failUnless(self._isMenuItemYellow(jsLocator))
+        self.failUnless(self._isMenuItemSelected(jsLocator))
 
     def test(self):
         if not self.canRun:
