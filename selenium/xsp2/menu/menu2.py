@@ -11,23 +11,23 @@ class menu_menu2(xsp2TestCase):
     testcaseid = 863393
 
     def _isMenuNormal(self, jsLocator):
-        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className;")
         return (className == "Menu12_1 Menu12_3")
 
     def _isMenuHovered(self, jsLocator):
-        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className;")
         return (className == "Menu12_1 Menu12_3 Menu12_11")
 
     def _isMenuItemNormal(self, jsLocator):
-        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className;")
         return (className == "Menu12_1 Menu12_6")
 
     def _isMenuItemHovered(self, jsLocator):
-        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className;")
         return (className == "Menu12_1 Menu12_6 Menu12_13")
 
     def _isMenuItemSelected(self, jsLocator):
-        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className")
+        className = self.selenium.get_eval("this.browserbot.findElement(" + jsLocator + ").className;")
         return (className == "Menu12_1 Menu12_6 Menu12_9")
 
     def _hoverMenuTest(self, jsLocator):
