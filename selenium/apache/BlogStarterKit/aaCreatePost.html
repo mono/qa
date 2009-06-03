@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://c528.mono.lab.novell.com/" />
+<title>aaCreatePost</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">aaCreatePost</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/BlogStarterKit/Admin/Login.aspx?ReturnUrl=%2fBlogStarterKit%2fAdmin%2fDefault.aspx</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_Content_Login1_UserName</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_Content_Login1_Password</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_Content_Login1_LoginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>My Blog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage categories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_Content_NewCategoryForm_NameTextBox</td>
+	<td>Technology</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_Content_NewCategoryForm_DescriptionTextBox</td>
+	<td>Technology topics</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_Content_NewCategoryForm_InsertButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage categories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Technology topics</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New post</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_Content_PostForm_TitleTextBox</td>
+	<td>Mono takes over the world</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_Content_PostForm_SubTitleEdit</td>
+	<td>This is a summary of how Mono took over the world.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ctl00_Content_PostForm_CategoryDropDown</td>
+	<td>label=Technology</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_Content_PostForm_SaveButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='ContentContainer']/h1</td>
+	<td>Posts</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_HomeLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ctl00_Content_BlogPosts_ctl00_TitleLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//*[@id=&quot;ctl00_Content_BlogPosts_ctl00_TitleLink&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is a summary of how Mono took over the world</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_Content_BlogPosts_ctl00_TitleLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//html/body/form/div[2]/div[3]/h2</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

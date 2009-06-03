@@ -25,6 +25,7 @@ from defaults import *
 xsp1_url = '%s:%s' % (base_url,xsp1_port)
 xsp2_url = '%s:%s' % (base_url,xsp2_port)
 graffiti_url = '%s:%s' % (base_url,graffiti_port)
+apache_url = '%s:%s' % (base_url,apache_port)
 usexsp2 = False
 
 # Testopia variables
@@ -42,6 +43,7 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'xsp1_port=':'Port number that xsp1 is running on',
         'xsp2_port=':'Port number that xsp2 is running on',
         'graffiti_port=':'Port number that graffiti is running on',
+        'apache_port=':'Port number that apache is running on',
         'rc_server=':'ip or dns of the Selenium RC server (do not prepend with \'http\')',
         'rc_port=':'Port number that the RC server is using',
         'rc_browser=':'Browser that RC server should use',
@@ -54,9 +56,9 @@ value_args = {'base_url=':'URL of the webserver being tested',
 #----------------------------------------------------------------------
 def loadargs(cmdargs):
     global base_url,testrunid,xsp1_port,xsp2_port
-    global xsp1_url,xsp2_url,graffiti_url
+    global xsp1_url,xsp2_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
-    global graffiti_port, debug, logfile
+    global graffiti_port, apache_port, debug, logfile
     global usexsp2
 
     longargs = value_args.keys()
@@ -81,7 +83,8 @@ def loadargs(cmdargs):
             xsp2_port = int(a)
         elif o == '--graffiti_port':
             graffiti_port = int(a)
-
+        elif o == '--apache_port':
+            apache_port = int(a)
         elif o == '--rc_server':
             rc_server = a
         elif o == '--rc_port':
@@ -103,6 +106,7 @@ def loadargs(cmdargs):
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
         xsp2_url = "%s:%s" % (base_url,xsp2_port)
         graffiti_url = "%s:%s" % (base_url,graffiti_port)
+        apache_url = "%s:%s" % (base_url,apache_port)
 
     if showvalues or debug:
         printValues()
@@ -116,6 +120,7 @@ def printValues():
     print "\nxsp1_port = %s" % str(xsp1_port)
     print "xsp2_port = %s" % str(xsp2_port)
     print "graffiti_port = %s" % str(graffiti_port)
+    print "apache_port = %s" % str(apache_port)
 
     print "\nrc_server = %s" % rc_server
     print "rc_port = %s" % str(rc_port)
@@ -162,6 +167,9 @@ def check_args():
         quit = True
     if graffiti_port == None or graffiti_port == 0:
         print "ERROR: graffiti_port is not set"
+        quit = True
+    if apache_port == None or apache_port == 0:
+        print "ERROR: apache_port is not set"
         quit = True
     if rc_server == None or rc_server == '':
         print "ERROR: rc_server is not set"
