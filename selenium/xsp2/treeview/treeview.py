@@ -136,7 +136,9 @@ class treeview_treeview(xsp2TestCase):
 
             # Finally start testing
             sel = self.selenium
-            sel.open("/2.0/treeview/treeview.aspx")
+            sel.open("/")
+            sel.click("//*[@id=\"TreeView2_0_0_3_img\"]")
+            sel.click("//*[@id=\"TreeView2_0_0_3_0_txt\"]")
             sel.wait_for_page_to_load("30000")
 
             # Test the expandable menus
