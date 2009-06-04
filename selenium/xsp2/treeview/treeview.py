@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.xsp2.xsp2TestCase import xsp2TestCase
 
 
-class treeview_treeview(xsp2TestCase):
+class Treeview_Treeview(xsp2TestCase):
     testcaseid = 863926
 
     def _isExpanded(self, jsLocator):
