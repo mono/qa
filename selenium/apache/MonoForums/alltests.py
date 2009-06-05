@@ -4,7 +4,8 @@ sys.path.append('../../..')
 
 from common.monotesting import *
 
-#from testFile import *
+from aaCreateUser import *
+from bbCreateForum import *
 
 if __name__ == '__main__':
     monotesting_main()

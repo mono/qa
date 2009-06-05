@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>CreateUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CreateUser</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/AspNetForums/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Loginbox1_ctl00_username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Loginbox1_ctl00_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>Loginbox1_ctl00_loginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//*[@id=&quot;Loginbox1_ctl00_loginButton&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//*[@id=&quot;NavigationMenu2_ctl00_HomeMenu&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//*[@id=&quot;NavigationMenu2_ctl00_AdminMenu&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create New Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Createuser1_ctl00_Username</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Createuser1_ctl00_Password</td>
+	<td>test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Createuser1_ctl00_Email</td>
+	<td>mono@mono.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//*[@id=&quot;Createuser1_ctl00_CreateAccount&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>User created</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//*[@id=&quot;Navigationmenu1_ctl00_LoginMenu&quot;]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
