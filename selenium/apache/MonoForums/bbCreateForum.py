@@ -12,7 +12,6 @@ class bbCreateForum(apacheTestCase):
         if not self.canRun:
             return
         try:
-
             sel = self.selenium
             sel.open("/AspNetForums/")
             sel.type("Loginbox1_ctl00_username", "admin")

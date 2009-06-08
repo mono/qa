@@ -12,12 +12,10 @@ class aaCreateUser(apacheTestCase):
         if not self.canRun:
             return
         try:
-
             sel = self.selenium
             sel.open("/AspNetForums/")
             sel.type("Loginbox1_ctl00_username", "admin")
             sel.type("Loginbox1_ctl00_password", "admin")
-            sel.click("Loginbox1_ctl00_loginButton")
             sel.click("//*[@id=\"Loginbox1_ctl00_loginButton\"]")
             sel.wait_for_page_to_load("30000")
             sel.click("//*[@id=\"NavigationMenu2_ctl00_HomeMenu\"]")
