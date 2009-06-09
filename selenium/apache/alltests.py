@@ -10,9 +10,9 @@ from common.monotesting import *
 #from blogengine.alltests import *
 #from mojoportal.alltests import *
 from BlogStarterKit.alltests import *
-#from ClassifiedsStarterKit.alltests import *
-#from ClubWebSite.alltests import *
-#from MonoForums.alltests import *
+from ClassifiedsStarterKit.alltests import *
+from ClubWebSite.alltests import *
+from MonoForums.alltests import *
 
 if __name__ == '__main__':
     monotesting_main()
