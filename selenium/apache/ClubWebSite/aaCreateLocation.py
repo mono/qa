@@ -6,7 +6,7 @@ sys.path.append('../../..')
 import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
-class aaCreateLocation(apacheTestCase):
+class ClubWebSite_aa_CreateLocation(apacheTestCase):
     apacheTestCaseId = 867471
     def test(self):
         if not self.canRun:
