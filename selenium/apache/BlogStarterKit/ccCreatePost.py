@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class ccCreatePost(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 710104
     def test(self):
         if not self.canRun:
             return

@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class bbCreateForum(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 510940
     def test(self):
         if not self.canRun:
             return

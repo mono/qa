@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class ccCreateThread(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 510943
     def test(self):
         if not self.canRun:
             return
