@@ -8,8 +8,8 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 
 
 class WebControls_WebButton(xsp1TestCase):
-    xsp1Testcaseid = 839925
-    xsp2Testcaseid = 861802
+    xsp1TestcaseId = 839925
+    xsp2TestcaseId = 861802
 
     def test(self):
         if not self.canRun:
