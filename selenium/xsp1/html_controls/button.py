@@ -20,6 +20,7 @@ class HtmlControls_Button(xsp1TestCase):
             sel.wait_for_page_to_load("30000")
             self.failUnless(sel.is_text_present("HtmlButton Sample"))
             sel.click("Button1")
+            time.sleep(1)
             self.assertEqual("You activated Button1", sel.get_text("Span1"))
             self.failUnless(sel.is_element_present("//*[@id=\"Button1\"]"))
             sel.click("Button1")
