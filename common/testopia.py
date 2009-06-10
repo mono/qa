@@ -2125,7 +2125,8 @@ class Driver(object):
                    self._search_op('requirement_type', requirement_type), self._numlist_option('run_id', run_id),                   
                    self._number_option('run_product_version', run_product_version), self._number_option('run_status', run_status),
                    self._string_option('tags', tags), self._search_op('tags_type', tags_type),
-                   self._string_option('testedby', testedby), self._search_op('testedby_type', testedby_type)
+                   self._string_option('testedby', testedby), self._search_op('testedby_type', testedby_type),
+                   self._boolean_option('viewall', self.view_all)
                    )])
 
 
