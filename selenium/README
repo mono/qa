@@ -12,7 +12,7 @@ password='yourpassword'
 
 $ cat defaults.py
 
-base_url = None
+base_url = 'http://mono-mac1.provo.novell.com' # http:// is ok here
 testrunid = None
 
 rc_server = 'localhost'
@@ -53,6 +53,20 @@ $ ln -s /home/users/linux/selenium-core /usr/share/mono/lib/xsp/tests/selenium-s
 
 This url should resolve properly:
 http://<testserver>.mono.lab.novell.com:8080/selenium-server/core/Blank.html
+
+
+####################################################################
+Xvfb
+
+You can tell selenium to use Xvfb when displaying firefox, so you can
+ continue working on your desktop
+
+In on shell, do the this:
+$ sudo Xvfb -fp /usr/share/fonts/misc -ac -screen 0 1024x1024x24 -nolisten tcp :3
+
+Then in another, start selenium
+
+$ DISPLAY=:3 java -jar selenium-server.jar [OPTIONS]
 
 ##################################################################
 Design Patterns
