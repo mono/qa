@@ -28,7 +28,6 @@ class WebService_TestService_AddTest(xsp1TestCase):
             sel.click("//input[@value='Invoke']")
             sel.wait_for_page_to_load("30000")
             self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
-            mono.log("hello")
 
         except Exception,e:
             self.verificationErrors.append(str(e))
