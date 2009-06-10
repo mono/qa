@@ -12,6 +12,7 @@ import getopt
 import traceback
 import pdb
 from testopia import Testopia
+from monoTestCase import updateTestCaseBatch
 
 from defaults import *
 
@@ -27,11 +28,6 @@ xsp2_url = '%s:%s' % (base_url,xsp2_port)
 graffiti_url = '%s:%s' % (base_url,graffiti_port)
 apache_url = '%s:%s' % (base_url,apache_port)
 usexsp2 = False
-
-# Testopia variables
-mytestopia = None
-testrun = None
-
 
 #################################################################
 #
@@ -200,7 +196,17 @@ def monotesting_main():
 
     if debug:
         sys.argv.append('-v')
-    unittest.main()
+
+    loader = unittest.TestLoader()
+    testsuite = loader.loadTestsFromModule(__import__('__main__'))
+
+    print "\nRunning %d tests\n" % testsuite.countTestCases()
+    unittest.TextTestRunner(verbosity=2).run(testsuite)
+
+    # All that ^^ just because unittest.main() calls sys.exit()
+
+    #update Testopia batch call
+    updateTestCaseBatch()
 
 #----------------------------------------------------------------------
 
