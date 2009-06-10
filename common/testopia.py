@@ -98,10 +98,6 @@ class Driver(object):
         try:
             return eval(cmd)
         except xmlrpclib.Error, e:
-            log.warning("Error while executing cmd \'%s\' --> %s" % ( verb + "(" + params + ")", e))
-        try:
-            return eval(cmd)
-        except xmlrpclib.Error, e:
             # Don't print out exception. It prints out username, password in clear text!
             #print "Error while executing cmd \'%s\' --> %s" % ( verb + "(" + params + ")", e)
             #print "Error {'args':'%s','errcode':'%d','errmsg':'%s','headers':'%s','message':'%s','url':'%s'" \
