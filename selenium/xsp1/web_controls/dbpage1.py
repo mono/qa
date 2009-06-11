@@ -22,14 +22,14 @@ class WebControls_Dbpage1(xsp1TestCase):
             sel.type("PersonFilter", "%shrek%")
             sel.click("btn")
             sel.wait_for_page_to_load("30000")
-            self.assertEqual("Shrek Ogre", sel.get_text("//html/body/form/p[4]/table/tbody/tr/td[2]"))
-            self.assertEqual("shrek@farfaraway.com", sel.get_text("//html/body/form/p[4]/table/tbody/tr/td"))
+            self.assertEqual("Shrek Ogre", sel.get_text("//table[@id='myTable']/tbody/tr/td[1]"))
+            self.assertEqual("shrek@farfaraway.com", sel.get_text("//table[@id='myTable']/tbody/tr/td[2]"))
             sel.type("PersonFilter", "%")
             sel.type("MailFilter", "%duck%")
             sel.click("btn")
             sel.wait_for_page_to_load("30000")
-            self.assertEqual("Donald Duck", sel.get_text("//html/body/form/p[4]/table/tbody/tr/td[2]"))
-            self.assertEqual("donald.duck@donaldinho.com", sel.get_text("//html/body/form/p[4]/table/tbody/tr/td"))
+            self.assertEqual("Donald Duck", sel.get_text("//table[@id='myTable']/tbody/tr/td[1]"))
+            self.assertEqual("donald.duck@donaldinho.com", sel.get_text("//table[@id='myTable']/tbody/tr/td[2]"))
         except Exception,e:
             self.verificationErrors.append(str(e))
 
