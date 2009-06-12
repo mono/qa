@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://c544:8083/" />
+<title>aaCreateUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">aaCreateUser</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserName</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Password</td>
+	<td>mono</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_UserManagementLink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='content']/div/div/div[1]/div[1]/div/div[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_MainRegion_txtUserName</td>
+	<td>mono user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_MainRegion_txtEmail</td>
+	<td>mono@mono.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_MainRegion_txtPassword</td>
+	<td>mono</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_MainRegion_CreateUser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ctl00_MainRegion_Roles_ctl00_role</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_MainRegion_EditCategory</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='ctl00_MainRegion_Category_List']/ul/li[1]/div/div[1]</td>
+	<td>mono user</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log Off</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
