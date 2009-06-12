@@ -7,7 +7,9 @@ from common.monotesting import *
 # sub directories
 # Add child test suites to test suite
 
-#from TestCaseFile import *
+from aaCreateUser import *
+from bbCreateBlogPost import *
+from ccCreateSampleContent import *
 
 if __name__ == '__main__':
     monotesting_main()

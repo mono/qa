@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>ccCreateSampleContent</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ccCreateSampleContent</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>UserName</td>
+	<td>mono user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Password</td>
+	<td>mono</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Write</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//*[@id=&quot;ctl00_MainRegion_txtTitle&quot;]</td>
+	<td>Pellentesque tempus mollis pharetra. Etiam blandit risus augue, eget venenatis elit?</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ctl00_MainRegion_CategoryList</td>
+	<td>label=Sample Content</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00$MainRegion$txtContent</td>
+	<td>Praesent at nisl eu dui imperdiet euismod a nec ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent molestie est sit amet odio ultricies sodales. Pellentesque pharetra, enim eget tristique tempus, massa neque hendrerit tortor; eu sollicitudin elit mi nec risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac mi ante, in iaculis est. Etiam fringilla, libero consequat ullamcorper rutrum; ligula mauris lobortis erat, id rutrum ligula massa nec nisi. Maecenas semper; quam eu vulputate egestas, sapien nisi aliquet mauris; ac tincidunt turpis dui egestas nulla. Phasellus nibh sem, commodo a ullamcorper eget, pulvinar vitae dolor. Quisque scelerisque odio dapibus leo semper ullamcorper vulputate tellus malesuada. In at nibh mauris. Proin commodo tempor ante, eu adipiscing orci dapibus vel. Morbi massa risus, consequat eu interdum at; iaculis at diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In hac habitasse platea dictumst.&nbsp;&nbsp;Cras imperdiet, tortor vel feugiat commodo, lacus nisi aliquam ante; nec rutrum nunc ante nec nulla. Aliquam fermentum purus varius lacus viverra at imperdiet enim tincidunt. Aenean mi elit, ullamcorper quis faucibus ac, dignissim quis erat. Aenean tempor facilisis quam, eu posuere ante egestas id. Morbi in ligula velit. Aliquam erat libero, iaculis bibendum volutpat eu; blandit at erat. Quisque neque elit, vestibulum eget vulputate eget, faucibus eget urna. Nunc malesuada purus id nulla egestas adipiscing. Nam hendrerit elementum commodo. Nullam tristique, mauris sed tincidunt molestie, orci nisl sollicitudin ligula, ac elementum erat magna in leo. Fusce in lectus a libero dapibus sodales at varius urna. Phasellus blandit mattis quam quis aliquet? Nulla vulputate iaculis turpis, a luctus justo ultricies quis. Sed aliquet purus non dolor interdum fermentum. Nullam pulvinar leo eu arcu consequat sollicitudin. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse eleifend lorem nulla, et cursus enim? Duis non varius ipsum. Curabitur purus lorem, molestie et blandit id, tempor vitae ante.&nbsp;&nbsp;Quisque facilisis vehicula ornare. Maecenas nec augue dolor. Proin nec condimentum enim. Donec dignissim congue blandit. Nulla porttitor adipiscing metus, vel placerat elit dictum eget. Pellentesque mattis lectus a velit sagittis aliquam accumsan enim adipiscing. Proin non erat diam, nec bibendum felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque in mollis mi. Integer congue; eros in convallis porttitor, augue nisl porta leo, ac accumsan sem dui vel eros. Phasellus tincidunt rhoncus cursus. Morbi magna lacus, vulputate interdum elementum sed, porttitor et urna. Aenean iaculis leo vel diam congue sit amet malesuada ligula viverra. Nulla tellus metus, pellentesque vitae hendrerit ut, cursus sed nisi. Quisque porta purus vel felis sollicitudin tempus eget non erat. Sed diam justo, consectetur et aliquet sit amet, scelerisque in odio?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_MainRegion_Publish_Button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>exact:Cras tristique, enim ac ornare facilisis, ante justo euismod urna; ac varius nisl libero sed velit? Pellentesque tempus mollis pharetra. Etiam blandit risus augue, eget venenatis elit. Curabitur et lorem nec enim ultricies viverra. Curabitur ligula nullam</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>By mono user on</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Log Off</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
