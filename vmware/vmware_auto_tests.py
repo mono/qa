@@ -6,6 +6,12 @@ import unittest
 
 
 class vmware_unit_tests(unittest.TestCase):
+    def __init__(self, methodname="runTest"):
+        cmdOut = self.__execute("whoami")
+        if cmdOut[0].strip() != "root":
+            raise "You must run this script as root"
+        unittest.TestCase.__init__(self, methodname)
+
     def __execute(self, command):
         ret = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         output = ret.communicate()[0]
@@ -35,7 +41,8 @@ class vmware_unit_tests(unittest.TestCase):
 
     def testRepoRefresh(self):
         # Testcase 546327
-        cmdOut = self.__execute("zypper lr")[2:-1]
+        cmdOut = self.__execute("zypper ref")
+        self.assertEqual(cmdOut[-2].strip(), "All repositories have been refreshed.")
 
     def testRepoSettings(self):
         # Testcase 828169
@@ -85,6 +92,9 @@ class vmware_unit_tests(unittest.TestCase):
                                 "rm -rf $TMPDIR")
         #pdb.set_trace()
         self.assertEqual(cmdOut[0].strip(), "<html><body><p>Hello World!</p></body></html>")
+
+    #def testWebSiteIconsExist(self):
+        #cmdOut = 
 
 if __name__ == "__main__":
     unittest.main()
