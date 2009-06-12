@@ -93,8 +93,21 @@ class vmware_unit_tests(unittest.TestCase):
         #pdb.set_trace()
         self.assertEqual(cmdOut[0].strip(), "<html><body><p>Hello World!</p></body></html>")
 
-    #def testWebSiteIconsExist(self):
-        #cmdOut = 
+    def testWebSiteIconsData(self):
+        webSitePath = "/home/rupert/Desktop/Mono\ Web\ Sites"
+        cmdOut = self.__execute("cd " + webSitePath + ";for FILE in *; do echo $FILE; done")
+        icons = { "Banshee.desktop":"URL=http://banshee-project.org/",
+                  "F-Spot.desktop":"URL=http://f-spot.org/",
+                  "gbrainy.desktop":"URL=http://live.gnome.org/gbrainy/",
+                  "MonoDevelop.desktop":"URL=http://www.monodevelop.com/",
+                  "Monologue.desktop":"URL=http://www.go-mono.com/monologue/",
+                  "Mono Project.desktop":"URL=http://www.mono-project.org/",
+                  "Monsoon.desktop":"URL=http://www.monsoon-project.org/",
+                  "Tomboy.desktop":"URL=http://www.gnome.org/projects/tomboy/" }
+
+        for curFile in cmdOut[0:-1]:
+            url = self.__execute("cd " + webSitePath + "; grep URL '" + curFile + "'")[0]
+            self.assertEqual(url, icons[curFile])
 
 if __name__ == "__main__":
     unittest.main()
