@@ -10,6 +10,7 @@ from common.monotesting import *
 from aaCreateUser import *
 from bbCreateBlogPost import *
 from ccCreateSampleContent import *
+from ddApprovePosts import *
 
 if __name__ == '__main__':
     monotesting_main()
