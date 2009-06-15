@@ -16,7 +16,7 @@ from xsp1.alltests import *
 
 
 if __name__ == '__main__':
-    monotesting_main(xsp1_tmp_port=8082)
+    monotesting_main(_usexsp2=True)
 
 
 # vim:ts=4:expandtab:
