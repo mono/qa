@@ -8,7 +8,7 @@ from selenium.graffiti.graffitiTestCase import graffitiTestCase
 
 class graffiti_dd_ApprovePosts(graffitiTestCase):
 
-    graffitiTestCaseId = None
+    graffitiTestCaseId = 662405
     def test(self):
         if not self.canRun:
             return

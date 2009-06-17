@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.graffiti.graffitiTestCase import graffitiTestCase
 
 class graffiti_aa_CreateUser(graffitiTestCase):
-    graffitiTestCaseId = None
+    graffitiTestCaseId = 662400
     def test(self):
         if not self.canRun:
             return
