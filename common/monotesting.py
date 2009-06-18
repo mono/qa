@@ -6,14 +6,17 @@
 # Author: Rusty Howell (rhowell@novell.com)
 #
 
-import sys,re
+import sys
+import re
+import os
 import unittest
 import getopt
 import traceback
+import getpass
 import pdb
 from testopia import Testopia
 
-from defaults import *
+import ConfigParser
 
 #################################################################
 #
@@ -22,15 +25,25 @@ from defaults import *
 # See the README for more information
 #
 
-xsp1_url = '%s:%s' % (base_url,xsp1_port)
-xsp2_url = '%s:%s' % (base_url,xsp2_port)
-graffiti_url = '%s:%s' % (base_url,graffiti_port)
-apache_url = '%s:%s' % (base_url,apache_port)
-usexsp2 = False
 
-# Testopia variables
-mytestopia = None
-testrun = None
+base_url = None
+testrunid = None
+xsp1_port = None
+xsp2_port = None
+xsp1_url = None
+xsp2_url = None
+graffiti_url = None
+apache_url = None
+rc_server = None
+rc_port = None
+rc_browser = None
+graffiti_port = None
+apache_port = None
+verbose = None
+logfile = None
+usexsp2 = False
+username = None
+password = None
 
 
 #################################################################
@@ -49,20 +62,23 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'rc_browser=':'Browser that RC server should use',
         'showvalues':'Prints the current values',
         'help':'Prints this help message',
-        'debug':'Prints debug messages (implies --showvalues)',
+        'verbose':'Prints debug messages (implies --showvalues)',
+        'username=':'Username to login to Testopia',
+        'password=':'Password to login to Testopia',
         'logfile=':'Write debug output to this file',
         'usexsp2':'Use xsp2 port'}
 
 #----------------------------------------------------------------------
-def loadargs(cmdargs):
+def __loadargs(cmdargs):
     global base_url,testrunid,xsp1_port,xsp2_port
     global xsp1_url,xsp2_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
-    global graffiti_port, apache_port, debug, logfile
+    global graffiti_port, apache_port, verbose, logfile
     global usexsp2
+    global username,password
 
     longargs = value_args.keys()
-    shortargs = ''
+    shortargs = 'hvu:p:'
     showvalues = False
 
     opts,args = getopt.getopt(cmdargs,shortargs,longargs)
@@ -93,13 +109,17 @@ def loadargs(cmdargs):
             rc_browser = a
         elif o == '--showvalues':
             showvalues = True
-        elif o == '--debug':
-            debug = True
+        elif o in ('--verbose','-v'):
+            verbose = True
         elif o == '--logfile':
             logfile = a
         elif o == '--usexsp2':
             usexsp2 = True
-        elif o == '--help':
+        elif o in ('--username','-u'):
+            username = a
+        elif o in ('--password','-p'):
+            password = a
+        elif o in ('--help','-h'):
             usage()
             sys.exit(0)
 
@@ -108,11 +128,84 @@ def loadargs(cmdargs):
         graffiti_url = "%s:%s" % (base_url,graffiti_port)
         apache_url = "%s:%s" % (base_url,apache_port)
 
-    if showvalues or debug:
-        printValues()
+    #pdb.set_trace()
+
+    if showvalues or verbose:
+        __printValues()
 
 #----------------------------------------------------------------------
-def printValues():
+def __loadConfFile():
+    global base_url,testrunid,xsp1_port,xsp2_port
+    global xsp1_url,xsp2_url,graffiti_url,apache_url
+    global rc_server,rc_port,rc_browser
+    global graffiti_port, apache_port, verbose,logfile
+    global usexsp2
+
+    conf_file = 'defaults.conf'
+    prefix = os.getcwd()
+    for dir in  __file__.split('/')[:-1]: # this is the path of monotesting.py
+        prefix = os.path.join(prefix,dir)
+
+    _path = os.path.join(prefix,conf_file)
+    conf_file_path = os.path.normpath(_path)
+
+    if not os.path.exists(conf_file_path):
+        print "ERROR: Cannot find %s" % conf_file_path
+        sys.exit(1)
+
+    config = ConfigParser.ConfigParser()
+    config.read(conf_file_path)
+
+    # Required settings
+    base_url = config.get('main','base_url')
+    testrunid = int(config.get('main','testrunid'))
+
+    xsp1_port = config.get('main','xsp1_port')
+    xsp2_port = config.get('main','xsp2_port')
+    graffiti_port = config.get('main','graffiti_port')
+    apache_port = config.get('main','apache_port')
+
+    rc_server = config.get('rc server','rc_server')
+    rc_port = config.get('rc server','rc_port')
+    rc_browser = config.get('rc server','rc_browser')
+
+    #Optional settings
+    if config.has_option('debug','verbose'):
+        verbose = config.get('debug','verbose')
+    if config.has_option('debug','logfile'):
+        logfile = config.get('debug','logfile')
+
+
+#----------------------------------------------------------------------
+def __loadCredentials():
+    global username,password
+    creds_file = '.testopia_creds.conf'
+    creds_file_path = os.path.join(os.environ['HOME'],creds_file)
+
+    if not os.path.exists(creds_file_path):
+        print "Cannot find %s" % creds_file_path
+        sys.exit(1)
+
+    config = ConfigParser.ConfigParser()
+    config.read(creds_file_path)
+
+    username = config.get('testopia','username')
+    password = config.get('testopia','password')
+
+    if password == None or password == '':
+        password = getpass.getpass("Enter password for user %s: " % username)
+
+
+#----------------------------------------------------------------------
+def __setUrls():
+    global xsp1_url,xsp2_url,graffiti_url,apache_url
+    xsp1_url = '%s:%s' % (base_url,xsp1_port)
+    xsp2_url = '%s:%s' % (base_url,xsp2_port)
+    graffiti_url = '%s:%s' % (base_url,graffiti_port)
+    apache_url = '%s:%s' % (base_url,apache_port)
+
+#----------------------------------------------------------------------
+def __printValues():
     print "Current values:"
     print "base_url = %s" % base_url
     print "testrunid = %s" % str(testrunid)
@@ -126,12 +219,13 @@ def printValues():
     print "rc_port = %s" % str(rc_port)
     print "rc_browser = %s\n" % str(rc_browser)
 
-    print "debug = %s" % debug
+    print "username = %s" % username
+    print "verbose = %s" % verbose
     print "logfile = %s" % logfile
     print "usexsp2 = %s\n" % str(usexsp2)
 
 #----------------------------------------------------------------------
-def usage():
+def __usage():
     print "\nUsage: %s [OPTIONS]\n" % sys.argv[0]
 
     options = value_args.items()
@@ -144,8 +238,8 @@ def usage():
 
 #----------------------------------------------------------------------
 def log(msg):
-    global logfile
-    if debug:
+    global logfile,verbose
+    if verbose:
         print msg
 
     if logfile != None:
@@ -153,8 +247,8 @@ def log(msg):
         f.writelines(msg + '\n')
         f.close()
 
-
-def check_args():
+#----------------------------------------------------------------------
+def __check_args():
     quit = False
     if base_url == '' or base_url == None:
         print "ERROR: base_url is not set"
@@ -191,19 +285,19 @@ def check_args():
 #
 
 def monotesting_main(_usexsp2=False):
-    global usexsp2
-    loadargs(sys.argv[1:])
+    global usexsp2,password,verbose
+    __loadCredentials()
+    __loadConfFile()
+    __loadargs(sys.argv[1:])
+    __setUrls()
 
     if _usexsp2:
         usexsp2 = True
 
     sys.argv = sys.argv[:1]
+    __check_args()
 
-    check_args()
-
-    printValues()
-
-    if debug:
+    if verbose:
         sys.argv.append('-v')
     unittest.main()
 

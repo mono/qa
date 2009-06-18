@@ -4,13 +4,7 @@ import os
 import unittest
 import pdb
 
-from defaults import *
 from testopia import Testopia
-
-creds_dir = os.path.join(os.environ['HOME'],'.bugzilla')
-sys.path = [creds_dir] + sys.path
-import creds
-#from monotesting import *
 import monotesting as mono
 
 BUG_STATUS = {'IDLE':1,
@@ -41,7 +35,7 @@ class monoTestCase(unittest.TestCase):
         port = None
 
         if self.mytestopia == None:
-            self.mytestopia = Testopia(username=creds.username,password=creds.password,host=host,ssl=ssl,port=port)
+            self.mytestopia = Testopia(username=mono.username,password=mono.password,host=host,ssl=ssl,port=port)
         return self.mytestopia
 
     #----------------------------------------------------------------------
@@ -68,7 +62,10 @@ class monoTestCase(unittest.TestCase):
         if self.testcaseid in monoTestCase.testcase_list:
             mono.log("Testcase %s found in test run %s" % (self.testcaseid,mono.testrunid))
             return True
-        
+        #else:
+        #    mono.log("Adding test case %s to test run %s" % (self.testcaseid,mono.testrunid))
+        #    self.getTestopia().testcase_add_to_run(self.testcaseid, mono.testrunid)
+
         mono.log("Testcase %s NOT found in test run %s" % (self.testcaseid,mono.testrunid))
         return False
 
