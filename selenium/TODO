@@ -9,7 +9,9 @@ Things to do for complete automated testing of asp.net:
      * Complete thorough test cases for asp.net apps
 
  Framework features:
+     * Optimize to use testopia batch calls
      * Add warnings for test cases that weren't run because they're not in the testopia test run
+     * Add cmd that will only re-run failed tests in the test run
      * Added cmd line option that will set isautomated=True in Testopia on all test cases that are run
      * Implement logging module for better debug output
 
