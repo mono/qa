@@ -5,27 +5,31 @@
 #   1. ~/.bugzilla/creds.py
 #    2. ../common/defaults.py
 
-$ cat ~/.bugzilla/creds.py
+$ cat ~/.testopia_creds.conf
 
+[testopia]
 username='youruser'
 password='yourpassword'
 
-$ cat defaults.py
+$ cat defaults.conf
 
-base_url = 'http://mono-mac1.provo.novell.com' # http:// is ok here
-testrunid = None
-
-rc_server = 'localhost'
-rc_server = 'c4170.mono.lab.novell.com' # Do not prepend with http://
-rc_port = 4444
-rc_browser = '*chrome'
+[main]
+base_url = 'http://mono-mac1.provo.novell.com'
+testrunid = 15510
 
 xsp1_port = 8081
 xsp2_port = 8082
 graffiti_port = 8083
+apache_port = 8084
 
-logfile = None
+[rc server]
+rc_server = 'localhost'
+rc_port = 4444
+rc_browser = '*firefox'
+
+[debug]
 debug = False
+logfile = None
 
 
 ####################################################################
