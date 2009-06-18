@@ -8,13 +8,13 @@
 $ cat ~/.testopia_creds.conf
 
 [testopia]
-username='youruser'
-password='yourpassword'
+username=youruser
+password=yourpassword
 
 $ cat defaults.conf
 
 [main]
-base_url = 'http://mono-mac1.provo.novell.com'
+base_url = http://mono-mac1.provo.novell.com
 testrunid = 15510
 
 xsp1_port = 8081
@@ -23,9 +23,9 @@ graffiti_port = 8083
 apache_port = 8084
 
 [rc server]
-rc_server = 'localhost'
+rc_server = localhost
 rc_port = 4444
-rc_browser = '*firefox'
+rc_browser = *firefox
 
 [debug]
 debug = False
