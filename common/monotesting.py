@@ -285,18 +285,16 @@ def __check_args():
 #
 
 def monotesting_main(_usexsp2=False):
-    global usexsp2,password,verbose
+    args = sys.argv[1:]
+    if _usexsp2:
+        args += ['--usexsp2']
     __loadCredentials()
     __loadConfFile()
-    __loadargs(sys.argv[1:])
+    __loadargs(args)
     __setUrls()
-
-    if _usexsp2:
-        usexsp2 = True
-
-    sys.argv = sys.argv[:1]
     __check_args()
 
+    sys.argv = sys.argv[:1]
     if verbose:
         sys.argv.append('-v')
     unittest.main()
