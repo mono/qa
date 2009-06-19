@@ -6,7 +6,7 @@ sys.path.append('../../..')
 import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
-class aaCreateCategory(apacheTestCase):
+class blogengine_aa_ChangeBlogName(apacheTestCase):
     apacheTestCaseId = None
     def test(self):
         if not self.canRun:
@@ -25,6 +25,7 @@ class aaCreateCategory(apacheTestCase):
             sel.type("ctl00_cphAdmin_txtName", "Mono Blog")
             sel.type("ctl00_cphAdmin_txtDescription", "Discussions about mono")
             sel.click("ctl00_cphAdmin_btnSave")
+            sel.wait_for_page_to_load("30000")
             sel.click("link=Go to front page")
             sel.wait_for_page_to_load("30000")
             self.assertEqual("Mono Blog", sel.get_text("link=Mono Blog"))
