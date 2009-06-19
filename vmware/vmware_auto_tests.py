@@ -5,11 +5,11 @@ import subprocess
 import unittest
 
 
-class vmware_unit_tests(unittest.TestCase):
+class vmware_automated_tests(unittest.TestCase):
     def __init__(self, methodname="runTest"):
         cmdOut = self.__execute("whoami")
         if cmdOut[0].strip() != "root":
-            raise "You must run this script as root"
+            raise Exception("You must run this script as root")
         unittest.TestCase.__init__(self, methodname)
 
     def __execute(self, command):
@@ -39,7 +39,7 @@ class vmware_unit_tests(unittest.TestCase):
         for curRefresh in cmdOut:
             self.assertEqual(curRefresh.split()[-1], "No")
 
-    def testRepoRefresh(self):
+    def testRepoCanRefresh(self):
         # Testcase 546327
         cmdOut = self.__execute("zypper ref")
         self.assertEqual(cmdOut[-2].strip(), "All repositories have been refreshed.")
@@ -52,7 +52,7 @@ class vmware_unit_tests(unittest.TestCase):
                   "Mono:Community_11.1+Mono:Preview": ("Mono:Community_11.1+Mono:Preview","No","No","http://download.opensuse.org/repositories/Mono:/Community/openSUSE_11.1+Mono_Preview"),
                   "Virtualization:VMware_11.1_Update": ("Virtualization:VMware_11.1_Update","Yes","No","http://download.opensuse.org/repositories/Virtualization:/VMware/openSUSE_11.1_Update/"),
                   "mono-preview-11.1": ("mono-preview-11.1","No","No","http://mono.ximian.com/monobuild/preview/download-preview/openSUSE_11.1/"),
-                  "mono-stable-11.1": ("mono-stable-11.1","Yes","No","http://ftp.novell.com/pub/mono/download-stable/openSUSE_11.1/"),
+                  "mono-stable-11.1": ("mono-stable-11.1","Yes","No","http://ftp.novell.com/pub/mono/download-stable/openSUSE_11.1"),
                   "openSUSE_11.1_Updates": ("openSUSE_11.1_Updates","Yes","No","http://download.opensuse.org/update/11.1/"),
                   "openSUSE_11.1_oss": ("openSUSE_11.1_oss","Yes","No","http://download.opensuse.org/distribution/11.1/repo/oss/") }
 
@@ -181,7 +181,7 @@ class vmware_unit_tests(unittest.TestCase):
         for curFile in cmdOut[0:-1]:
             self.__checkDesktopFile(curFile, icons, iconPath)
 
-    def testWinformsApplicationsIconsData(self):
+    def testDesktopIconsData(self):
         # Testcase 869520
         iconPath = "/home/rupert/Desktop/"
         cmdOut = self.__execute("cd " + iconPath + ";for FILE in *.desktop; do echo $FILE; done")
