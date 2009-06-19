@@ -158,7 +158,9 @@ def __loadConfFile():
 
     # Required settings
     base_url = config.get('main','base_url')
-    testrunid = int(config.get('main','testrunid'))
+    testrunid = config.get('main','testrunid')
+    if testrunid == 'None' or testrunid == '' or int(testrunid) == 0:
+        testrunid = None
 
     xsp1_port = config.get('main','xsp1_port')
     xsp2_port = config.get('main','xsp2_port')
