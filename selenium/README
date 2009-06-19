@@ -20,7 +20,7 @@ testrunid = 15510
 xsp1_port = 8081
 xsp2_port = 8082
 graffiti_port = 8083
-apache_port = 8084
+apache_port = 80
 
 [rc server]
 rc_server = localhost
