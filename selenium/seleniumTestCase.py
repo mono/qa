@@ -22,7 +22,7 @@ class seleniumTestCase(monoTestCase):
         #self.verificationErrors = []
 
     def setUp(self):
-        mono.log("Setting up test case %d" % self.testcaseid)
+        mono.log("Setting up test case %s" % self.testcaseid)
         self.canRun = self.isTestCaseInTestRun()
         if not self.canRun:
             mono.log("   Test case #%d is not found in the test run.... skipping" % self.testcaseid)
