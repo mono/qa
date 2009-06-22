@@ -120,7 +120,7 @@ def __loadargs(cmdargs):
         elif o in ('--password','-p'):
             password = a
         elif o in ('--help','-h'):
-            usage()
+            __usage()
             sys.exit(0)
 
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
@@ -128,10 +128,20 @@ def __loadargs(cmdargs):
         graffiti_url = "%s:%s" % (base_url,graffiti_port)
         apache_url = "%s:%s" % (base_url,apache_port)
 
-    #pdb.set_trace()
+    pdb.set_trace()
 
     if showvalues or verbose:
         __printValues()
+
+#----------------------------------------------------------------------
+def __getCommonDir():
+    '''Returns the absolute path of trunk/qa/common directory'''
+
+    prefix = os.getcwd()
+    for dir in  __file__.split('/')[:-1]: # this is the path of monotesting.py
+        prefix = os.path.join(prefix,dir)
+    return os.path.normpath(prefix)
+
 
 #----------------------------------------------------------------------
 def __loadConfFile():
@@ -142,12 +152,7 @@ def __loadConfFile():
     global usexsp2
 
     conf_file = 'defaults.conf'
-    prefix = os.getcwd()
-    for dir in  __file__.split('/')[:-1]: # this is the path of monotesting.py
-        prefix = os.path.join(prefix,dir)
-
-    _path = os.path.join(prefix,conf_file)
-    conf_file_path = os.path.normpath(_path)
+    conf_file_path = os.path.join(__getCommonDir(),conf_file)
 
     if not os.path.exists(conf_file_path):
         print "ERROR: Cannot find %s" % conf_file_path
@@ -159,8 +164,7 @@ def __loadConfFile():
     # Required settings
     base_url = config.get('main','base_url')
     testrunid = config.get('main','testrunid')
-    if testrunid == 'None' or testrunid == '' or int(testrunid) == 0:
-        testrunid = None
+    testrunid = __stringToIntOrNone(testrunid)
 
     xsp1_port = config.get('main','xsp1_port')
     xsp2_port = config.get('main','xsp2_port')
@@ -198,6 +202,12 @@ def __loadCredentials():
         password = getpass.getpass("Enter password for user %s: " % username)
 
 
+#----------------------------------------------------------------------
+def __stringToIntOrNone(s):
+    if s == None or s == 'None' or s == '' or s == '0':
+        return None
+    else:
+        return int(s)
 #----------------------------------------------------------------------
 def __setUrls():
     global xsp1_url,xsp2_url,graffiti_url,apache_url
