@@ -128,7 +128,7 @@ def __loadargs(cmdargs):
         graffiti_url = "%s:%s" % (base_url,graffiti_port)
         apache_url = "%s:%s" % (base_url,apache_port)
 
-    pdb.set_trace()
+    #pdb.set_trace()
 
     if showvalues or verbose:
         __printValues()
@@ -309,7 +309,19 @@ def monotesting_main(_usexsp2=False):
     sys.argv = sys.argv[:1]
     if verbose:
         sys.argv.append('-v')
-    unittest.main()
+    #unittest.main()
+
+    loader = unittest.TestLoader()
+    testsuite = loader.loadTestsFromModule(__import__('__main__'))
+
+    print "\nRunning %d tests\n" % testsuite.countTestCases()
+    results = unittest.TextTestRunner(verbosity=2).run(testsuite)
+
+    print "%12s:%3s" % ('Errors',len(results.errors))
+    print "%12s:%3s" % ('Failures',len(results.failures))
+    print "%12s:%3s" % ('Tests run',results.testsRun)
+
+    # All that ^^ just because unittest.main() calls sys.exit()
 
 #----------------------------------------------------------------------
 
