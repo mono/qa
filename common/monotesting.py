@@ -185,7 +185,7 @@ def __loadCredentials():
     creds_file_path = os.path.join(os.environ['HOME'],creds_file)
 
     if not os.path.exists(creds_file_path):
-        print "Cannot find %s" % creds_file_path
+        print "ERROR: Cannot find %s" % creds_file_path
         sys.exit(1)
 
     config = ConfigParser.ConfigParser()
