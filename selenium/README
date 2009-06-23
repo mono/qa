@@ -8,6 +8,7 @@
 $ cat ~/.testopia_creds.conf
 
 [testopia]
+# Do not use quotes for username or password
 username=youruser
 password=yourpassword
 
