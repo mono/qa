@@ -27,6 +27,12 @@ class WebService_TestService_AddTest(xsp1TestCase):
             sel.type("b", "8361")
             sel.click("//input[@value='Invoke']")
             sel.wait_for_page_to_load("30000")
+            for i in range(60):
+                try:
+                 if sel.is_element_present("//html/body/table/tbody/tr/td[2]/div/div/div"): break
+                except: pass
+                time.sleep(1)
+            else: self.fail("time out")
             self.failUnless(re.search(r"^[\s\S]*13599[\s\S]*$", sel.get_text("//html/body/table/tbody/tr/td[2]/div/div/div")))
 
         except Exception,e:
