@@ -21,6 +21,7 @@ BUG_STATUS = {'IDLE':1,
 
 class monoTestCase(unittest.TestCase):
     testcase_list = None
+    testrun = None
 
     def __init__(self,methodname="runTest"):
         unittest.TestCase.__init__(self,methodname)
@@ -40,12 +41,11 @@ class monoTestCase(unittest.TestCase):
 
     #----------------------------------------------------------------------
     def getTestRun(self):
-        testrun = None
         if mono.testrunid == None or mono.testrunid == 0:
-            testrun = None
-        elif testrun == None:
-            testrun = self.getTestopia().testrun_get(mono.testrunid)
-        return testrun
+            monoTestCase.testrun = None
+        elif monoTestCase.testrun == None:
+            monoTestCase.testrun = self.getTestopia().testrun_get(mono.testrunid)
+        return monoTestCase.testrun
 
 
     #----------------------------------------------------------------------
