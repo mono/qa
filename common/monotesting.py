@@ -46,6 +46,11 @@ username = None
 password = None
 
 
+colors = {
+        'red':'\033[31m',
+        'norm':'\033[0m',
+        'green':'\033[32m',
+        }
 #################################################################
 #
 # Local helper functions
@@ -291,11 +296,63 @@ def __check_args():
         print "\nExiting\n"
         sys.exit(1)
 
+#----------------------------------------------------------------------
+def __flattenTestSuite(suite):
+    '''This function takes a test suite and looks at each element which may
+       be a test suite or a test case. If it's another test suite, it takes 
+       test cases in it and adds it to the parent test suite.
+    '''
+    new_suite = unittest.TestSuite()
+    for e in suite:
+        if issubclass(e.__class__,unittest.TestSuite):
+            new_e = __flattenTestSuite(e)
+            new_suite.addTests(new_e)
+        else:
+            new_suite.addTest(e)
+    return new_suite
+
+#----------------------------------------------------------------------
+def __printColor(msg,color):
+    print '%s%s%s' % (colors[color],msg,colors['norm'])
+
 ####################################################################
 #
 #    main methods
 #
 
+def __runAllTests():
+
+    loader = unittest.TestLoader()
+    testsuite = loader.loadTestsFromModule(__import__('__main__'))
+
+    print "\nRunning %d tests\n" % testsuite.countTestCases()
+    #results = unittest.TextTestRunner(verbosity=2).run(testsuite)
+    results = unittest.TestResult()
+
+    testsuite = __flattenTestSuite(testsuite)
+    totalCount = testsuite.countTestCases()
+
+    for i,t in enumerate(testsuite):
+        print "Running %d of %d: %s ..." % ( i+1, totalCount, t.id()),
+        failures = len(results.failures)
+        errors = len(results.errors)
+        t.run(results)
+        if failures != len(results.failures): #Check if a failure was added
+            __printColor("FAILED",'red')
+        elif errors != len(results.errors):
+            __printColor("ERROR",'red')
+        else:
+            print 'ok'
+        # Get result from the results and print status
+
+    print "\n%12s:%3s" % ('Errors',len(results.errors))
+    print "%12s:%3s" % ('Failures',len(results.failures))
+    print "%12s:%3s" % ('Tests run',results.testsRun)
+    print ''
+
+    # All that ^^ just because unittest.main() calls sys.exit()
+
+#----------------------------------------------------------------------
 def monotesting_main(_usexsp2=False):
     args = sys.argv[1:]
     if _usexsp2:
@@ -309,19 +366,9 @@ def monotesting_main(_usexsp2=False):
     sys.argv = sys.argv[:1]
     if verbose:
         sys.argv.append('-v')
-    #unittest.main()
 
-    loader = unittest.TestLoader()
-    testsuite = loader.loadTestsFromModule(__import__('__main__'))
+    __runAllTests()
 
-    print "\nRunning %d tests\n" % testsuite.countTestCases()
-    results = unittest.TextTestRunner(verbosity=2).run(testsuite)
-
-    print "%12s:%3s" % ('Errors',len(results.errors))
-    print "%12s:%3s" % ('Failures',len(results.failures))
-    print "%12s:%3s" % ('Tests run',results.testsRun)
-
-    # All that ^^ just because unittest.main() calls sys.exit()
 
 #----------------------------------------------------------------------
 
