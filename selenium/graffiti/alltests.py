@@ -11,6 +11,9 @@ from aaCreateUser import *
 from bbCreateBlogPost import *
 from ccCreateSampleContent import *
 from ddApprovePosts import *
+from ee_deletePosts import *
+from ff_purgePost1 import *
+from gg_purgePost2 import *
 
 if __name__ == '__main__':
     monotesting_main()
