@@ -8,7 +8,7 @@ from selenium.graffiti.graffitiTestCase import graffitiTestCase
 import re
 
 class graffiti_ee_deletePosts(graffitiTestCase):
-    graffitiTestCaseId = None
+    graffitiTestCaseId = 871073
     def test(self):
         if not self.canRun:
             return
@@ -28,7 +28,6 @@ class graffiti_ee_deletePosts(graffitiTestCase):
             # Find index for first story, build XPath with it, delete
             href = sel.get_attribute("link=Cras tristique, enim ac ornare facilisis, ante justo euismod urna; ac varius nisl libero sed velit?@href")
             match = re.match(r'.*=(.*)',href)
-            print("Deleting first story: " + match.group(1))
             sel.click('//*[@id="post-' + match.group(1) + '"]/td[4]/a[2]')
 
 ##################################
@@ -36,7 +35,6 @@ class graffiti_ee_deletePosts(graffitiTestCase):
             # Find index for second story, build XPath, delete
             href = sel.get_attribute("link=Pellentesque tempus mollis pharetra. Etiam blandit risus augue, eget venenatis elit?@href")
             match = re.match(r'.*=(.*)',href)
-            print("Deleting second story: " + match.group(1))
             sel.click('//*[@id="post-' + match.group(1) + '"]/td[4]/a[2]')
             
 
