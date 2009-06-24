@@ -23,9 +23,9 @@ class vmware_automated_tests(unittest.TestCase):
 
     def testSwapFileSize(self):
         # Testcase 546301
-        cmdOut = self.__execute("ls -lh /swap")
+        cmdOut = self.__execute("ls -l /swap")
         swapFileSize = cmdOut[0].split()[4]
-        self.assertEqual(swapFileSize, "512M")
+        self.assertEqual(swapFileSize, "536870912")
 
     def testSwapFileActive(self):
         # Testcase 546302
@@ -72,9 +72,15 @@ class vmware_automated_tests(unittest.TestCase):
 
     def testDiskSize(self):
         # Testcase 546325
-        cmdOut = self.__execute("df -h")
+        cmdOut = self.__execute("df /")
         diskSize = cmdOut[1].split()[1]
-        self.assertEqual(diskSize, "30G")
+        self.assertEqual(diskSize, "30961664")
+
+    def testMaxNumInodes(self):
+        # Testcase 871067
+        cmdOut = self.__execute("df -i /")
+        diskSize = cmdOut[1].split()[1]
+        self.assertEqual(diskSize, "1966080")
 
     def testHelloWorldAspxSite(self):
         # Testcase 816722
