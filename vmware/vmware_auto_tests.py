@@ -97,7 +97,7 @@ class vmware_automated_tests(unittest.TestCase):
                                 "rm -rf $TMPDIR")
         self.assertEqual(cmdOut[0].strip(), "<html><body><p>Hello World!</p></body></html>")
 
-    def __checkDesktopFile(self, file, icons, iconPath):
+    def __checkDesktopFileData(self, file, icons, iconPath):
         if icons[file][2] == "Type=Application":
             action = self.__execute("cd " + iconPath + "; grep '^Exec=' '" + file + "'")[0]
         elif icons[file][2] == "Type=Link":
@@ -108,6 +108,11 @@ class vmware_automated_tests(unittest.TestCase):
         self.assertEqual(action, icons[file][0])
         self.assertEqual(name, icons[file][1])
         self.assertEqual(type, icons[file][2])
+
+    def __checkAllDesktopFilesExist(self, icons, iconPath):
+        for curDesktopFile in icons.keys():
+            cmdOut = self.__execute("cd " + iconPath + ";ls '" + curDesktopFile + "'")[0]
+            self.assertEqual(cmdOut, curDesktopFile)
 
     def testGtkSharpApplicationsIconsData(self):
         # Testcase 869515
@@ -122,8 +127,9 @@ class vmware_automated_tests(unittest.TestCase):
                   "tasque.desktop":("Exec=tasque","Name=Tasque","Type=Application"),
                   "tomboy.desktop":("Exec=tomboy --search","Name=Tomboy Notes","Type=Application") }
 
+        self.__checkAllDesktopFilesExist(icons, iconPath)
         for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFile(curFile, icons, iconPath)
+            self.__checkDesktopFileData(curFile, icons, iconPath)
 
     def testWebSiteIconsData(self):
         # Testcase 869512
@@ -138,8 +144,9 @@ class vmware_automated_tests(unittest.TestCase):
                   "Monsoon.desktop":("URL=http://www.monsoon-project.org/","Name=Monsoon","Type=Link"),
                   "Tomboy.desktop":("URL=http://www.gnome.org/projects/tomboy/","Name=Tomboy","Type=Link") }
 
+        self.__checkAllDesktopFilesExist(icons, iconPath)
         for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFile(curFile, icons, iconPath)
+            self.__checkDesktopFileData(curFile, icons, iconPath)
 
     def testWebAppIconsData(self):
         # Testcase 869516
@@ -154,8 +161,9 @@ class vmware_automated_tests(unittest.TestCase):
 
                   "sources.desktop":("URL=file:///usr/share/mono/asp.net","Name=Sources","Type=Link") }
 
+        self.__checkAllDesktopFilesExist(icons, iconPath)
         for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFile(curFile, icons, iconPath)
+            self.__checkDesktopFileData(curFile, icons, iconPath)
 
     def testWinformsApplicationsIconsData(self):
         # Testcase 869519
@@ -184,8 +192,9 @@ class vmware_automated_tests(unittest.TestCase):
                   "SVGPad.desktop":("Exec=SVGPad","Name=SVGPad","Type=Application"),
                   "UsingWebBrowser.desktop":("Exec=UsingWebBrowser","Name=UsingWebBrowser","Type=Application") }
 
+        self.__checkAllDesktopFilesExist(icons, iconPath)
         for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFile(curFile, icons, iconPath)
+            self.__checkDesktopFileData(curFile, icons, iconPath)
 
     def testDesktopIconsData(self):
         # Testcase 869520
@@ -196,8 +205,47 @@ class vmware_automated_tests(unittest.TestCase):
                   "monodoc.desktop":("Exec=/usr/bin/monodoc","Name=Mono Documentation","Type=Application"),
                   "start-here.desktop":("URL=file:///srv/www/htdocs/index.html","Name=Start Here","Type=Link") }
 
+        self.__checkAllDesktopFilesExist(icons, iconPath)
         for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFile(curFile, icons, iconPath)
+            self.__checkDesktopFileData(curFile, icons, iconPath)
+
+    def testTheXdgAutoStartIconsData(self):
+        # Testcase 871071
+        iconPath = "/etc/xdg/autostart"
+        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *.desktop; do echo $FILE; done")
+        icons = { "gnome-at-session.desktop":("Exec=gnome-at-visual -s","Name=Visual Assistance","Type=Application"),
+                  "gnome-settings-daemon.desktop":("Exec=/usr/lib/gnome-settings-daemon/gnome-settings-daemon","Name=GNOME Settings Daemon","Type=Application"),
+                  "nm-applet.desktop":("Exec=nm-applet --sm-disable","Name=Network Manager","Type=Application"),
+                  "pulseaudio.desktop":("Exec=start-pulseaudio-x11","Name=PulseAudio Sound System","Type=Application"),
+                  "vmware-user-autostart.desktop":("Exec=vmware-user-autostart-wrapper","Name=VMware User Agent","Type=Application") }
+
+        self.__checkAllDesktopFilesExist(icons, iconPath)
+        for curFile in cmdOut[0:-1]:
+            self.__checkDesktopFileData(curFile, icons, iconPath)
+
+    def testVMwareToolsUserAgentSettings(self):
+        # Testcase 871068
+        cmdOut = self.__execute("ps -ef|grep -i /usr/bin/vmware-user|grep -v grep")[0].split()
+        self.assertEqual(cmdOut[0], "rupert")
+        self.assertEqual(cmdOut[7], "/usr/bin/vmware-user")
+
+        cmdOut = self.__execute("ls -l /usr/bin/vmware-user-suid-wrapper")[0].split()
+        self.assertEqual(cmdOut[0], "-rwsr-xr-x")
+        self.assertEqual(cmdOut[7], "/usr/bin/vmware-user-suid-wrapper")
+
+    def testVMwareToolsX11Config(self):
+        # Testcase 871069
+        cmdOut = self.__execute("grep 'vmmouse' /etc/X11/xorg.conf")[0].split()
+        self.assertEqual(cmdOut[0], "Driver")
+        self.assertEqual(cmdOut[1], "\"vmmouse\"")
+        cmdOut = self.__execute("grep 'vmware' /etc/X11/xorg.conf")[0].split()
+        self.assertEqual(cmdOut[0], "Driver")
+        self.assertEqual(cmdOut[1], "\"vmware\"")
+
+    def testThatApacheIsRunning(self):
+        # Testcase 871070
+        cmdOut = self.__execute("ps -ef|grep -i apache|grep -v grep")[0].split()
+        self.assertEqual(cmdOut[7], "/usr/sbin/httpd2-prefork")
 
 if __name__ == "__main__":
     unittest.main()
