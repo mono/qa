@@ -185,6 +185,8 @@ def __loadConfFile():
         verbose = config.get('debug','verbose')
     if config.has_option('debug','logfile'):
         logfile = config.get('debug','logfile')
+        if logfile == 'None' or logfile == '':
+            logfile = None
 
 
 #----------------------------------------------------------------------
