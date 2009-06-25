@@ -263,7 +263,7 @@ class vmware_automated_tests(unittest.TestCase):
         self.assertEqual(cmdOut[7], "/srv/www/htdocs")
 
     def testTheSambaConfiguration(self):
-        # Testcase 
+        # Testcase 871296
         cmdOut = self.__execute("cat /etc/samba/smb.conf |sed -e 's/\t//g' > /tmp/vmware_auto-smb.conf")
         self.assertEqual(len(cmdOut),1)
         config = ConfigParser.ConfigParser()
