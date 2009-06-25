@@ -3,6 +3,7 @@
 import pdb
 import subprocess
 import unittest
+import ConfigParser
 
 
 class vmware_automated_tests(unittest.TestCase):
@@ -246,6 +247,54 @@ class vmware_automated_tests(unittest.TestCase):
         # Testcase 871070
         cmdOut = self.__execute("ps -ef|grep -i apache|grep -v grep")[0].split()
         self.assertEqual(cmdOut[7], "/usr/sbin/httpd2-prefork")
+
+    def testThatSambaIsRunning(self):
+        # Testcase 871293
+        cmdOut = self.__execute("ps -ef|grep -i /usr/sbin/smbd|grep -v grep")[0].split()
+        self.assertEqual(cmdOut[0], "root")
+        self.assertEqual(cmdOut[7], "/usr/sbin/smbd")
+
+    def testTheApacheWebDirPerms(self):
+        # Testcase 871294
+        cmdOut = self.__execute("ls -ld /srv/www/htdocs")[0].split()
+        self.assertEqual(cmdOut[0], "drwxr-xr-x")
+        self.assertEqual(cmdOut[2], "rupert")
+        self.assertEqual(cmdOut[3], "www")
+        self.assertEqual(cmdOut[7], "/srv/www/htdocs")
+
+    def testTheSambaConfiguration(self):
+        # Testcase 
+        cmdOut = self.__execute("cat /etc/samba/smb.conf |sed -e 's/\t//g' > /tmp/vmware_auto-smb.conf")
+        self.assertEqual(len(cmdOut),1)
+        config = ConfigParser.ConfigParser()
+        config.read("/tmp/vmware_auto-smb.conf")
+        self.assertEqual(config.get("global","workgroup"), "MONO")
+        self.assertEqual(config.get("global","security"), "user")
+        self.assertEqual(config.get("global","passdb backend"), "smbpasswd")
+        self.assertEqual(config.get("global","username map"), "/etc/samba/smbusers")
+        self.assertEqual(config.get("homes","inherit acls"), "Yes")
+        self.assertEqual(config.get("homes","browseable"), "No")
+        self.assertEqual(config.get("homes","read only"), "No")
+        self.assertEqual(config.get("htdocs","inherit acls"), "Yes")
+        self.assertEqual(config.get("htdocs","browseable"), "Yes")
+        self.assertEqual(config.get("htdocs","path"), "/srv/www/htdocs/")
+        self.assertEqual(config.get("htdocs","read only"), "No")
+
+        cmdOut = self.__execute("cat /etc/samba/smbpasswd|grep rupert")[0].split(':')
+        self.assertEqual(cmdOut[0],"rupert")
+        self.assertEqual(cmdOut[1],"1000")
+        self.assertEqual(cmdOut[3],"A9D31A2BB68D6C08133C86A425068A1F")
+        self.assertEqual(cmdOut[4],"[U          ]")
+
+        cmdOut = self.__execute("cat /etc/samba/smbpasswd|grep root")[0].split(':')
+        self.assertEqual(cmdOut[0],"root")
+        self.assertEqual(cmdOut[1],"0")
+        self.assertEqual(cmdOut[3],"A9D31A2BB68D6C08133C86A425068A1F")
+        self.assertEqual(cmdOut[4],"[U          ]")
+
+        cmdOut = self.__execute("cat /etc/samba/smbusers|grep root")[0].split()
+        self.assertEqual(cmdOut[0],"root")
+        self.assertEqual(cmdOut[2],"administrator")
 
 if __name__ == "__main__":
     unittest.main()
