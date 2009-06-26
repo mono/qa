@@ -50,6 +50,7 @@ colors = {
         'red':'\033[31m',
         'norm':'\033[0m',
         'green':'\033[32m',
+        'blue':'\033[34m',
         }
 #################################################################
 #
@@ -333,22 +334,28 @@ def __runAllTests():
 
     testsuite = __flattenTestSuite(testsuite)
     totalCount = testsuite.countTestCases()
+    skipped = 0
 
     for i,t in enumerate(testsuite):
         print "Running %d of %d: %s ..." % ( i+1, totalCount, t.id()),
         failures = len(results.failures)
         errors = len(results.errors)
-        t.run(results)
-        if failures != len(results.failures): #Check if a failure was added
-            __printColor("FAILED",'red')
-        elif errors != len(results.errors):
-            __printColor("ERROR",'red')
+        if t.isTestCaseInTestRun():
+            t.run(results)
+            if failures != len(results.failures): #Check if a failure was added
+                __printColor("FAILED",'red')
+            elif errors != len(results.errors):
+                __printColor("ERROR",'red')
+            else:
+                print 'ok'
+            # Get result from the results and print status
         else:
-            print 'ok'
-        # Get result from the results and print status
+            __printColor("skipped [%d]" % t.testcaseid, 'blue')
+            skipped += 1
 
     print "\n%12s:%3s" % ('Errors',len(results.errors))
     print "%12s:%3s" % ('Failures',len(results.failures))
+    print "%12s:%3s" % ('Skipped',skipped)
     print "%12s:%3s" % ('Tests run',results.testsRun)
     print ''
 
