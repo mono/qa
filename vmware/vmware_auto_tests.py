@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import glob
+import os
 import pdb
 import subprocess
 import unittest
@@ -98,131 +100,125 @@ class vmware_automated_tests(unittest.TestCase):
                                 "rm -rf $TMPDIR")
         self.assertEqual(cmdOut[0].strip(), "<html><body><p>Hello World!</p></body></html>")
 
-    def __checkDesktopFileData(self, file, icons, iconPath):
-        if icons[file][2] == "Type=Application":
-            action = self.__execute("cd " + iconPath + "; grep '^Exec=' '" + file + "'")[0]
-        elif icons[file][2] == "Type=Link":
-            action = self.__execute("cd " + iconPath + "; grep '^URL=' '" + file + "'")[0]
+    def __checkDesktopFileData(self, filePath, fileName, expectedData):
+        self.assertTrue(os.path.isfile(filePath + "/" + fileName))
+        config = ConfigParser.ConfigParser()
+        config.read(filePath + "/" + fileName)
+        for curData in expectedData:
+            self.assertEqual(config.get("Desktop Entry",curData[0]), curData[1])
 
-        name = self.__execute("cd " + iconPath + "; grep '^Name=' '" + file + "'")[0]
-        type = self.__execute("cd " + iconPath + "; grep '^Type=' '" + file + "'")[0]
-        self.assertEqual(action, icons[file][0])
-        self.assertEqual(name, icons[file][1])
-        self.assertEqual(type, icons[file][2])
+    def __checkOnlyTheseDesktopFilesExist(self, filePath, expectedIcons):
+        iconFiles = {}
+        for curIcon in expectedIcons:
+            iconFiles[curIcon[0]] = curIcon[0]
 
-    def __checkAllDesktopFilesExist(self, icons, iconPath):
-        for curDesktopFile in icons.keys():
-            cmdOut = self.__execute("cd " + iconPath + ";ls '" + curDesktopFile + "'")[0]
-            self.assertEqual(cmdOut, curDesktopFile)
+        entries = glob.glob(filePath + "/*.desktop")
+        for curEntry in entries:
+            if os.path.isfile(curEntry):
+                fileName = curEntry.split("/")[-1]
+                self.assertEqual(iconFiles[fileName], fileName)
 
     def testGtkSharpApplicationsIconsData(self):
         # Testcase 869515
-        iconPath = "/home/rupert/Desktop/Gtk#\ Applications"
-        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *; do echo $FILE; done")
-        icons = { "banshee-1.desktop":("Exec=banshee-1 --redirect-log --play-enqueued %U","Name=Banshee","Type=Application"),
-                  "f-spot.desktop":("Exec=f-spot","Name=F-Spot","Type=Application"),
-                  "gbrainy.desktop":("Exec=gbrainy","Name=gbrainy","Type=Application"),
-                  "gnome-do.desktop":("Exec=gnome-do","Name=GNOME Do","Type=Application"),
-                  "monsoon.desktop":("Exec=monsoon","Name=Monsoon","Type=Application"),
-                  "smuxi-frontend-gnome.desktop":("Exec=smuxi-frontend-gnome","Name=Smuxi","Type=Application"),
-                  "tasque.desktop":("Exec=tasque","Name=Tasque","Type=Application"),
-                  "tomboy.desktop":("Exec=tomboy --search","Name=Tomboy Notes","Type=Application") }
+        iconPath = "/home/rupert/Desktop/Gtk# Applications"
+        icons = [ ("banshee-1.desktop", ("Exec","banshee-1 --redirect-log --play-enqueued %U"),("Name","Banshee"),("Type","Application")),
+                  ("f-spot.desktop",("Exec","f-spot"),("Name","F-Spot"),("Type","Application")),
+                  ("gbrainy.desktop",("Exec","gbrainy"),("Name","gbrainy"),("Type","Application")),
+                  ("gnome-do.desktop",("Exec","gnome-do"),("Name","GNOME Do"),("Type","Application")),
+                  ("monsoon.desktop",("Exec","monsoon"),("Name","Monsoon"),("Type","Application")),
+                  ("smuxi-frontend-gnome.desktop",("Exec","smuxi-frontend-gnome"),("Name","Smuxi"),("Type","Application")),
+                  ("tasque.desktop",("Exec","tasque"),("Name","Tasque"),("Type","Application")),
+                  ("tomboy.desktop",("Exec","tomboy --search"),("Name","Tomboy Notes"),("Type","Application")) ]
 
-        self.__checkAllDesktopFilesExist(icons, iconPath)
-        for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFileData(curFile, icons, iconPath)
+        self.__checkOnlyTheseDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.__checkDesktopFileData(iconPath, curIcon[0], curIcon[1:])
 
     def testWebSiteIconsData(self):
         # Testcase 869512
-        iconPath = "/home/rupert/Desktop/Mono\ Web\ Sites"
-        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *; do echo $FILE; done")
-        icons = { "Banshee.desktop":("URL=http://banshee-project.org/","Name=Banshee","Type=Link"),
-                  "F-Spot.desktop":("URL=http://f-spot.org/","Name=F-Spot","Type=Link"),
-                  "gbrainy.desktop":("URL=http://live.gnome.org/gbrainy/","Name=gbrainy","Type=Link"),
-                  "MonoDevelop.desktop":("URL=http://www.monodevelop.com/","Name=MonoDevelop","Type=Link"),
-                  "Monologue.desktop":("URL=http://www.go-mono.com/monologue/","Name=Monologue - Voices of the Mono Project","Type=Link"),
-                  "Mono Project.desktop":("URL=http://www.mono-project.org/","Name=Mono Project","Type=Link"),
-                  "Monsoon.desktop":("URL=http://www.monsoon-project.org/","Name=Monsoon","Type=Link"),
-                  "Tomboy.desktop":("URL=http://www.gnome.org/projects/tomboy/","Name=Tomboy","Type=Link") }
+        iconPath = "/home/rupert/Desktop/Mono Web Sites"
+        icons = [ ("Banshee.desktop",("URL","http://banshee-project.org/"),("Name","Banshee"),("Type","Link")),
+                  ("F-Spot.desktop",("URL","http://f-spot.org/"),("Name","F-Spot"),("Type","Link")),
+                  ("gbrainy.desktop",("URL","http://live.gnome.org/gbrainy/"),("Name","gbrainy"),("Type","Link")),
+                  ("MonoDevelop.desktop",("URL","http://www.monodevelop.com/"),("Name","MonoDevelop"),("Type","Link")),
+                  ("Monologue.desktop",("URL","http://www.go-mono.com/monologue/"),("Name","Monologue - Voices of the Mono Project"),("Type","Link")),
+                  ("Mono Project.desktop",("URL","http://www.mono-project.org/"),("Name","Mono Project"),("Type","Link")),
+                  ("Monsoon.desktop",("URL","http://www.monsoon-project.org/"),("Name","Monsoon"),("Type","Link")),
+                  ("Tomboy.desktop",("URL","http://www.gnome.org/projects/tomboy/"),("Name","Tomboy"),("Type","Link")) ]
 
-        self.__checkAllDesktopFilesExist(icons, iconPath)
-        for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFileData(curFile, icons, iconPath)
+        self.__checkOnlyTheseDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.__checkDesktopFileData(iconPath, curIcon[0], curIcon[1:])
 
     def testWebAppIconsData(self):
         # Testcase 869516
-        iconPath = "/home/rupert/Desktop/Mono\ Web\ Applications"
-        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *; do echo $FILE; done")
-        icons = { "about.desktop":("URL=file:///srv/www/htdocs/index.html","Name=About ASP.NET Applications","Type=Link"),
-                  "AspNetForums.desktop":("URL=http://localhost/AspNetForums/","Name=ASP.NET Forums","Type=Link"),
-                  "BlogStarterKit.desktop":("URL=http://localhost/BlogStarterKit/Admin/","Name=Blog Starter Kit","Type=Link"),
-                  "ClassifiedsStarterKit.desktop":("URL=http://localhost/ClassifiedsStarterKit/default.aspx","Name=Classifieds Starter Kit","Type=Link"),
-                  "ClubWebSite.desktop":("URL=http://localhost/ClubWebSite/","Name=Club Web Site Starter Kit","Type=Link"),
-                  "mojoPortal.desktop":("URL=http://localhost/mojoportal/","Name=mojoPortal Web Site Framework","Type=Link"),
+        iconPath = "/home/rupert/Desktop/Mono Web Applications"
+        icons = [ ("about.desktop",("URL","file:///srv/www/htdocs/index.html"),("Name","About ASP.NET Applications"),("Type","Link")),
+                  ("AspNetForums.desktop",("URL","http://localhost/AspNetForums/"),("Name","ASP.NET Forums"),("Type","Link")),
+                  ("BlogStarterKit.desktop",("URL","http://localhost/BlogStarterKit/Admin/"),("Name","Blog Starter Kit"),("Type","Link")),
+                  ("ClassifiedsStarterKit.desktop",("URL","http://localhost/ClassifiedsStarterKit/default.aspx"),("Name","Classifieds Starter Kit"),("Type","Link")),
+                  ("ClubWebSite.desktop",("URL","http://localhost/ClubWebSite/"),("Name","Club Web Site Starter Kit"),("Type","Link")),
+                  ("mojoPortal.desktop",("URL","http://localhost/mojoportal/"),("Name","mojoPortal Web Site Framework"),("Type","Link")),
+                  ("sources.desktop",("URL","file:///usr/share/mono/asp.net"),("Name","Sources"),("Type","Link")) ]
 
-                  "sources.desktop":("URL=file:///usr/share/mono/asp.net","Name=Sources","Type=Link") }
-
-        self.__checkAllDesktopFilesExist(icons, iconPath)
-        for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFileData(curFile, icons, iconPath)
+        self.__checkOnlyTheseDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.__checkDesktopFileData(iconPath, curIcon[0], curIcon[1:])
 
     def testWinformsApplicationsIconsData(self):
         # Testcase 869519
-        iconPath = "/home/rupert/Desktop/Mono\ Winforms\ Applications"
-        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *; do echo $FILE; done")
-        icons = { "AderPlotter.desktop":("Exec=AderPlotter","Name=AderPlotter","Type=Application"),
-                  "AnotherTetrisClone.desktop":("Exec=AnotherTetrisClone","Name=AnotherTetrisClone","Type=Application"),
-                  "ChessBoard.desktop":("Exec=ChessBoard","Name=ChessBoard","Type=Application"),
-                  "ControlInspector.desktop":("Exec=ControlInspector","Name=ControlInspector","Type=Application"),
-                  "CSharpTetris.desktop":("Exec=CSharpTetris","Name=CSharpTetris","Type=Application"),
-                  "GATetris.desktop":("Exec=GATetris","Name=GATetris","Type=Application"),
-                  "GraphLibraryDemo.desktop":("Exec=GraphLibraryDemo","Name=GraphLibraryDemo","Type=Application"),
-                  "ICanSpy.desktop":("Exec=ICanSpy","Name=ICanSpy","Type=Application"),
-                  "IEClone.desktop":("Exec=IEClone","Name=IEClone","Type=Application"),
-                  "MonoCalendar.desktop":("Exec=MonoCalendar","Name=MonoCalendar","Type=Application"),
-                  "myUML.desktop":("Exec=myUML","Name=myUML","Type=Application"),
-                  "Notepad.desktop":("Exec=Notepad","Name=Notepad","Type=Application"),
-                  "NPlot.desktop":("Exec=NPlot","Name=NPlot","Type=Application"),
-                  "PieChart.desktop":("Exec=PieChart","Name=PieChart","Type=Application"),
-                  "PolygonTriangulation.desktop":("Exec=PolygonTriangulation","Name=PolygonTriangulation","Type=Application"),
-                  "ReportBuilder.desktop":("Exec=ReportBuilder","Name=ReportBuilder","Type=Application"),
-                  "Rubik.desktop":("Exec=Rubik","Name=Rubik","Type=Application"),
-                  "SharpChess.desktop":("Exec=SharpChess","Name=SharpChess","Type=Application"),
-                  "sources.desktop":("URL=file:///home/rupert/src","Name=Sources","Type=Link"),
-                  "SplineInterpolation.desktop":("Exec=SplineInterpolation","Name=SplineInterpolation","Type=Application"),
-                  "SVGPad.desktop":("Exec=SVGPad","Name=SVGPad","Type=Application"),
-                  "UsingWebBrowser.desktop":("Exec=UsingWebBrowser","Name=UsingWebBrowser","Type=Application") }
+        iconPath = "/home/rupert/Desktop/Mono Winforms Applications"
+        icons = [ ("AderPlotter.desktop",("Exec","AderPlotter"),("Name","AderPlotter"),("Type","Application")),
+                  ("AnotherTetrisClone.desktop",("Exec","AnotherTetrisClone"),("Name","AnotherTetrisClone"),("Type","Application")),
+                  ("ChessBoard.desktop",("Exec","ChessBoard"),("Name","ChessBoard"),("Type","Application")),
+                  ("ControlInspector.desktop",("Exec","ControlInspector"),("Name","ControlInspector"),("Type","Application")),
+                  ("CSharpTetris.desktop",("Exec","CSharpTetris"),("Name","CSharpTetris"),("Type","Application")),
+                  ("GATetris.desktop",("Exec","GATetris"),("Name","GATetris"),("Type","Application")),
+                  ("GraphLibraryDemo.desktop",("Exec","GraphLibraryDemo"),("Name","GraphLibraryDemo"),("Type","Application")),
+                  ("ICanSpy.desktop",("Exec","ICanSpy"),("Name","ICanSpy"),("Type","Application")),
+                  ("IEClone.desktop",("Exec","IEClone"),("Name","IEClone"),("Type","Application")),
+                  ("MonoCalendar.desktop",("Exec","MonoCalendar"),("Name","MonoCalendar"),("Type","Application")),
+                  ("myUML.desktop",("Exec","myUML"),("Name","myUML"),("Type","Application")),
+                  ("Notepad.desktop",("Exec","Notepad"),("Name","Notepad"),("Type","Application")),
+                  ("NPlot.desktop",("Exec","NPlot"),("Name","NPlot"),("Type","Application")),
+                  ("PieChart.desktop",("Exec","PieChart"),("Name","PieChart"),("Type","Application")),
+                  ("PolygonTriangulation.desktop",("Exec","PolygonTriangulation"),("Name","PolygonTriangulation"),("Type","Application")),
+                  ("ReportBuilder.desktop",("Exec","ReportBuilder"),("Name","ReportBuilder"),("Type","Application")),
+                  ("Rubik.desktop",("Exec","Rubik"),("Name","Rubik"),("Type","Application")),
+                  ("SharpChess.desktop",("Exec","SharpChess"),("Name","SharpChess"),("Type","Application")),
+                  ("sources.desktop",("URL","file:///home/rupert/src"),("Name","Sources"),("Type","Link")),
+                  ("SplineInterpolation.desktop",("Exec","SplineInterpolation"),("Name","SplineInterpolation"),("Type","Application")),
+                  ("SVGPad.desktop",("Exec","SVGPad"),("Name","SVGPad"),("Type","Application")),
+                  ("UsingWebBrowser.desktop",("Exec","UsingWebBrowser"),("Name","UsingWebBrowser"),("Type","Application")) ]
 
-        self.__checkAllDesktopFilesExist(icons, iconPath)
-        for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFileData(curFile, icons, iconPath)
+        self.__checkOnlyTheseDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.__checkDesktopFileData(iconPath, curIcon[0], curIcon[1:])
 
     def testDesktopIconsData(self):
         # Testcase 869520
         iconPath = "/home/rupert/Desktop/"
-        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *.desktop; do echo $FILE; done")
-        icons = { "moma.desktop":("Exec=moma","Name=MoMA","Type=Application"),
-                  "monodevelop.desktop":("Exec=monodevelop","Name=Mono Development Environment","Type=Application"),
-                  "monodoc.desktop":("Exec=/usr/bin/monodoc","Name=Mono Documentation","Type=Application"),
-                  "start-here.desktop":("URL=file:///srv/www/htdocs/index.html","Name=Start Here","Type=Link") }
+        icons = [ ("moma.desktop",("Exec","moma"),("Name","MoMA"),("Type","Application")),
+                  ("monodevelop.desktop",("Exec","monodevelop"),("Name","Mono Development Environment"),("Type","Application")),
+                  ("monodoc.desktop",("Exec","/usr/bin/monodoc"),("Name","Mono Documentation"),("Type","Application")),
+                  ("start-here.desktop",("URL","file:///srv/www/htdocs/index.html"),("Name","Start Here"),("Type","Link")) ]
 
-        self.__checkAllDesktopFilesExist(icons, iconPath)
-        for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFileData(curFile, icons, iconPath)
+        self.__checkOnlyTheseDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.__checkDesktopFileData(iconPath, curIcon[0], curIcon[1:])
 
     def testTheXdgAutoStartIconsData(self):
         # Testcase 871071
         iconPath = "/etc/xdg/autostart"
-        cmdOut = self.__execute("cd " + iconPath + ";for FILE in *.desktop; do echo $FILE; done")
-        icons = { "gnome-at-session.desktop":("Exec=gnome-at-visual -s","Name=Visual Assistance","Type=Application"),
-                  "gnome-settings-daemon.desktop":("Exec=/usr/lib/gnome-settings-daemon/gnome-settings-daemon","Name=GNOME Settings Daemon","Type=Application"),
-                  "nm-applet.desktop":("Exec=nm-applet --sm-disable","Name=Network Manager","Type=Application"),
-                  "pulseaudio.desktop":("Exec=start-pulseaudio-x11","Name=PulseAudio Sound System","Type=Application"),
-                  "vmware-user-autostart.desktop":("Exec=vmware-user-autostart-wrapper","Name=VMware User Agent","Type=Application") }
+        icons = [ ("gnome-at-session.desktop",("Exec","gnome-at-visual -s"),("Name","Visual Assistance"),("Type","Application")),
+                  ("gnome-settings-daemon.desktop",("Exec","/usr/lib/gnome-settings-daemon/gnome-settings-daemon"),("Name","GNOME Settings Daemon"),("Type","Application")),
+                  ("nm-applet.desktop",("Exec","nm-applet --sm-disable"),("Name","Network Manager"),("Type","Application")),
+                  ("pulseaudio.desktop",("Exec","start-pulseaudio-x11"),("Name","PulseAudio Sound System"),("Type","Application")),
+                  ("vmware-user-autostart.desktop",("Exec","vmware-user-autostart-wrapper"),("Name","VMware User Agent"),("Type","Application")) ]
 
-        self.__checkAllDesktopFilesExist(icons, iconPath)
-        for curFile in cmdOut[0:-1]:
-            self.__checkDesktopFileData(curFile, icons, iconPath)
+        self.__checkOnlyTheseDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.__checkDesktopFileData(iconPath, curIcon[0], curIcon[1:])
 
     def testVMwareToolsUserAgentSettings(self):
         # Testcase 871068
@@ -298,101 +294,99 @@ class vmware_automated_tests(unittest.TestCase):
 
     def testAllExpectedRpmsAreInstalled(self):
         # Testcase 871305
-        expectedRpms = [
-        "mono-core",
-        "mono-devel",
-        "mono-debugger",
-        "mono-check",
-        "mono-addins",
-        "mono-nunit",
-        "mono-locale-extras",
-        "mono-zeroconf",
-        "mono-zeroconf-doc",
-        "mono-tools",
-        "mono-complete",
-        "mono-extras",
-        "monodoc-core",
-        "mono-wcf",
-        "mono-basic",
-        "mono-winfxcore",
-        "mono-jscript",
-        "mono-zeroconf-provider-avahi",
-        "mono-uia",
-# --------------------------------------------
-        "mono-winforms",
-        "libgdiplus0",
-        "libgluezilla0",
-# --------------------------------------------
-        "mono-web",
-        "apache2-mod_mono",
-        "Mono_ASP.NET_MonoForums",
-        "Mono_ASP.NET_ClubWebSite",
-        "Mono_ASP.NET_ClassifiedsStarterKit",
-        "Mono_ASP.NET_BlogStarterKit",
-# --------------------------------------------
-        "mono-data",
-        "mono-data-oracle",
-        "mono-data-sqlite",
-        "mono-data-postgresql",
-        "mono-data-sybase",
-        "mono-data-firebird",
-        "bytefx-data-mysql",
-        "ibm-data-db2",
-# --------------------------------------------
-        "monodevelop",
-        "monodevelop-boo",
-        "monodevelop-database",
-        "monodevelop-debugger-gdb",
-        "monodevelop-debugger-mdb",
-        "monodevelop-java",
-        "monodevelop-vala",
-# --------------------------------------------
-        "uiaatkbridge",
-        "uiautomationwinforms",
-# --------------------------------------------
-        "gmime-sharp",
-        "gtkhtml314-sharp",
-        "webkit-sharp",
-        "gnome-sharp2-complete",
-        "gecko-sharp2",
-        "gnome-print-sharp",
-        "gnome-desktop-sharp2",
-        "taglib-sharp",
-        "gtk-sharp2",
-        "gnome-vfs-sharp2",
-        "glade-sharp2",
-        "gnome-sharp2",
-        "rsvg2-sharp",
-        "vte016-sharp",
-        "gtk-sharp2-complete",
-        "gtk-sharp2-gapi",
-        "gnome-keyring-sharp",
-        "gtksourceview-sharp2",
-        "gnome-panel-sharp",
-        "nautilusburn-sharp",
-        "glib-sharp2",
-        "gtk-sharp2-doc",
-        "evolution-sharp",
-        "art-sharp2",
-        "gconf-sharp2",
-        "notify-sharp",
-        "wnck-sharp",
-        "gtksourceview2-sharp",
-# --------------------------------------------
-        "IPCE",
-        "boo",
-        "boo-devel",
-        "ikvm",
-        "nant",
-        "ndesk-dbus",
-        "ndesk-dbus-glib",
-        "ndesk-dbus-glib-devel",
-        "webkit-sharp",
-        "xsp" ]
+        expectedRpms = [ "mono-core",
+                         "mono-devel",
+                         "mono-debugger",
+                         "mono-check",
+                         "mono-addins",
+                         "mono-nunit",
+                         "mono-locale-extras",
+                         "mono-zeroconf",
+                         "mono-zeroconf-doc",
+                         "mono-tools",
+                         "mono-complete",
+                         "mono-extras",
+                         "monodoc-core",
+                         "mono-wcf",
+                         "mono-basic",
+                         "mono-winfxcore",
+                         "mono-jscript",
+                         "mono-zeroconf-provider-avahi",
+            # --------------------------------------------
+                         "mono-winforms",
+                         "libgdiplus0",
+                         "libgluezilla0",
+            # --------------------------------------------
+                         "mono-web",
+                         "apache2-mod_mono",
+                         "Mono_ASP.NET_MonoForums",
+                         "Mono_ASP.NET_ClubWebSite",
+                         "Mono_ASP.NET_ClassifiedsStarterKit",
+                         "Mono_ASP.NET_BlogStarterKit",
+            # --------------------------------------------
+                         "mono-data",
+                         "mono-data-oracle",
+                         "mono-data-sqlite",
+                         "mono-data-postgresql",
+                         "mono-data-sybase",
+                         "mono-data-firebird",
+                         "bytefx-data-mysql",
+                         "ibm-data-db2",
+            # --------------------------------------------
+                         "monodevelop",
+                         "monodevelop-boo",
+                         "monodevelop-database",
+                         "monodevelop-debugger-gdb",
+                         "monodevelop-debugger-mdb",
+                         "monodevelop-java",
+                         "monodevelop-vala",
+            # --------------------------------------------
+                         "mono-uia",
+                         "uiaatkbridge",
+                         "uiautomationwinforms",
+            # --------------------------------------------
+                         "gmime-sharp",
+                         "gtkhtml314-sharp",
+                         "webkit-sharp",
+                         "gnome-sharp2-complete",
+                         "gecko-sharp2",
+                         "gnome-print-sharp",
+                         "gnome-desktop-sharp2",
+                         "taglib-sharp",
+                         "gtk-sharp2",
+                         "gnome-vfs-sharp2",
+                         "glade-sharp2",
+                         "gnome-sharp2",
+                         "rsvg2-sharp",
+                         "vte016-sharp",
+                         "gtk-sharp2-complete",
+                         "gtk-sharp2-gapi",
+                         "gnome-keyring-sharp",
+                         "gtksourceview-sharp2",
+                         "gnome-panel-sharp",
+                         "nautilusburn-sharp",
+                         "glib-sharp2",
+                         "gtk-sharp2-doc",
+                         "evolution-sharp",
+                         "art-sharp2",
+                         "gconf-sharp2",
+                         "notify-sharp",
+                         "wnck-sharp",
+                         "gtksourceview2-sharp",
+            # --------------------------------------------
+                         "IPCE",
+                         "boo",
+                         "boo-devel",
+                         "ikvm",
+                         "nant",
+                         "ndesk-dbus",
+                         "ndesk-dbus-glib",
+                         "ndesk-dbus-glib-devel",
+                         "webkit-sharp",
+                         "xsp" ]
 
         cmdOut = self.__execute("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
         rpms = dict(zip(cmdOut,cmdOut))
-        #pdb.set_trace()
         for curExpRpm in expectedRpms:
             self.assertTrue(rpms.has_key(curExpRpm))
 
