@@ -14,6 +14,7 @@ import getopt
 import traceback
 import getpass
 import pdb
+from time import time as clock
 from testopia import Testopia
 
 import ConfigParser
@@ -376,7 +377,9 @@ def monotesting_main(_usexsp2=False):
     if verbose:
         sys.argv.append('-v')
 
+    start = clock()
     __runAllTests()
+    print "Time: %d seconds" % (clock() - start)
 
 
 #----------------------------------------------------------------------
