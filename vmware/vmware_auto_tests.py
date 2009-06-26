@@ -388,7 +388,7 @@ class vmware_automated_tests(unittest.TestCase):
         cmdOut = self.__execute("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
         rpms = dict(zip(cmdOut,cmdOut))
         for curExpRpm in expectedRpms:
-            self.assertTrue(rpms.has_key(curExpRpm))
+            self.assertEqual(rpms[curExpRpm], curExpRpm)
 
 
 if __name__ == "__main__":
