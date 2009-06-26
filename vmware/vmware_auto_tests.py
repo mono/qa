@@ -260,7 +260,7 @@ class vmware_automated_tests(unittest.TestCase):
         self.assertEqual(cmdOut[0], "drwxr-xr-x")
         self.assertEqual(cmdOut[2], "rupert")
         self.assertEqual(cmdOut[3], "www")
-        self.assertEqual(cmdOut[7], "/srv/www/htdocs")
+        self.assertEqual(cmdOut[-1], "/srv/www/htdocs")
 
     def testTheSambaConfiguration(self):
         # Testcase 871296
@@ -295,6 +295,107 @@ class vmware_automated_tests(unittest.TestCase):
         cmdOut = self.__execute("cat /etc/samba/smbusers|grep root")[0].split()
         self.assertEqual(cmdOut[0],"root")
         self.assertEqual(cmdOut[2],"administrator")
+
+    def testAllExpectedRpmsAreInstalled(self):
+        # Testcase 871305
+        expectedRpms = [
+        "mono-core",
+        "mono-devel",
+        "mono-debugger",
+        "mono-check",
+        "mono-addins",
+        "mono-nunit",
+        "mono-locale-extras",
+        "mono-zeroconf",
+        "mono-zeroconf-doc",
+        "mono-tools",
+        "mono-complete",
+        "mono-extras",
+        "monodoc-core",
+        "mono-wcf",
+        "mono-basic",
+        "mono-winfxcore",
+        "mono-jscript",
+        "mono-zeroconf-provider-avahi",
+        "mono-uia",
+# --------------------------------------------
+        "mono-winforms",
+        "libgdiplus0",
+        "libgluezilla0",
+# --------------------------------------------
+        "mono-web",
+        "apache2-mod_mono",
+        "Mono_ASP.NET_MonoForums",
+        "Mono_ASP.NET_ClubWebSite",
+        "Mono_ASP.NET_ClassifiedsStarterKit",
+        "Mono_ASP.NET_BlogStarterKit",
+# --------------------------------------------
+        "mono-data",
+        "mono-data-oracle",
+        "mono-data-sqlite",
+        "mono-data-postgresql",
+        "mono-data-sybase",
+        "mono-data-firebird",
+        "bytefx-data-mysql",
+        "ibm-data-db2",
+# --------------------------------------------
+        "monodevelop",
+        "monodevelop-boo",
+        "monodevelop-database",
+        "monodevelop-debugger-gdb",
+        "monodevelop-debugger-mdb",
+        "monodevelop-java",
+        "monodevelop-vala",
+# --------------------------------------------
+        "uiaatkbridge",
+        "uiautomationwinforms",
+# --------------------------------------------
+        "gmime-sharp",
+        "gtkhtml314-sharp",
+        "webkit-sharp",
+        "gnome-sharp2-complete",
+        "gecko-sharp2",
+        "gnome-print-sharp",
+        "gnome-desktop-sharp2",
+        "taglib-sharp",
+        "gtk-sharp2",
+        "gnome-vfs-sharp2",
+        "glade-sharp2",
+        "gnome-sharp2",
+        "rsvg2-sharp",
+        "vte016-sharp",
+        "gtk-sharp2-complete",
+        "gtk-sharp2-gapi",
+        "gnome-keyring-sharp",
+        "gtksourceview-sharp2",
+        "gnome-panel-sharp",
+        "nautilusburn-sharp",
+        "glib-sharp2",
+        "gtk-sharp2-doc",
+        "evolution-sharp",
+        "art-sharp2",
+        "gconf-sharp2",
+        "notify-sharp",
+        "wnck-sharp",
+        "gtksourceview2-sharp",
+# --------------------------------------------
+        "IPCE",
+        "boo",
+        "boo-devel",
+        "ikvm",
+        "nant",
+        "ndesk-dbus",
+        "ndesk-dbus-glib",
+        "ndesk-dbus-glib-devel",
+        "webkit-sharp",
+        "xsp" ]
+
+        cmdOut = self.__execute("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
+        rpms = dict(zip(cmdOut,cmdOut))
+        #pdb.set_trace()
+        for curExpRpm in expectedRpms:
+            self.assertTrue(rpms.has_key(curExpRpm))
+
 
 if __name__ == "__main__":
     unittest.main()
