@@ -242,11 +242,12 @@ def __loadCredentials():
     if testrunid == None or testrunid == 0 or testrunid == '': #skip creds
         return
 
+    #pdb.set_trace()
     # Otherwise, read the conf file
     creds_file = '.testopia_creds.conf'
     creds_file_path = os.path.join(os.environ['HOME'],creds_file)
 
-    if not os.path.exists(creds_file_path) or username != None or username != '':
+    if not os.path.exists(creds_file_path) or (username != None and username != ''):
         __promptForCredentials()
     else: #read the conf file
         config = ConfigParser.ConfigParser()
@@ -389,7 +390,7 @@ def monotesting_main(_usexsp2=False):
         sys.argv.append('-v')
 
     start = clock()
-    monoTestRunner.runAllTests()
+    r = monoTestRunner.runAllTests()
 
     etime = clock() - start
     print "Time: %dm %ds\n" % (etime / 60, etime % 60)

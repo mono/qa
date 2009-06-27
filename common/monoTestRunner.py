@@ -45,25 +45,28 @@ def runAllTests():
     totalCount = testsuite.countTestCases()
     skipped = 0
 
-    for i,t in enumerate(testsuite):
-        print "Running %d of %d: %s ..." % ( i+1, totalCount, t.id()),
-        failures = len(results.failures)
-        errors = len(results.errors)
-        if t.isTestCaseInTestRun():
-            t.run(results)
-            if failures != len(results.failures): #Check if a failure was added
-                __printColor("FAILED",'red')
-                d['failed'].append(t.testcaseid)
-            elif errors != len(results.errors):
-                __printColor("ERROR",'red')
-                d['errors'].append(t.testcaseid)
-            else:
-                print 'ok'
-                d['passed'].append(t.testcaseid)
+    try:
+        for i,t in enumerate(testsuite):
+            print "Running %d of %d: %s ..." % ( i+1, totalCount, t.id()),
+            failures = len(results.failures)
+            errors = len(results.errors)
+            if t.isTestCaseInTestRun():
+                t.run(results)
+                if failures != len(results.failures): #Check if a failure was added
+                    __printColor("FAILED",'red')
+                    d['failed'].append(t.testcaseid)
+                elif errors != len(results.errors):
+                    __printColor("ERROR",'red')
+                    d['errors'].append(t.testcaseid)
+                else:
+                    print 'ok'
+                    d['passed'].append(t.testcaseid)
             # Get result from the results and print status
-        else:
-            __printColor("skipped [%d]" % t.testcaseid, 'orange')
-            skipped += 1
+            else:
+                __printColor("skipped [%d]" % t.testcaseid, 'orange')
+                skipped += 1
+    except KeyboardInterrupt:
+        print "\n ** Aborting test run **"
 
     if len(results.errors) > 0:
         print '-' * 80
