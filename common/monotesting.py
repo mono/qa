@@ -48,11 +48,15 @@ password = None
 
 
 colors = {
-        'red':'\033[31m',
         'norm':'\033[0m',
+        'red':'\033[31m',
         'green':'\033[32m',
+        'orange':'\033[33m',
         'blue':'\033[34m',
+        'purple':'\033[35m',
         }
+
+myTestopia = None
 #################################################################
 #
 # Local helper functions
@@ -141,6 +145,32 @@ def __loadargs(cmdargs):
         __printValues()
 
 #----------------------------------------------------------------------
+def __testTestopiaConn():
+    '''mytestopia is set to None if the creds are invalid or if testrunid is None'''
+
+    # TODO: better test to check if the test run is STOPPED?
+    # That would check the creds and see if the test run could/should be modified.
+    # That way we don't muck up our historical data
+
+    global testrunid,myTestopia
+    host='apibugzilla.novell.com'
+    ssl=True
+    port = None
+    myTestopia = None
+
+    if testrunid != None:
+        print "Connecting to Testopia...",
+        myTestopia = Testopia(username=username,password=password,host=host,ssl=ssl,port=port)
+        version = myTestopia.testopia_api_version()
+        if version == None:
+            print "XMLRPC error: Check your credentials"
+            myTestopia = None
+        else:
+            print "ok"
+    if testrunid == None or myTestopia == None:
+        print "Skipping Testopia syncing"
+
+#----------------------------------------------------------------------
 def __getCommonDir():
     '''Returns the absolute path of trunk/qa/common directory'''
 
@@ -184,7 +214,7 @@ def __loadConfFile():
 
     #Optional settings
     if config.has_option('debug','verbose'):
-        verbose = config.get('debug','verbose')
+        verbose = config.getboolean('debug','verbose')
     if config.has_option('debug','logfile'):
         logfile = config.get('debug','logfile')
         if logfile == 'None' or logfile == '':
@@ -192,23 +222,41 @@ def __loadConfFile():
 
 
 #----------------------------------------------------------------------
-def __loadCredentials():
+def __promptForCredentials():
     global username,password
+    forcepwd = False
+    if username == None or username == '': # username was passed in at commandline
+        username = raw_input("Enter Testopia username: ")
+        forcepwd = True # force pwd to be passed in on command line
+
+    if password == None or password == '' or forcepwd: # pwd was not passed in or if user was passed in on cmdline
+        password = getpass.getpass("Enter Testopia password for %s: " % username)
+
+#----------------------------------------------------------------------
+def __loadCredentials():
+    '''Set the credentials for Testopia. If conf file non-existant, then
+    prompt user for creds.'''
+
+    global username,password
+    if testrunid == None or testrunid == 0 or testrunid == '': #skip creds
+        return
+
+    # Otherwise, read the conf file
     creds_file = '.testopia_creds.conf'
     creds_file_path = os.path.join(os.environ['HOME'],creds_file)
 
-    if not os.path.exists(creds_file_path):
-        print "ERROR: Cannot find %s" % creds_file_path
-        sys.exit(1)
+    if not os.path.exists(creds_file_path) or username != None or username != '':
+        __promptForCredentials()
+    else: #read the conf file
+        config = ConfigParser.ConfigParser()
+        config.read(creds_file_path)
 
-    config = ConfigParser.ConfigParser()
-    config.read(creds_file_path)
-
-    username = config.get('testopia','username')
-    password = config.get('testopia','password')
-
-    if password == None or password == '':
-        password = getpass.getpass("Enter password for user %s: " % username)
+        if config.has_option('testopia','username'):
+            username = config.get('testopia','username')
+        if config.has_option('testopia','password'):
+            password = config.get('testopia','password')
+        if password == None or password == '' or username == None or username == '':
+            __promptForCredentials()
 
 
 #----------------------------------------------------------------------
@@ -351,7 +399,7 @@ def __runAllTests():
                 print 'ok'
             # Get result from the results and print status
         else:
-            __printColor("skipped [%d]" % t.testcaseid, 'blue')
+            __printColor("skipped [%d]" % t.testcaseid, 'orange')
             skipped += 1
 
     print "\n%12s:%3s" % ('Errors',len(results.errors))
@@ -367,9 +415,10 @@ def monotesting_main(_usexsp2=False):
     args = sys.argv[1:]
     if _usexsp2:
         args += ['--usexsp2']
-    __loadCredentials()
     __loadConfFile()
     __loadargs(args)
+    __loadCredentials()
+    __testTestopiaConn()
     __setUrls()
     __check_args()
 
@@ -379,7 +428,9 @@ def monotesting_main(_usexsp2=False):
 
     start = clock()
     __runAllTests()
-    print "Time: %d seconds" % (clock() - start)
+
+    etime = clock() - start
+    print "Time: %dm %ds\n" % (etime / 60, etime % 60)
 
 
 #----------------------------------------------------------------------

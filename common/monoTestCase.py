@@ -25,38 +25,24 @@ class monoTestCase(unittest.TestCase):
 
     def __init__(self,methodname="runTest"):
         unittest.TestCase.__init__(self,methodname)
-        self.mytestopia = None
-
-
-    #----------------------------------------------------------------------
-    def getTestopia(self):
-        host='apibugzilla.novell.com'
-        ssl=True
-        #port=443
-        port = None
-
-        if self.mytestopia == None:
-            self.mytestopia = Testopia(username=mono.username,password=mono.password,host=host,ssl=ssl,port=port)
-        return self.mytestopia
 
     #----------------------------------------------------------------------
     def getTestRun(self):
-        if mono.testrunid == None or mono.testrunid == 0:
+        if mono.testrunid == None or mono.testrunid == 0 or mono.myTestopia == None:
             monoTestCase.testrun = None
         elif monoTestCase.testrun == None:
-            monoTestCase.testrun = self.getTestopia().testrun_get(mono.testrunid)
+            monoTestCase.testrun = mono.myTestopia.testrun_get(mono.testrunid)
         return monoTestCase.testrun
 
 
     #----------------------------------------------------------------------
     def isTestCaseInTestRun(self):
-        if mono.testrunid == None:
-            mono.log("Testrunid is None; isTestCaseInTestRun == true")
-            return True
+        if mono.myTestopia == None:
+            return True # return true so the test case is run, regardless of testopia
 
         if monoTestCase.testcase_list == None:
             mono.log("Getting test cases in test run")
-            list = self.getTestopia().testrun_get_test_cases(mono.testrunid)
+            list = mono.myTestopia.testrun_get_test_cases(mono.testrunid)
             monoTestCase.testcase_list = [tc['case_id'] for tc in list]
 
         if self.testcaseid in monoTestCase.testcase_list:
@@ -95,14 +81,14 @@ class monoTestCase(unittest.TestCase):
             mono.log("WARNING: __updateTestCase(): testcaseid == None; TESTOPIA WILL NOT BE UPDATED")
             return
 
-        if self.getTestRun() == None:
+        tr = self.getTestRun()
+        if tr == None:
             mono.log("WARNING: __updateTestCase(): getTestRun() returned None; TESTOPIA WILL NOT BE UPDATED")
-            return 
+            return
 
         mono.log("   Setting testcase #%d status to %s" % (self.testcaseid,status))
         
-        tr = self.getTestRun()
-        self.getTestopia().testcaserun_update_alt(
+        mono.myTestopia.testcaserun_update_alt(
                 tr['run_id'],
                 self.testcaseid,
                 tr['build_id'],
