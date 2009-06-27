@@ -18,6 +18,7 @@ from time import time as clock
 from testopia import Testopia
 
 import ConfigParser
+import monoTestRunner
 
 #################################################################
 #
@@ -159,7 +160,7 @@ def __testTestopiaConn():
     myTestopia = None
 
     if testrunid != None:
-        print "Connecting to Testopia...",
+        print "\nConnecting to Testopia...",
         myTestopia = Testopia(username=username,password=password,host=host,ssl=ssl,port=port)
         version = myTestopia.testopia_api_version()
         if version == None:
@@ -372,45 +373,6 @@ def __printColor(msg,color):
 #    main methods
 #
 
-def __runAllTests():
-
-    loader = unittest.TestLoader()
-    testsuite = loader.loadTestsFromModule(__import__('__main__'))
-
-    print "\nRunning %d tests\n" % testsuite.countTestCases()
-    #results = unittest.TextTestRunner(verbosity=2).run(testsuite)
-    results = unittest.TestResult()
-
-    testsuite = __flattenTestSuite(testsuite)
-    totalCount = testsuite.countTestCases()
-    skipped = 0
-
-    for i,t in enumerate(testsuite):
-        print "Running %d of %d: %s ..." % ( i+1, totalCount, t.id()),
-        failures = len(results.failures)
-        errors = len(results.errors)
-        if t.isTestCaseInTestRun():
-            t.run(results)
-            if failures != len(results.failures): #Check if a failure was added
-                __printColor("FAILED",'red')
-            elif errors != len(results.errors):
-                __printColor("ERROR",'red')
-            else:
-                print 'ok'
-            # Get result from the results and print status
-        else:
-            __printColor("skipped [%d]" % t.testcaseid, 'orange')
-            skipped += 1
-
-    print "\n%12s:%3s" % ('Errors',len(results.errors))
-    print "%12s:%3s" % ('Failures',len(results.failures))
-    print "%12s:%3s" % ('Skipped',skipped)
-    print "%12s:%3s" % ('Tests run',results.testsRun)
-    print ''
-
-    # All that ^^ just because unittest.main() calls sys.exit()
-
-#----------------------------------------------------------------------
 def monotesting_main(_usexsp2=False):
     args = sys.argv[1:]
     if _usexsp2:
@@ -427,7 +389,7 @@ def monotesting_main(_usexsp2=False):
         sys.argv.append('-v')
 
     start = clock()
-    __runAllTests()
+    monoTestRunner.runAllTests()
 
     etime = clock() - start
     print "Time: %dm %ds\n" % (etime / 60, etime % 60)

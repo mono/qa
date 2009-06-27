@@ -14,6 +14,7 @@ BUG_STATUS = {'IDLE':1,
             'PAUSED':5,
             'BLOCKED':6
             }
+
 #####################################################################
 #
 #     Testopia helper functions
@@ -41,7 +42,7 @@ class monoTestCase(unittest.TestCase):
             return True # return true so the test case is run, regardless of testopia
 
         if monoTestCase.testcase_list == None:
-            mono.log("Getting test cases in test run")
+            mono.log("testopia.testrun_get_test_cases()")
             list = mono.myTestopia.testrun_get_test_cases(mono.testrunid)
             monoTestCase.testcase_list = [tc['case_id'] for tc in list]
 
@@ -87,7 +88,6 @@ class monoTestCase(unittest.TestCase):
             return
 
         mono.log("   Setting testcase #%d status to %s" % (self.testcaseid,status))
-        
         mono.myTestopia.testcaserun_update_alt(
                 tr['run_id'],
                 self.testcaseid,
@@ -99,7 +99,8 @@ class monoTestCase(unittest.TestCase):
             for (i,e) in enumerate(errorsList):
                 e = e.replace('\'','\"')
                 msg = '''[%d]: %s''' % (i,e)
-                self.getTestopia().testcaserun_update_alt(
+                #mono.log('testopia.testcaserun_update_alt()')
+                mono.myTestopia.testcaserun_update_alt(
                     tr['run_id'],
                     self.testcaseid,
                     tr['build_id'],
