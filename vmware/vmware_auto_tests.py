@@ -390,6 +390,20 @@ class vmware_automated_tests(unittest.TestCase):
         for curExpRpm in expectedRpms:
             self.assertEqual(rpms[curExpRpm], curExpRpm)
 
+    def testVMwareKernelCommandLine(self):
+        expectedOptions = ["vga=0x314", "splash=silent"]
+        actualOptions = open("/proc/cmdline","r").read().split()
+        expectedOptions.sort()
+        actualOptions.sort()
+        self.assertEqual(str(actualOptions), str(expectedOptions))
+
+    def testVpcKernelCommandLine(self):
+        expectedOptions = ["vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
+        actualOptions = open("/proc/cmdline","r").read().split()
+        expectedOptions.sort()
+        actualOptions.sort()
+        self.assertEqual(str(actualOptions), str(expectedOptions))
+
 
 if __name__ == "__main__":
     unittest.main()
