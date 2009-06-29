@@ -12,8 +12,6 @@ class WebService_TestService_AddTest(xsp1TestCase):
     xsp2TestCaseId = 841146
 
     def test(self):
-        if not self.canRun:
-            return
         try:
             sel = self.selenium
             sel.open("/index.aspx")

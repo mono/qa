@@ -11,9 +11,7 @@ class WebService_TestService_EchoTest(xsp1TestCase):
     xsp2TestCaseId = 841152
 
     def test(self):
-        if not self.canRun:
-            return
-        try: 
+        try:
             sel = self.selenium
             sel.open("/index.aspx")
             sel.click("link=TestService.asmx")
