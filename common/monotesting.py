@@ -14,7 +14,12 @@ import getopt
 import traceback
 import getpass
 import pdb
-from time import time as clock
+
+if sys.platform == "win32":
+    from time import clock
+else:
+    from time import time as clock
+
 from testopia import Testopia
 
 import ConfigParser
@@ -381,6 +386,7 @@ def monotesting_main(_usexsp2=False):
     __loadConfFile()
     __loadargs(args)
     __loadCredentials()
+    start = clock()
     __testTestopiaConn()
     __setUrls()
     __check_args()
@@ -389,11 +395,10 @@ def monotesting_main(_usexsp2=False):
     if verbose:
         sys.argv.append('-v')
 
-    start = clock()
     r = monoTestRunner.runAllTests()
 
     etime = clock() - start
-    print "Time: %dm %ds\n" % (etime / 60, etime % 60)
+    print "Time: %dh %dm %ds\n" % (etime / 3600, (etime % 3600) / 60, etime % 60)
 
 
 #----------------------------------------------------------------------
