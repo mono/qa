@@ -395,14 +395,14 @@ class vmware_automated_tests(unittest.TestCase):
         actualOptions = open("/proc/cmdline","r").read().split()
         expectedOptions.sort()
         actualOptions.sort()
-        self.assertEqual(str(actualOptions), str(expectedOptions))
+        self.assertEqual(actualOptions, expectedOptions)
 
     def testVpcKernelCommandLine(self):
         expectedOptions = ["vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
         actualOptions = open("/proc/cmdline","r").read().split()
         expectedOptions.sort()
         actualOptions.sort()
-        self.assertEqual(str(actualOptions), str(expectedOptions))
+        self.assertEqual(actualOptions, expectedOptions)
 
 
 if __name__ == "__main__":
