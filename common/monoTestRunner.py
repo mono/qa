@@ -71,20 +71,25 @@ def runAllTests():
     except KeyboardInterrupt:
         print "\n ** Aborting test run **"
 
-    if len(results.errors) > 0:
+    resFailures = len(results.failures)
+    resErrors = len(results.errors)
+    resPassed = results.testsRun - (resFailures + resErrors)
+
+    if resErrors > 0:
         print '-' * 80
         print '   ERRORS'
         for e in results.errors:
             print e[1]
 
-    if len(results.failures) > 0:
+    if resFailures > 0:
         print '-' * 80
         print '   FAILURES'
         for f in results.failures:
             print f[1]
 
-    print "\n%12s:%3s" % ('Errors',len(results.errors))
-    print "%12s:%3s" % ('Failures',len(results.failures))
+    print "\n%12s:%3s" % ('Passed',resPassed)
+    print "%12s:%3s" % ('Errors',resErrors)
+    print "%12s:%3s" % ('Failures',resFailures)
     print "%12s:%3s" % ('Skipped',skipped)
     print "%12s:%3s\n" % ('Tests run',results.testsRun)
 
