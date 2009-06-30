@@ -14,13 +14,9 @@ import getopt
 import traceback
 import getpass
 import pdb
+from time import time as clock
 
-if sys.platform == "win32":
-    from time import clock
-else:
-    from time import time as clock
-
-from testopia import Testopia
+from monoTestopia import monoTestopia as Testopia
 
 import ConfigParser
 import monoTestRunner
@@ -51,6 +47,13 @@ logfile = None
 usexsp2 = False
 username = None
 password = None
+failed = False
+
+###############################################################
+# Testopia connection info
+testopia_url = 'apibugzilla.novell.com'
+testopia_ssl = True
+testopia_port = None
 
 
 colors = {
@@ -83,7 +86,8 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'username=':'Username to login to Testopia',
         'password=':'Password to login to Testopia',
         'logfile=':'Write debug output to this file',
-        'usexsp2':'Use xsp2 port'}
+        'usexsp2':'Use xsp2 port',
+        'failed':'Only run failed tests'}
 
 #----------------------------------------------------------------------
 def __loadargs(cmdargs):
@@ -92,7 +96,7 @@ def __loadargs(cmdargs):
     global rc_server,rc_port,rc_browser
     global graffiti_port, apache_port, verbose, logfile
     global usexsp2
-    global username,password
+    global username,password,failed
 
     longargs = value_args.keys()
     shortargs = 'hvu:p:'
@@ -139,6 +143,8 @@ def __loadargs(cmdargs):
         elif o in ('--help','-h'):
             __usage()
             sys.exit(0)
+        elif o == '--failed':
+            failed = True
 
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
         xsp2_url = "%s:%s" % (base_url,xsp2_port)
@@ -152,29 +158,9 @@ def __loadargs(cmdargs):
 
 #----------------------------------------------------------------------
 def __testTestopiaConn():
-    '''mytestopia is set to None if the creds are invalid or if testrunid is None'''
-
-    # TODO: better test to check if the test run is STOPPED?
-    # That would check the creds and see if the test run could/should be modified.
-    # That way we don't muck up our historical data
-
-    global testrunid,myTestopia
-    host='apibugzilla.novell.com'
-    ssl=True
-    port = None
-    myTestopia = None
-
-    if testrunid != None:
-        print "\nConnecting to Testopia...",
-        myTestopia = Testopia(username=username,password=password,host=host,ssl=ssl,port=port)
-        version = myTestopia.testopia_api_version()
-        if version == None:
-            print "XMLRPC error: Check your credentials"
-            myTestopia = None
-        else:
-            print "ok"
-    if testrunid == None or myTestopia == None:
-        print "Skipping Testopia syncing"
+    global myTestopia
+    myTestopia = Testopia(username=username,password=password,host=testopia_url,ssl=testopia_ssl,testrunid=testrunid)
+    myTestopia.testConnection()
 
 #----------------------------------------------------------------------
 def __getCommonDir():
@@ -356,21 +342,6 @@ def __check_args():
         sys.exit(1)
 
 #----------------------------------------------------------------------
-def __flattenTestSuite(suite):
-    '''This function takes a test suite and looks at each element which may
-       be a test suite or a test case. If it's another test suite, it takes 
-       test cases in it and adds it to the parent test suite.
-    '''
-    new_suite = unittest.TestSuite()
-    for e in suite:
-        if issubclass(e.__class__,unittest.TestSuite):
-            new_e = __flattenTestSuite(e)
-            new_suite.addTests(new_e)
-        else:
-            new_suite.addTest(e)
-    return new_suite
-
-#----------------------------------------------------------------------
 def __printColor(msg,color):
     print '%s%s%s' % (colors[color],msg,colors['norm'])
 
@@ -395,10 +366,16 @@ def monotesting_main(_usexsp2=False):
     if verbose:
         sys.argv.append('-v')
 
-    r = monoTestRunner.runAllTests()
+    runner = monoTestRunner.monoTestRunner(runFailedOnly=failed)
+    results,aborted = runner.runAllTests()
+
+    if not aborted:
+        myTestopia.updateAllTestCases(results)
 
     etime = clock() - start
-    print "Time: %dh %dm %ds\n" % (etime / 3600, (etime % 3600) / 60, etime % 60)
+    print "\nTime: %dh %dm %ds\n" % (etime / 3600, (etime % 3600) / 60, etime % 60)
+
+    #print 'API calls: %d\n' % myTestopia.apicalls
 
 
 #----------------------------------------------------------------------

@@ -19,14 +19,11 @@ class seleniumTestCase(monoTestCase):
 
     def __init__(self,methodname='runTest'):
         monoTestCase.__init__(self,methodname)
-        #self.verificationErrors = []
+        self.verificationErrors = []
+        self.canRun = True # This value is deprecated
 
     def setUp(self):
         mono.log("Setting up test case %s" % self.testcaseid)
-        self.canRun = self.isTestCaseInTestRun()
-        if not self.canRun:
-            mono.log("   Test case #%d is not found in the test run.... skipping" % self.testcaseid)
-            return
 
         try:
             self.verificationErrors = []
@@ -38,14 +35,9 @@ class seleniumTestCase(monoTestCase):
             mono.log('-'*60)
             mono.log(traceback.print_exc(file=sys.stdout))
             mono.log('-'*60)
-            self.updateTestCase([('setUp: ' + str(e))])
             raise e
 
     def tearDown(self):
-        #print self.failureException
-        if not self.canRun:
-            return
         self.selenium.stop()
-        self.updateTestCase(self.verificationErrors)
         self.assertEqual([], self.verificationErrors)
 
