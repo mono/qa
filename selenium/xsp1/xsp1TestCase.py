@@ -10,11 +10,7 @@ basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 sys.path.append(basepath)
 
 import common.monotesting as mono
-from common.monotesting import log
-from common.monoTestCase import monoTestCase
 from selenium.seleniumTestCase import seleniumTestCase
-
-log("sys.path = %s" % (str(sys.path)))
 
 ####################################################################
 #
