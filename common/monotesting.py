@@ -166,10 +166,8 @@ def __testTestopiaConn():
 def __getCommonDir():
     '''Returns the absolute path of trunk/qa/common directory'''
 
-    prefix = os.getcwd()
-    for dir in  __file__.split('/')[:-1]: # this is the path of monotesting.py
-        prefix = os.path.join(prefix,dir)
-    return os.path.normpath(prefix)
+    dir = os.path.join(os.getcwd(),os.path.dirname(__file__))
+    return os.path.normpath(dir)
 
 
 #----------------------------------------------------------------------
