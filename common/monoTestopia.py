@@ -67,7 +67,7 @@ class monoTestopia(Testopia):
     def isTestCaseInTestRun(self,testcaseid):
         '''Returns true if the test case is in the test run'''
 
-        if self.canConnect == False:
+        if not self.canConnect:
             return True # return true so the test case is run, regardless of testopia
 
         return testcaseid in self.testcaseids
@@ -78,7 +78,7 @@ class monoTestopia(Testopia):
 
     #--------------------------------------------------------------------------------
     def hasTestCaseFailed(self,testcaseid):
-        if self.canConnect == False:
+        if not self.canConnect:
             return True # return true so the test case is run, regardless of testopia
 
         return testcaseid in self.failed_testcaseids
@@ -86,6 +86,8 @@ class monoTestopia(Testopia):
 
     #--------------------------------------------------------------------------------
     def updateAllTestCases(self,results):
+        if not self.canConnect:
+            return
         # results = {'failed': [], 'errors': [], 'passed': [837262, 426296]}
         tresults = {'passed':results['passed'],'failed':results['failed'].extend(results['errors'])}
 
@@ -98,6 +100,8 @@ class monoTestopia(Testopia):
 
     #--------------------------------------------------------------------------------
     def updateTestCase(self,testcaseid,status,errorsList=None):
+        if not self.canConnect:
+            return
         print "Updating failed test case %d" % testcaseid
 
         tr = self.testrun
