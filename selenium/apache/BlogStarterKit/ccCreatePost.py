@@ -35,16 +35,23 @@ class BlogStarterKit_cc_CreatePost(apacheTestCase):
             sel.select("ctl00_Content_PostForm_CategoryDropDown", "label=Technology")
             sel.click("ctl00_Content_PostForm_SaveButton")
             sel.wait_for_page_to_load("30000")
+            for i in range(60):
+                try:
+                    if sel.is_element_present("//div[@id='ContentContainer']/h1"): break
+                except: pass
+                time.sleep(1)
             self.assertEqual("Posts", sel.get_text("//div[@id='ContentContainer']/h1"))
             sel.click("ctl00_HomeLink")
             sel.wait_for_page_to_load("30000")
+	    for i in range(60):
+                try:
+                    if sel.is_element_present("ctl00_Content_BlogPosts_ctl00_TitleLink"): break
+                except: pass
+                time.sleep(1)
+	    print("2")
             sel.click("ctl00_Content_BlogPosts_ctl00_TitleLink")
-            self.failUnless(sel.is_element_present("//*[@id=\"ctl00_Content_BlogPosts_ctl00_TitleLink\"]"))
+	    sel.wait_for_page_to_load("30000")
             self.failUnless(sel.is_text_present("This is a summary of how Mono took over the world"))
-            #sel.click("ctl00_Content_BlogPosts_ctl00_TitleLink")
-            #sel.wait_for_page_to_load("30000")
-            #self.failUnless(sel.is_element_present("//html/body/form/div[2]/div[3]/h2"))
-            #time.sleep(30)
         except Exception,e:
             self.verificationErrors.append(str(e))
 
