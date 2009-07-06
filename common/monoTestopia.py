@@ -92,7 +92,9 @@ class monoTestopia(Testopia):
         tresults = {'passed':results['passed'],'failed':results['failed'].extend(results['errors'])}
 
         if len(results['passed']) > 0:
-            self.testcaserun_update(caserun_ids=results['passed'],case_run_status_id=BUG_STATUS['PASSED'])
+            print "Updating %d PASSED test cases" % len(results['passed'])
+            ids = self.__convertToTestCaseRunIds(results['passed'])
+            self.testcaserun_update(caserun_ids=ids,case_run_status_id=BUG_STATUS['PASSED'])
 
         for key in results.keys():
             if type(key) is int:
