@@ -24,11 +24,12 @@ from filelist import *
 class macosTestCase(monoTestCase):
     testcaseid = 0
 
-    def __printResults(self,missing,title):
+    def __printResults(self,tmpfiles,filetype,expected=True):
+        expected = "%s" % (['Unexpected','Missing'][expected])
         print ''
-        for f in missing:
-            print "   Missing %s: %s" % (title,f)
-        self.assertEqual(0,len(missing),"%d missing %ss"% (len(missing),title))
+        for f in tmpfiles:
+            print "   %s %s: %s" % (expected,filetype,f)
+        self.assertEqual(0,len(tmpfiles),"%d %s %ss"% (len(tmpfiles),expected.lower(),filetype))
 
     def testFiles(self):
         missing = []
@@ -52,19 +53,25 @@ class macosTestCase(monoTestCase):
         self.__printResults(missing,'symlink')
 
     def testBadFiles(self):
+        unexpected = []
         for f in badfiles:
             if os.path.isfile(f):
-                self.fail("Existing BAD file: %s" % f)
+                unexpected.append(f)
+        self.__printResults(unexpected,'file',expected=False)
 
     def testBadDirs(self):
+        unexpected = []
         for d in baddirs:
             if os.path.isdir(d):
-                self.fail("Existing BAD dir: %s" % d)
+                unexpected.append(d)
+        self.__printResults(unexpected,'dir',expected=False)
 
     def testBadSymLinks(self):
+        unexpected = []
         for l in badsymlinks:
             if os.path.islink(l):
-                self.fail("Existing BAD symlink: %s" % l)
+                unexpected.append(l)
+        self.__printResults(unexpected,'symlink',expected=False)
 
 if __name__ == '__main__':
     mono.monotesting_main()
