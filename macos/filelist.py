@@ -242,10 +242,10 @@ symlinks = [
 
 
 # These files/dirs/links should NOT exist
-baddirs = [
+unexpecteddirs = [
     os.path.join(basepath,'usr')
 ]
-badfiles = [
+unexpectedfiles = [
     '/Library/Frameworks/Mono.framework/Commands/cilc',
     '/Library/Frameworks/Mono.framework/Commands/gapi2-codegen',
     '/Library/Frameworks/Mono.framework/Commands/gapi2-fixup',
@@ -256,7 +256,7 @@ badfiles = [
     '/Library/Frameworks/Mono.framework/Commands/mjs',
 
 ]
-badsymlinks = [
+unexpectedsymlinks = [
     '/usr/bin/cilc',
     '/usr/bin/gapi2-codegen',
     '/usr/bin/gapi2-fixup',
