@@ -5,7 +5,7 @@ basepath = '/Library/Frameworks/Mono.framework/Versions/Current'
 files = [
     os.path.join(basepath,'bin','vbnc'),
     os.path.join(basepath,'lib','mono','2.0','Microsoft.VisualBasic.dll'),
-    os.path.join(basepath,'share','man','man1','vbnc.1'),
+    os.path.join(basepath,'share','man','man1','vbnc.1.gz'),
     '/Library/Frameworks/Mono.framework/Commands/al',
     '/Library/Frameworks/Mono.framework/Commands/al1',
     '/Library/Frameworks/Mono.framework/Commands/al2',
