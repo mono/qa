@@ -21,7 +21,8 @@ class HtmlControls_HtmlInputRadioButton(xsp1TestCase):
             if not mono.usexsp2:
                 self.assertEqual("One\n Two\n Three\n One bis\n Two bis", sel.get_text("_ctl1"))
             else:
-                self.assertEqual("//<![CDATA[ var theForm; if (document.getElementById) { theForm = document.getElementById ('ctl01'); } else { theForm = document.ctl01; } //]]> \n One\n Two\n Three\n One bis\n Two bis", sel.get_text("ctl01"))
+                #self.assertEqual("//<![CDATA[ var theForm; if (document.getElementById) { theForm = document.getElementById ('ctl01'); } else { theForm = document.ctl01; } //]]> \n One\n Two\n Three\n One bis\n Two bis", sel.get_text("ctl01"))
+                self.assertEqual("One\n Two\n Three\n One bis\n Two bis", sel.get_text("ctl01"))
             self.failUnless(sel.is_checked("//*[@id=\"rb3\"]"))
             sel.click("rb1")
             self.failIf(sel.is_checked("//*[@id=\"rb3\"]"))
