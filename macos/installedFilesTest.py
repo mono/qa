@@ -25,6 +25,7 @@ class macosTestCase(monoTestCase):
     testcaseid = 0
 
     def __printResults(self,missing,title):
+        print ''
         for f in missing:
             print "   Missing %s: %s" % (title,f)
         self.assertEqual(0,len(missing),"%d missing %ss"% (len(missing),title))
