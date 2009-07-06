@@ -129,7 +129,7 @@ dirs = [
     os.path.join(basepath,'bin'),
     os.path.join(basepath,'share'),
     os.path.join(basepath,'etc'),
-    os.path.join(basepath,'inclue'),
+    os.path.join(basepath,'include'),
     os.path.join(basepath,'Resources'),
     os.path.join(basepath,'lib','mono','gac','Microsoft.VisualBasic')
 ]
@@ -262,8 +262,25 @@ baddirs = [
     os.path.join(basepath,'usr')
 ]
 badfiles = [
+    '/Library/Frameworks/Mono.framework/Commands/cilc',
+    '/Library/Frameworks/Mono.framework/Commands/gapi2-codegen',
+    '/Library/Frameworks/Mono.framework/Commands/gapi2-fixup',
+    '/Library/Frameworks/Mono.framework/Commands/gapi2-parser',
+    '/Library/Frameworks/Mono.framework/Commands/ikvm',
+    '/Library/Frameworks/Mono.framework/Commands/ikvmc',
+    '/Library/Frameworks/Mono.framework/Commands/ikvmstub',
+    '/Library/Frameworks/Mono.framework/Commands/mjs',
+
 ]
 badsymlinks = [
+    '/usr/bin/gapi2-codegen',
+    '/usr/bin/gapi2-fixup',
+    '/usr/bin/gapi2-parser',
+    '/usr/bin/ikvm',
+    '/usr/bin/ikvmc',
+    '/usr/bin/ikvmstub',
+    '/usr/bin/mjs',
+
 ]
 
 
