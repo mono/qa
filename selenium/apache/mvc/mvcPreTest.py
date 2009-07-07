@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class mvcPreTest(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 872669
     def test(self):
         if not self.canRun:
             return
