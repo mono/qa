@@ -24,8 +24,12 @@ class ClugWebSite_bb_CreateEvent(apacheTestCase):
             sel.wait_for_page_to_load("30000")
             sel.type("ctl00_ContentPlaceHolder1_FormView1_titleTextBox", "Mono Summit in Down Under")
             sel.select("ctl00_ContentPlaceHolder1_FormView1_LocationPicker1_locationselect", "label=New Zealand")
+            for i in range(60):
+                try:
+                    if sel.is_element_present("//option[@value='1']"): break
+                except: pass
+                time.sleep(1)
             sel.click("//option[@value='1']")
-            sel.wait_for_page_to_load("30000")
             sel.type("ctl00_ContentPlaceHolder1_FormView1_descriptionTextBox", "The conference will be held this year in New Zealand, land where J R R Tolkien's novels of heroism, bravery, ultimate quests and triumph of good over evil were portrayed on the silver screen. Much hacking will be done.")
             sel.click("//*[@id=\"ctl00_ContentPlaceHolder1_FormView1_apply1\"]")
             sel.wait_for_page_to_load("30000")
