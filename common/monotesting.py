@@ -365,9 +365,9 @@ def monotesting_main(_usexsp2=False):
         sys.argv.append('-v')
 
     runner = monoTestRunner.monoTestRunner(runFailedOnly=failed)
-    results,aborted = runner.runAllTests()
+    runner.runAllTests()
 
-    myTestopia.updateAllTestCases(results)
+    #myTestopia.updateAllTestCases(results)
 
     etime = clock() - start
     print "\nTime: %dh %dm %ds\n" % (etime / 3600, (etime % 3600) / 60, etime % 60)

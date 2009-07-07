@@ -1,6 +1,7 @@
 
 from testopia import Testopia
 import types
+from threading import Thread
 
 BUG_STATUS = {'IDLE':1,
             'PASSED':2,
@@ -9,6 +10,42 @@ BUG_STATUS = {'IDLE':1,
             'PAUSED':5,
             'BLOCKED':6
             }
+
+#--------------------------------------------------------------------------------------
+class monoTestopiaThread(Thread):
+    def __init__(self,myTestopia,testcaseid,status,errorsList=None):
+        Thread.__init__(self)
+        self.myTestopia = myTestopia
+        self.testcaseid = testcaseid
+        self.status = status.upper()
+        self.errorsList = errorsList
+
+    def run(self):
+        tr = self.myTestopia.testrun
+        #print "THREAD %d: updating Testopia" % self.testcaseid
+
+        if self.errorsList == None or len(self.errorsList) == 0:
+            self.myTestopia.testcaserun_update_alt(
+                    run_id=tr['run_id'],
+                    case_id=self.testcaseid,
+                    build_id=tr['build_id'],
+                    environment_id=tr['environment_id'],
+                    case_run_status_id=BUG_STATUS[self.status])
+        else:
+            for (i,e) in enumerate(self.errorsList):
+                e = e.replace('\'','\"')
+                msg = '''[%d]: %s''' % (i,e)
+                self.myTestopia.testcaserun_update_alt(
+                    run_id=tr['run_id'],
+                    case_id=self.testcaseid,
+                    build_id=tr['build_id'],
+                    environment_id=tr['environment_id'],
+                    case_run_status_id=BUG_STATUS[self.status],
+                    notes=msg)
+        #print "THREAD %d: finished" % self.testcaseid
+
+
+#--------------------------------------------------------------------------------------
 
 class monoTestopia(Testopia):
     def __init__(self,username,password,host,ssl,testrunid):
@@ -20,6 +57,7 @@ class monoTestopia(Testopia):
 
         self.canConnect = False
         self.apicalls = 0
+        self.threadlist = []
 
     #--------------------------------------------------------------------------------
     def __getData(self):
@@ -83,6 +121,12 @@ class monoTestopia(Testopia):
 
         return testcaseid in self.failed_testcaseids
 
+    #--------------------------------------------------------------------------------
+    def updateTestCasesList(self,ids,status):
+        status = status.upper()
+        print "Updating %d %s test cases" % (len(ids),status)
+        ids = self.__convertToTestCaseRunIds(ids)
+        self.testcaserun_update(caserun_ids=ids,case_run_status_id=BUG_STATUS[status])
 
     #--------------------------------------------------------------------------------
     def updateAllTestCases(self,results):
@@ -92,9 +136,7 @@ class monoTestopia(Testopia):
         tresults = {'passed':results['passed'],'failed':results['failed'].extend(results['errors'])}
 
         if len(results['passed']) > 0:
-            print "Updating %d PASSED test cases" % len(results['passed'])
-            ids = self.__convertToTestCaseRunIds(results['passed'])
-            self.testcaserun_update(caserun_ids=ids,case_run_status_id=BUG_STATUS['PASSED'])
+            self.updateTestCasesList(results['passed'],'PASSED')
 
         for key in results.keys():
             if type(key) is int:
@@ -129,6 +171,17 @@ class monoTestopia(Testopia):
                     notes=msg)
 
                 self.apicalls += 1
+
+    #--------------------------------------------------------------------------------
+    def updateTestCaseViaThread(self,testcaseid,status,errorsList=None):
+        curthread = monoTestopiaThread(self,testcaseid,status,errorsList=errorsList)
+        self.threadlist.append(curthread)
+        curthread.start()
+
+    def waitForThreads(self):
+        for curthread in self.threadlist:
+            curthread.join()
+
 
 
 #--------------------------------------------------------------------------------
