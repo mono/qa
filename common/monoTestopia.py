@@ -22,7 +22,7 @@ class monoTestopiaThread(Thread):
 
     def run(self):
         tr = self.myTestopia.testrun
-        print "THREAD %d: updating Testopia" % self.testcaseid
+        #print "THREAD %d: updating Testopia" % self.testcaseid
 
         if self.errorsList == None or len(self.errorsList) == 0:
             self.myTestopia.testcaserun_update_alt(
@@ -42,7 +42,7 @@ class monoTestopiaThread(Thread):
                     environment_id=tr['environment_id'],
                     case_run_status_id=BUG_STATUS[self.status],
                     notes=msg)
-        print "THREAD %d: finished" % self.testcaseid
+        #print "THREAD %d: finished" % self.testcaseid
 
 
 #--------------------------------------------------------------------------------------
@@ -142,8 +142,8 @@ class monoTestopia(Testopia):
             print "Updating %d %s test cases" % (len(ids),status)
             caserun_ids = self.__convertToTestCaseRunIds(ids)
             self.testcaserun_update(caserun_ids=caserun_ids,case_run_status_id=BUG_STATUS[status])
-        else:
-            print "Cannot update %d %s test cases" % (len(ids),status)
+        #else:
+        #    print "Cannot update %d %s test cases" % (len(ids),status)
 
     #--------------------------------------------------------------------------------
     def updateAllTestCases(self,results):

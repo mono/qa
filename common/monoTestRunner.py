@@ -53,10 +53,7 @@ class monoTestRunner():
         ids = []
         for t in testsuite:
             ids.append(t.testcaseid)
-        print ids
-
         runningIds = mono.myTestopia.filterTestCasesInRun(ids=ids)
-        print runningIds
         mono.myTestopia.updateTestCasesList(ids=runningIds,status='running')
 
 
