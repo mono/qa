@@ -22,7 +22,7 @@ class monoTestopiaThread(Thread):
 
     def run(self):
         tr = self.myTestopia.testrun
-        #print "THREAD %d: updating Testopia" % self.testcaseid
+        print "THREAD %d: updating Testopia" % self.testcaseid
 
         if self.errorsList == None or len(self.errorsList) == 0:
             self.myTestopia.testcaserun_update_alt(
@@ -42,7 +42,7 @@ class monoTestopiaThread(Thread):
                     environment_id=tr['environment_id'],
                     case_run_status_id=BUG_STATUS[self.status],
                     notes=msg)
-        #print "THREAD %d: finished" % self.testcaseid
+        print "THREAD %d: finished" % self.testcaseid
 
 
 #--------------------------------------------------------------------------------------
@@ -102,6 +102,20 @@ class monoTestopia(Testopia):
             print "Skipping Testopia syncing"
 
     #--------------------------------------------------------------------------------
+    def filterTestCasesInRun(self,ids):
+        '''This takes a list of possible testcases and filters out any that
+            are not in the testrun. Akin to isTestCaseInTestRun but for multiple ids'''
+        newids = []
+        if self.canConnect:
+            for id in ids:
+                if id in self.testcaseids:
+                    newids.append(id)
+        else:
+            newids = ids
+        return newids
+
+
+    #--------------------------------------------------------------------------------
     def isTestCaseInTestRun(self,testcaseid):
         '''Returns true if the test case is in the test run'''
 
@@ -123,10 +137,13 @@ class monoTestopia(Testopia):
 
     #--------------------------------------------------------------------------------
     def updateTestCasesList(self,ids,status):
-        status = status.upper()
-        print "Updating %d %s test cases" % (len(ids),status)
-        ids = self.__convertToTestCaseRunIds(ids)
-        self.testcaserun_update(caserun_ids=ids,case_run_status_id=BUG_STATUS[status])
+        if self.canConnect:
+            status = status.upper()
+            print "Updating %d %s test cases" % (len(ids),status)
+            caserun_ids = self.__convertToTestCaseRunIds(ids)
+            self.testcaserun_update(caserun_ids=caserun_ids,case_run_status_id=BUG_STATUS[status])
+        else:
+            print "Cannot update %d %s test cases" % (len(ids),status)
 
     #--------------------------------------------------------------------------------
     def updateAllTestCases(self,results):
@@ -174,9 +191,10 @@ class monoTestopia(Testopia):
 
     #--------------------------------------------------------------------------------
     def updateTestCaseViaThread(self,testcaseid,status,errorsList=None):
-        curthread = monoTestopiaThread(self,testcaseid,status,errorsList=errorsList)
-        self.threadlist.append(curthread)
-        curthread.start()
+        if self.canConnect:
+            curthread = monoTestopiaThread(self,testcaseid,status,errorsList=errorsList)
+            self.threadlist.append(curthread)
+            curthread.start()
 
     def waitForThreads(self):
         for curthread in self.threadlist:

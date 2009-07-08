@@ -45,6 +45,21 @@ class monoTestRunner():
                 print "    %s" % t.__class__.__name__
                 newsuite.addTest(t)
         return newsuite
+
+    #----------------------------------------------------------------------
+    def setTestCasesToRunning(self,testsuite):
+        print "Setting test cases to running"
+
+        ids = []
+        for t in testsuite:
+            ids.append(t.testcaseid)
+        print ids
+
+        runningIds = mono.myTestopia.filterTestCasesInRun(ids=ids)
+        print runningIds
+        mono.myTestopia.updateTestCasesList(ids=runningIds,status='running')
+
+
     #----------------------------------------------------------------------
     def runAllTests(self):
         '''Runs the tests are returns a dict of lists of passed and failed tests '''
@@ -58,6 +73,8 @@ class monoTestRunner():
         testsuite = self.__flattenTestSuite(testsuite)
         if self.runFailedOnly:
             testsuite = self.filterForFailedTestCases(testsuite)
+
+        self.setTestCasesToRunning(testsuite)
 
         print "\nRunning %d tests\n" % testsuite.countTestCases()
         totalCount = testsuite.countTestCases()
