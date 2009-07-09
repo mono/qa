@@ -15,6 +15,7 @@ Things to do for complete automated testing of asp.net:
      * Add cmd that will only re-run failed tests in the test run
      * Added cmd line option that will set isautomated=True in Testopia on all test cases that are run
      * Implement logging module for better debug output
+     * Change the framework to not require "port" and "base_url" to be set. That's only applicable for selenium.
 
 
 BUGS
