@@ -55,3 +55,8 @@ class vmImageTestCase(monoTestCase):
     def getActiveSwapSize(self):
         cmdOut = helpers.executeCmd("free -m")
         return int(cmdOut[3].split()[1])
+
+    def areRepoRefreshesOff(self):
+        cmdOut = helpers.executeCmd("zypper lr")[2:-1]
+        for curRefresh in cmdOut:
+            self.assertEqual(curRefresh.split()[-1], "No")
