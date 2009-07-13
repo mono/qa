@@ -51,7 +51,7 @@ class vmImageTestCase(monoTestCase):
 
     def getFileSize(self, filePath):
         statinfo = os.stat(filepath)
-        return statinfo.st_size
+        return int(statinfo.st_size)
 
     def getActiveSwapSize(self):
         cmdOut = helpers.executeCmd("free -m")
