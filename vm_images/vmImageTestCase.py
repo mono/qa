@@ -1,5 +1,6 @@
 # vim:ts=4:expandtab:
 import sys
+import os
 import unittest
 import traceback
 import pdb
@@ -49,8 +50,8 @@ class vmImageTestCase(monoTestCase):
         self.assertEqual([], self.verificationErrors)
 
     def getFileSize(self, filePath):
-        cmdOut = helpers.executeCmd("ls -l " + filePath)
-        return int(cmdOut[0].split()[4])
+        statinfo = os.stat(filepath)
+        return statinfo.st_size
 
     def getActiveSwapSize(self):
         cmdOut = helpers.executeCmd("free -m")
