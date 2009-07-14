@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://c544/" />
+<title>bbCreateSoryTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">bbCreateSoryTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/blogengine/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_UserName</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_Password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphBody_Login1_LoginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//html/body/form/div[3]/div/div[2]/div/ul/li/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_txtTitle</td>
+	<td>Mono Story</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphAdmin_cbUseRaw</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_txtRawContent</td>
+	<td>&lt;p&gt;This is a story about Mono&lt;/p&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphAdmin_btnSave</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Mono Story</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Mono Story</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is a story about Mono</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAlert</td>
+	<td>Your rating has been registered. Thank you!</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

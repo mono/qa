@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>0800_createStoryAsMonoUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0700_createStoryAsMonoUser</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/blogengine/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_UserName</td>
+	<td>mono user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_Password</td>
+	<td>mono</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphBody_Login1_LoginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//ul[@id='ctl00_42fcbe7c2c9c440abad965a94472fccc_uxMenu_ulMenu']/li[1]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_txtTitle</td>
+	<td>Mono Story 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_txtRawContent</td>
+	<td>&lt;p&gt;This is a story by mono user&lt;p&gt;<br /></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_txtRawContent</td>
+	<td>&lt;p&gt;This is a story by mono user&lt;p&gt;<br />&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie justo a augue facilisis interdum. Sed sollicitudin lobortis dapibus. Suspendisse vitae urna urna, et posuere turpis! Nulla sed erat dui, eget interdum odio. Nullam id tortor et elit volutpat vulputate ac sit amet odio. Proin nisl est, pretium non dapibus id, vestibulum sed orci. Mauris lobortis diam eu mi pulvinar ut vehicula velit convallis. Quisque malesuada porttitor ante ut porta! Nunc magna ipsum, lobortis vitae luctus eu, varius et quam! Sed non metus imperdiet massa aliquam tristique sit amet auctor lacus. Maecenas sollicitudin varius aliquet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin non ipsum metus, vel elementum quam! Sed interdum metus pharetra elit accumsan sit amet semper purus auctor. Nunc eget dolor ac nibh molestie iaculis in at mi. Nunc velit nisl, venenatis at tempus id, adipiscing et ligula. Aliquam erat volutpat. Mauris eget commodo erat.&lt;/p&gt;</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphAdmin_btnSave</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Mono Story 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>This is a story by mono user</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer molestie justo a augue facilisis interdum. Sed sollicitudin lobortis dapibus. Suspendisse vitae urna urna, et posuere turpis! Nulla sed erat dui, eget interdum odio. Nullam id tortor et elit volutpat vulputate ac sit amet odio. Proin nisl est, pretium non dapibus id, vestibulum sed orci. Mauris lobortis diam eu mi pulvinar ut vehicula velit convallis. Quisque malesuada porttitor ante ut porta! Nunc magna ipsum, lobortis vitae luctus eu, varius et quam! Sed non metus imperdiet massa aliquam tristique sit amet auctor lacus. Maecenas sollicitudin varius aliquet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin non ipsum metus, vel elementum quam! Sed interdum metus pharetra elit accumsan sit amet semper purus auctor. Nunc eget dolor ac nibh molestie iaculis in at mi. Nunc velit nisl, venenatis at tempus id, adipiscing et ligula. Aliquam erat volutpat. Mauris eget commodo erat.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

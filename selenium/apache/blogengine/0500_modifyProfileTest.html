@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>0500_modifyProfileTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">0500_modifyProfileTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/blogengine/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_UserName</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_Password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphBody_Login1_LoginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//ul[@id='ctl00_42fcbe7c2c9c440abad965a94472fccc_uxMenu_ulMenu']/li[8]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>ctl00_cphAdmin_ddlUserList</td>
+	<td>label=mono user</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphAdmin_lbChangeUserProfile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbDisplayName</td>
+	<td>Mono User</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbFirstName</td>
+	<td>Rupert</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbMiddleName</td>
+	<td>The</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbLastName</td>
+	<td>Monkey</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbEmailAddress</td>
+	<td>mono@example.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbCityTown</td>
+	<td>Provo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbRegionState</td>
+	<td>Utah</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_tbCompany</td>
+	<td>Novell</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='ctl00_cphAdmin_tbAboutMe_TinyMCE1_txtContent_code']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>htmlSource</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>htmlSource</td>
+	<td>I am a Code Monkey</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>insert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphAdmin_lbSaveProfile</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
