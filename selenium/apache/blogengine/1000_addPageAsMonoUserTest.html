@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>1000_addPageAsMonoUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">1000_addPageAsMonoUser</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/blogengine/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_UserName</td>
+	<td>mono user</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphBody_Login1_Password</td>
+	<td>mono</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphBody_Login1_LoginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//ul[@id='ctl00_42fcbe7c2c9c440abad965a94472fccc_uxMenu_ulMenu']/li[4]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ctl00_cphAdmin_txtTitle</td>
+	<td>Mono Page</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@id='ctl00_cphAdmin_txtContent_TinyMCE1_txtContent_code']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>htmlSource</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>htmlSource</td>
+	<td>&lt;p&gt;Aliquam nec justo nec nulla congue tempus. Aliquam eu egestas lorem. Nullam nec lectus sit amet risus tempus mattis id non eros. In orci lacus, porta a ultrices sed, hendrerit in velit. Vestibulum dignissim arcu id nibh ullamcorper accumsan? Suspendisse consectetur pretium elit nec ullamcorper. Aenean et mauris ac dui accumsan tempus vitae nec tortor. Aenean nec neque elit. Nunc pharetra; nulla eu laoreet vulputate, arcu dui mattis velit, et ultrices quam nunc a mi. Nullam tincidunt felis in purus tempus et aliquam metus dignissim? Sed ipsum velit, mollis vel pretium at, rhoncus vel neque. Maecenas euismod iaculis quam vel adipiscing. Cras laoreet consequat mi ac dapibus? Nunc condimentum accumsan velit. Duis adipiscing ultricies mi, non elementum nunc consequat ut. Sed varius tortor id arcu faucibus eget vehicula tortor dignissim. Vivamus ullamcorper, velit vitae rutrum bibendum, neque sapien dictum lorem, a luctus tellus dolor vel eros. Donec turpis lacus, hendrerit non bibendum vitae, dignissim ut ligula. Sed consectetur congue ornare? Praesent sit amet libero nec turpis consectetur scelerisque.&lt;/p&gt;<br />&lt;p&gt;Nam a gravida eros. Fusce eu tincidunt libero. Maecenas vel elit sit amet nunc scelerisque vehicula ut quis massa. Mauris euismod lectus a quam adipiscing congue. Sed fringilla ullamcorper nisi aliquet rhoncus. Donec tortor tortor, adipiscing eget imperdiet a, ultrices vel odio? Etiam dictum condimentum enim sed dictum. Nullam ullamcorper neque eget libero sollicitudin pulvinar? Maecenas in risus justo. Aenean sed nunc tortor. Etiam molestie, massa bibendum tristique pretium, nisl metus lacinia libero, vitae pretium mauris lectus varius elit. Aenean viverra mattis adipiscing. Curabitur a eleifend enim.&lt;/p&gt;<br />&lt;p&gt;In molestie leo scelerisque felis consequat rhoncus. Donec felis est, cursus at varius pretium, molestie non libero. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis hendrerit rutrum elit, at eleifend magna gravida et. Nulla malesuada facilisis massa, sed dignissim turpis posuere a. In ut elementum turpis? Cras viverra, metus eu ultricies lobortis, leo est congue libero, viverra pellentesque magna ante non eros! Nam faucibus erat facilisis sapien lobortis accumsan. Duis condimentum sapien ut odio volutpat ac rutrum nibh adipiscing. Aliquam ut nulla neque. Nullam vel massa eros.&lt;/p&gt;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>insert</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>ctl00_cphAdmin_btnSave</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Mono Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Mono Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Aliquam nec justo nec nulla congue tempus. Aliquam eu egestas lorem. Nullam nec lectus sit amet risus tempus mattis id non eros. In orci lacus, porta a ultrices sed, hendrerit in velit. Vestibulum dignissim arcu id nibh ullamcorper accumsan? Suspendisse consectetur pretium elit nec ullamcorper. Aenean et mauris ac dui accumsan tempus vitae nec tortor. Aenean nec neque elit. Nunc pharetra; nulla eu laoreet vulputate, arcu dui mattis velit, et ultrices quam nunc a mi. Nullam tincidunt felis in purus tempus et aliquam metus dignissim? Sed ipsum velit, mollis vel pretium at, rhoncus vel neque. Maecenas euismod iaculis quam vel adipiscing. Cras laoreet consequat mi ac dapibus? Nunc condimentum accumsan velit. Duis adipiscing ultricies mi, non elementum nunc consequat ut. Sed varius tortor id arcu faucibus eget vehicula tortor dignissim. Vivamus ullamcorper, velit vitae rutrum bibendum, neque sapien dictum lorem, a luctus tellus dolor vel eros. Donec turpis lacus, hendrerit non bibendum vitae, dignissim ut ligula. Sed consectetur congue ornare? Praesent sit amet libero nec turpis consectetur scelerisque.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>ctl00_aLogin</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
