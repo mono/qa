@@ -81,6 +81,7 @@ class monoTestRunner():
         try:
             for i,t in enumerate(testsuite):
                 print "Running %d of %d: %s ..." % ( i+1, totalCount, t.id()),
+                sys.stdout.flush()
                 failures = len(results.failures)
                 errors = len(results.errors)
                 status = ''
