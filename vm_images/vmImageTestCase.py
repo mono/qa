@@ -50,7 +50,7 @@ class vmImageTestCase(monoTestCase):
         self.assertEqual([], self.verificationErrors)
 
     def getFileSize(self, filePath):
-        statinfo = os.stat(filepath)
+        statinfo = os.stat(filePath)
         return int(statinfo.st_size)
 
     def getActiveSwapSize(self):
