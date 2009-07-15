@@ -61,3 +61,7 @@ class vmImageTestCase(monoTestCase):
         cmdOut = helpers.executeCmd("zypper lr")[2:-1]
         for curRefresh in cmdOut:
             self.assertEqual(curRefresh.split()[-1], "No")
+
+    def canReposRefresh(self):
+        cmdOut = helpers.executeCmd("zypper ref")[-2].strip()
+        self.assertEqual(cmdOut, "All repositories have been refreshed.")
