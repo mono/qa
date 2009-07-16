@@ -9,6 +9,7 @@ from common.monotesting import *
 
 from all.alltests import *
 
+# Depending on your OS, import the proper subdirectory
 if os.path.exists('C:'):
     print "Importing Win32 tests"
     from win32.alltests import *
