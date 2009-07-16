@@ -18,7 +18,7 @@ elif os.uname()[0].lower() == 'linux':
     from linux.alltests import *
 elif os.uname()[0].lower() == 'darwin':
     print "Importing Mac OSX tests"
-    from macox.alltests import *
+    from macos.alltests import *
 
 
 if __name__ == '__main__':
