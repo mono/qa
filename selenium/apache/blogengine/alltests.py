@@ -15,6 +15,7 @@ from be_0800_createStoryAsMonoUserTest import *
 from be_0900_addBlogRollAsMonoUserTest import *
 from be_1000_addPageAsMonoUserTest import *
 from be_1100_ChangeUserProfileAsMonoUserTest import *
+from be_1200_cleanUpTest import *
 
 if __name__ == '__main__':
     monotesting_main()
