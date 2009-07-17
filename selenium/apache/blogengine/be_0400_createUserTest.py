@@ -6,7 +6,7 @@ sys.path.append('../../..')
 import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
-class aaCreateCategory(apacheTestCase):
+class be_0400_createUserTest(apacheTestCase):
     apacheTestCaseId = None
     def test(self):
         if not self.canRun:
@@ -23,13 +23,18 @@ class aaCreateCategory(apacheTestCase):
             sel.wait_for_page_to_load("30000")
             sel.click("//ul[@id='ctl00_42fcbe7c2c9c440abad965a94472fccc_uxMenu_ulMenu']/li[9]/a/span")
             sel.wait_for_page_to_load("30000")
-            if not sel.is_checked("//td/span[text()='mono user']/../parent::*/*[last()]/span[2]/input"):
-                sel.click("//td/span[text()='mono user']/../parent::*/*[last()]/span[2]/input")
-                sel.wait_for_page_to_load("30000")
+            sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_UserName", "mono user")
+            sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_Password", "mono")
+            sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_ConfirmPassword", "mono")
+            sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_Email", "mono@example.com")
+            sel.click("ctl00_cphAdmin_CreateUserWizard1_CustomNavContainer0_StepNextButtonButton")
+            sel.wait_for_page_to_load("30000")
             sel.click("link=Logout")
+            sel.wait_for_page_to_load("30000")
 
         except Exception,e:
             self.verificationErrors.append(str(e))
+
 
 if __name__ == "__main__":
     mono.monotesting_main()

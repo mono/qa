@@ -6,7 +6,7 @@ sys.path.append('../../..')
 import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
-class aaCreateCategory(apacheTestCase):
+class be_0800_createStoryAsMonoUserTestt(apacheTestCase):
     apacheTestCaseId = None
     def test(self):
         if not self.canRun:
