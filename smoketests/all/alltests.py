@@ -10,6 +10,7 @@ from gmcsTest import *
 from gmcs2Test import *
 from visualBasicTest import *
 from gacutilTest import *
+from pkgVersionsTest import *
 
 if __name__ == '__main__':
     monotesting_main()
