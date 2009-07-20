@@ -4,6 +4,7 @@ import sys,os
 import unittest
 import traceback
 import pdb
+import glob
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(filepath))
@@ -46,6 +47,27 @@ class smokeTestCase(monoTestCase):
     def checkFiles(self,list):
         self.checkList(list,os.path.isfile,'file',expected=True)
 
+    def checkListInWindows(self, dict, chkFunc):
+        for curDirGlob in dict.keys():
+            for curDir in glob.glob(curDirGlob):
+                # check that the expected files exist
+                for curFile in dict[curDirGlob]:
+                    for wholeFile in glob.glob(os.path.join(curDir, curFile)):
+                        self.assertTrue(chkFunc(wholeFile),"[%s] Not Found." % wholeFile)
+
+                # check that there aren't any unexpected files that exist
+                filesInDir = glob.glob(curDir + os.sep + "*")
+                for curFile in filesInDir:
+                    if chkFunc(curFile):
+                        fileNameOnly = os.path.basename(curFile)
+                        self.assertTrue(fileNameOnly in dict[curDirGlob], "[%s] unexpectedly exists." % curFile)
+
+    def checkFilesInWindows(self,fileDict):
+        self.checkListInWindows(fileDict, os.path.isfile)
+
+    def checkSymlinksInWindows(self,symlinksDict):
+        self.checkListInWindows(symlinksDict, os.path.islink)
+
     def checkDirs(self,list):
         self.checkList(list,os.path.isdir,'dir',expected=True)
 
@@ -61,6 +83,66 @@ class smokeTestCase(monoTestCase):
     def checkUnexpectedSymlinks(self,list):
         self.checkList(list,os.path.islink,'symlink',expected=False)
 
+def generateFileListInWindows(basepath):
+    files = {}
+    symlinks = {}
+    for curWalkDirEntries  in os.walk(basepath):
+        curWalkDir = curWalkDirEntries[0]
+        curWalkFiles = curWalkDirEntries[2]
+
+        filesInCurDir = []
+        linksInCurDir = []
+        for curFileInDir in curWalkFiles:
+            fullPath = os.path.join(curWalkDir, curFileInDir)
+            if os.path.isfile(fullPath):
+                filesInCurDir.append(curFileInDir)
+            elif os.path.islink(fullPath):
+                linksInCurDir.append(curFileInDir)
+            else:
+                raise Exception("%s is not a file or link" % fullPath)
+
+        files[curWalkDir] = filesInCurDir
+        symlinks[curWalkDir] = linksInCurDir
+
+    print "import os"
+    print "from glob import glob\n"
+    print "import sys"
+    print "sys.path.append(\"..\")"
+    print "import smokeTestCase\n"
+    print "basepath = glob(\"C:\\Program Files\\Mono-*\")[0]\n"
+    print "files = {",
+    for curKey in files.keys():
+        if len(files[curKey]) > 0:
+            newPathList = curKey.replace(basepath,"").split(os.path.sep)[1:]
+
+#            # make it so that the gac checks will pass, even if the gac UUID changes
+#            if "gac" in newPathList:
+#                newPathList[-1] = "*"
+
+            print "    os.path.join(basepath",
+            for curPath in newPathList:
+                print ", \"%s\"" % curPath,
+            print "):[",
+            for curFile in files[curKey]:
+                print "\"%s\"," % (curFile),
+            print "],"
+    print "}\n"
+
+    print "symlinks = {",
+    for curKey in symlinks.keys():
+        if len(symlinks[curKey]) > 0:
+            newPathList = curKey.replace(basepath,"").split(os.path.sep)[1:]
+            print "    os.path.join(basepath",
+            for curPath in newPathList:
+                print ", \"%s\"" % curPath,
+            print "):[",
+            for curFile in symlinks[curKey]:
+                print "\"%s\"," % (curFile),
+            print "],"
+    print "}\n\n"
+
+    print "if __name__ == '__main__':"
+    print "    smokeTestCase.generateFileListInWindows(basepath)"
 
 
 # vim:ts=4:expandtab:

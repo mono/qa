@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import pdb
 import sys,os
 import unittest
 import traceback
@@ -14,34 +14,17 @@ sys.path.append(basepath)
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
 
-from filelist import *
+from installedFilesTest_filelist import *
 
-
-####################################################################
-#
-#    xsp1TestCase class
-#
 
 class installedFilesTestCase(smokeTestCase):
     testcaseid = 0
 
     def testFiles(self):
-        self.checkFiles(files)
-
-    def testDirs(self):
-        self.checkDirs(dirs)
+        self.checkFilesInWindows(files)
 
     def testSymlinks(self):
-        self.checkSymlinks(symlinks)
-
-    def testUnexpectedFiles(self):
-        self.checkUnexpectedFiles(unexpectedfiles)
-
-    def testUnexpectedDirs(self):
-        self.checkUnexpectedDirs(unexpecteddirs)
-
-    def testUnexpectedSymlinks(self):
-        self.checkUnexpectedSymlinks(unexpectedsymlinks)
+        self.checkSymlinksInWindows(symlinks)
 
 if __name__ == '__main__':
     mono.monotesting_main()
