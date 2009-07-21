@@ -11,7 +11,6 @@ sys.path.append(basepath)
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
 from common.helpers import *
-
 from pkgVersionsTest_data import *
 
 
@@ -24,11 +23,18 @@ class pkgVersionsTestCase(smokeTestCase):
     testcaseid = 0
 
     def test(self):
+        errors = []
         for pkg in pkgs.keys():
-            out = executeCmd(pkg)[0]
+            cmd = getPrefix() + os.path.sep + 'bin' + os.path.sep + pkg
+            out = executeCmd(cmd)[0]
             if out.find(pkgs[pkg]) < 0:
-                self.fail("Bad version of package\n\t '%s' != '%s'" % (pkg,pkgs[pkg]))
+                errors.append("\t '%s' != '%s'" % (pkg,pkgs[pkg]))
 
+        if len(errors) != 0:
+            print "Package versions errors:"
+            for err in errors:
+                mono.printColor(err,'red')
+            self.fail("Package version errors")
 
 if __name__ == '__main__':
     mono.monotesting_main()

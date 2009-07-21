@@ -5,14 +5,6 @@ import sys
 import pdb
 import monotesting as mono
 
-colors = {
-        'norm':'\033[0m',
-        'red':'\033[31m',
-        'green':'\033[32m',
-        'orange':'\033[33m',
-        'blue':'\033[34m',
-        'purple':'\033[35m',
-}
 
 class monoTestRunner():
     def __init__(self,runFailedOnly = False):
@@ -32,10 +24,6 @@ class monoTestRunner():
             else:
                 new_suite.addTest(e)
         return new_suite
-
-    #----------------------------------------------------------------------
-    def __printColor(self,msg,color):
-        print '%s%s%s' % (colors[color],msg,colors['norm'])
 
     #----------------------------------------------------------------------
     def filterForFailedTestCases(self,testsuite):
@@ -62,11 +50,11 @@ class monoTestRunner():
     def runAllTests(self):
         '''Runs the tests are returns a dict of lists of passed and failed tests '''
         aborted = False
-        #errors = {} # {testcaseid,[list of errors]}
+        errors = {} # {testcaseid,[list of errors]}
 
         loader = unittest.TestLoader()
         testsuite = loader.loadTestsFromModule(__import__('__main__'))
-        #d = {'passed':[],'failed':[],'errors':[]}
+        d = {'passed':[],'failed':[],'errors':[]}
 
         testsuite = self.__flattenTestSuite(testsuite)
         if self.runFailedOnly:
@@ -89,27 +77,27 @@ class monoTestRunner():
                 if mono.myTestopia.isTestCaseInTestRun(t.testcaseid):
                     t.run(results)
                     if failures != len(results.failures): #Check if a failure was added
-                        self.__printColor("FAILED",'red')
-                        #d['failed'].append(t.testcaseid)
+                        mono.printColor("FAILED",'red')
+                        d['failed'].append(t.testcaseid)
                         status = 'failed'
-                        #d[t.testcaseid] = t.verificationErrors
+                        d[t.testcaseid] = t.verificationErrors
                         print results.failures[-1][1] # print the stack trace
                     elif errors != len(results.errors):
-                        self.__printColor("ERROR",'red')
-                        #d['errors'].append(t.testcaseid)
+                        mono.printColor("ERROR",'red')
+                        d['errors'].append(t.testcaseid)
                         status = 'failed'
-                        #d[t.testcaseid] = t.verificationErrors
+                        d[t.testcaseid] = t.verificationErrors
                         print results.errors[-1][1] # print the stack trace
                     else:
                         print 'ok'
-                        #d['passed'].append(t.testcaseid)
+                        d['passed'].append(t.testcaseid)
                         status = 'passed'
 
-                    mono.myTestopia.updateTestCaseViaThread(testcaseid=t.testcaseid,status=status,errorsList=t.verificationErrors)
+                    #mono.myTestopia.updateTestCaseViaThread(testcaseid=t.testcaseid,status=status,errorsList=t.verificationErrors)
 
                 # Get result from the results and print status
                 else:
-                    self.__printColor("skipped [%d]" % t.testcaseid, 'orange')
+                    mono.printColor("skipped [%d]" % t.testcaseid, 'orange')
                     skipped += 1
         except KeyboardInterrupt:
             # The interrupted test run is counted as 'run' ie. 'passed'
@@ -127,7 +115,7 @@ class monoTestRunner():
         print "%12s:%3s\n" % ('Tests run',results.testsRun)
 
 
-        #return d,aborted
+        return d,aborted
 
         # All that ^^ just because unittest.main() calls sys.exit()
 

@@ -123,7 +123,7 @@ dirs = [
     os.path.join(basepath,'etc'),
     os.path.join(basepath,'include'),
     os.path.join(basepath,'Resources'),
-    os.path.join(basepath,'lib','mono','gac','Microsoft.VisualBasic')
+    os.path.join(basepath,'lib','mono','gac','Microsoft.VisualBasic'),
 ]
 
 symlinks = [

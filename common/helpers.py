@@ -17,5 +17,14 @@ def whichOS():
     elif sys.platform == 'darwin':
         return 'macos'
 
+def getPrefix():
+    myos = whichOS()
+    if myos == 'win32':
+        return ''
+    elif myos == 'linux':
+        return '/usr'
+    elif myos == 'macos':
+        return '/Library/Frameworks/Mono.framework/Versions/Current'
+
 
 # vim:ts=4:expandtab:
