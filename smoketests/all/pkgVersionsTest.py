@@ -25,7 +25,8 @@ class pkgVersionsTestCase(smokeTestCase):
     def test(self):
         errors = []
         for pkg in pkgs.keys():
-            cmd = getPrefix() + os.path.sep + 'bin' + os.path.sep + pkg
+            cmd = getPrefix() + pkg
+            mono.log("Checking '%s'" % pkg)
             out = executeCmd(cmd)[0]
             if out.find(pkgs[pkg]) < 0:
                 errors.append("\t '%s' != '%s'" % (pkg,pkgs[pkg]))

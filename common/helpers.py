@@ -22,9 +22,9 @@ def getPrefix():
     if myos == 'win32':
         return ''
     elif myos == 'linux':
-        return '/usr'
+        return ''
     elif myos == 'macos':
-        return '/Library/Frameworks/Mono.framework/Versions/Current'
+        return '/Library/Frameworks/Mono.framework/Versions/Current/bin/'
 
 
 # vim:ts=4:expandtab:
