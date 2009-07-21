@@ -2,17 +2,15 @@
 
 import sys,os
 import unittest
-import traceback
-import subprocess
 import uuid
 
 filepath = os.path.realpath(__file__)
-basepath = os.path.dirname(os.path.dirname(filepath))
+basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 #basepath is the absolute path of the trunk/qa directory
 
 sys.path.append(basepath)
 import common.monotesting as mono
-from smokeTestCase import smokeTestCase
+from smoketests.smokeTestCase import smokeTestCase
 from common.helpers import *
 
 
