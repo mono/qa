@@ -48,8 +48,11 @@ class smokeTestCase(monoTestCase):
         self.checkList(list,os.path.isfile,'file',expected=True)
 
     def checkListInWindows(self, dict, chkFunc):
+        #pdb.set_trace()
         for curDirGlob in dict.keys():
-            for curDir in glob.glob(curDirGlob):
+            globList = glob.glob(curDirGlob)
+            self.assertNotEqual(globList, [])
+            for curDir in globList:
                 # check that the expected files exist
                 for curFile in dict[curDirGlob]:
                     for wholeFile in glob.glob(os.path.join(curDir, curFile)):
