@@ -31,10 +31,11 @@ class ClassifiedsStarterKit_cc_UnlistAd(apacheTestCase):
             self.assertEqual("Please confirm that you are unlisting this ad. It will no longer appear among the active listings.", sel.get_confirmation())
 	    for i in range(60):
                 try:
-                    if sel.is_element_present("//a[@id='ctl00_TopMenuRepeater_ctl02_MenuLink']/span"): break
+                    if sel.is_element_present("link=Current Ads"): break
                 except: pass
                 time.sleep(1)
-            sel.click("//a[@id='ctl00_TopMenuRepeater_ctl02_MenuLink']/span")
+
+            sel.click("link=Current Ads")
             sel.wait_for_page_to_load("30000")
             self.failIf(sel.is_text_present("link=iPod Touch 3g 32GB"))
             sel.click("link=Logout")
