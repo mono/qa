@@ -3,6 +3,7 @@
 import sys
 import os
 import pdb
+import re
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
@@ -26,12 +27,15 @@ class pkgVersionsTestCase(smokeTestCase):
     def setUp(self):
         if whichOS() == 'macos':
             pkgs.update(macos_pkgs)
+            exes.update(macos_exes)
         if whichOS() == 'linux':
             pkgs.update(linux_pkgs)
+            exes.update(linux_exes)
         if whichOS() == 'win32':
             pkgs.update(win32_pkgs)
+            exes.update(win32_exes)
 
-    def test(self):
+    def testPkgConfigFileVersions(self):
 
         errors = []
         for pkg in pkgs.keys():
@@ -46,6 +50,28 @@ class pkgVersionsTestCase(smokeTestCase):
             for err in errors:
                 printColor(err,'red')
             self.fail("Package version errors")
+
+    def testExecutableFileVersions(self):
+
+        errors = []
+        for exe in exes.keys():
+            cmd = getPrefix() + exe
+            mono.log("Checking '%s'" % exe)
+            matched = False
+            #pdb.set_trace()
+            for curLineWS in executeCmd(cmd):
+                curLine = curLineWS.strip()
+                if re.search(exes[exe] + " ", curLine):
+                    matched = True
+
+            if not matched:
+                errors.append("\t '%s' expected '%s'" % (exe,exes[exe]))
+
+        if len(errors) != 0:
+            print "Executable versions errors:"
+            for err in errors:
+                printColor(err,'red')
+            self.fail("Executable version errors")
 
 if __name__ == '__main__':
     mono.monotesting_main()

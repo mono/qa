@@ -41,5 +41,21 @@ win32_pkgs = {
 }
 
 
+# These executables are common across all platforms
+exes = {
+    'mono --version':              '2.4.2.3',
+}
+
+# These executables are unique to linux
+linux_exes = {
+}
+
+# These executables are unique to OSX
+macos_exes = {
+}
+
+# These executables are unique to win32
+win32_exes = {
+}
 
 # vim:ts=4:expandtab:
