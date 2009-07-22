@@ -3,6 +3,10 @@
 import sys
 import subprocess
 
+
+def printColor(msg, color):
+    printColorOnOS(msg, color)
+
 def executeCmd(command):
     ret = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     output = ret.communicate()[0]
@@ -26,5 +30,10 @@ def getPrefix():
     elif myos == 'macos':
         return '/Library/Frameworks/Mono.framework/Versions/Current/bin/'
 
+
+if whichOS() == 'win32':
+    from winColors import printColor as printColorOnOS
+else:
+    from uxColors import printColor as printColorOnOS
 
 # vim:ts=4:expandtab:
