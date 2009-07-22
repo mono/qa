@@ -2,6 +2,7 @@
 
 import sys
 import os
+import pdb
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
@@ -36,7 +37,7 @@ class pkgVersionsTestCase(smokeTestCase):
         for pkg in pkgs.keys():
             cmd = getPrefix() + pkg
             mono.log("Checking '%s'" % pkg)
-            out = executeCmd(cmd)[0]
+            out = executeCmd(cmd)[0].strip()
             if out != pkgs[pkg]:
                 errors.append("\t '%s' expected '%s' but got '%s'" % (pkg,pkgs[pkg],out))
 
