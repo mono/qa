@@ -17,6 +17,7 @@ import pdb
 from time import time as clock
 
 from monoTestopia import monoTestopia as Testopia
+import helpers
 
 import ConfigParser
 import monoTestRunner
@@ -48,6 +49,7 @@ usexsp2 = False
 username = None
 password = None
 failed = False
+debug = False
 
 ###############################################################
 # Testopia connection info
@@ -56,17 +58,6 @@ testopia_ssl = True
 testopia_port = None
 
 
-colors = {
-        'norm':'\033[0m',
-        'red':'\033[31m',
-        'green':'\033[32m',
-        'orange':'\033[33m',
-        'blue':'\033[34m',
-        'purple':'\033[35m',
-}
-
-
-myTestopia = None
 #################################################################
 #
 # Local helper functions
@@ -101,14 +92,14 @@ def __loadargs(cmdargs):
     global graffiti_port, apache_port, verbose, logfile
     global usexsp2
     global username,password,failed
-    debug = False
+    global debug
 
     longargs = value_args.keys()
     shortargs = 'hvu:p:'
     showvalues = False
 
     opts,args = getopt.getopt(cmdargs,shortargs,longargs)
-    #print  opts
+    #print opts
     #print args
 
     for o,a in opts:
@@ -151,10 +142,8 @@ def __loadargs(cmdargs):
         elif o == '--failed':
             failed = True
         elif o == '--debug':
+            print "--debug passed"
             debug = True
-
-        if not debug:
-            pdb.set_trace = lambda :None
 
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
         xsp2_url = "%s:%s" % (base_url,xsp2_port)
@@ -168,9 +157,9 @@ def __loadargs(cmdargs):
 
 #----------------------------------------------------------------------
 def __testTestopiaConn():
-    global myTestopia
-    myTestopia = Testopia(username=username,password=password,host=testopia_url,ssl=testopia_ssl,testrunid=testrunid)
-    myTestopia.testConnection()
+    #global myTestopia
+    helpers.myTestopia = Testopia(username=username,password=password,host=testopia_url,ssl=testopia_ssl,testrunid=testrunid)
+    helpers.myTestopia.testConnection()
 
 #----------------------------------------------------------------------
 def __getCommonDir():
@@ -186,7 +175,7 @@ def __loadConfFile():
     global xsp1_url,xsp2_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, apache_port, verbose,logfile
-    global usexsp2
+    global usexsp2,debug
 
     conf_file = 'defaults.conf'
     conf_file_path = os.path.join(__getCommonDir(),conf_file)
@@ -213,6 +202,8 @@ def __loadConfFile():
     rc_browser = config.get('rc server','rc_browser')
 
     #Optional settings
+    if config.has_option('debug','set_trace'):
+        debug = config.getboolean('debug','set_trace')
     if config.has_option('debug','verbose'):
         verbose = config.getboolean('debug','verbose')
     if config.has_option('debug','logfile'):
@@ -293,6 +284,7 @@ def __printValues():
     print "verbose = %s" % verbose
     print "logfile = %s" % logfile
     print "usexsp2 = %s\n" % str(usexsp2)
+    print "debug = %s\n" % str(debug)
 
 #----------------------------------------------------------------------
 def __usage():
@@ -349,10 +341,6 @@ def __check_args():
         print "\nExiting\n"
         sys.exit(1)
 
-#----------------------------------------------------------------------
-def printColor(msg,color):
-    print '%s%s%s' % (colors[color],msg,colors['norm'])
-
 ####################################################################
 #
 #    main methods
@@ -374,10 +362,14 @@ def monotesting_main(_usexsp2=False):
     if verbose:
         sys.argv.append('-v')
 
+    # Cannot put this in __loadargs() from some reason
+    if not debug:
+        pdb.set_trace = lambda: None
+
     runner = monoTestRunner.monoTestRunner(runFailedOnly=failed)
     results = runner.runAllTests()
 
-    myTestopia.updateAllTestCases(results)
+    helpers.myTestopia.updateAllTestCases(results)
 
     etime = clock() - start
     print "\nTime: %dh %dm %ds\n" % (etime / 3600, (etime % 3600) / 60, etime % 60)

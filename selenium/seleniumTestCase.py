@@ -29,6 +29,7 @@ class seleniumTestCase(monoTestCase):
             self.verificationErrors = []
             url = "%s:%s" % (mono.base_url,self.port)
             mono.log("   Creating test case(url='%s',rc_server='%s')" % (url,mono.rc_server))
+            mono.log("       selenium(mono.rc_server='%s', mono.rc_port='%s', mono.rc_browser='%s',url='%s')" % (mono.rc_server, mono.rc_port, mono.rc_browser,url))
             self.selenium = selenium(mono.rc_server, mono.rc_port, mono.rc_browser,url)
             self.selenium.start()
         except Exception, e:

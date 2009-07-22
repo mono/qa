@@ -29,12 +29,12 @@ class pkgVersionsTestCase(smokeTestCase):
             mono.log("Checking '%s'" % pkg)
             out = executeCmd(cmd)[0]
             if out != pkgs[pkg]:
-                errors.append("\t '%s' != '%s'" % (pkg,pkgs[pkg]))
+                errors.append("\t '%s' expected '%s' but got '%s'" % (pkg,pkgs[pkg],out))
 
         if len(errors) != 0:
             print "Package versions errors:"
             for err in errors:
-                mono.printColor(err,'red')
+                printColor(err,'red')
             self.fail("Package version errors")
 
 if __name__ == '__main__':

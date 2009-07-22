@@ -11,6 +11,7 @@ BUG_STATUS = {'IDLE':1,
             'BLOCKED':6
             }
 
+myTestopia = None
 #--------------------------------------------------------------------------------------
 class monoTestopiaThread(Thread):
     def __init__(self,myTestopia,testcaseid,status,errorsList=None):

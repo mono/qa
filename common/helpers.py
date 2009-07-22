@@ -3,6 +3,7 @@
 import sys
 import subprocess
 
+myTestopia = None
 
 def printColor(msg, color):
     printColorOnOS(msg, color)
@@ -35,5 +36,6 @@ if whichOS() == 'win32':
     from winColors import printColor as printColorOnOS
 else:
     from uxColors import printColor as printColorOnOS
+
 
 # vim:ts=4:expandtab:
