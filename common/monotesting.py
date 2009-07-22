@@ -49,7 +49,6 @@ usexsp2 = False
 username = None
 password = None
 failed = False
-debug = False
 
 ###############################################################
 # Testopia connection info
@@ -81,7 +80,6 @@ value_args = {
         'logfile=':'Write debug output to this file',
         'usexsp2':'Use xsp2 port',
         'failed':'Only run failed tests',
-        'debug':'Stop at breakpoints pdb.set_trace()',
 }
 
 #----------------------------------------------------------------------
@@ -92,7 +90,6 @@ def __loadargs(cmdargs):
     global graffiti_port, apache_port, verbose, logfile
     global usexsp2
     global username,password,failed
-    global debug
 
     longargs = value_args.keys()
     shortargs = 'hvu:p:'
@@ -141,16 +138,12 @@ def __loadargs(cmdargs):
             sys.exit(0)
         elif o == '--failed':
             failed = True
-        elif o == '--debug':
-            print "--debug passed"
-            debug = True
 
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
         xsp2_url = "%s:%s" % (base_url,xsp2_port)
         graffiti_url = "%s:%s" % (base_url,graffiti_port)
         apache_url = "%s:%s" % (base_url,apache_port)
 
-    #pdb.set_trace()
 
     if showvalues or verbose:
         __printValues()
@@ -175,7 +168,7 @@ def __loadConfFile():
     global xsp1_url,xsp2_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, apache_port, verbose,logfile
-    global usexsp2,debug
+    global usexsp2
 
     conf_file = 'defaults.conf'
     conf_file_path = os.path.join(__getCommonDir(),conf_file)
@@ -202,8 +195,6 @@ def __loadConfFile():
     rc_browser = config.get('rc server','rc_browser')
 
     #Optional settings
-    if config.has_option('debug','set_trace'):
-        debug = config.getboolean('debug','set_trace')
     if config.has_option('debug','verbose'):
         verbose = config.getboolean('debug','verbose')
     if config.has_option('debug','logfile'):
@@ -284,7 +275,6 @@ def __printValues():
     print "verbose = %s" % verbose
     print "logfile = %s" % logfile
     print "usexsp2 = %s\n" % str(usexsp2)
-    print "debug = %s\n" % str(debug)
 
 #----------------------------------------------------------------------
 def __usage():
@@ -361,10 +351,6 @@ def monotesting_main(_usexsp2=False):
     sys.argv = sys.argv[:1]
     if verbose:
         sys.argv.append('-v')
-
-    # Cannot put this in __loadargs() from some reason
-    if not debug:
-        pdb.set_trace = lambda: None
 
     runner = monoTestRunner.monoTestRunner(runFailedOnly=failed)
     results = runner.runAllTests()

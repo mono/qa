@@ -76,7 +76,6 @@ class monoTestRunner():
                 errors = len(results.errors)
                 #status = ''
                 if helpers.myTestopia.isTestCaseInTestRun(t.testcaseid):
-                    pdb.set_trace()
                     t.run(results)
                     if failures != len(results.failures): #Check if a failure was added
                         helpers.printColor("FAILED",'red')
