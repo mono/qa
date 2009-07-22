@@ -13,7 +13,7 @@ class mvcPreTest(apacheTestCase):
             return
         try:
             sel = self.selenium
-            sel.open("/mvcPreTest/")
+            sel.open("/mvcTestPre/")
             for i in range(60):
                 try:
                     if sel.is_element_present("link=Home"): break

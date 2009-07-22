@@ -5,7 +5,7 @@ sys.path.append('../../..')
 from common.monotesting import *
 
 from mvcTest import *
-from mvcPreTest import *
+from mvcTestPre import *
 
 if __name__ == '__main__':
     monotesting_main()
