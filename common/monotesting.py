@@ -72,7 +72,8 @@ myTestopia = None
 # Local helper functions
 #
 
-value_args = {'base_url=':'URL of the webserver being tested',
+value_args = {
+        'base_url=':'URL of the webserver being tested',
         'testrunid=':'Test run id in Testopia (use 0 or None to disable Testopia)',
         'xsp1_port=':'Port number that xsp1 is running on',
         'xsp2_port=':'Port number that xsp2 is running on',
@@ -88,7 +89,9 @@ value_args = {'base_url=':'URL of the webserver being tested',
         'password=':'Password to login to Testopia',
         'logfile=':'Write debug output to this file',
         'usexsp2':'Use xsp2 port',
-        'failed':'Only run failed tests'}
+        'failed':'Only run failed tests',
+        'debug':'Stop at breakpoints pdb.set_trace()',
+}
 
 #----------------------------------------------------------------------
 def __loadargs(cmdargs):
@@ -98,6 +101,7 @@ def __loadargs(cmdargs):
     global graffiti_port, apache_port, verbose, logfile
     global usexsp2
     global username,password,failed
+    debug = False
 
     longargs = value_args.keys()
     shortargs = 'hvu:p:'
@@ -146,6 +150,11 @@ def __loadargs(cmdargs):
             sys.exit(0)
         elif o == '--failed':
             failed = True
+        elif o == '--debug':
+            debug = True
+
+        if not debug:
+            pdb.set_trace = lambda :None
 
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
         xsp2_url = "%s:%s" % (base_url,xsp2_port)
@@ -366,9 +375,9 @@ def monotesting_main(_usexsp2=False):
         sys.argv.append('-v')
 
     runner = monoTestRunner.monoTestRunner(runFailedOnly=failed)
-    runner.runAllTests()
+    results = runner.runAllTests()
 
-    #myTestopia.updateAllTestCases(results)
+    myTestopia.updateAllTestCases(results)
 
     etime = clock() - start
     print "\nTime: %dh %dm %ds\n" % (etime / 3600, (etime % 3600) / 60, etime % 60)

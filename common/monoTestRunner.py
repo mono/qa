@@ -75,6 +75,7 @@ class monoTestRunner():
                 errors = len(results.errors)
                 status = ''
                 if mono.myTestopia.isTestCaseInTestRun(t.testcaseid):
+                    pdb.set_trace()
                     t.run(results)
                     if failures != len(results.failures): #Check if a failure was added
                         mono.printColor("FAILED",'red')
@@ -94,6 +95,7 @@ class monoTestRunner():
                         status = 'passed'
 
                     #mono.myTestopia.updateTestCaseViaThread(testcaseid=t.testcaseid,status=status,errorsList=t.verificationErrors)
+                    #print "done"
 
                 # Get result from the results and print status
                 else:
@@ -115,7 +117,7 @@ class monoTestRunner():
         print "%12s:%3s\n" % ('Tests run',results.testsRun)
 
 
-        return d,aborted
+        return d
 
         # All that ^^ just because unittest.main() calls sys.exit()
 
