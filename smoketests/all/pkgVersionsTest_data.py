@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
+# These packages are common across all platforms
 pkgs = {
     'pkg-config --modversion atk':  '1.24.0',
-    'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
     'pkg-config --modversion mono':             '2.4.2.3',
     'pkg-config --modversion mono-addins':      '0.4',
@@ -21,6 +21,23 @@ pkgs = {
 
 
 }
+
+# These packages are unique to linux
+linux_pkgs = {
+    'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
+}
+
+
+# These packages are unique to OSX
+macos_pkgs = { 
+    'pkg-config --modversion cocoa-sharp':              '0.9.5',
+
+}
+
+# These packages are unique to win32
+win32_pkgs = {
+}
+
 
 
 # vim:ts=4:expandtab:

@@ -22,7 +22,16 @@ from pkgVersionsTest_data import *
 class pkgVersionsTestCase(smokeTestCase):
     testcaseid = 0
 
+    def setUp(self):
+        if whichOS() == 'macos':
+            pkgs.update(macos_pkgs)
+        if whichOS() == 'linux':
+            pkgs.update(linux_pkgs)
+        if whichOS() == 'win32':
+            pkgs.update(win32_pkgs)
+
     def test(self):
+
         errors = []
         for pkg in pkgs.keys():
             cmd = getPrefix() + pkg
