@@ -51,7 +51,7 @@ class smokeTestCase(monoTestCase):
         #pdb.set_trace()
         for curDirGlob in dict.keys():
             globList = glob.glob(curDirGlob)
-            self.assertNotEqual(globList, [])
+            self.assertNotEqual(globList, [], "[%s] either doesn't exist, or is an empty directory." % curDirGlob)
             for curDir in globList:
                 # check that the expected files exist
                 for curFile in dict[curDirGlob]:
