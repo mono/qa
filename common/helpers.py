@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+import os
 import subprocess
 
 myTestopia = None
@@ -8,8 +9,8 @@ myTestopia = None
 def printColor(msg, color):
     printColorOnOS(msg, color)
 
-def executeCmd(command):
-    ret = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+def executeCmd(command, stderr=open(os.devnull)):
+    ret = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=stderr)
     output = ret.communicate()[0]
     lines = output.split('\n')
     return lines
