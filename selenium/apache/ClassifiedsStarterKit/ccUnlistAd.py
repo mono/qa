@@ -34,7 +34,7 @@ class ClassifiedsStarterKit_cc_UnlistAd(apacheTestCase):
                     if sel.is_element_present("link=Current Ads"): break
                 except: pass
                 time.sleep(1)
-
+            time.sleep(1)
             sel.click("link=Current Ads")
             sel.wait_for_page_to_load("30000")
             self.failIf(sel.is_text_present("link=iPod Touch 3g 32GB"))
