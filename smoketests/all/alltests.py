@@ -8,6 +8,7 @@ from common.monotesting import *
 # Add child test suites to test suite
 from gmcsTest import *
 from gmcs2Test import *
+from gmcsBitmapTest import *
 from visualBasicTest import *
 from gacutilTest import *
 from pkgVersionsTest import *
