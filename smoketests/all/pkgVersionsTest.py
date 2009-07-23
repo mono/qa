@@ -4,6 +4,7 @@ import sys
 import os
 import pdb
 import re
+import string
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
@@ -58,14 +59,10 @@ class pkgVersionsTestCase(smokeTestCase):
             cmd = getPrefix() + exe
             mono.log("Checking '%s'" % exe)
             matched = False
-            #pdb.set_trace()
-            for curLineWS in executeCmd(cmd):
-                curLine = curLineWS.strip()
-                if re.search(exes[exe] + " ", curLine):
-                    matched = True
+            output = string.join(executeCmd(cmd)).replace('\r ','\n')
 
-            if not matched:
-                errors.append("\t '%s' expected '%s'" % (exe,exes[exe]))
+            if not re.search("[^.0-9]" + exes[exe] + "[^.0-9]", output):
+                errors.append("\t '%s' expected '%s' got:\n%s\n" % (exe,exes[exe],output))
 
         if len(errors) != 0:
             print "Executable versions errors:"

@@ -76,6 +76,7 @@ macos_exes = {
 
 # These executables are unique to win32
 win32_exes = {
+    'envsubst --version':              '0.17',
 }
 
 # vim:ts=4:expandtab:
