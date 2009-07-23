@@ -1,17 +1,19 @@
 #!/usr/bin/python
 
+monoVersion = "2.4.2.3"
+
 # These packages are common across all platforms
 pkgs = {
     #'pkg-config --modversion atk':  '1.24.0',
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
-    'pkg-config --modversion mono':             '2.4.2.3',
-    'pkg-config --modversion mono-cairo':       '2.4.2.3',
+    'pkg-config --modversion mono':             monoVersion,
+    'pkg-config --modversion mono-cairo':       monoVersion,
     'pkg-config --modversion mono-lineeditor':  '0.2.1',
-    'pkg-config --modversion mono-nunit':       '2.4.2.3',
+    'pkg-config --modversion mono-nunit':       monoVersion,
     'pkg-config --modversion mono-options':     '0.2.1',
     'pkg-config --modversion mono.web':         '2.0.0.0',
-    'pkg-config --modversion monodoc':          '2.4.2.3',
-    'pkg-config --modversion smcs':             '2.4.2.3',
+    'pkg-config --modversion monodoc':          monoVersion,
+    'pkg-config --modversion smcs':             monoVersion,
     'pkg-config --modversion xsp':              '2.4.2',
 }
 
@@ -43,25 +45,25 @@ win32_pkgs = {
 
 # These executables are common across all platforms
 exes = {
-    'mono --version':               '2.4.2.3',
-    'mcs --version':                '2.4.2.3',
-    'gmcs --version':               '2.4.2.3',
-    'smcs --version':               '2.4.2.3',
+    'mono --version':               monoVersion,
+    'mcs --version':                monoVersion,
+    'gmcs --version':               monoVersion,
+    'smcs --version':               monoVersion,
     'xsp --version':                '2.4.2.0',
     'xsp1 --version':               '2.4.2.0',
     'xsp2 --version':               '2.4.2.0',
     'monolinker --version':         '0.2.0.0',
-    'resgen --version':             '2.4.2.3',
-    'resgen1 --version':            '2.4.2.3',
+    'resgen --version':             monoVersion,
+    'resgen1 --version':            monoVersion,
     'mod-mono-server --version':    '2.4.2.0',
-    'signcode --version':           '2.4.2.3',
-    'csharp --version':             '2.4.2.3',
-    'al --version':                 '2.4.2.3',
-    'al1 --version':                '2.4.2.3',
-    'al2 --version':                '2.4.2.3',
-    'ilasm --version':              '2.4.2.3',
-    'ilasm1 --version':             '2.4.2.3',
-    'ilasm2 --version':             '2.4.2.3',
+    'signcode --version':           monoVersion,
+    'csharp --version':             monoVersion,
+    'al --version':                 monoVersion,
+    'al1 --version':                monoVersion,
+    'al2 --version':                monoVersion,
+    'ilasm --version':              monoVersion,
+    'ilasm1 --version':             monoVersion,
+    'ilasm2 --version':             monoVersion,
 }
 
 # These executables are unique to linux
