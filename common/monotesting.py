@@ -164,10 +164,10 @@ def __getCommonDir():
 
 
 #----------------------------------------------------------------------
-def __loadConfigOption(section,option):
+def __loadConfigOption(option):
     value = None
-    if config.has_option(section,option):
-        value = config.get(section,option)
+    if config.has_option('main',option):    # config file has only 'main'
+        value = config.get('main',option)
     return value
 
 #----------------------------------------------------------------------
@@ -189,23 +189,23 @@ def __loadConfFile():
     config.read(conf_file_path)
 
     # Required settings
-    base_url = __loadConfigOption('main','base_url')
-    testrunid = __loadConfigOption('main','testrunid')
+    base_url = __loadConfigOption('base_url')
+    testrunid = __loadConfigOption('testrunid')
     testrunid = __stringToIntOrNone(testrunid)
 
-    xsp1_port = __loadConfigOption('main','xsp1_port')
-    xsp2_port = __loadConfigOption('main','xsp2_port')
-    graffiti_port = __loadConfigOption('main','graffiti_port')
-    apache_port = __loadConfigOption('main','apache_port')
+    xsp1_port = __loadConfigOption('xsp1_port')
+    xsp2_port = __loadConfigOption('xsp2_port')
+    graffiti_port = __loadConfigOption('graffiti_port')
+    apache_port = __loadConfigOption('apache_port')
 
-    rc_server = __loadConfigOption('rc server','rc_server')
-    rc_port = __loadConfigOption('rc server','rc_port')
-    rc_browser = __loadConfigOption('rc server','rc_browser')
+    rc_server = __loadConfigOption('rc_server')
+    rc_port = __loadConfigOption('rc_port')
+    rc_browser = __loadConfigOption('rc_browser')
 
     #Optional settings
-    if config.has_option('debug','verbose'):
-        verbose = config.getboolean('debug','verbose')
-    logfile = __loadConfigOption('debug','logfile')
+    if config.has_option('main','verbose'):
+        verbose = config.getboolean('main','verbose')
+    logfile = __loadConfigOption('logfile')
     if logfile == 'None' or logfile == '':
         logfile = None
 

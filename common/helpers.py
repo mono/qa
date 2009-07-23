@@ -10,6 +10,11 @@ def checkOption(option,name):
     '''This function checks that an option has been set
        in the config file or on the command line.'''
     if option == None:
+        msg = '''Config option '%s' is not set.
+Add '%s = <somevalue>' to defaults.conf 
+ or set it on the command line. See --help''' %(name,name)
+        printColor(msg,'red')
+
         raise Exception("Config option '%s' is not set" % name)
 
 def printColor(msg, color):
