@@ -61,7 +61,7 @@ class pkgVersionsTestCase(smokeTestCase):
             matched = False
             output = string.join(executeCmd(cmd)).replace('\r ','\n')
 
-            if not re.search("[^.0-9]" + exes[exe] + "[^.0-9]", output):
+            if not re.search("[^.0-9]*" + exes[exe] + "[^.0-9]*", output):
                 errors.append("\t '%s' expected '%s' got:\n%s\n" % (exe,exes[exe],output))
 
         if len(errors) != 0:
