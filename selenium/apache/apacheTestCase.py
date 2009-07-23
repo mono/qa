@@ -10,11 +10,9 @@ basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 sys.path.append(basepath)
 
 import common.monotesting as mono
-from common.monotesting import log
-from common.monoTestCase import monoTestCase
+from common.helpers import checkOption
 from selenium.seleniumTestCase import seleniumTestCase
 
-log("sys.path = %s" % (str(sys.path)))
 
 ####################################################################
 #
@@ -25,6 +23,8 @@ class apacheTestCase(seleniumTestCase):
     testcaseid = 0
     def __init__(self,methodname='test'):
         seleniumTestCase.__init__(self,methodname)
+        checkOption(mono.apache_port,'apache_port')
+
         self.port = mono.apache_port
         self.testcaseid = self.apacheTestCaseId
 

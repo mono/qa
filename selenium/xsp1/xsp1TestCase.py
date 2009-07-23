@@ -10,6 +10,7 @@ basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 sys.path.append(basepath)
 
 import common.monotesting as mono
+from common.helpers import checkOption
 from selenium.seleniumTestCase import seleniumTestCase
 
 ####################################################################
@@ -23,11 +24,14 @@ class xsp1TestCase(seleniumTestCase):
         seleniumTestCase.__init__(self,methodname)
         self.usexsp2 = mono.usexsp2
         if self.usexsp2:
+            checkOption(mono.xsp2_port,'xsp2_port')
             self.port = mono.xsp2_port
             self.testcaseid = self.xsp2TestCaseId
         else:
+            checkOption(mono.xsp1_port,'xsp1_port')
             self.port = mono.xsp1_port
             self.testcaseid = self.xsp1TestCaseId
+
 
 def monotesting_main():
     mono.monotesting_main()

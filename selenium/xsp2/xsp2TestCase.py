@@ -8,8 +8,8 @@ basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 #basepath is the absolute path of the trunk/qa directory
 
 sys.path.append(basepath)
-
 import common.monotesting as mono
+from common.helpers import checkOption
 from selenium.seleniumTestCase import seleniumTestCase
 
 
@@ -24,5 +24,6 @@ class xsp2TestCase(seleniumTestCase):
 
     def __init__(self,methodname='test'):
         seleniumTestCase.__init__(self,methodname)
+        checkOption(mono.xsp2_port,'xsp2_port')
         self.port = mono.xsp2_port
 

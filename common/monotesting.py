@@ -49,6 +49,7 @@ usexsp2 = False
 username = None
 password = None
 failed = False
+config = None
 
 ###############################################################
 # Testopia connection info
@@ -163,12 +164,19 @@ def __getCommonDir():
 
 
 #----------------------------------------------------------------------
+def __loadConfigOption(section,option):
+    value = None
+    if config.has_option(section,option):
+        value = config.get(section,option)
+    return value
+
+#----------------------------------------------------------------------
 def __loadConfFile():
     global base_url,testrunid,xsp1_port,xsp2_port
     global xsp1_url,xsp2_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, apache_port, verbose,logfile
-    global usexsp2
+    global usexsp2,config
 
     conf_file = 'defaults.conf'
     conf_file_path = os.path.join(__getCommonDir(),conf_file)
@@ -181,26 +189,25 @@ def __loadConfFile():
     config.read(conf_file_path)
 
     # Required settings
-    base_url = config.get('main','base_url')
-    testrunid = config.get('main','testrunid')
+    base_url = __loadConfigOption('main','base_url')
+    testrunid = __loadConfigOption('main','testrunid')
     testrunid = __stringToIntOrNone(testrunid)
 
-    xsp1_port = config.get('main','xsp1_port')
-    xsp2_port = config.get('main','xsp2_port')
-    graffiti_port = config.get('main','graffiti_port')
-    apache_port = config.get('main','apache_port')
+    xsp1_port = __loadConfigOption('main','xsp1_port')
+    xsp2_port = __loadConfigOption('main','xsp2_port')
+    graffiti_port = __loadConfigOption('main','graffiti_port')
+    apache_port = __loadConfigOption('main','apache_port')
 
-    rc_server = config.get('rc server','rc_server')
-    rc_port = config.get('rc server','rc_port')
-    rc_browser = config.get('rc server','rc_browser')
+    rc_server = __loadConfigOption('rc server','rc_server')
+    rc_port = __loadConfigOption('rc server','rc_port')
+    rc_browser = __loadConfigOption('rc server','rc_browser')
 
     #Optional settings
     if config.has_option('debug','verbose'):
         verbose = config.getboolean('debug','verbose')
-    if config.has_option('debug','logfile'):
-        logfile = config.get('debug','logfile')
-        if logfile == 'None' or logfile == '':
-            logfile = None
+    logfile = __loadConfigOption('debug','logfile')
+    if logfile == 'None' or logfile == '':
+        logfile = None
 
 
 #----------------------------------------------------------------------
@@ -299,38 +306,6 @@ def log(msg):
         f.writelines(msg + '\n')
         f.close()
 
-#----------------------------------------------------------------------
-def __check_args():
-    quit = False
-    if base_url == '' or base_url == None:
-        print "ERROR: base_url is not set"
-        quit = True
-    if xsp1_port == None or xsp1_port == 0:
-        print "ERROR: xsp1_port is not set"
-        quit = True
-    if xsp2_port == None or xsp2_port == 0:
-        print "ERROR: xsp2_port is not set"
-        quit = True
-    if graffiti_port == None or graffiti_port == 0:
-        print "ERROR: graffiti_port is not set"
-        quit = True
-    if apache_port == None or apache_port == 0:
-        print "ERROR: apache_port is not set"
-        quit = True
-    if rc_server == None or rc_server == '':
-        print "ERROR: rc_server is not set"
-        quit = True
-    if rc_port == None or rc_port == 0:
-        print "ERROR: rc_port is not set"
-        quit = True
-    if rc_browser == None or rc_browser == '':
-        print "ERROR: rc_browser is not set"
-        quit = True
-
-    if quit:
-        print "\nExiting\n"
-        sys.exit(1)
-
 ####################################################################
 #
 #    main methods
@@ -346,7 +321,6 @@ def monotesting_main(_usexsp2=False):
     start = clock()
     __testTestopiaConn()
     __setUrls()
-    __check_args()
 
     sys.argv = sys.argv[:1]
     if verbose:

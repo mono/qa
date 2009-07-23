@@ -8,13 +8,10 @@ basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 #basepath is the absolute path of the trunk/qa directory
 
 sys.path.append(basepath)
-
 import common.monotesting as mono
-from common.monotesting import log
-from common.monoTestCase import monoTestCase
+from common.helpers import checkOption
 from selenium.seleniumTestCase import seleniumTestCase
 
-log("sys.path = %s" % (str(sys.path)))
 
 ####################################################################
 #
@@ -25,6 +22,7 @@ class graffitiTestCase(seleniumTestCase):
     testcaseid = 0
     def __init__(self,methodname='test'):
         seleniumTestCase.__init__(self,methodname)
+        checkOption(mono.graffiti_port,'graffiti_port')
         self.port = mono.graffiti_port
         self.testcaseid = self.graffitiTestCaseId
 

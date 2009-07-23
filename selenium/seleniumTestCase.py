@@ -5,6 +5,7 @@ import traceback
 
 sys.path.append('..')
 import common.monotesting as mono
+from common.helpers import checkOption
 
 from common.monoTestCase import monoTestCase
 from selenium import selenium
@@ -21,6 +22,11 @@ class seleniumTestCase(monoTestCase):
         monoTestCase.__init__(self,methodname)
         self.verificationErrors = []
         self.canRun = True # This value is deprecated
+        checkOption(mono.base_url,'base_url')
+        checkOption(mono.rc_server,'rc_server')
+        checkOption(mono.rc_port,'rc_port')
+        checkOption(mono.rc_browser,'rc_browser')
+
 
     def setUp(self):
         mono.log("Setting up test case %s" % self.testcaseid)

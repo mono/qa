@@ -6,6 +6,12 @@ import subprocess
 
 myTestopia = None
 
+def checkOption(option,name):
+    '''This function checks that an option has been set
+       in the config file or on the command line.'''
+    if option == None:
+        raise Exception("Config option '%s' is not set" % name)
+
 def printColor(msg, color):
     printColorOnOS(msg, color)
 
