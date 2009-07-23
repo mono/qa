@@ -148,4 +148,65 @@ def generateFileListInWindows(basepath):
     print "    smokeTestCase.generateFileListInWindows(basepath)"
 
 
+def generateFileList(basepath,filename):
+    f = open(filename,'w')
+    files = {}
+    symlinks = {}
+    for curWalkDirEntries  in os.walk(basepath):
+        curWalkDir = curWalkDirEntries[0]
+        curWalkFiles = curWalkDirEntries[2]
+
+        filesInCurDir = []
+        linksInCurDir = []
+        for curFileInDir in curWalkFiles:
+            fullPath = os.path.join(curWalkDir, curFileInDir)
+            if os.path.isfile(fullPath):
+                filesInCurDir.append(curFileInDir)
+            elif os.path.islink(fullPath):
+                linksInCurDir.append(curFileInDir)
+            else:
+                raise Exception("%s is not a file or link" % fullPath)
+
+        files[curWalkDir] = filesInCurDir
+        symlinks[curWalkDir] = linksInCurDir
+
+    f.write("\nimport os")
+    f.write("\nfrom glob import glob\n")
+    f.write("\nimport sys")
+    f.write("\nsys.path.append('..')")
+    f.write("\nimport smokeTestCase\n")
+    f.write("\nbasepath = glob('%s')[0]\n" % basepath)
+    f.write("\nfiles = {",)
+    for curKey in files.keys():
+        if len(files[curKey]) > 0:
+            newPathList = curKey.replace(basepath,"").split(os.path.sep)[1:]
+
+#            # make it so that the gac checks will pass, even if the gac UUID changes
+#            if "gac" in newPathList:
+#                newPathList[-1] = "*"
+
+            f.write("\n    os.path.join(basepath")
+            for curPath in newPathList:
+                f.write(", '%s'" % curPath)
+            f.write("):[")
+            for curFile in files[curKey]:
+                f.write("'%s'," % (curFile))
+            f.write("],")
+    f.write("\n}\n")
+
+    f.write("\nsymlinks = {")
+    for curKey in symlinks.keys():
+        if len(symlinks[curKey]) > 0:
+            newPathList = curKey.replace(basepath,"").split(os.path.sep)[1:]
+            f.write("\n    os.path.join(basepath")
+            for curPath in newPathList:
+                f.write(", '%s'" % curPath)
+            f.write("):[")
+            for curFile in symlinks[curKey]:
+                f.write("'%s'," % (curFile))
+            f.write("],")
+    f.write("\n}\n\n")
+
+    f.close()
+
 # vim:ts=4:expandtab:
