@@ -44,14 +44,6 @@ win32_pkgs = {
 # These executables are common across all platforms
 exes = {
     'mono --version':               '2.4.2.3',
-}
-
-# These executables are unique to linux
-linux_exes = {
-}
-
-# These executables are unique to OSX
-macos_exes = {
     'mcs --version':                '2.4.2.3',
     'gmcs --version':               '2.4.2.3',
     'smcs --version':               '2.4.2.3',
@@ -59,7 +51,6 @@ macos_exes = {
     'xsp1 --version':               '2.4.2.0',
     'xsp2 --version':               '2.4.2.0',
     'monolinker --version':         '0.2.0.0',
-    'monodocer --version':          '0.1.0',
     'resgen --version':             '2.4.2.3',
     'resgen1 --version':            '2.4.2.3',
     'mod-mono-server --version':    '2.4.2.0',
@@ -71,6 +62,15 @@ macos_exes = {
     'ilasm --version':              '2.4.2.3',
     'ilasm1 --version':             '2.4.2.3',
     'ilasm2 --version':             '2.4.2.3',
+}
+
+# These executables are unique to linux
+linux_exes = {
+}
+
+# These executables are unique to OSX
+macos_exes = {
+    'monodocer --version':          '0.1.0',
     'mconfig --version':            '0.1.0.0',
 }
 
