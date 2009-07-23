@@ -1,9 +1,10 @@
-######################################################################
-#
-#   You must create two python modules (creds.py,defaults.py)
-#
-#   1. ~/.bugzilla/creds.py
-#    2. ../common/defaults.py
+
+To run the monotesting framework, it's easiest to have the needed options
+in a config file. You do not have to create these files however.
+The framework will allow you to set these options via the command
+line. See --help
+
+The two config files look like so:
 
 $ cat ~/.testopia_creds.conf
 
@@ -12,7 +13,7 @@ $ cat ~/.testopia_creds.conf
 username=youruser
 password=yourpassword
 
-$ cat defaults.conf
+$ cat ./common/defaults.conf
 
 [main]
 base_url = http://mono-mac1.provo.novell.com
@@ -23,12 +24,10 @@ xsp2_port = 8082
 graffiti_port = 8083
 apache_port = 80
 
-[rc server]
 rc_server = localhost
 rc_port = 4444
 rc_browser = *firefox
 
-[debug]
 debug = False
 logfile = None
 

@@ -1,3 +1,9 @@
+#################################################################
+#
+# Base class for the test cases in the mono testing framework
+#
+# Author: Rusty Howell (rhowell@novell.com)
+#
 
 import sys
 import os

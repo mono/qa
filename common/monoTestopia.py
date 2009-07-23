@@ -1,3 +1,9 @@
+#################################################################
+#
+# Helper functions for Testopia calls
+#
+# Author: Rusty Howell (rhowell@novell.com)
+#
 
 from testopia import Testopia
 import types
