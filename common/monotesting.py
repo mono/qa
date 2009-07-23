@@ -182,8 +182,8 @@ def __loadConfFile():
     conf_file_path = os.path.join(__getCommonDir(),conf_file)
 
     if not os.path.exists(conf_file_path):
-        print "ERROR: Cannot find %s" % conf_file_path
-        sys.exit(1)
+        helpers.printColor("Warning: Cannot find conf file '%s'" % conf_file_path,'red')
+        return
 
     config = ConfigParser.ConfigParser()
     config.read(conf_file_path)
