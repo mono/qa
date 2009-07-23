@@ -6,7 +6,6 @@ monoVersion = "2.4.2.3"
 pkgs = {
     #'pkg-config --modversion atk':  '1.24.0',
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
-    'pkg-config --modversion mono':             monoVersion,
     'pkg-config --modversion mono-cairo':       monoVersion,
     'pkg-config --modversion mono-lineeditor':  '0.2.1',
     'pkg-config --modversion mono-nunit':       monoVersion,
@@ -20,6 +19,7 @@ pkgs = {
 # These packages are unique to linux
 linux_pkgs = {
     'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
+    'pkg-config --modversion mono':             monoVersion,
     'pkg-config --modversion mono-addins':      '0.4',
     'pkg-config --modversion mono-addins-gui' : '0.4',
     'pkg-config --modversion mono-addins-setup':'0.4',
@@ -40,6 +40,7 @@ macos_pkgs = {
 
 # These packages are unique to win32
 win32_pkgs = {
+    'pkg-config --modversion mono':             monoVersion,
 }
 
 
