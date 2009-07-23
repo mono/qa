@@ -5,6 +5,7 @@ import os
 import pdb
 import re
 import string
+import subprocess
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
@@ -59,9 +60,9 @@ class pkgVersionsTestCase(smokeTestCase):
             cmd = getPrefix() + exe
             mono.log("Checking '%s'" % exe)
             matched = False
-            output = string.join(executeCmd(cmd)).replace('\r ','\n')
+            output = string.join(executeCmd(cmd,stderr=subprocess.STDOUT)).replace('\r ','\n')
 
-            if not re.search("[^.0-9]*" + exes[exe] + "[^.0-9]*", output):
+            if not re.search("[^.0-9a-zA-Z]*" + exes[exe] + "[^.0-9a-zA-Z]*", output):
                 errors.append("\t '%s' expected '%s' got:\n%s\n" % (exe,exes[exe],output))
 
         if len(errors) != 0:

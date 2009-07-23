@@ -57,6 +57,8 @@ exes = {
     'resgen --version':             monoVersion,
     'resgen1 --version':            monoVersion,
     'mod-mono-server --version':    '2.4.2.0',
+    'mod-mono-server1 --version':   '2.4.2.0',
+    'mod-mono-server2 --version':   '2.4.2.0',
     'signcode --version':           monoVersion,
     'csharp --version':             monoVersion,
     'al --version':                 monoVersion,
@@ -79,8 +81,31 @@ macos_exes = {
 
 # These executables are unique to win32
 win32_exes = {
-    'envsubst --version':              '0.17',
-    'gconftool-2 --version':              '2.22.0',
+    'envsubst --version':                            '0.17',
+    'gconftool-2 --version':                         '2.22.0',
+    'gdk-pixbuf-csource --version':                  '2.14.7',
+    'glib-genmarshal --version':                     '2.18.4',
+    'monodis':                                       'Disassembler',
+    'monograph --version':                           '0.2',
+    'msgfmt --version':                              '0.17',
+    'pango-querymodules --version':                  '1.22.4',
+    'pkg-config --version':                          '0.23',
+    'recode-sr-latin.exe --version':                 '0.17',
+    'booc --version':                                '0.9.1.3287',
+    'caspol':                                        monoVersion,
+    'certmgr':                                       monoVersion,
+    'chktrust':                                      monoVersion,
+    'disco':                                         monoVersion,
+    'fastcgi-mono-server --version':                 '2.4.2.0',
+    'fastcgi-mono-server1 --version':                '2.4.2.0',
+    'fastcgi-mono-server2 --version':                '2.4.2.0',
+    'gendarme --version':                            '2.4.2.0',
+    'ikvm -version':                                 '0.38.0.4',
+    'ipy -V':                                        '1.1',
+    'ipy2 -V':                                       '2.0A5',
+    'makecert':                                      monoVersion,
+    'mdoc --version':                                '0.1.0',
+    'mjs --version':                                 '0.0.0.0',
 }
 
 # vim:ts=4:expandtab:
