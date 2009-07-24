@@ -5,6 +5,7 @@ import unittest
 import traceback
 import subprocess
 import uuid
+import tempfile
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
@@ -23,6 +24,10 @@ from common.helpers import *
 
 class gmcs2TestCase(smokeTestCase):
     testcaseid = 0
+
+    def setUp(self):
+        self.tmpDir = tempfile.mkdtemp()
+        os.chdir(self.tmpDir)
 
     def test(self):
         u = uuid.uuid1()
@@ -58,6 +63,7 @@ class m
     def tearDown(self):
         self.remove('list.cs')
         self.remove('list_cs.exe')
+        os.rmdir(self.tmpDir)
 
 
 if __name__ == '__main__':

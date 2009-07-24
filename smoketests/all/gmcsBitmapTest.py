@@ -12,6 +12,8 @@ basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
 
 sys.path.append(basepath)
 import common.monotesting as mono
+import tempfile
+import pdb
 from smoketests.smokeTestCase import smokeTestCase
 from common.helpers import *
 
@@ -25,6 +27,10 @@ class gmcs2TestCase(smokeTestCase):
     testcaseid = 0
     codefile = 'bitmap.cs'
     exefile = 'bitmap_test.exe'
+
+    def setUp(self):
+        self.tmpDir = tempfile.mkdtemp()
+        os.chdir(self.tmpDir)
 
     def test(self):
         u = uuid.uuid1()
@@ -57,6 +63,7 @@ public class mclass
     def tearDown(self):
         self.remove(self.codefile)
         self.remove(self.exefile)
+        os.rmdir(self.tmpDir)
 
 
 if __name__ == '__main__':

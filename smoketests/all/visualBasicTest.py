@@ -5,6 +5,7 @@ import unittest
 import traceback
 import subprocess
 import uuid
+import tempfile
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
@@ -23,6 +24,10 @@ from smoketests.smokeTestCase import smokeTestCase
 
 class visualBasicTestCase(smokeTestCase):
     testcaseid = 0
+
+    def setUp(self):
+        self.tmpDir = tempfile.mkdtemp()
+        os.chdir(self.tmpDir)
 
     def test(self):
         u = uuid.uuid1()
@@ -47,6 +52,7 @@ End Class
     def tearDown(self):
         self.remove('helloworld.vb')
         self.remove('helloworld_vb.exe')
+        os.rmdir(self.tmpDir)
 
 
 if __name__ == '__main__':
