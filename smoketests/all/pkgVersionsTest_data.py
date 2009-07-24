@@ -78,6 +78,22 @@ linux_exes = {
 macos_exes = {
     'monodocer --version':          '0.1.0',
     'mconfig --version':            '0.1.0.0',
+    'monodis':                                       'Disassembler',
+    'monograph --version':                           '0.2',
+    'pango-querymodules --version':                  '1.22.4',
+    'pkg-config --version':                          '0.23',
+    'booc --version':                                '0.9.1.3287',
+    'caspol':                                        monoVersion,
+    'certmgr':                                       monoVersion,
+    'chktrust':                                      monoVersion,
+    'disco':                                         monoVersion,
+    'fastcgi-mono-server --version':                 '2.4.2.0',
+    'fastcgi-mono-server1 --version':                '2.4.2.0',
+    'fastcgi-mono-server2 --version':                '2.4.2.0',
+    'ipy -V':                                        '1.1',
+    'ipy2 -V':                                       '2.0A5',
+    'makecert':                                      monoVersion,
+    'mdoc --version':                                '0.1.0',
 }
 
 # These executables are unique to win32
