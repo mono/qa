@@ -174,7 +174,7 @@ class monoTestopia(Testopia):
 
         tr = self.testrun
 
-        if errorsList == None and len(errorsList) == 0:
+        if errorsList == None or len(errorsList) == 0:
             self.testcaserun_update_alt(
                     run_id=tr['run_id'],
                     case_id=testcaseid,
