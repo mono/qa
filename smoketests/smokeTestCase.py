@@ -148,7 +148,7 @@ def generateFileListInWindows(basepath):
     print "    smokeTestCase.generateFileListInWindows(basepath)"
 
 
-def generateFileList(basepath,filename):
+def generateFileListOnMacOS(basepath,filename):
     f = open(filename,'w')
     files = {}
     symlinks = {}
@@ -171,11 +171,7 @@ def generateFileList(basepath,filename):
         symlinks[curWalkDir] = linksInCurDir
 
     f.write("\nimport os")
-    f.write("\nfrom glob import glob\n")
-    f.write("\nimport sys")
-    f.write("\nsys.path.append('..')")
-    f.write("\nimport smokeTestCase\n")
-    f.write("\nbasepath = glob('%s')[0]\n" % basepath)
+    f.write("\nbasepath = '%s'\n" % basepath)
     f.write("\nfiles = {",)
     for curKey in files.keys():
         if len(files[curKey]) > 0:
