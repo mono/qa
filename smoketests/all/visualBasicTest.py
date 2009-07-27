@@ -23,7 +23,7 @@ from smoketests.smokeTestCase import smokeTestCase
 #
 
 class visualBasicTestCase(smokeTestCase):
-    testcaseid = 0
+    testcaseid = 875240
 
     def setUp(self):
         self.tmpDir = tempfile.mkdtemp()

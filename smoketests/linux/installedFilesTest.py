@@ -23,28 +23,13 @@ from filelist import *
 #
 
 class installedFilesTestCase(smokeTestCase):
-    testcaseid = 0
+    testcaseid = 875244
 
-    #def testFiles(self):
-    #    self.checkFiles(files)
-
-    #def testDirs(self):
-    #    self.checkDirs(dirs)
-
-    #def testSymlinks(self):
-    #    self.checkSymlinks(symlinks)
-
-    #def testUnexpectedFiles(self):
-    #    self.checkUnexpectedFiles(unexpectedfiles)
-
-    #def testUnexpectedDirs(self):
-    #    self.checkUnexpectedDirs(unexpecteddirs)
-
-    #def testUnexpectedSymlinks(self):
-    #    self.checkUnexpectedSymlinks(unexpectedsymlinks)
+    def testSymlinks(self):
+        self.checkForSymlinks(symlinks)
 
     def testFiles(self):
-        self.checkFilesInWindows(files)
+        self.checkForFiles(files)
 
 if __name__ == '__main__':
     mono.monotesting_main()

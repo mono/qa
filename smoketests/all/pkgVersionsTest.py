@@ -24,7 +24,7 @@ from pkgVersionsTest_data import *
 #
 
 class pkgVersionsTestCase(smokeTestCase):
-    testcaseid = 0
+    testcaseid = 875243
 
     def setUp(self):
         if whichOS() == 'macos':

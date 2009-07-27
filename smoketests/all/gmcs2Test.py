@@ -23,7 +23,7 @@ from common.helpers import *
 #
 
 class gmcs2TestCase(smokeTestCase):
-    testcaseid = 0
+    testcaseid = 875239
 
     def setUp(self):
         self.tmpDir = tempfile.mkdtemp()

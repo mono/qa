@@ -23,16 +23,13 @@ from filelist import *
 #
 
 class installedFilesTestCase(smokeTestCase):
-    testcaseid = 0
-
-    #def testFiles(self):
-    #    self.checkFiles(files)
+    testcaseid = 875245
 
     def testSymlinks(self):
-        self.checkSymlinksInWindows(symlinks)
+        self.checkForSymlinks(symlinks)
 
     def testFiles(self):
-        self.checkFilesInWindows(files)
+        self.checkForFiles(files)
 
 if __name__ == '__main__':
     mono.monotesting_main()

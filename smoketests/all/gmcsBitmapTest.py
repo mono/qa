@@ -24,7 +24,7 @@ from common.helpers import *
 #
 
 class gmcs2TestCase(smokeTestCase):
-    testcaseid = 0
+    testcaseid = 875242
     codefile = 'bitmap.cs'
     exefile = 'bitmap_test.exe'
 
