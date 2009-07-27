@@ -19,7 +19,7 @@ from smoketests.smokeTestCase import smokeTestCase
 
 ####################################################################
 #
-#    xsp1TestCase class
+#    visualBasicTestCase class
 #
 
 class visualBasicTestCase(smokeTestCase):

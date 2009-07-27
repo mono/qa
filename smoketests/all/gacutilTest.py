@@ -16,7 +16,7 @@ from common.helpers import *
 
 ####################################################################
 #
-#    xsp1TestCase class
+#    gacutilTestCase class
 #
 
 class gacutilTestCase(smokeTestCase):

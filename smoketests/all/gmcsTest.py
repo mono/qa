@@ -19,7 +19,7 @@ from common.helpers import *
 
 ####################################################################
 #
-#    xsp1TestCase class
+#    gmcsTestCase class
 #
 
 class gmcsTestCase(smokeTestCase):

@@ -20,10 +20,10 @@ from common.helpers import *
 
 ####################################################################
 #
-#    xsp1TestCase class
+#    gmcsBitmapTestCase class
 #
 
-class gmcs2TestCase(smokeTestCase):
+class gmcsBitmapTestCase(smokeTestCase):
     testcaseid = 875242
     codefile = 'bitmap.cs'
     exefile = 'bitmap_test.exe'
