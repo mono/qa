@@ -56,6 +56,7 @@ class smokeTestCase(monoTestCase):
                 # check that the expected files exist
                 for curFile in dict[curDirGlob]:
                     for wholeFile in glob.glob(os.path.join(curDir, curFile)):
+                        
                         self.assertTrue(chkFunc(wholeFile),"[%s] Not Found." % wholeFile)
 
                 # check that there aren't any unexpected files that exist
@@ -148,7 +149,7 @@ def generateFileListInWindows(basepath):
     print "    smokeTestCase.generateFileListInWindows(basepath)"
 
 
-def generateFileListOnMacOS(basepath,filename):
+def generateFileListInMacOS(basepath,filename):
     f = open(filename,'w')
     files = {}
     symlinks = {}
