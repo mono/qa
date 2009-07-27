@@ -11,4 +11,4 @@ basepath = glob('/Library/Frameworks/Mono.framework/Versions/*')[0]
 
 if __name__ == '__main__':
     filename = 'installedFilesTest_filelist.py'
-    smokeTestCase.generateFileListOnMacOS(basepath,filename)
+    smokeTestCase.generateFileList(basepath,filename)

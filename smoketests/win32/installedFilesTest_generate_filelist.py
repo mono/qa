@@ -8,4 +8,5 @@ import smokeTestCase
 basepath = glob("C:\Program Files\Mono-*")[0]
 
 if __name__ == '__main__':
-    smokeTestCase.generateFileListInWindows(basepath)
+    filename = 'installedFilesTest_filelist.py'
+    smokeTestCase.generateFileList(basepath,filename)
