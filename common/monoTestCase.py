@@ -14,11 +14,11 @@ import monotesting as mono
 
 
 class monoTestCase(unittest.TestCase):
+    testcaseid = 0
 
     def __init__(self,methodname="runTest"):
         unittest.TestCase.__init__(self,methodname)
         self.verificationErrors = []
-        self.testcaseid = 0
 
     #----------------------------------------------------------------------
     def isTestCaseInTestRun(self):

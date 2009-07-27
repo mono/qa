@@ -147,6 +147,8 @@ class monoTestopia(Testopia):
         if self.canConnect:
             status = status.upper()
             print "Updating %d %s test cases" % (len(ids),status)
+            if len(ids) == 0:
+                return
             caserun_ids = self.__convertToTestCaseRunIds(ids)
             self.testcaserun_update(caserun_ids=caserun_ids,case_run_status_id=BUG_STATUS[status])
         #else:
