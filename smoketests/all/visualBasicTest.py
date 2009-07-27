@@ -27,6 +27,7 @@ class visualBasicTestCase(smokeTestCase):
 
     def setUp(self):
         self.tmpDir = tempfile.mkdtemp()
+        self.startDir = os.getcwd()
         os.chdir(self.tmpDir)
 
     def test(self):
@@ -52,6 +53,7 @@ End Class
     def tearDown(self):
         self.remove('helloworld.vb')
         self.remove('helloworld_vb.exe')
+        os.chdir(self.startDir)
         os.rmdir(self.tmpDir)
 
 

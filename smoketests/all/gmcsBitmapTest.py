@@ -30,6 +30,7 @@ class gmcs2TestCase(smokeTestCase):
 
     def setUp(self):
         self.tmpDir = tempfile.mkdtemp()
+        self.startDir = os.getcwd()
         os.chdir(self.tmpDir)
 
     def test(self):
@@ -63,6 +64,7 @@ public class mclass
     def tearDown(self):
         self.remove(self.codefile)
         self.remove(self.exefile)
+        os.chdir(self.startDir)
         os.rmdir(self.tmpDir)
 
 

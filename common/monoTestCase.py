@@ -29,4 +29,35 @@ class monoTestCase(unittest.TestCase):
     def updateTestCase(self,errorsList):
         print "Deprecated call to monoTestCase.updateTestCase()"
 
+    #----------------------------------------------------------------------
+    def assertLessThan(self, first, second, msg=None):
+        """Fail if the second >= first as determined by the '<' operator.
+        """
+        if not first < second:
+            raise self.failureException, \
+                  (msg or '%r >= %r' % (second, first))
+
+    def assertGreaterThan(self, first, second, msg=None):
+        """Fail if the second <= first as determined by the '>' operator.
+        """
+        if not first > second:
+            raise self.failureException, \
+                  (msg or '%r <= %r' % (second, first))
+
+    def assertLessThanOrEquals(self, first, second, msg=None):
+        """Fail if the second > first as determined by the '<=' operator.
+        """
+        if not first <= second:
+            raise self.failureException, \
+                  (msg or '%r > %r' % (second, first))
+
+    def assertGreaterThanOrEquals(self, first, second, msg=None):
+        """Fail if the second < first as determined by the '>=' operator.
+        """
+        if not first >= second:
+            raise self.failureException, \
+                  (msg or '%r < %r' % (second, first))
+
+
+
 # vim:ts=4:expandtab:
