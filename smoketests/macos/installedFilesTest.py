@@ -28,23 +28,11 @@ class installedFilesTestCase(smokeTestCase):
     #def testFiles(self):
     #    self.checkFiles(files)
 
-    #def testDirs(self):
-    #    self.checkDirs(dirs)
-
-    #def testSymlinks(self):
-    #    self.checkSymlinks(symlinks)
-
-    #def testUnexpectedFiles(self):
-    #    self.checkUnexpectedFiles(unexpectedfiles)
-
-    #def testUnexpectedDirs(self):
-    #    self.checkUnexpectedDirs(unexpecteddirs)
-
-    #def testUnexpectedSymlinks(self):
-    #    self.checkUnexpectedSymlinks(unexpectedsymlinks)
+    def testSymlinks(self):
+        self.checkSymlinksInWindows(symlinks)
 
     def testFiles(self):
-        self.checkListInMacOS(files,os.path.isfile)
+        self.checkFilesInWindows(files)
 
 if __name__ == '__main__':
     mono.monotesting_main()
