@@ -5,6 +5,7 @@ import unittest
 import traceback
 import pdb
 import glob
+import getpass
 
 filepath = os.path.realpath(__file__)
 basepath = os.path.dirname(os.path.dirname(filepath))
@@ -23,6 +24,15 @@ from common.monoTestCase import monoTestCase
 
 class smokeTestCase(monoTestCase):
     testcaseid = 0
+
+    def __init__(self,methodname='runTest'):
+        if isAppliance():
+            if getpass.getuser() != "root":
+                raise Exception("You must run this script as root")
+
+        monoTestCase.__init__(self,methodname)
+        self.verificationErrors = []
+        unittest.TestCase.__init__(self, methodname)
 
 
     def remove(self,filepath):
@@ -91,7 +101,26 @@ class smokeTestCase(monoTestCase):
 
     def checkForSymlinks(self,symlinksDict):
         self.checkForList(symlinksDict, os.path.islink)
+    #---------------------------------------------------------------
+    # These are functions mostly for the vmware test cases
+    def getFileSize(self, filePath):
+        statinfo = os.stat(filePath)
+        return int(statinfo.st_size)
 
+    def getActiveSwapSize(self):
+        cmdOut = executeCmd("free -m")
+        return int(cmdOut[3].split()[1])
+
+    def areZypperRepoRefreshesOff(self):
+        cmdOut = executeCmd("zypper lr")[2:-1]
+        for curRefresh in cmdOut:
+            self.assertEqual(curRefresh.split()[-1], "No")
+
+    def canZypperReposBeRefreshed(self):
+        cmdOut = executeCmd("zypper ref")[-2].strip()
+        self.assertEqual(cmdOut, "All repositories have been refreshed.")
+
+    #---------------------------------------------------------------
 def generateFileList(basepath,filename):
     f = open(filename,'w')
     files = {}
