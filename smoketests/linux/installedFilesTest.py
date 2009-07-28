@@ -14,7 +14,7 @@ sys.path.append(basepath)
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
 
-from filelist import *
+from installedFilesTest_filelist import *
 
 
 ####################################################################

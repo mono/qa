@@ -16,11 +16,27 @@ if myOS == 'win32':
     print "Importing Win32 tests"
     from win32.alltests import *
 elif myOS == 'linux':
-    print "Importing Linux tests"
+    if not isAppliance():
+        print "Importing Linux tests"
+    else:
+        appType = whichAppliance()
+        if appType == "vmware":
+            print "Importing VMware Appliance tests"
+        elif appType == "vpc":
+            print "Importing VirtualPC Appliance tests"
+        elif appType == "livecd":
+            print "Importing LiveCD Appliance tests"
+        else:
+            raise Exception("Unknown Appliance Type")
+        from appliances.alltests import *
     from linux.alltests import *
 elif myOS  == 'macos':
     print "Importing Mac OSX tests"
+    from linux.alltests import *
     from macos.alltests import *
+    from appliances.alltests import *
+else:
+    raise Exception("Unknown OS to run smoke tests on")
 
 
 if __name__ == '__main__':

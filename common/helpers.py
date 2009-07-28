@@ -27,29 +27,38 @@ def executeCmd(command, stderr=open(os.devnull)):
     lines = output.split('\n')
     return lines
 
+def whichAppliance():
+    if os.path.isfile("/studio/profile"):
+        # this will determine if it's running on vpc
+        moboMaker = executeCmd("hal-device computer | grep system.board.vendor")[0].strip()
+
+        # this tells us what type if image kiwi created (VM or LiveCD)
+        for curLine in open("/studio/profile").readlines():
+            if "kiwi_type=" in curLine:
+                kiwiType = curLine.split("=")[1].strip().strip("\"")
+
+        if moboMaker == "system.board.vendor = 'Microsoft Corporation'  (string)" and kiwiType == "vmx":
+            return 'vpc'
+        elif kiwiType == "iso":
+            return 'livecd'
+        elif kiwiType == "vmx":
+            return 'vmware'
+        else:
+            raise Exception("Couldn't determine the type of kiwi created image I'm running on.")
+
+def isAppliance():
+    type = whichAppliance()
+    if type == "vmware" or \
+       type == "vpc" or \
+       type == "livecd":
+       return True
+    return False
+
 def whichOS():
     if sys.platform == 'win32':
         return 'win32'
     elif sys.platform == 'linux2':
-        if os.path.isfile("/studio/profile"):
-            # this will determine if it's running on vpc
-            moboMaker = executeCmd("hal-device computer | grep system.board.vendor")[0].strip()
-
-            # this tells us what type if image kiwi created (VM or LiveCD)
-            for curLine in open("/studio/profile").readlines():
-                if "kiwi_type=" in curLine:
-                    kiwiType = curLine.split("=")[1].strip().strip("\"")
-
-            if moboMaker == "system.board.vendor = 'Microsoft Corporation'  (string)" and kiwiType == "vmx":
-                return 'vpc'
-            elif kiwiType == "iso":
-                return 'livecd'
-            elif kiwiType == "vmx":
-                return 'vmware'
-            else:
-                raise Exception("Couldn't determine the type of kiwi created image I'm running on.")
-        else:
-            return 'linux'
+        return 'linux'
     elif sys.platform == 'darwin':
         return 'macos'
 
