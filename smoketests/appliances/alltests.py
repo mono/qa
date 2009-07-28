@@ -8,6 +8,7 @@ from common.monotesting import *
 # Add child test suites to test suite
 from areRepoRefreshesOff import *
 from canReposRefresh import *
+from verifyZypperReposAreSetupCorrectly import *
 from isSwapFileActive import *
 from swapFileSize import *
 

@@ -121,6 +121,24 @@ class smokeTestCase(monoTestCase):
         cmdOut = executeCmd("zypper ref")[-2].strip()
         self.assertEqual(cmdOut, "All repositories have been refreshed.")
 
+    def verifyZypperRepoData(self, expectedRepoData):
+        cmdOut = executeCmd("zypper lr -u")[2:-1]
+        numVerifiedRepos = 0
+
+        for curLine in cmdOut:
+            curRepo = curLine.split("|")
+            alias = curRepo[1].strip()
+            name = curRepo[2].strip()
+            enabled = curRepo[3].strip()
+            refresh = curRepo[4].strip()
+            uri = curRepo[5].strip()
+            self.assertEqual(name, expectedRepoData[alias][0])
+            self.assertEqual(enabled, expectedRepoData[alias][1])
+            self.assertEqual(refresh, expectedRepoData[alias][2])
+            self.assertEqual(uri, expectedRepoData[alias][3])
+            numVerifiedRepos += 1
+        self.assertEqual(numVerifiedRepos, len(expectedRepoData))
+
     #---------------------------------------------------------------
 def generateFileList(basepath,filename):
     f = open(filename,'w')
