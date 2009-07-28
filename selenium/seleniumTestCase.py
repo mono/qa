@@ -1,9 +1,16 @@
 # vim:ts=4:expandtab:
+
 import sys
+import os
 import unittest
 import traceback
 
-sys.path.append('..')
+basepath = os.path.dirname(os.path.realpath(__file__))
+while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
+    basepath = os.path.dirname(basepath)
+if not basepath in sys.path:
+    sys.path.append(basepath)
+
 import common.monotesting as mono
 from common.helpers import checkOption
 
