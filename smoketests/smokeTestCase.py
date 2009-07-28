@@ -139,6 +139,11 @@ class smokeTestCase(monoTestCase):
             numVerifiedRepos += 1
         self.assertEqual(numVerifiedRepos, len(expectedRepoData))
 
+    def verifyDiskSize(self, mntPoint, expectedSize):
+        s = os.statvfs(mntPoint)
+        actualSize = (s.f_blocks * s.f_frsize / 1024)
+        self.assertGreaterThanOrEquals(actualSize, expectedSize)
+
     #---------------------------------------------------------------
 def generateFileList(basepath,filename):
     f = open(filename,'w')
