@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 
-import sys,os
+import sys
+import os
 import unittest
 import traceback
 import subprocess
 import uuid
 
-filepath = os.path.realpath(__file__)
-basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
-#basepath is the absolute path of the trunk/qa directory
+basepath = os.path.dirname(os.path.realpath(__file__))
+while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
+    basepath = os.path.dirname(basepath)
+if not basepath in sys.path:
+    sys.path.append(basepath)
 
-sys.path.append(basepath)
 import common.monotesting as mono
 import tempfile
 import pdb

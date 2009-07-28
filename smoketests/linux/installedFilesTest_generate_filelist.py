@@ -1,11 +1,16 @@
 #!/usr/bin/python
 
+import sys
 import os
 from glob import glob
 
-import sys
-sys.path.append("..")
-import smokeTestCase
+basepath = os.path.dirname(os.path.realpath(__file__))
+while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
+    basepath = os.path.dirname(basepath)
+if not basepath in sys.path:
+    sys.path.append(basepath)
+
+from smoketests import smokeTestCase
 
 basepath = '/usr/lib/mono'
 
