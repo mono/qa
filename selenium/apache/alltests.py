@@ -14,6 +14,7 @@ from BlogStarterKit.alltests import *
 from ClassifiedsStarterKit.alltests import *
 from ClubWebSite.alltests import *
 from MonoForums.alltests import *
+from mvc.alltests import *
 
 if __name__ == '__main__':
     monotesting_main()
