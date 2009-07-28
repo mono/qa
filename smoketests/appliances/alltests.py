@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+import os
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
