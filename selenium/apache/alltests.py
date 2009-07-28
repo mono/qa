@@ -8,7 +8,7 @@ from common.monotesting import *
 # Add child test suites to test suite
 
 
-#from blogengine.alltests import *
+from blogengine.alltests import *
 #from mojoportal.alltests import *
 from BlogStarterKit.alltests import *
 from ClassifiedsStarterKit.alltests import *

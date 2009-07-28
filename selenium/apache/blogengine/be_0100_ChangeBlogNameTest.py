@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class be_0100_ChangeBlogNameTest(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 875588
     def test(self):
         if not self.canRun:
             return

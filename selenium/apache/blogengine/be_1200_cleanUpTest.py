@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class be_1200_cleanUpTest(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 875599
     def test(self):
         if not self.canRun:
             return

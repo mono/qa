@@ -7,7 +7,7 @@ import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
 class be_0800_createStoryAsMonoUserTestt(apacheTestCase):
-    apacheTestCaseId = None
+    apacheTestCaseId = 875595
     def test(self):
         if not self.canRun:
             return
