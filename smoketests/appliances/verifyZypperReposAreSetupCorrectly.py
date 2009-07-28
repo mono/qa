@@ -2,18 +2,18 @@
 
 import sys, unittest, os
 
-filepath = os.path.realpath(__file__)
-basepath = os.path.dirname(os.path.dirname(os.path.dirname(filepath)))
-#basepath is the absolute path of the trunk/qa directory
-
-sys.path.append(basepath)
+basepath = os.path.dirname(os.path.realpath(__file__))
+while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
+    basepath = os.path.dirname(basepath)
+if not basepath in sys.path:
+    sys.path.append(basepath)
 
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
 
 
 class verifyZypperReposAreSetupCorrectly(smokeTestCase):
-    vmImageTestCaseId = 828169
+    testcaseid = 828169
 
     def test(self):
         expectedRepoData = { "Mono:Community_11.1+Mono": ("Mono:Community_11.1+Mono","Yes","No","http://download.opensuse.org/repositories/Mono:/Community/openSUSE_11.1+Mono"),
