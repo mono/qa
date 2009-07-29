@@ -11,13 +11,12 @@ if not basepath in sys.path:
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
 
-
-class swapFileSize(smokeTestCase):
-    testcaseid = 546301
+class verifySwapFileIsActive(smokeTestCase):
+    testcaseid = 546302
 
     def test(self):
-        swapFileSize = self.getFileSize("/swap")
-        self.assertEqual(swapFileSize, 536870912)
+        activeSwapSize = self.getActiveSwapSize()
+        self.assertEqual(activeSwapSize, 511)
 
 if __name__ == "__main__":
     mono.monotesting_main()

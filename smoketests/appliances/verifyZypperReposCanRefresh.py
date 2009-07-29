@@ -12,7 +12,7 @@ import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
 
 
-class canReposRefresh(smokeTestCase):
+class verifyReposCanRefresh(smokeTestCase):
     testcaseid = 546327
 
     def test(self):
