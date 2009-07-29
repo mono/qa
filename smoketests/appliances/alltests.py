@@ -18,6 +18,7 @@ from verifyZypperReposAreSetupCorrectly import *
 from verifySwapFileIsActive import *
 from verifySwapFileSize import *
 from verifyRootDiskSize import *
+from verifyRootDiskInodeCount import *
 
 
 if __name__ == '__main__':

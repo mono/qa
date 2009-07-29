@@ -144,6 +144,10 @@ class smokeTestCase(monoTestCase):
         actualSize = (s.f_blocks * s.f_frsize / 1024)
         self.assertGreaterThanOrEquals(actualSize, expectedSize)
 
+    def verifyDiskInodeCount(self, mntPoint, expectedNumberOfInodes):
+        s = os.statvfs(mntPoint)
+        actualNumberOfInodes = s.f_files
+        self.assertGreaterThanOrEquals(actualNumberOfInodes, expectedNumberOfInodes)
     #---------------------------------------------------------------
 def generateFileList(basepath,filename):
     f = open(filename,'w')
