@@ -12,11 +12,11 @@ from common.monotesting import *
 
 # sub directories
 # Add child test suites to test suite
-from areRepoRefreshesOff import *
-from canReposRefresh import *
+from verifyRepoRefreshesAreOff import *
+from verifyReposCanRefresh import *
 from verifyZypperReposAreSetupCorrectly import *
-from isSwapFileActive import *
-from swapFileSize import *
+from verifySwapFileIsActive import *
+from verifySwapFileSize import *
 from verifyRootDiskSize import *
 
 
