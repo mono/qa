@@ -6,6 +6,7 @@ import traceback
 import pdb
 import glob
 import getpass
+import ConfigParser
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
@@ -148,6 +149,24 @@ class smokeTestCase(monoTestCase):
         s = os.statvfs(mntPoint)
         actualNumberOfInodes = s.f_files
         self.assertGreaterThanOrEquals(actualNumberOfInodes, expectedNumberOfInodes)
+
+    def verifyDesktopFileData(self, filePath, fileName, expectedData):
+        self.assertTrue(os.path.isfile(filePath + "/" + fileName))
+        config = ConfigParser.ConfigParser()
+        config.read(filePath + "/" + fileName)
+        for curData in expectedData:
+            self.assertEqual(config.get("Desktop Entry",curData[0]), curData[1])
+
+    def verifyOnlyExpectedDesktopFilesExist(self, filePath, expectedData):
+        desktopFiles = {}
+        for curIcon in expectedData:
+            desktopFiles[curIcon[0]] = curIcon[0]
+
+        entries = glob.glob(filePath + "/*.desktop")
+        for curEntry in entries:
+            if os.path.isfile(curEntry):
+                fileName = curEntry.split("/")[-1]
+                self.assertEqual(desktopFiles[fileName], fileName)
     #---------------------------------------------------------------
 def generateFileList(basepath,filename):
     f = open(filename,'w')

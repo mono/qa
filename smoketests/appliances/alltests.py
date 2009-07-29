@@ -19,6 +19,13 @@ from verifySwapFileIsActive import *
 from verifySwapFileSize import *
 from verifyRootDiskSize import *
 from verifyRootDiskInodeCount import *
+from verifySampleAspxPageWorks import *
+from verifyDesktopIconsData import *
+from verifyGtkSharpApplicationIconsData import *
+from verifyTheXdgAutoStartIconsData import *
+from verifyWebApplicationIconsData import *
+from verifyWebSiteIconsData import *
+from verifyWinformApplicationIconsData import *
 
 
 if __name__ == '__main__':

@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import sys, unittest, os
+
+basepath = os.path.dirname(os.path.realpath(__file__))
+while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
+    basepath = os.path.dirname(basepath)
+if not basepath in sys.path:
+    sys.path.append(basepath)
+
+import common.monotesting as mono
+from smoketests.smokeTestCase import smokeTestCase
+from common.helpers import executeCmd
+
+
+class verifyTheXdgAutoStartIconsData(smokeTestCase):
+    testcaseid = 871071
+
+    def test(self):
+        iconPath = "/etc/xdg/autostart"
+        icons = [ ("gnome-at-session.desktop",("Exec","gnome-at-visual -s"),("Name","Visual Assistance"),("Type","Application")),
+                  ("gnome-settings-daemon.desktop",("Exec","/usr/lib/gnome-settings-daemon/gnome-settings-daemon"),("Name","GNOME Settings Daemon"),("Type","Application")),
+                  ("nm-applet.desktop",("Exec","nm-applet --sm-disable"),("Name","Network Manager"),("Type","Application")),
+                  ("pulseaudio.desktop",("Exec","start-pulseaudio-x11"),("Name","PulseAudio Sound System"),("Type","Application")),
+                  ("vmware-user-autostart.desktop",("Exec","vmware-user-autostart-wrapper"),("Name","VMware User Agent"),("Type","Application")) ]
+
+        self.verifyOnlyExpectedDesktopFilesExist(iconPath, icons)
+        for curIcon in icons:
+            self.verifyDesktopFileData(iconPath, curIcon[0], curIcon[1:])
+
+if __name__ == "__main__":
+    mono.monotesting_main()
+
+# vim:ts=4:expandtab:
