@@ -12,8 +12,8 @@ from common.monotesting import *
 
 # sub directories
 # Add child test suites to test suite
-from verifyRepoRefreshesAreOff import *
-from verifyReposCanRefresh import *
+from verifyZypperRepoRefreshesAreOff import *
+from verifyZypperReposCanRefresh import *
 from verifyZypperReposAreSetupCorrectly import *
 from verifySwapFileIsActive import *
 from verifySwapFileSize import *
