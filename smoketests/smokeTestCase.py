@@ -104,7 +104,7 @@ class smokeTestCase(monoTestCase):
     def checkForSymlinks(self,symlinksDict):
         self.checkForList(symlinksDict, os.path.islink)
     #---------------------------------------------------------------
-    # These are functions mostly for the vmware test cases
+    # These functions are mostly used in the vmware test cases
     def getFileSize(self, filePath):
         statinfo = os.stat(filePath)
         return int(statinfo.st_size)
@@ -151,9 +151,9 @@ class smokeTestCase(monoTestCase):
         self.assertGreaterThanOrEquals(actualNumberOfInodes, expectedNumberOfInodes)
 
     def verifyDesktopFileData(self, filePath, fileName, expectedData):
-        self.assertTrue(os.path.isfile(filePath + "/" + fileName))
+        self.assertTrue(os.path.isfile(os.path.join(filePath,fileName)))
         config = ConfigParser.ConfigParser()
-        config.read(filePath + "/" + fileName)
+        config.read(os.path.join(filePath,fileName))
         for curData in expectedData:
             self.assertEqual(config.get("Desktop Entry",curData[0]), curData[1])
 
@@ -162,11 +162,50 @@ class smokeTestCase(monoTestCase):
         for curIcon in expectedData:
             desktopFiles[curIcon[0]] = curIcon[0]
 
-        entries = glob.glob(filePath + "/*.desktop")
+        entries = glob.glob(filePath + os.sep + "*.desktop")
         for curEntry in entries:
             if os.path.isfile(curEntry):
-                fileName = curEntry.split("/")[-1]
+                fileName = os.path.basename(curEntry)
                 self.assertEqual(desktopFiles[fileName], fileName)
+
+    def verifyProcessIsRunningAsUser(self, processName, userName):
+        cmdOut = executeCmd("ps -e -o pid,user,command|grep %s|grep -v grep" % processName)[0].split()
+        self.assertEqual(cmdOut[1], userName)
+        self.assertEqual(cmdOut[2], processName)
+
+    def verifyFilePermissions(self, filePath, expectedPermissions, expectedUid, expectedGid):
+        self.assertTrue(os.path.isfile(filePath), "%s is not a file" % filePath)
+        st = os.stat(filePath)
+        self.assertEqual(st.st_mode, expectedPermissions)
+        self.assertEqual(st.st_uid, expectedUid)
+        self.assertEqual(st.st_gid, expectedGid)
+
+    def verifyDirectoryPermissions(self, dirPath, expectedPermissions, expectedUid, expectedGid):
+        self.assertTrue(os.path.isdir(dirPath), "%s is not a directory" % dirPath)
+        st = os.stat(dirPath)
+        self.assertEqual(st.st_mode, expectedPermissions)
+        self.assertEqual(st.st_uid, expectedUid)
+        self.assertEqual(st.st_gid, expectedGid)
+
+    def verifyFileContainsLine(self, fileName, line):
+        found = False
+        for curLine in open(fileName).readlines():
+            if line in curLine:
+                found = True
+        self.assertTrue(found, "%s was not found in %s" % (line, fileName))
+
+    def verifyTheseRpmsAreInstalled(self, expectedRpms):
+        cmdOut = executeCmd("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
+        rpms = dict(zip(cmdOut,cmdOut))
+        for curExpRpm in expectedRpms:
+            self.assertEqual(rpms[curExpRpm], curExpRpm)
+
+    def verifyKernelCommandLineOptions(self, expectedOptions):
+        actualOptions = open("/proc/cmdline","r").read().split()
+        expectedOptions.sort()
+        actualOptions.sort()
+        self.assertEqual(actualOptions, expectedOptions)
+
     #---------------------------------------------------------------
 def generateFileList(basepath,filename):
     f = open(filename,'w')

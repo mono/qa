@@ -12,20 +12,28 @@ from common.monotesting import *
 
 # sub directories
 # Add child test suites to test suite
-from verifyZypperRepoRefreshesAreOff import *
-from verifyZypperReposCanRefresh import *
-from verifyZypperReposAreSetupCorrectly import *
+from verifyApacheIsRunning import *
+from verifyApacheWebDirPerms import *
+from verifyDesktopIconsData import *
+from verifyExpectedRpmsAreInstalled import *
+from verifyGtkSharpApplicationIconsData import *
+from verifyKernelCommandLineOptions import *
+from verifyRootDiskInodeCount import *
+from verifyRootDiskSize import *
+from verifySambaConfigFile import *
+from verifySambaIsRunning import *
+from verifySampleAspxPageWorks import *
 from verifySwapFileIsActive import *
 from verifySwapFileSize import *
-from verifyRootDiskSize import *
-from verifyRootDiskInodeCount import *
-from verifySampleAspxPageWorks import *
-from verifyDesktopIconsData import *
-from verifyGtkSharpApplicationIconsData import *
 from verifyTheXdgAutoStartIconsData import *
+from verifyVMwareToolsUserAgent import *
+from verifyVMwareToolsX11Config import *
 from verifyWebApplicationIconsData import *
 from verifyWebSiteIconsData import *
 from verifyWinformApplicationIconsData import *
+from verifyZypperRepoRefreshesAreOff import *
+from verifyZypperReposAreSetupCorrectly import *
+from verifyZypperReposCanRefresh import *
 
 
 if __name__ == '__main__':
