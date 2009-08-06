@@ -9,16 +9,18 @@ if not basepath in sys.path:
     sys.path.append(basepath)
 
 from common.monotesting import *
-from common.helpers import *
 
 # sub directories
 # Add child test suites to test suite
-from all.alltests import *
 
-if isMonoVSAppliance():
-    from monovs.alltests import *
-else:
-    from mono.alltests import *
+from verifyGtkSharpApplicationIconsData import *
+from verifySambaConfigFile import *
+from verifySambaIsRunning import *
+from verifyTheXdgAutoStartIconsData import *
+from verifyWebApplicationIconsData import *
+from verifyWebSiteIconsData import *
+from verifyWinformApplicationIconsData import *
+from verifyZypperRepoRefreshesAreOff import *
 
 
 if __name__ == '__main__':

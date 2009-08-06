@@ -54,6 +54,13 @@ def isAppliance():
        return True
     return False
 
+def isMonoVSAppliance():
+    if isAppliance():
+        for curLine in open("/studio/profile").readlines():
+            if "kiwi_iname=" in curLine and "MonoVS" in curLine:
+                return True
+    return False
+
 def whichOS():
     if sys.platform == 'win32':
         return 'win32'
