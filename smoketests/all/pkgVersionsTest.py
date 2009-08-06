@@ -49,7 +49,7 @@ class pkgVersionsTestCase(smokeTestCase):
                 errors.append("\t '%s' expected '%s' but got '%s'" % (pkg,pkgs[pkg],out))
 
         if len(errors) != 0:
-            print "Package versions errors:"
+            print "\n\nPackage versions errors:"
             for err in errors:
                 printColor(err,'red')
             self.fail("Package version errors")

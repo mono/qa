@@ -195,10 +195,21 @@ class smokeTestCase(monoTestCase):
         self.assertTrue(found, "%s was not found in %s" % (line, fileName))
 
     def verifyTheseRpmsAreInstalled(self, expectedRpms):
-        cmdOut = executeCmd("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
-        rpms = dict(zip(cmdOut,cmdOut))
+        rpms = executeCmd("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
+        #rpms = dict(zip(cmdOut,cmdOut))
+
+        errors = []
         for curExpRpm in expectedRpms:
-            self.assertEqual(rpms[curExpRpm], curExpRpm)
+            if not curExpRpm in rpms:
+                errors.append("\t'%s' is missing" % (curExpRpm))
+            #self.assertEqual(rpms[curExpRpm], curExpRpm)
+
+        if len(errors) != 0:
+            print "\n\nMissing RPMs:"
+            for err in errors:
+                printColor(err,'red')
+            self.fail("Missing RPMs")
+
 
     def verifyKernelCommandLineOptions(self, expectedOptions):
         actualOptions = open("/proc/cmdline","r").read().split()
