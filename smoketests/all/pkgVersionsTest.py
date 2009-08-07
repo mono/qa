@@ -32,7 +32,10 @@ class pkgVersionsTestCase(smokeTestCase):
             pkgs.update(macos_pkgs)
             exes.update(macos_exes)
         if whichOS() == 'linux':
-            pkgs.update(linux_pkgs)
+            if isMonoVSAppliance():
+                pkgs.update(monovs_linux_pkgs)
+            else:
+                pkgs.update(linux_pkgs)
             exes.update(linux_exes)
         if whichOS() == 'win32':
             pkgs.update(win32_pkgs)

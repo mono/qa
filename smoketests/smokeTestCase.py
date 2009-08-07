@@ -7,6 +7,8 @@ import pdb
 import glob
 import getpass
 import ConfigParser
+import shutil
+import tempfile
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
@@ -112,6 +114,22 @@ class smokeTestCase(monoTestCase):
     def getActiveSwapSize(self):
         cmdOut = executeCmd("free -m")
         return int(cmdOut[3].split()[1])
+
+    def addGlobalSectionHeader(self, fileName, tmpFile):
+        fd = open(tmpFile,"w")
+        fd.write("[global]\n")
+
+        for curLine in open(fileName).readlines():
+            fd.write(curLine)
+
+    def verifyZypperCredentials(self, credentialFileName, expectedData):
+        tmpFile = tempfile.mktemp(".ini")
+        self.addGlobalSectionHeader(credentialFileName, tmpFile)
+
+        config = ConfigParser.ConfigParser()
+        config.read(tmpFile)
+        for curData in expectedData:
+            self.assertEqual(config.get("global",curData[0]), curData[1])
 
     def areZypperRepoRefreshesOff(self):
         cmdOut = executeCmd("zypper lr")[2:-1]

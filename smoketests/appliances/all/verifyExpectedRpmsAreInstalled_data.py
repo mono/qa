@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 
 # These are the rpms that are expected to be there on the Mono appliance
-monoExpectedRpms = [ "mono-check",
+monoExpectedRpms = [ 
                     "mono-addins",
                     "mono-zeroconf",
                     "mono-zeroconf-doc",
                     "mono-zeroconf-provider-avahi",
                     "mono-tools",
-                    "mono-basic",
                     "mono-winfxcore",
-                    "libgluezilla0",
        # --------------------------------------------
                     "Mono_ASP.NET_MonoForums",
                     "Mono_ASP.NET_ClubWebSite",
@@ -29,7 +27,6 @@ monoExpectedRpms = [ "mono-check",
                     "uiautomationwinforms",
        # --------------------------------------------
                     "gtkhtml314-sharp",
-                    "webkit-sharp",
                     "gnome-sharp2-complete",
                     "gecko-sharp2",
                     "gnome-print-sharp",
@@ -69,6 +66,10 @@ expectedRpms = [ "mono-core",
                     "monodoc-core",
                     "mono-wcf",
                     "mono-jscript",
+                    "mono-check",
+                    "mono-basic",
+                    "libgluezilla0",
+                    "webkit-sharp",
        # --------------------------------------------
                     "mono-winforms",
                     "libgdiplus0",
@@ -100,3 +101,6 @@ expectedRpms = [ "mono-core",
                     "ndesk-dbus-glib",
                     "xsp",
                     ]
+
+
+# vim:ts=4:expandtab:
