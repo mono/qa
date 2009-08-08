@@ -9,6 +9,7 @@ if not basepath in sys.path:
     sys.path.append(basepath)
 
 from common.monotesting import *
+from common.helpers import *
 
 # sub directories
 # Add child test suites to test suite
@@ -23,10 +24,12 @@ from verifyRootDiskSize import *
 from verifySampleAspxPageWorks import *
 from verifySwapFileIsActive import *
 from verifySwapFileSize import *
-from verifyVMwareToolsUserAgent import *
-from verifyVMwareToolsX11Config import *
 from verifyZypperReposAreSetupCorrectly import *
 from verifyZypperReposCanRefresh import *
+
+if whichAppliance == "vmware":
+    from verifyVMwareToolsUserAgent import *
+    from verifyVMwareToolsX11Config import *
 
 if __name__ == '__main__':
     monotesting_main()

@@ -169,7 +169,9 @@ class smokeTestCase(monoTestCase):
         self.assertGreaterThanOrEquals(actualNumberOfInodes, expectedNumberOfInodes)
 
     def verifyDesktopFileData(self, filePath, fileName, expectedData):
-        self.assertTrue(os.path.isfile(os.path.join(filePath,fileName)))
+        fullPath = os.path.join(filePath, fileName)
+        self.assertTrue(os.path.isfile(fullPath),"%s does not exist!" % fullPath)
+
         config = ConfigParser.ConfigParser()
         config.read(os.path.join(filePath,fileName))
         for curData in expectedData:

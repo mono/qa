@@ -10,18 +10,21 @@ if not basepath in sys.path:
 
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
-import common.helpers as helpers
+from common.helpers import *
 
 
 class verifyKernelCommandLineOptions(smokeTestCase):
     testcaseid = -1
 
     def test(self):
-        appType = helpers.whichAppliance()
+        appType = whichAppliance()
         if appType == "vmware":
             expectedOptions = ["root=/dev/sda1", "vga=0x314", "splash=silent"]
         elif appType == "vpc":
-            expectedOptions = ["root=/dev/sda1", "vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
+            if isMonoVSAppliance():
+                expectedOptions = ["vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
+            else:
+                expectedOptions = ["root=/dev/sda1", "vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
         elif appType == "livecd":
             raise Exception("Not setup yet")
 
