@@ -19,7 +19,10 @@ class verifyKernelCommandLineOptions(smokeTestCase):
     def test(self):
         appType = whichAppliance()
         if appType == "vmware":
-            expectedOptions = ["root=/dev/sda1", "vga=0x314", "splash=silent"]
+            if isMonoVSAppliance():
+                expectedOptions = ["vga=0x314", "splash=silent"]
+            else:
+                expectedOptions = ["root=/dev/sda1", "vga=0x314", "splash=silent"]
         elif appType == "vpc":
             if isMonoVSAppliance():
                 expectedOptions = ["vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
