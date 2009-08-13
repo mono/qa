@@ -208,6 +208,7 @@ class smokeTestCase(monoTestCase):
         self.assertEqual(st.st_gid, expectedGid)
 
     def verifyFileContainsLine(self, fileName, line):
+        # Basically, this is "grep file for this exact line"
         found = False
         for curLine in open(fileName).readlines():
             if line in curLine:

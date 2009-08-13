@@ -24,6 +24,7 @@ from verifyRootDiskSize import *
 from verifySampleAspxPageWorks import *
 from verifySwapFileIsActive import *
 from verifySwapFileSize import *
+from verifyXdmHackIsInPlace import *
 from verifyZypperReposAreSetupCorrectly import *
 from verifyZypperReposCanRefresh import *
 
