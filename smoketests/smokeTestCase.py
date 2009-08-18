@@ -215,6 +215,10 @@ class smokeTestCase(monoTestCase):
                 found = True
         self.assertTrue(found, "%s was not found in %s" % (line, fileName))
 
+    def verifyRpmDoesntOwnFile(self, fileName):
+        out = executeCmd("rpm -qf " + fileName)[0]
+        self.assertEqual(out, "file " + fileName + " is not owned by any package")
+
     def verifyTheseRpmsAreInstalled(self, expectedRpms):
         rpms = executeCmd("rpm -qa --queryformat '%{NAME}\n'")[0:-1]
         #rpms = dict(zip(cmdOut,cmdOut))
