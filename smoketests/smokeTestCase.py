@@ -238,8 +238,14 @@ class smokeTestCase(monoTestCase):
 
     def verifyKernelCommandLineOptions(self, expectedOptions):
         actualOptions = open("/proc/cmdline","r").read().split()
+
+        if 'root=/dev/sda1' in actualOptions and \
+           not 'root=/dev/sda1' in expectedOptions:
+           expectedOptions.append('root=/dev/sda1')
+
         expectedOptions.sort()
         actualOptions.sort()
+
         self.assertEqual(actualOptions, expectedOptions)
 
     #---------------------------------------------------------------
