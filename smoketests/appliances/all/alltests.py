@@ -28,7 +28,7 @@ from verifyXdmHackIsInPlace import *
 from verifyZypperReposAreSetupCorrectly import *
 from verifyZypperReposCanRefresh import *
 
-if whichAppliance == "vmware":
+if whichAppliance() == "vmware":
     from verifyVMwareToolsUserAgent import *
     from verifyVMwareToolsX11Config import *
 

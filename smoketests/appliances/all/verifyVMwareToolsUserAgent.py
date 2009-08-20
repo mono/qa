@@ -10,7 +10,7 @@ if not basepath in sys.path:
 
 import common.monotesting as mono
 from smoketests.smokeTestCase import smokeTestCase
-from common.helpers import executeCmd
+from common.helpers import *
 
 
 class verifyVMwareToolsUserAgent(smokeTestCase):
@@ -18,7 +18,11 @@ class verifyVMwareToolsUserAgent(smokeTestCase):
 
     def test(self):
         self.verifyProcessIsRunningAsUser("/usr/bin/vmware-user", "rupert")
-        self.verifyFilePermissions("/usr/bin/vmware-user-suid-wrapper", 35309, 0, 0)
+        if isMonoVSAppliance():
+            expectedPerms = 33261
+        else:
+            expectedPerms = 35309
+        self.verifyFilePermissions("/usr/bin/vmware-user-suid-wrapper", expectedPerms, 0, 0)
 
 if __name__ == "__main__":
     mono.monotesting_main()
