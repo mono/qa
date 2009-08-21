@@ -13,7 +13,7 @@ from smoketests.smokeTestCase import smokeTestCase
 from common.helpers import executeCmd
 
 
-class verifyXdmHackIsInPlace(smokeTestCase):
+class verifyZenityFocusHackIsInPlace(smokeTestCase):
     testcaseid = -1
 
     def test(self):
