@@ -26,6 +26,7 @@ from verifySwapFileIsActive import *
 from verifySwapFileSize import *
 from verifyXdmHackIsInPlace import *
 from verifyZypperReposAreSetupCorrectly import *
+from verifyZypperRepoFilesArentOwnedByRpm import *
 from verifyZypperReposCanRefresh import *
 
 if whichAppliance() == "vmware":

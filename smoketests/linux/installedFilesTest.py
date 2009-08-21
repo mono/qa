@@ -22,7 +22,7 @@ from installedFilesTest_filelist import *
 #    xsp1TestCase class
 #
 
-class installedFilesTestCase(smokeTestCase):
+class linuxInstalledFilesTestCase(smokeTestCase):
     testcaseid = 875244
 
     def testSymlinks(self):

@@ -18,7 +18,7 @@ from smoketests.smokeTestCase import smokeTestCase
 from installedFilesTest_filelist import *
 
 
-class installedFilesTestCase(smokeTestCase):
+class winInstalledFilesTestCase(smokeTestCase):
     testcaseid = 875246
 
     def testFiles(self):

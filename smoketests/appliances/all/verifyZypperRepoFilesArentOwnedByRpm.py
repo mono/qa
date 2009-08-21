@@ -13,7 +13,7 @@ from common.helpers import *
 from smoketests.smokeTestCase import smokeTestCase
 
 
-class verifyZypperReposAreSetupCorrectly(smokeTestCase):
+class verifyZypperRepoFilesArentOwnedByRpm(smokeTestCase):
     testcaseid = 828169
 
     def test(self):

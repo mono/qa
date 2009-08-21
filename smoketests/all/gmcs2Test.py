@@ -41,7 +41,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-class m
+class m2
 {
     public static void Main(){
         List<string> l = new List<string>();
