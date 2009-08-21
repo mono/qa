@@ -13,7 +13,7 @@ from common.helpers import *
 
 # sub directories
 # Add child test suites to test suite
-
+from verifyZenityFocusHackIsInPlace import *
 
 if __name__ == '__main__':
     monotesting_main()

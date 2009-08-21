@@ -207,13 +207,30 @@ class smokeTestCase(monoTestCase):
         self.assertEqual(st.st_uid, expectedUid)
         self.assertEqual(st.st_gid, expectedGid)
 
-    def verifyFileContainsLine(self, fileName, line):
+    def howManyTimesDoesFileContainThisLine(self, fileName, line):
         # Basically, this is "grep file for this exact line"
-        found = False
+        numFound = 0
         for curLine in open(fileName).readlines():
             if line in curLine:
-                found = True
+                numFound += 1
+        return numFound
+
+    def doesFileContainLine(self, fileName, line):
+        numFound = self.howManyTimesDoesFileContainThisLine(fileName, line)
+        if numFound == 0:
+            return False
+        else:
+            return True
+
+    def verifyFileContainsLine(self, fileName, line):
+        # Basically, this is "grep file for this exact line"
+        found = self.doesFileContainLine(fileName, line)
         self.assertTrue(found, "%s was not found in %s" % (line, fileName))
+
+    def verifyFileDoesNotContainLine(self, fileName, line):
+        # Basically, this is "grep file for and make sure it doesn't contain this exact line"
+        found = self.doesFileContainLine(fileName, line)
+        self.assertFalse(found, "%s was found in %s" % (line, fileName))
 
     def verifyRpmDoesntOwnFile(self, fileName):
         out = executeCmd("rpm -qf " + fileName)[0]
