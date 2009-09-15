@@ -24,7 +24,7 @@ class WebControls_WebHyperLink(xsp1TestCase):
             self.failUnless(sel.is_element_present(imageXPath))
             sel.click(imageXPath)
             sel.wait_for_page_to_load("30000")
-            self.assertEqual("Linux OS | SUSE Linux Enterprise", sel.get_title())
+            self.assertEqual("Ximian", sel.get_title())
         except Exception,e:
             self.verificationErrors.append(str(e))
 
