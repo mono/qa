@@ -6,7 +6,7 @@ sys.path.append('../../..')
 import common.monotesting as mono
 from selenium.apache.apacheTestCase import apacheTestCase
 
-class be_0800_createStoryAsMonoUserTestt(apacheTestCase):
+class be_0800_createStoryAsMonoUserTest(apacheTestCase):
     apacheTestCaseId = 875595
     def test(self):
         if not self.canRun:
@@ -20,7 +20,13 @@ class be_0800_createStoryAsMonoUserTestt(apacheTestCase):
             sel.type("ctl00_cphBody_Login1_Password", "mono")
             sel.click("ctl00_cphBody_Login1_LoginButton")
             sel.wait_for_page_to_load("30000")
-            sel.click("//html/body/form/div[3]/div/div[2]/div/ul/li/a/span")
+            for i in range(60):
+                try:
+                    if sel.is_element_present("//span[text()='Add entry']"): break
+                except: pass
+                time.sleep(1)
+            else: self.fail("time out")
+            sel.click("//span[text()='Add entry']")
             sel.wait_for_page_to_load("30000")
             sel.type("ctl00_cphAdmin_txtTitle", "Mono Story 2")
             if not sel.is_checked("ctl00_cphAdmin_cbUseRaw"):

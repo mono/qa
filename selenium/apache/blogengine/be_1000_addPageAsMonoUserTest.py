@@ -20,9 +20,14 @@ class be_1000_addPageAsMonoUserTest(apacheTestCase):
             sel.type("ctl00_cphBody_Login1_Password", "mono")
             sel.click("ctl00_cphBody_Login1_LoginButton")
             sel.wait_for_page_to_load("30000")
-            sel.click("//ul[@id='ctl00_42fcbe7c2c9c440abad965a94472fccc_uxMenu_ulMenu']/li[4]/a/span")
+            sel.click("//a/span[text()='Pages']")
             sel.wait_for_page_to_load("30000")
-            sel.type("ctl00_cphAdmin_txtTitle", "Mono Page")
+            for i in range(60):
+                try:
+                    if sel.is_element_present("//input[@id='ctl00_cphAdmin_txtTitle']"): break
+                except: pass
+                time.sleep(1)
+            sel.type("//input[@id='ctl00_cphAdmin_txtTitle']", "Mono Page")
             sel.click("//a[@id='ctl00_cphAdmin_txtContent_TinyMCE1_txtContent_code']/span")
             for i in range(60):
                 try:

@@ -21,29 +21,31 @@ class be_1200_cleanUpTest(apacheTestCase):
             sel.click("ctl00_cphBody_Login1_LoginButton")
             sel.wait_for_page_to_load("30000")
 ############
-            mono.log("Delete Mono Story 2")
-            sel.click("link=Mono Story 2")
-            sel.wait_for_page_to_load("30000")
-            sel.click("//html/body/form//div[3]/a[text()='Delete']")
-            self.failUnless(re.search(r"^Are you sure you want to delete the post[\s\S]$", sel.get_confirmation()))
+            if sel.is_element_present("link=Mono Story 2"):
+                mono.log("Delete Mono Story 2")
+                sel.click("link=Mono Story 2")
+                sel.wait_for_page_to_load("30000")
+                sel.click("//html/body/form//div[3]/a[text()='Delete']")
+                self.failUnless(re.search(r"^Are you sure you want to delete the post[\s\S]$", sel.get_confirmation()))
 ############
-            mono.log("Delete Mono Story")
-            for i in range(60):
-                try:
-                    if sel.is_element_present("link=Mono Story"): break
-                except: pass
-                time.sleep(1)
-            else: self.fail("time out")
-            sel.click("link=Mono Story")
-            sel.wait_for_page_to_load("30000")
-            for i in range(60):
-                try:
-                    if sel.is_element_present("//html/body/form//div[3]/a[text()='Delete']"): break
-                except: pass
-                time.sleep(1)
-            else: self.fail("time out")
-            sel.click("//html/body/form//div[3]/a[text()='Delete']")
-            self.failUnless(re.search(r"^Are you sure you want to delete the post[\s\S]$", sel.get_confirmation()))
+            if sel.is_element_present("link=Mono Story"):
+                mono.log("Delete Mono Story")
+                for i in range(60):
+                    try:
+                        if sel.is_element_present("link=Mono Story"): break
+                    except: pass
+                    time.sleep(1)
+                else: self.fail("time out")
+                sel.click("link=Mono Story")
+                sel.wait_for_page_to_load("30000")
+                for i in range(60):
+                    try:
+                        if sel.is_element_present("//html/body/form//div[3]/a[text()='Delete']"): break
+                    except: pass
+                    time.sleep(1)
+                else: self.fail("time out")
+                sel.click("//html/body/form//div[3]/a[text()='Delete']")
+                self.failUnless(re.search(r"^Are you sure you want to delete the post[\s\S]$", sel.get_confirmation()))
 ############
             mono.log("Delete Mono category")
             for i in range(60):
