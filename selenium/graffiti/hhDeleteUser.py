@@ -14,6 +14,12 @@ class graffiti_hh_deleteUser(graffitiTestCase):
         try:
             sel = self.selenium
             sel.open("/")
+            for i in range(60):
+                try:
+                    if sel.is_element_present("link=Login"): break
+                except: pass
+                time.sleep(1)
+            else: self.fail("time out")
             sel.click("link=Login")
             sel.wait_for_page_to_load("30000")
             sel.type("UserName", "admin")

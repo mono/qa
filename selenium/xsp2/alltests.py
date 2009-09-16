@@ -17,8 +17,8 @@ from common.monotesting import *
 sys.path.append('..')
 from xsp1.alltests import *
 
-#from masterpages.alltests import *
-#from menu.alltests import *
+from masterpages.alltests import *
+from menu.alltests import *
 #from treeview.alltests import *
 
 
