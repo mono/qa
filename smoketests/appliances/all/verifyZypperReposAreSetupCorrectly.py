@@ -19,10 +19,10 @@ class verifyZypperReposAreSetupCorrectly(smokeTestCase):
     def test(self):
 
         if isMonoVSAppliance():
-            expectedRepoData = { "MonoVS": ("MonoVS","Yes","Yes","http://go-mono.com/monovs-download/latest/openSUSE_11.1"),
-                                 "Virtualization:VMware_11.1_Update": ("Virtualization:VMware_11.1_Update","Yes","Yes","http://download.opensuse.org/repositories/Virtualization:/VMware/openSUSE_11.1_Update"),
-                                 "openSUSE_11.1_Updates": ("openSUSE_11.1_Updates","Yes","Yes","http://download.opensuse.org/update/11.1"),
-                                 "openSUSE_11.1_oss": ("openSUSE_11.1_oss","Yes","Yes","http://download.opensuse.org/distribution/11.1/repo/oss") }
+            expectedRepoData = { "MonoVS": ("MonoVS","Yes","No","http://go-mono.com/monovs-download/latest/openSUSE_11.1"),
+                                 "Virtualization:VMware_11.1_Update": ("Virtualization:VMware_11.1_Update","Yes","No","http://download.opensuse.org/repositories/Virtualization:/VMware/openSUSE_11.1_Update"),
+                                 "openSUSE_11.1_Updates": ("openSUSE_11.1_Updates","Yes","No","http://download.opensuse.org/update/11.1"),
+                                 "openSUSE_11.1_oss": ("openSUSE_11.1_oss","Yes","No","http://download.opensuse.org/distribution/11.1/repo/oss") }
             expectedCredentials = {}
         else:
             expectedRepoData = { "Mono:Community_11.1+Mono": ("Mono:Community_11.1+Mono","Yes","No","http://download.opensuse.org/repositories/Mono:/Community/openSUSE_11.1+Mono"),

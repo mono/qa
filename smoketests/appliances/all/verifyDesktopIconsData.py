@@ -24,9 +24,7 @@ class verifyDesktopIconsData(smokeTestCase):
             userDesktopIcons = []
             distDesktopIcons = [ ("monovs-server.desktop",("Exec","monovs-gui-server"),("Name","MonoVS Server"),("Icon","monovs-server"),("Type","Application")),
                   ("monovs-server-version.desktop",("Exec","monovs-server-version"),("Name","MonoVS Server Version"),("Icon","dialog-question"),("Type","Application")),
-                  ("update-monovs.desktop",("Exec","update-monovs"),("Name","Update MonoVS Server"),("Icon","up"),("Type","Application")),
-                  ("GnomeOnlineHelp.desktop",("URL","http://help.opensuse.org/"),("Name","Online Help"),("Icon","/usr/share/dist/icons/suse-help.svg"),("Type","Link")),
-                  ("SuSE.desktop",("Exec","ggreeter /usr/lib/ggreeter/greeter.exe"),("Name","openSUSE"),("Icon","suse"),("Type","Application")) ]
+                  ("update-monovs.desktop",("Exec","update-monovs"),("Name","Update MonoVS Server"),("Icon","up"),("Type","Application"))]
         else:
             userDesktopIcons = [ ("moma.desktop",("Exec","moma"),("Name","MoMA"),("Icon","moma48"),("Type","Application")),
                   ("monodevelop.desktop",("Exec","monodevelop"),("Name","Mono Development Environment"),("Icon","monodevelop"),("Type","Application")),
