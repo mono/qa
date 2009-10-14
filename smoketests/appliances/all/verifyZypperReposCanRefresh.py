@@ -17,20 +17,7 @@ class verifyReposCanRefresh(smokeTestCase):
     testcaseid = 546327
 
     def test(self):
-        monovs_creds_file = "/etc/zypp/credentials.d/MonoVS"
-
-        if isMonoVSAppliance():
-            self.assertFalse(os.path.isfile("/etc/zypp/credentials.d/MonoVS"), "The MonoVS Repo Creds File exists!")
-            fd = open(monovs_creds_file, "wb")
-            fd.write("username=qa\n")
-            fd.write("password=m0n0\n")
-            fd.close();
-
         self.canZypperReposBeRefreshed()
-
-        if isMonoVSAppliance():
-            # Clean up
-            os.remove(monovs_creds_file)
 
 if __name__ == "__main__":
     mono.monotesting_main()
