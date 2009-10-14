@@ -19,9 +19,10 @@ class verifyZypperReposAreSetupCorrectly(smokeTestCase):
     def test(self):
 
         if isMonoVSAppliance():
-            expectedRepoData = { "MonoVS_SLE-11": ("MonoVS_SLE-11","Yes","Yes","http://go-mono.com/monovs-download/latest/SLE_11?credentials=MonoVS") }
-            # We no longer ship with creds
-            # expectedCredentials = { "/etc/zypp/credentials.d/MonoVS": (("username","mono-vsbeta"),("password","VfSpW8lIPQ")) }
+            expectedRepoData = { "MonoVS": ("MonoVS","Yes","Yes","http://go-mono.com/monovs-download/latest/openSUSE_11.1"),
+                                 "Virtualization:VMware_11.1_Update": ("Virtualization:VMware_11.1_Update","Yes","Yes","http://download.opensuse.org/repositories/Virtualization:/VMware/openSUSE_11.1_Update"),
+                                 "openSUSE_11.1_Updates": ("openSUSE_11.1_Updates","Yes","Yes","http://download.opensuse.org/update/11.1"),
+                                 "openSUSE_11.1_oss": ("openSUSE_11.1_oss","Yes","Yes","http://download.opensuse.org/distribution/11.1/repo/oss") }
             expectedCredentials = {}
         else:
             expectedRepoData = { "Mono:Community_11.1+Mono": ("Mono:Community_11.1+Mono","Yes","No","http://download.opensuse.org/repositories/Mono:/Community/openSUSE_11.1+Mono"),

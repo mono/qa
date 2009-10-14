@@ -19,7 +19,10 @@ class verifyZypperRepoFilesArentOwnedByRpm(smokeTestCase):
     def test(self):
 
         if isMonoVSAppliance():
-            filesToCheck= ["/etc/zypp/repos.d/MonoVS_SLE-11.repo"]
+            filesToCheck= ["/etc/zypp/repos.d/MonoVS.repo",
+                           "/etc/zypp/repos.d/openSUSE_11.1_oss.repo",
+                           "/etc/zypp/repos.d/openSUSE_11.1_Updates.repo",
+                           "/etc/zypp/repos.d/Virtualization_VMware_11.1_Update.repo"]
         else:
             filesToCheck= ["/etc/zypp/repos.d/Mono_Community_11.1+Mono_Preview.repo",
                            "/etc/zypp/repos.d/openSUSE_11.1_oss.repo",
