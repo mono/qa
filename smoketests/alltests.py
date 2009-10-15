@@ -26,6 +26,8 @@ elif myOS == 'linux':
         print "Importing Linux tests"
     else:
         appType = whichAppliance()
+        if isMonoVSAppliance():
+            print "[MonoVS]:",
         if appType == "vmware":
             print "Importing VMware Appliance tests"
         elif appType == "vpc":
