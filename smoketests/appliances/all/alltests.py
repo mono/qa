@@ -16,6 +16,7 @@ from common.helpers import *
 
 from verifyApacheIsRunning import *
 from verifyApacheWebDirPerms import *
+from verifyChkconfigsAreSetupCorrectly import *
 from verifyDesktopIconsData import *
 from verifyExpectedRpmsAreInstalled import *
 from verifyKernelCommandLineOptions import *

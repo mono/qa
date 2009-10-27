@@ -131,6 +131,11 @@ class smokeTestCase(monoTestCase):
         for curData in expectedData:
             self.assertEqual(config.get("global",curData[0]), curData[1])
 
+    def verifyChkconfigIsSet(self, daemon, status):
+        cmdOut = executeCmd("chkconfig " + daemon)[0].split()
+        self.assertEqual(cmdOut[0], daemon)
+        self.assertEqual(cmdOut[1], status)
+
     def areZypperRepoRefreshesOff(self):
         cmdOut = executeCmd("zypper lr")[2:-1]
         for curRefresh in cmdOut:
