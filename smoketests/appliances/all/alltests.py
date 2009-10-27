@@ -23,6 +23,7 @@ from verifyKernelCommandLineOptions import *
 from verifyRootDiskInodeCount import *
 from verifyRootDiskSize import *
 from verifySambaIsRunning import *
+from verifySambaConfigFile import *
 from verifySampleAspxPageWorks import *
 from verifySwapFileIsActive import *
 from verifySwapFileSize import *

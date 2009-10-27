@@ -14,7 +14,7 @@ from common.helpers import executeCmd
 
 
 class verifySambaIsRunning(smokeTestCase):
-    testcaseid = None
+    testcaseid = 871293
 
     def test(self):
         self.verifyProcessIsRunningAsUser("/usr/sbin/smbd", "root")

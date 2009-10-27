@@ -14,8 +14,6 @@ from common.monotesting import *
 # Add child test suites to test suite
 
 from verifyGtkSharpApplicationIconsData import *
-from verifySambaConfigFile import *
-from verifySambaIsRunning import *
 from verifyTheXdgAutoStartIconsData import *
 from verifyWebApplicationIconsData import *
 from verifyWebSiteIconsData import *
