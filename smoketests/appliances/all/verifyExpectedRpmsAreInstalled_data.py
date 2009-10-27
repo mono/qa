@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # These are the rpms that are expected to be there on the Mono appliance
-monoExpectedRpms = [ 
+monoExpectedRpms = [
                     "mono-addins",
                     "mono-zeroconf",
                     "mono-zeroconf-doc",
@@ -57,7 +57,8 @@ monoExpectedRpms = [
 monoVSExpectedRpms = []
 
 # These are the rpms that are expected to be there on all appliances
-expectedRpms = [ "mono-core",
+expectedRpms = [
+                    "mono-core",
                     "mono-devel",
                     "mono-debugger",
                     "mono-nunit",
@@ -100,6 +101,7 @@ expectedRpms = [ "mono-core",
                     "ndesk-dbus",
                     "ndesk-dbus-glib",
                     "xsp",
+                    "samba",
                     ]
 
 
