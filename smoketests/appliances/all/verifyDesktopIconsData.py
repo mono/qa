@@ -22,7 +22,7 @@ class verifyDesktopIconsData(smokeTestCase):
 
         if isMonoVSAppliance():
             userDesktopIcons = []
-            distDesktopIcons = [ ("monovs-server.desktop",("Exec","monovs-gui-server"),("Name","MonoVS Server"),("Icon","monovs-server"),("Type","Application")),
+            distDesktopIcons = [ ("monovs-server.desktop",("Exec","monovs-gui-server"),("Name","MonoVS Server"),("Icon","monovs"),("Type","Application")),
                   ("monovs-server-version.desktop",("Exec","monovs-server-version"),("Name","MonoVS Server Version"),("Icon","dialog-question"),("Type","Application")),
                   ("update-monovs.desktop",("Exec","update-monovs"),("Name","Update MonoVS Server"),("Icon","up"),("Type","Application"))]
         else:
