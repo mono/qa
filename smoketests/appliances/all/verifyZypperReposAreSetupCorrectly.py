@@ -19,7 +19,7 @@ class verifyZypperReposAreSetupCorrectly(smokeTestCase):
     def test(self):
 
         if isMonoVSAppliance():
-            expectedRepoData = { "MonoVS": ("MonoVS","Yes","No","http://go-mono.com/monovs-download/latest/openSUSE_11.1"),
+            expectedRepoData = { "MonoVS": ("MonoVS","Yes","No","http://ftp.novell.com/pub/mono/monovs/latest/openSUSE_11.1"),
                                  "Virtualization:VMware_11.1_Update": ("Virtualization:VMware_11.1_Update","Yes","No","http://download.opensuse.org/repositories/Virtualization:/VMware/openSUSE_11.1_Update"),
                                  "openSUSE_11.1_Updates": ("openSUSE_11.1_Updates","Yes","No","http://download.opensuse.org/update/11.1"),
                                  "openSUSE_11.1_oss": ("openSUSE_11.1_oss","Yes","No","http://download.opensuse.org/distribution/11.1/repo/oss") }
