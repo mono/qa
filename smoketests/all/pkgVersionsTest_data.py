@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-monoVersion = "2.4.2.3"
+monoVersion = "2.4.3"
 
 # These packages are common across all platforms
 pkgs = {
@@ -12,14 +12,14 @@ pkgs = {
     'pkg-config --modversion mono.web':         '2.0.0.0',
     'pkg-config --modversion monodoc':          monoVersion,
     'pkg-config --modversion smcs':             monoVersion,
-    'pkg-config --modversion xsp':              '2.4.2',
+    'pkg-config --modversion xsp':              monoVersion,
+    'pkg-config --modversion mono':             monoVersion,
 }
 
 # These packages are unique to linux
 linux_pkgs = {
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
     'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
-    'pkg-config --modversion mono':             monoVersion,
     'pkg-config --modversion mono-addins':      '0.4',
     'pkg-config --modversion mono-addins-gui' : '0.4',
     'pkg-config --modversion mono-addins-setup':'0.4',
@@ -32,7 +32,6 @@ linux_pkgs = {
 monovs_linux_pkgs = {
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.6',
     'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
-    'pkg-config --modversion mono':             monoVersion,
 }
 
 
@@ -49,7 +48,6 @@ macos_pkgs = {
 # These packages are unique to win32
 win32_pkgs = {
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
-    'pkg-config --modversion mono':             monoVersion,
 }
 
 
@@ -58,17 +56,16 @@ exes = {
     'mono --version':               monoVersion,
     'mcs --version':                monoVersion,
     'gmcs --version':               monoVersion,
-    'smcs --version':               monoVersion,
-    'xsp --version':                '2.4.2.0',
-    'xsp1 --version':               '2.4.2.0',
-    'xsp2 --version':               '2.4.2.0',
+    'xsp --version':                '2.4.3.0',
+    'xsp1 --version':               '2.4.3.0',
+    'xsp2 --version':               '2.4.3.0',
     'monolinker --version':         '0.2.0.0',
     'resgen --version':             monoVersion,
     'resgen1 --version':            monoVersion,
     'resgen2 --version':            monoVersion,
-    'mod-mono-server --version':    '2.4.2.0',
-    'mod-mono-server1 --version':   '2.4.2.0',
-    'mod-mono-server2 --version':   '2.4.2.0',
+    'mod-mono-server --version':    '2.4.3.0',
+    'mod-mono-server1 --version':   '2.4.3.0',
+    'mod-mono-server2 --version':   '2.4.3.0',
     'signcode --version':           monoVersion,
     'csharp --version':             monoVersion,
     'al --version':                 monoVersion,
@@ -81,6 +78,7 @@ exes = {
 
 # These executables are unique to linux
 linux_exes = {
+    'smcs --version':               monoVersion,
 }
 
 # These executables are unique to OSX
@@ -103,18 +101,18 @@ macos_exes = {
     'ipy2 -V':                                       '2.0A5',
     'makecert':                                      monoVersion,
     'mdoc --version':                                '0.1.0',
+    'smcs --version':               monoVersion,
 }
 
 # These executables are unique to win32
 win32_exes = {
     'envsubst --version':                            '0.17',
-    'gconftool-2 --version':                         '2.22.0',
-    'gdk-pixbuf-csource --version':                  '2.14.7',
-    'glib-genmarshal --version':                     '2.18.4',
+    'gdk-pixbuf-csource --version':                  '2.18.3',
+    'glib-genmarshal --version':                     '2.22.2',
     'monodis':                                       'Disassembler',
     'monograph --version':                           '0.2',
     'msgfmt --version':                              '0.17',
-    'pango-querymodules --version':                  '1.22.4',
+    'pango-querymodules --version':                  '1.26.0',
     'pkg-config --version':                          '0.23',
     'recode-sr-latin.exe --version':                 '0.17',
     'booc --version':                                '0.9.1.3287',
@@ -122,11 +120,11 @@ win32_exes = {
     'certmgr':                                       monoVersion,
     'chktrust':                                      monoVersion,
     'disco':                                         monoVersion,
-    'fastcgi-mono-server --version':                 '2.4.2.0',
-    'fastcgi-mono-server1 --version':                '2.4.2.0',
-    'fastcgi-mono-server2 --version':                '2.4.2.0',
-    'gendarme --version':                            '2.4.2.0',
-    'ikvm -version':                                 '0.38.0.4',
+    'fastcgi-mono-server --version':                 '2.4.3.0',
+    'fastcgi-mono-server1 --version':                '2.4.3.0',
+    'fastcgi-mono-server2 --version':                '2.4.3.0',
+    'gendarme --version':                            '2.4.3.0',
+    'ikvm -version':                                 '0.40.0.1',
     'ipy -V':                                        '1.1',
     'ipy2 -V':                                       '2.0A5',
     'makecert':                                      monoVersion,
@@ -147,7 +145,7 @@ win32_exes = {
     'signcode':                                      monoVersion,
     'sn':                                            monoVersion,
     'vbnc':                                          '0.0.0.5914',
-    'xbuild --version':                              '0.1',
+    'xbuild --version':                              '2.4.3.0',
 }
 
 # vim:ts=4:expandtab:
