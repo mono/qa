@@ -1,25 +1,25 @@
 #!/usr/bin/env python
 
-monoVersion = "2.4.3"
+monoVersion = "2.6.0.0"
+monoShortVersion = "2.6"
 
 # These packages are common across all platforms
 pkgs = {
     #'pkg-config --modversion atk':  '1.24.0',
-    'pkg-config --modversion mono-cairo':       monoVersion,
+    'pkg-config --modversion mono-cairo':       monoShortVersion,
     'pkg-config --modversion mono-lineeditor':  '0.2.1',
-    'pkg-config --modversion mono-nunit':       monoVersion,
+    'pkg-config --modversion mono-nunit':       monoShortVersion,
     'pkg-config --modversion mono-options':     '0.2.1',
     'pkg-config --modversion mono.web':         '2.0.0.0',
-    'pkg-config --modversion monodoc':          monoVersion,
-    'pkg-config --modversion smcs':             monoVersion,
-    'pkg-config --modversion xsp':              monoVersion,
-    'pkg-config --modversion mono':             monoVersion,
+    'pkg-config --modversion monodoc':          monoShortVersion,
+    'pkg-config --modversion xsp':              monoShortVersion,
+    'pkg-config --modversion mono':             monoShortVersion,
 }
 
 # These packages are unique to linux
 linux_pkgs = {
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
-    'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
+    'pkg-config --modversion gnome-sharp-2.0':  '2.24.1',
     'pkg-config --modversion mono-addins':      '0.4',
     'pkg-config --modversion mono-addins-gui' : '0.4',
     'pkg-config --modversion mono-addins-setup':'0.4',
@@ -53,21 +53,21 @@ win32_pkgs = {
 
 # These executables are common across all platforms
 exes = {
-    'mono --version':               monoVersion,
+    'mono --version':               monoShortVersion,
     'mcs --version':                monoVersion,
     'gmcs --version':               monoVersion,
-    'xsp --version':                '2.4.3.0',
-    'xsp1 --version':               '2.4.3.0',
-    'xsp2 --version':               '2.4.3.0',
+    'xsp --version':                monoVersion,
+    'xsp1 --version':               monoVersion,
+    'xsp2 --version':               monoVersion,
     'monolinker --version':         '0.2.0.0',
     'resgen --version':             monoVersion,
     'resgen1 --version':            monoVersion,
     'resgen2 --version':            monoVersion,
-    'mod-mono-server --version':    '2.4.3.0',
-    'mod-mono-server1 --version':   '2.4.3.0',
-    'mod-mono-server2 --version':   '2.4.3.0',
+    'mod-mono-server --version':    monoVersion,
+    'mod-mono-server1 --version':   monoVersion,
+    'mod-mono-server2 --version':   monoVersion,
     'signcode --version':           monoVersion,
-    'csharp --version':             monoVersion,
+    'csharp --version':             '2.1.0.0',
     'al --version':                 monoVersion,
     'al1 --version':                monoVersion,
     'al2 --version':                monoVersion,
@@ -78,7 +78,6 @@ exes = {
 
 # These executables are unique to linux
 linux_exes = {
-    'smcs --version':               monoVersion,
 }
 
 # These executables are unique to OSX
@@ -101,7 +100,6 @@ macos_exes = {
     'ipy2 -V':                                       '2.0A5',
     'makecert':                                      monoVersion,
     'mdoc --version':                                '0.1.0',
-    'smcs --version':               monoVersion,
 }
 
 # These executables are unique to win32
