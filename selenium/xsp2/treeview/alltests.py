@@ -2,6 +2,7 @@
 
 import sys
 import os
+import unittest
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
@@ -11,19 +12,12 @@ if not basepath in sys.path:
 
 from common.monotesting import *
 
-# sub directories
-# Add child test suites to test suite
 
-sys.path.append('..')
-from xsp1.alltests import *
-
-from masterpages.alltests import *
-from menu.alltests import *
-from treeview.alltests import *
+from populateOnDemandTest import *
+from treeviewTest import *
 
 
 if __name__ == '__main__':
-    monotesting_main(_usexsp2=True)
-
+    monotesting_main()
 
 # vim:ts=4:expandtab:
