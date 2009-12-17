@@ -29,7 +29,6 @@ monoExpectedRpms = [
                     "vte016-sharp",
                     "gtkhtml314-sharp",
                     "gnome-sharp2-complete",
-                    "gecko-sharp2",
                     "gnome-print-sharp",
                     "gnome-desktop-sharp2",
                     "taglib-sharp",

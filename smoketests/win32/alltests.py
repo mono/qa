@@ -13,7 +13,7 @@ from common.monotesting import *
 
 # sub directories
 # Add child test suites to test suite
-from installedFilesTest import *
+#from installedFilesTest import *
 
 if __name__ == '__main__':
     monotesting_main()

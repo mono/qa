@@ -83,22 +83,51 @@ class smokeTestCase(monoTestCase):
 
     def checkForList(self, dict, chkFunc):
         #pdb.set_trace()
+        emptyDirErrors = []
+        filesNotFound = []
+        unexpectedFilesFound = []
         for curDirGlob in dict.keys():
             globList = glob.glob(curDirGlob)
-            self.assertNotEqual(globList, [], "[%s] either doesn't exist, or is an empty directory." % curDirGlob)
+
+            if (globList == []):
+                emptyDirErrors.append("\t [%s] either doesn't exist, or is an empty directory." % curDirGlob)
+            #self.assertNotEqual(globList, [], "[%s] either doesn't exist, or is an empty directory." % curDirGlob)
+
             for curDir in globList:
                 # check that the expected files exist
                 for curFile in dict[curDirGlob]:
                     for wholeFile in glob.glob(os.path.join(curDir, curFile)):
-                        
-                        self.assertTrue(chkFunc(wholeFile),"[%s] Not Found." % wholeFile)
+                        if (chkFunc(wholeFile) == False):
+                            filesNotFound.append("\t [%s] Not Found." % wholeFile)
+                        #self.assertTrue(chkFunc(wholeFile),"[%s] Not Found." % wholeFile)
 
                 # check that there aren't any unexpected files that exist
                 filesInDir = glob.glob(curDir + os.sep + "*")
                 for curFile in filesInDir:
                     if chkFunc(curFile):
                         fileNameOnly = os.path.basename(curFile)
-                        self.assertTrue(fileNameOnly in dict[curDirGlob], "[%s] unexpectedly exists." % curFile)
+
+                        if (fileNameOnly not in dict[curDirGlob]):
+                            unexpectedFilesFound.append("\t [%s] unexpectedly exists." % curFile)
+                        #self.assertTrue(fileNameOnly in dict[curDirGlob], "[%s] unexpectedly exists." % curFile)
+
+        if (len(emptyDirErrors) != 0) or \
+           (len(filesNotFound) != 0) or \
+           (len(unexpectedFilesFound) != 0):
+            print "\n\nUnexpectedly Empty Directories:"
+            for err in emptyDirErrors:
+                printColor(err,'red')
+
+            print "\n\nFiles Not Found:"
+            for err in filesNotFound:
+                printColor(err,'red')
+
+            print "\n\nFiles Found Unexpectedly:"
+            for err in unexpectedFilesFound:
+                printColor(err,'red')
+
+            self.fail("File errors")
+
 
     def checkForFiles(self,fileDict):
         self.checkForList(fileDict, os.path.isfile)
@@ -188,10 +217,20 @@ class smokeTestCase(monoTestCase):
             desktopFiles[curIcon[0]] = curIcon[0]
 
         entries = glob.glob(filePath + os.sep + "*.desktop")
+        unexpectedFilesFound = []
         for curEntry in entries:
             if os.path.isfile(curEntry):
                 fileName = os.path.basename(curEntry)
-                self.assertEqual(desktopFiles[fileName], fileName)
+                #self.assertEqual(desktopFiles[fileName], fileName)
+                if (fileName not in desktopFiles):
+                    unexpectedFilesFound.append("\t [%s] unexpectedly exists." % fileName)
+
+        if (len(unexpectedFilesFound) != 0):
+            print "\n\nFiles Found Unexpectedly:"
+            for err in unexpectedFilesFound:
+                printColor(err,'red')
+            self.fail("Files Found Unexpectedly.")
+
 
     def verifyProcessIsRunningAsUser(self, processName, userName):
         cmdOut = executeCmd("ps -e -o pid,user,command|grep %s|grep -v grep" % processName)[0].split()

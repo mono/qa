@@ -17,7 +17,8 @@ class verifyApacheIsRunning(smokeTestCase):
     testcaseid = 871070
 
     def test(self):
-        self.verifyProcessIsRunningAsUser("/usr/sbin/httpd2-prefork", "root")
+        #self.verifyProcessIsRunningAsUser("/usr/sbin/httpd2-prefork", "root")
+        self.verifyProcessIsRunningAsUser("/usr/sbin/httpd2-itk", "root")
 
 if __name__ == "__main__":
     mono.monotesting_main()

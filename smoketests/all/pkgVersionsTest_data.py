@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-monoVersion = "2.6.0.0"
-monoShortVersion = "2.6"
+monoVersion = "2.6.1.0"
+monoShortVersion = "2.6.1"
 
 # These packages are common across all platforms
 pkgs = {
@@ -12,7 +12,7 @@ pkgs = {
     'pkg-config --modversion mono-options':     '0.2.1',
     'pkg-config --modversion mono.web':         '2.0.0.0',
     'pkg-config --modversion monodoc':          monoShortVersion,
-    'pkg-config --modversion xsp':              monoShortVersion,
+    'pkg-config --modversion xsp':              '2.6',
     'pkg-config --modversion mono':             monoShortVersion,
 }
 
@@ -23,9 +23,9 @@ linux_pkgs = {
     'pkg-config --modversion mono-addins':      '0.4',
     'pkg-config --modversion mono-addins-gui' : '0.4',
     'pkg-config --modversion mono-addins-setup':'0.4',
-    'pkg-config --modversion mono-zeroconf':    '0.8.0',
-    'pkg-config --modversion monodevelop':      '2.0',
-    'pkg-config --modversion monodevelop-core-addins':'2.0',
+    'pkg-config --modversion mono-zeroconf':    '0.9.0',
+    'pkg-config --modversion monodevelop':      '2.2',
+    'pkg-config --modversion monodevelop-core-addins':'2.2',
 }
 
 # These packages are unique to linux
@@ -56,16 +56,16 @@ exes = {
     'mono --version':               monoShortVersion,
     'mcs --version':                monoVersion,
     'gmcs --version':               monoVersion,
-    'xsp --version':                monoVersion,
-    'xsp1 --version':               monoVersion,
-    'xsp2 --version':               monoVersion,
+    'xsp --version':                '2.6.0.0',
+    'xsp1 --version':               '2.6.0.0',
+    'xsp2 --version':               '2.6.0.0',
     'monolinker --version':         '0.2.0.0',
     'resgen --version':             monoVersion,
     'resgen1 --version':            monoVersion,
     'resgen2 --version':            monoVersion,
-    'mod-mono-server --version':    monoVersion,
-    'mod-mono-server1 --version':   monoVersion,
-    'mod-mono-server2 --version':   monoVersion,
+    'mod-mono-server --version':    '2.6.0.0',
+    'mod-mono-server1 --version':   '2.6.0.0',
+    'mod-mono-server2 --version':   '2.6.0.0',
     'signcode --version':           monoVersion,
     'csharp --version':             '2.1.0.0',
     'al --version':                 monoVersion,

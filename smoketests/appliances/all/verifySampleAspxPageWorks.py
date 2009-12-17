@@ -24,8 +24,7 @@ class verifySampleAspxPageWorks(smokeTestCase):
                             "echo '<html><body><p><%= \"Hello World!\" %></p></body></html>' > $WEBDIR/index.aspx ;" +
                             "mkdir -p $TMPDIR ;" +
                             "cd $TMPDIR ;" +
-                            "wget http://localhost/$TSTSTR > /dev/null 2>&1 ;"+
-                            "cat index.html ;" +
+                            "curl http://localhost/$TSTSTR/index.aspx;" +
                             "rm -rf $WEBDIR ;" +
                             "rm -rf $TMPDIR")
         self.assertEqual(cmdOut[0].strip(), "<html><body><p>Hello World!</p></body></html>")
