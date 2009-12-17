@@ -71,6 +71,8 @@ expectedRpms = [
                     "mono-basic",
                     "libgluezilla0",
                     "webkit-sharp",
+                    "monovs-server",
+                    "monovs-server-gui",
        # --------------------------------------------
                     "mono-winforms",
                     "libgdiplus0",
