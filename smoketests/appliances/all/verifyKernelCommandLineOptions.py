@@ -19,9 +19,9 @@ class verifyKernelCommandLineOptions(smokeTestCase):
     def test(self):
         appType = whichAppliance()
         if appType == "vmware":
-            expectedOptions = ["vga=0x314", "splash=silent"]
+            expectedOptions = ["loader=grub", "vga=0x314", "splash=silent"]
         elif appType == "vpc":
-            expectedOptions = ["vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
+            expectedOptions = ["loader=grub", "vga=0x314", "splash=silent", "noreplace-paravirt", "i8042.noloop", "clock=pit"]
         elif appType == "livecd":
             raise Exception("Not setup yet")
 

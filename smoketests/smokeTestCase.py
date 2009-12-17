@@ -277,8 +277,13 @@ class smokeTestCase(monoTestCase):
         self.assertFalse(found, "%s was found in %s" % (line, fileName))
 
     def verifyRpmDoesntOwnFile(self, fileName):
-        out = executeCmd("rpm -qf " + fileName)[0]
-        self.assertEqual(out, "file " + fileName + " is not owned by any package")
+        if os.path.isfile(fileName):
+            out = executeCmd("rpm -qf " + fileName)[0]
+            self.assertEqual(out, "file " + fileName + " is not owned by any package")
+        else:
+            printColor("\n\n\tError: File doesn't exist [" + fileName + "]",'red')
+            self.fail("Missing RPMs")
+            
 
     def verifyTheseRpmsAreInstalled(self, expectedRpms):
         rpms = executeCmd("rpm -qa --queryformat '%{NAME}\n'")[0:-1]

@@ -23,6 +23,7 @@ class verifyTheXdgAutoStartIconsData(smokeTestCase):
                   ("gnome-settings-daemon-helper.desktop",("Exec","/usr/lib/gnome-session/helpers/gnome-settings-daemon-helper"), ("Name","GNOME Settings Daemon Helper"), ("Type","Application")),
                   ("gnome-keyring-daemon.desktop",("Exec","gnome-keyring-daemon --start"), ("Name","GNOME Keyring Daemon"), ("Type","Application")),
                   ("gnome-volume-control-applet.desktop",("Exec","gnome-volume-control-applet"), ("Name","Volume Control"), ("Type","Application")),
+                  ("gnome-screensaver.desktop",("Exec","gnome-screensaver"), ("Name","Screensaver"), ("Type","Application")),
                   ("at-spi-registryd.desktop",("Exec","/usr/lib/at-spi/at-spi-registryd"), ("Name","AT SPI Registry Wrapper"), ("Type","Application")),
                   ("nm-applet.desktop",("Exec","nm-applet --sm-disable"),("Name","Network Manager"),("Type","Application")),
                   ("pulseaudio.desktop",("Exec","start-pulseaudio-x11"),("Name","PulseAudio Sound System"),("Type","Application")),
