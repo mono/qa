@@ -19,13 +19,13 @@ pkgs = {
 # These packages are unique to linux
 linux_pkgs = {
     'pkg-config --modversion gtk-sharp-2.0':    '2.12.9',
-    'pkg-config --modversion gnome-sharp-2.0':  '2.24.1',
+    'pkg-config --modversion gnome-sharp-2.0':  '2.24.0',
     'pkg-config --modversion mono-addins':      '0.4',
     'pkg-config --modversion mono-addins-gui' : '0.4',
     'pkg-config --modversion mono-addins-setup':'0.4',
     'pkg-config --modversion mono-zeroconf':    '0.9.0',
-    'pkg-config --modversion monodevelop':      '2.2',
-    'pkg-config --modversion monodevelop-core-addins':'2.2',
+    'pkg-config --modversion monodevelop':      '2.0',
+    'pkg-config --modversion monodevelop-core-addins':'2.0',
 }
 
 # These packages are unique to linux
