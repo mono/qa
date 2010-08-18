@@ -16,11 +16,12 @@ password=yourpassword
 $ cat ./common/defaults.conf
 
 [main]
-base_url = http://mono-mac1.provo.novell.com
-testrunid = 15510
+base_url = http://localhost
+testrunid = None
 
 xsp1_port = 8081
 xsp2_port = 8082
+xsp4_port = 8084
 graffiti_port = 8083
 apache_port = 80
 

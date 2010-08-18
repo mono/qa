@@ -34,8 +34,10 @@ base_url = None
 testrunid = None
 xsp1_port = None
 xsp2_port = None
+xsp4_port = None
 xsp1_url = None
 xsp2_url = None
+xsp4_url = None
 graffiti_url = None
 apache_url = None
 rc_server = None
@@ -46,6 +48,7 @@ apache_port = None
 verbose = None
 logfile = None
 usexsp2 = False
+usexsp4 = False
 username = None
 password = None
 failed = False
@@ -68,6 +71,7 @@ value_args = {
         'testrunid=':'Test run id in Testopia (use 0 or None to disable Testopia)',
         'xsp1_port=':'Port number that xsp1 is running on',
         'xsp2_port=':'Port number that xsp2 is running on',
+        'xsp4_port=':'Port number that xsp4 is running on',
         'graffiti_port=':'Port number that graffiti is running on',
         'apache_port=':'Port number that apache is running on',
         'rc_server=':'ip or dns of the Selenium RC server (do not prepend with \'http\')',
@@ -80,16 +84,17 @@ value_args = {
         'password=':'Password to login to Testopia',
         'logfile=':'Write debug output to this file',
         'usexsp2':'Use xsp2 port',
+        'usexsp4':'Use xsp4 port',
         'failed':'Only run failed tests',
 }
 
 #----------------------------------------------------------------------
 def __loadargs(cmdargs):
-    global base_url,testrunid,xsp1_port,xsp2_port
-    global xsp1_url,xsp2_url,graffiti_url,apache_url
+    global base_url,testrunid,xsp1_port,xsp2_port,xsp4_port
+    global xsp1_url,xsp2_url,xsp4_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, apache_port, verbose, logfile
-    global usexsp2
+    global usexsp2,usexsp4
     global username,password,failed
 
     longargs = value_args.keys()
@@ -112,6 +117,8 @@ def __loadargs(cmdargs):
             xsp1_port = int(a)
         elif o == '--xsp2_port':
             xsp2_port = int(a)
+        elif o == '--xsp4_port':
+            xsp4_port = int(a)
         elif o == '--graffiti_port':
             graffiti_port = int(a)
         elif o == '--apache_port':
@@ -130,6 +137,8 @@ def __loadargs(cmdargs):
             logfile = a
         elif o == '--usexsp2':
             usexsp2 = True
+        elif o == '--usexsp4':
+            usexsp4 = True
         elif o in ('--username','-u'):
             username = a
         elif o in ('--password','-p'):
@@ -142,6 +151,7 @@ def __loadargs(cmdargs):
 
         xsp1_url = "%s:%s" % (base_url,xsp1_port)
         xsp2_url = "%s:%s" % (base_url,xsp2_port)
+        xsp4_url = "%s:%s" % (base_url,xsp4_port)
         graffiti_url = "%s:%s" % (base_url,graffiti_port)
         apache_url = "%s:%s" % (base_url,apache_port)
 
@@ -172,11 +182,11 @@ def __loadConfigOption(option):
 
 #----------------------------------------------------------------------
 def __loadConfFile():
-    global base_url,testrunid,xsp1_port,xsp2_port
-    global xsp1_url,xsp2_url,graffiti_url,apache_url
+    global base_url,testrunid,xsp1_port,xsp2_port,xsp4_port
+    global xsp1_url,xsp2_url,xsp4_url,graffiti_url,apache_url
     global rc_server,rc_port,rc_browser
     global graffiti_port, apache_port, verbose,logfile
-    global usexsp2,config
+    global usexsp2,usexsp4,config
 
     conf_file = 'defaults.conf'
     conf_file_path = os.path.join(__getCommonDir(),conf_file)
@@ -195,6 +205,7 @@ def __loadConfFile():
 
     xsp1_port = __loadConfigOption('xsp1_port')
     xsp2_port = __loadConfigOption('xsp2_port')
+    xsp4_port = __loadConfigOption('xsp4_port')
     graffiti_port = __loadConfigOption('graffiti_port')
     apache_port = __loadConfigOption('apache_port')
 
@@ -257,9 +268,10 @@ def __stringToIntOrNone(s):
         return int(s)
 #----------------------------------------------------------------------
 def __setUrls():
-    global xsp1_url,xsp2_url,graffiti_url,apache_url
+    global xsp1_url,xsp2_url,xsp4_url,graffiti_url,apache_url
     xsp1_url = '%s:%s' % (base_url,xsp1_port)
     xsp2_url = '%s:%s' % (base_url,xsp2_port)
+    xsp4_url = '%s:%s' % (base_url,xsp4_port)
     graffiti_url = '%s:%s' % (base_url,graffiti_port)
     apache_url = '%s:%s' % (base_url,apache_port)
 
@@ -271,6 +283,7 @@ def __printValues():
 
     print "\nxsp1_port = %s" % str(xsp1_port)
     print "xsp2_port = %s" % str(xsp2_port)
+    print "xsp4_port = %s" % str(xsp4_port)
     print "graffiti_port = %s" % str(graffiti_port)
     print "apache_port = %s" % str(apache_port)
 
@@ -282,6 +295,7 @@ def __printValues():
     print "verbose = %s" % verbose
     print "logfile = %s" % logfile
     print "usexsp2 = %s\n" % str(usexsp2)
+    print "usexsp4 = %s\n" % str(usexsp4)
 
 #----------------------------------------------------------------------
 def __usage():
@@ -311,10 +325,12 @@ def log(msg):
 #    main methods
 #
 
-def monotesting_main(_usexsp2=False):
+def monotesting_main(_usexsp2=False, _usexsp4=False):
     args = sys.argv[1:]
     if _usexsp2:
         args += ['--usexsp2']
+    if _usexsp4:
+        args += ['--usexsp4']
     __loadConfFile()
     __loadargs(args)
     __loadCredentials()
