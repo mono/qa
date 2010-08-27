@@ -20,14 +20,14 @@ class AspNetFramework_browserCaps(xsp1TestCase):
             sel.wait_for_page_to_load("30000")
             try:
                 # The following xpath refers to the "ActiveXControls" "False" table entry
-                activeXControlsXPath = "//table[@id='dg']/tbody/tr/td[text()='ActiveXControls']/following-sibling::td[1]"
+                activeXControlsXPath = "//table/tbody/tr/td[text()='ActiveXControls']/following-sibling::td[1]"
                 self.assertEqual("False", sel.get_text(activeXControlsXPath))
             except AssertionError, e:
                 self.verificationErrors.append("ActiveXControls test: " + str(e))
 
             try:
                 # The following xpath refers to the "Browser" "Firefox" table entry
-                browserXPath = "//table[@id='dg']/tbody/tr/td[text()='Browser']/following-sibling::td[1]"
+                browserXPath = "//table/tbody/tr/td[text()='Browser']/following-sibling::td[1]"
                 browser_txt = sel.get_text(browserXPath)
                 txt_ok = False
                 if browser_txt == "Firefox" or browser_txt == "Mozilla":
@@ -38,14 +38,14 @@ class AspNetFramework_browserCaps(xsp1TestCase):
 
             try:
                 # The following xpath refers to the "Tables" "True" table entry
-                tablesXPath = "//table[@id='dg']/tbody/tr/td[text()='Tables']/following-sibling::td[1]"
+                tablesXPath = "//table/tbody/tr/td[text()='Tables']/following-sibling::td[1]"
                 self.assertEqual("True", sel.get_text(tablesXPath))
             except AssertionError, e:
                 self.verificationErrors.append("Tables test: " + str(e))
 
             try:
                 # The following xpath refers to the "TagWriter" "System.Web.UI.HtmlTextWriter" table entry
-                tagWriterXPath = "//table[@id='dg']/tbody/tr/td[text()='TagWriter']/following-sibling::td[1]"
+                tagWriterXPath = "//table/tbody/tr/td[text()='TagWriter']/following-sibling::td[1]"
                 self.assertEqual("System.Web.UI.HtmlTextWriter", sel.get_text(tagWriterXPath))
             except AssertionError, e:
                 self.verificationErrors.append("System.Web.UI.HtmlTextWriter test: " + str(e))
