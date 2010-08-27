@@ -21,7 +21,9 @@ class HtmlControls_HtmlAnchor(xsp1TestCase):
             self.failUnless(sel.is_text_present("Go mono!"))
             sel.click("myAnchor")
             sel.wait_for_page_to_load("30000")
-            self.failUnless(sel.is_text_present("Mono Project News"))
+            self.failUnless(sel.is_text_present("Mono"))
+            self.failUnless(sel.is_text_present(".NET"))
+            self.failUnless(sel.is_text_present("C#"))
 
         except Exception,e:
             self.verificationErrors.append(str(e))

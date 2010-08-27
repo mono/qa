@@ -20,46 +20,32 @@ class AspNetFramework_browserCaps(xsp1TestCase):
             sel.wait_for_page_to_load("30000")
             try:
                 # The following xpath refers to the "ActiveXControls" "False" table entry
-                activeXControlsXPath = "//table[@id='dg']/tbody/tr[2]/td[2]"
-
+                activeXControlsXPath = "//table[@id='dg']/tbody/tr/td[text()='ActiveXControls']/following-sibling::td[1]"
                 self.assertEqual("False", sel.get_text(activeXControlsXPath))
             except AssertionError, e:
                 self.verificationErrors.append("ActiveXControls test: " + str(e))
 
             try:
                 # The following xpath refers to the "Browser" "Firefox" table entry
-                if not mono.usexsp2:
-                    browserXPath = "//table[@id='dg']/tbody/tr[6]/td[2]"
-                else:
-                    browserXPath = "//table[@id='dg']/tbody/tr[7]/td[2]"
+                browserXPath = "//table[@id='dg']/tbody/tr/td[text()='Browser']/following-sibling::td[1]"
                 browser_txt = sel.get_text(browserXPath)
+                txt_ok = False
                 if browser_txt == "Firefox" or browser_txt == "Mozilla":
-                    txt_ok = "True"
-                else:
-                    txt_ok = "False"
-                print(browser_txt + browserXPath)
-                self.assertEqual(txt_ok, "True")
+                    txt_ok = True
+                self.assertEqual(txt_ok, True)
             except AssertionError, e:
                 self.verificationErrors.append("Browser test: " + str(e))
 
             try:
                 # The following xpath refers to the "Tables" "True" table entry
-                if not mono.usexsp2:
-                    tablesXPath = "//table[@id='dg']/tbody/tr[20]/td[2]"
-                else:
-                    tablesXPath = "//table[@id='dg']/tbody/tr[107]/td[2]"
-
+                tablesXPath = "//table[@id='dg']/tbody/tr/td[text()='Tables']/following-sibling::td[1]"
                 self.assertEqual("True", sel.get_text(tablesXPath))
             except AssertionError, e:
                 self.verificationErrors.append("Tables test: " + str(e))
 
             try:
                 # The following xpath refers to the "TagWriter" "System.Web.UI.HtmlTextWriter" table entry
-                if not mono.usexsp2:
-                    tagWriterXPath = "//table[@id='dg']/tbody/tr[21]/td[2]"
-                else:
-                    tagWriterXPath = "//table[@id='dg']/tbody/tr[108]/td[2]"
-
+                tagWriterXPath = "//table[@id='dg']/tbody/tr/td[text()='TagWriter']/following-sibling::td[1]"
                 self.assertEqual("System.Web.UI.HtmlTextWriter", sel.get_text(tagWriterXPath))
             except AssertionError, e:
                 self.verificationErrors.append("System.Web.UI.HtmlTextWriter test: " + str(e))
