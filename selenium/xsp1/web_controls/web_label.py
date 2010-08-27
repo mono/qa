@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebLabel(xsp1TestCase):
     xsp1TestCaseId = 839929
     xsp2TestCaseId = 861818
+    xsp4TestCaseId = None
     Label1Xpath = "//*[@id=\"lbl1\"]"
     Label2XPath = "//*[@id=\"lbl2\"]"
     

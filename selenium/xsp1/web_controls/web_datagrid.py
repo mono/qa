@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebDataGrid(xsp1TestCase):
     xsp1TestCaseId = 838902
     xsp2TestCaseId = 861963
+    xsp4TestCaseId = None
 
     def _verifyRow(self, rowXPath, country, continent, abbr):
         self.assertEqual(country, self.selenium.get_text(rowXPath + "/td"))

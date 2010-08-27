@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class CustomControls_tabcontrolTest(xsp1TestCase):
     xsp1TestCaseId = 840314
     xsp2TestCaseId = 861724
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

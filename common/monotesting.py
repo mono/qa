@@ -280,22 +280,23 @@ def __printValues():
     print "Current values:"
     print "base_url = %s" % base_url
     print "testrunid = %s" % str(testrunid)
-
-    print "\nxsp1_port = %s" % str(xsp1_port)
+    print "\n"
+    print "xsp1_port = %s" % str(xsp1_port)
     print "xsp2_port = %s" % str(xsp2_port)
     print "xsp4_port = %s" % str(xsp4_port)
     print "graffiti_port = %s" % str(graffiti_port)
     print "apache_port = %s" % str(apache_port)
-
-    print "\nrc_server = %s" % rc_server
+    print "\n"
+    print "rc_server = %s" % rc_server
     print "rc_port = %s" % str(rc_port)
-    print "rc_browser = %s\n" % str(rc_browser)
-
+    print "rc_browser = %s" % str(rc_browser)
+    print "\n"
     print "username = %s" % username
     print "verbose = %s" % verbose
     print "logfile = %s" % logfile
-    print "usexsp2 = %s\n" % str(usexsp2)
-    print "usexsp4 = %s\n" % str(usexsp4)
+    print "usexsp2 = %s" % str(usexsp2)
+    print "usexsp4 = %s" % str(usexsp4)
+    print "\n"
 
 #----------------------------------------------------------------------
 def __usage():

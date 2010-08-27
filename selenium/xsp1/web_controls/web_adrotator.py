@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebAdRotator(xsp1TestCase):
     xsp1TestCaseId = 839924
     xsp2TestCaseId = 861798
+    xsp4TestCaseId = None
 
     def _runDancingMonkeyAd(self):
         while not self.selenium.is_element_present("//img[@alt='Dancing monkey']"):

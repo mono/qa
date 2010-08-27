@@ -23,6 +23,11 @@ class xsp1TestCase(seleniumTestCase):
     def __init__(self,methodname='test'):
         seleniumTestCase.__init__(self,methodname)
         self.usexsp2 = mono.usexsp2
+        self.usexsp4 = mono.usexsp4
+        if self.usexsp4:
+            checkOption(mono.xsp4_port,'xsp4_port')
+            self.port = mono.xsp4_port
+            self.testcaseid = self.xsp4TestCaseId
         if self.usexsp2:
             checkOption(mono.xsp2_port,'xsp2_port')
             self.port = mono.xsp2_port
@@ -31,7 +36,6 @@ class xsp1TestCase(seleniumTestCase):
             checkOption(mono.xsp1_port,'xsp1_port')
             self.port = mono.xsp1_port
             self.testcaseid = self.xsp1TestCaseId
-
 
 def monotesting_main():
     mono.monotesting_main()

@@ -18,7 +18,7 @@ from selenium.seleniumTestCase import seleniumTestCase
 
 ####################################################################
 #
-#    xsp1TestCase class
+#    xsp4TestCase class
 #
 
 class xsp4TestCase(seleniumTestCase):

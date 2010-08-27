@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebCheckBox(xsp1TestCase):
     xsp1TestCaseId = 838900
     xsp2TestCaseId = 861804
+    xsp4TestCaseId = None
 
     def _checkCheckbox(self, sel, locator):
         self.failUnless(sel.is_element_present(locator))

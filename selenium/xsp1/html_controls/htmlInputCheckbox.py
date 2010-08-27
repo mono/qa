@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class HtmlControls_HtmlInputCheckbox(xsp1TestCase):
     xsp1TestCaseId = 838540
     xsp2TestCaseId = 861712
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

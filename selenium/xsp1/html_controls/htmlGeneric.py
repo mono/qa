@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class HtmlControls_HtmlGeneric(xsp1TestCase):
     xsp1TestCaseId = 838537
     xsp2TestCaseId = 861709
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

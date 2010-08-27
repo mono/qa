@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebTable(xsp1TestCase):
     xsp1TestCaseId = 838909
     xsp2TestCaseId = 861809
+    xsp4TestCaseId = None
 
     def TableXPath(self, tr, td):
         return "//table[@id='myTable']/tbody/tr[" + tr + "]/td[" + td + "]"

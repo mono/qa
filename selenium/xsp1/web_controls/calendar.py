@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_Calendar(xsp1TestCase):
     xsp1TestCaseId = 838895
     xsp2TestCaseId = 861728
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

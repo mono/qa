@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class AspNetFramework_browserCaps(xsp1TestCase):
     xsp1TestCaseId = 838720
     xsp2TestCaseId = 861573
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

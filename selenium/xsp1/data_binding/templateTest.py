@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class templateTest (xsp1TestCase):
     xsp1TestCaseId = 840312
     xsp2TestCaseId = 861689
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class Handlers_MonoDoc (xsp1TestCase):
     xsp1TestCaseId = 840265
     xsp2TestCaseId = 861700
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

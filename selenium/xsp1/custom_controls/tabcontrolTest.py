@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class CustomControls_RegisterTest(xsp1TestCase):
     xsp1TestCaseId = 837902
     xsp2TestCaseId = 861725
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

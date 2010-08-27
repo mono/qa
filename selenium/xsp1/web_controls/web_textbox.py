@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebTextBox(xsp1TestCase):
     xsp1TestCaseId = 839936
     xsp2TestCaseId = 861810
+    xsp4TestCaseId = None
     Element1XPath = "//*[@id=\"txt1\"]"
     Element2XPath = "//*[@id=\"txt2\"]"
     Element3XPath = "//*[@id=\"txt3\"]"

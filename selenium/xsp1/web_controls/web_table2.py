@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebTable2(xsp1TestCase):
     xsp1TestCaseId = 839935
     xsp2TestCaseId = 861808
+    xsp4TestCaseId = None
     
     def test(self):
         if not mono.usexsp2:

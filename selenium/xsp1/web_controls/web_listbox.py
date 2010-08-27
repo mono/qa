@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebListBox(xsp1TestCase):
     xsp1TestCaseId = 838905
     xsp2TestCaseId = 861820
+    xsp4TestCaseId = None
     MultiSelectLabel = "//*[@id=\"lbm\"]"
     SingleSelectLabel = "//*[@id=\"lbs\"]"
 

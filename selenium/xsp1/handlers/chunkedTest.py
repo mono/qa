@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class Handlers_Chunked(xsp1TestCase):
     xsp1TestCaseId = 840262
     xsp2TestCaseId = 861697
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

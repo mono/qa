@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class Handlers_Async(xsp1TestCase):
     xsp1TestCaseId = 840261
     xsp2TestCaseId = 861696
+    xsp4TestCaseId = None
     
     def test(self):
         TestElementXpath = "//pre"

@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebCompareValidator(xsp1TestCase):
     xsp1TestCaseId = 838901
     xsp2TestCaseId = 861805
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

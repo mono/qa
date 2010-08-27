@@ -18,6 +18,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebService_TestService_EchoTest(xsp1TestCase):
     xsp1TestCaseId = 426296
     xsp2TestCaseId = 841152
+    xsp4TestCaseId = None
 
     def test(self):
         try:

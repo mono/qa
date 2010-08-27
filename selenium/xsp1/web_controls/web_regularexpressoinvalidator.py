@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebRegularExpressionValidator(xsp1TestCase):
     xsp1TestCaseId = 838908
     xsp2TestCaseId = 861816
+    xsp4TestCaseId = None
 
     def test(self):
     

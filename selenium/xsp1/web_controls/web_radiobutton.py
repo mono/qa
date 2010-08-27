@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebRadioButton(xsp1TestCase):
     xsp1TestCaseId = 839933
     xsp2TestCaseId = 861815
+    xsp4TestCaseId = None
 
     def ControlXPath(self, idx):
             return "//*[@id=\"r" + idx + "\"]"

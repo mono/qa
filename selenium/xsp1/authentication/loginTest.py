@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class Authentication_LoginTest(xsp1TestCase):
     xsp1TestCaseId = 837262
     xsp2TestCaseId = 861722
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class AspNetFramework_SerialTest(xsp1TestCase):
     xsp1TestCaseId = 837578
     xsp2TestCaseId = 861579
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

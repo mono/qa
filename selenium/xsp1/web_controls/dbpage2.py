@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_Dbpage2(xsp1TestCase):
     xsp1TestCaseId = 840269
     xsp2TestCaseId = 861785
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

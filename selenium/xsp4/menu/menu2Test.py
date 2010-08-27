@@ -10,7 +10,7 @@ if not basepath in sys.path:
     sys.path.append(basepath)
 
 import common.monotesting as mono
-        from selenium.xsp4.xsp4TestCase import xsp4TestCase
+from selenium.xsp4.xsp4TestCase import xsp4TestCase
 
 
 class menu_menu2Test(xsp4TestCase):

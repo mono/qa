@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class DataBinding_AttributeTest (xsp1TestCase):
     xsp1TestCaseId = 839039
     xsp2TestCaseId = 861686
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

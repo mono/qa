@@ -10,6 +10,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebImageButton(xsp1TestCase):
     xsp1TestCaseId = 838904
     xsp2TestCaseId = 863230
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

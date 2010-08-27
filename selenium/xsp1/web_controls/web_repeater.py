@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebRepeater(xsp1TestCase):
     xsp1TestCaseId = 839934
     xsp2TestCaseId = 861807
+    xsp4TestCaseId = None
     
     def ControlXPath(self, tr, td):
         if not mono.usexsp2:

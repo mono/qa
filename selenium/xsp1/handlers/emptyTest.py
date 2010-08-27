@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class Handlers_Empty(xsp1TestCase):
     xsp1TestCaseId = 840263
     xsp2TestCaseId = 861699
+    xsp4TestCaseId = None
 
     def test(self):
         BodyXpath = "//html"

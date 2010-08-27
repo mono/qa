@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class Handlers_WebHandler (xsp1TestCase):
     xsp1TestCaseId = 840264
     xsp2TestCaseId = 861702
+    xsp4TestCaseId = None
 
     def test(self):
         HeadingXpath = "//h1"

@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebXML(xsp1TestCase):
     xsp1TestCaseId = 838910
     xsp2TestCaseId = 861811
+    xsp4TestCaseId = None
 
     def ControlXPath(self, tbl, td):
         if not mono.usexsp2:

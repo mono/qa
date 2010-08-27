@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class HtmlControls_HtmlInputRadioButton(xsp1TestCase):
     xsp1TestCaseId = 838544
     xsp2TestCaseId = 861716
+    xsp4TestCaseId = None
 
     def test(self):
         if not self.canRun:

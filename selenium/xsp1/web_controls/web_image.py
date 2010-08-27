@@ -9,6 +9,7 @@ from selenium.xsp1.xsp1TestCase import xsp1TestCase
 class WebControls_WebImage(xsp1TestCase):
     xsp1TestCaseId = 839928
     xsp2TestCaseId = 861817
+    xsp4TestCaseId = None
 
     def test(self):
         TestElementXpath = "//*[@id=\"im\"]"
