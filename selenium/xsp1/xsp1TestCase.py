@@ -28,7 +28,7 @@ class xsp1TestCase(seleniumTestCase):
             checkOption(mono.xsp4_port,'xsp4_port')
             self.port = mono.xsp4_port
             self.testcaseid = self.xsp4TestCaseId
-        if self.usexsp2:
+        elif self.usexsp2:
             checkOption(mono.xsp2_port,'xsp2_port')
             self.port = mono.xsp2_port
             self.testcaseid = self.xsp2TestCaseId
