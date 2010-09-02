@@ -24,10 +24,10 @@ class CustomControls_RegisterTest(xsp1TestCase):
             sel.wait_for_page_to_load("30000")
 
             try:
-                if not mono.usexsp2:
-                    monoProjectXPath = "//form[@id='_ctl1']/table[2].0.1"
-                else:
+                if mono.usexsp2 or mono.usexsp4:
                     monoProjectXPath = "//form[@id='ctl01']/table[2].0.1"
+                else:
+                    monoProjectXPath = "//form[@id='_ctl1']/table[2].0.1"
 
                 self.assertEqual("Mono Project", sel.get_table(monoProjectXPath))
             except AssertionError, e:
@@ -39,10 +39,10 @@ class CustomControls_RegisterTest(xsp1TestCase):
             sel.wait_for_page_to_load("30000")
 
             try:
-                if not mono.usexsp2:
-                    googleXPath = "//form[@id='_ctl1']/table[2].0.3"
-                else:
+                if mono.usexsp2 or mono.usexsp4:
                     googleXPath = "//form[@id='ctl01']/table[2].0.3"
+                else:
+                    googleXPath = "//form[@id='_ctl1']/table[2].0.3"
 
                 self.assertEqual("Google", sel.get_table(googleXPath))
             except AssertionError, e:

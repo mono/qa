@@ -12,10 +12,11 @@ class WebControls_WebPlaceHolder(xsp1TestCase):
     xsp4TestCaseId = None
 
     def test(self):
-        if not mono.usexsp2:
-            ctl2 = "//*[@id=\"_ctl2\"]"
-        else:
+        if mono.usexsp2 or mono.usexsp4:
             ctl2 = "//*[@id=\"ctl02\"]"
+        else:
+            ctl2 = "//*[@id=\"_ctl2\"]"
+
         if not self.canRun:
             return
         try:

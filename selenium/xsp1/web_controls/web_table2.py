@@ -12,10 +12,10 @@ class WebControls_WebTable2(xsp1TestCase):
     xsp4TestCaseId = None
     
     def test(self):
-        if not mono.usexsp2:
-            FormCtl = "_ctl1"
-        else:
+        if mono.usexsp2 or mono.usexsp4:
             FormCtl = "ctl01"
+        else:
+            FormCtl = "_ctl1"
         ControlXPath = "//form[@id='" + FormCtl + "']/table/tbody/tr/td"
         TableXPath = "//html/body/form/table"
         if not self.canRun:

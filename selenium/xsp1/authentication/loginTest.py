@@ -22,24 +22,24 @@ class Authentication_LoginTest(xsp1TestCase):
             sel.type("UserEmail", "jdoe@somewhere.com")
             sel.type("UserPass", "password")
 
-            if not mono.usexsp2:
-                loginButtonName = "_ctl4"
-                loginButtonXPath = "//html/body/form/input[2]"
-            else:
+            if mono.usexsp2 or mono.usexsp4:
                 loginButtonName = "ctl04"
                 loginButtonXPath = "//html/body/form/input"
+            else:
+                loginButtonName = "_ctl4"
+                loginButtonXPath = "//html/body/form/input[2]"
 
             sel.click(loginButtonName)
             sel.wait_for_page_to_load("30000")
             sel.click("link=Authentication")
             sel.wait_for_page_to_load("30000")
 
-            if not mono.usexsp2:
-                signOutButtonName = "_ctl2"
-                signOutButtonXPath = "//html/body/form/input[2]"
-            else:
+            if mono.usexsp2 or mono.usexsp4:
                 signOutButtonName = "ctl02"
                 signOutButtonXPath = "//html/body/form/input"
+            else:
+                signOutButtonName = "_ctl2"
+                signOutButtonXPath = "//html/body/form/input[2]"
 
             try:
                 self.assertEqual("Signout", sel.get_value(signOutButtonXPath))

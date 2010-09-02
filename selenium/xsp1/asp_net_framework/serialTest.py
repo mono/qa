@@ -23,10 +23,10 @@ class AspNetFramework_SerialTest(xsp1TestCase):
             sel.wait_for_page_to_load("30000")
 
             for ix in range(30):
-                if not mono.usexsp2:
-                    buttonName = "_ctl2"
-                else:
+                if mono.usexsp2 or mono.usexsp4:
                     buttonName = "ctl02"
+                else:
+                    buttonName = "_ctl2"
 
                 sel.click(buttonName)
                 sel.wait_for_page_to_load("30000")

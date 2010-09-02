@@ -13,6 +13,7 @@ class WebControls_WebAdRotator(xsp1TestCase):
     xsp4TestCaseId = None
 
     def _runDancingMonkeyAd(self):
+        max_tries = 0
         while not self.selenium.is_element_present("//img[@alt='Dancing monkey']"):
             try:
                 self.failUnless(self.selenium.is_element_present("//img[@alt='Mono']"))
@@ -20,6 +21,9 @@ class WebControls_WebAdRotator(xsp1TestCase):
                 self.verificationErrors.append(str(e))
             self.selenium.refresh()
             self.selenium.wait_for_page_to_load("30000")
+            max_tries += 1
+            if max_tries == 10:
+                break
 
         self.selenium.click("//html/body/form/a/img")
         self.selenium.wait_for_page_to_load("30000")
@@ -32,6 +36,7 @@ class WebControls_WebAdRotator(xsp1TestCase):
         self.selenium.wait_for_page_to_load("30000")
 
     def _runMonoAd(self):
+        max_tries = 0
         while not self.selenium.is_element_present("//img[@alt='Mono']"):
             try:
                 self.failUnless(self.selenium.is_element_present("//img[@alt='Dancing monkey']"))
@@ -39,6 +44,9 @@ class WebControls_WebAdRotator(xsp1TestCase):
                 self.verificationErrors.append(str(e))
             self.selenium.refresh()
             self.selenium.wait_for_page_to_load("30000")
+            max_tries += 1
+            if max_tries == 10:
+                break
 
         self.selenium.click("//html/body/form/a/img")
         self.selenium.wait_for_page_to_load("30000")

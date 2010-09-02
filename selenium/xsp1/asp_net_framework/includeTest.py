@@ -24,10 +24,11 @@ class AspNetFramework_includeTest(xsp1TestCase):
             self.assertEqual("This is a default Two!", sel.get_text("Message2"))
             self.assertEqual("This is a label!", sel.get_text("Three"))
 
-            if not mono.usexsp2:
-                buttonName = "_ctl2"
-            else:
+            if mono.usexsp2 or mono.usexsp4:
                 buttonName = "ctl02"
+            else:
+                buttonName = "_ctl2"
+
             sel.click(buttonName)
 
             sel.wait_for_page_to_load("30000")

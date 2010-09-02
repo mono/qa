@@ -24,12 +24,12 @@ class WebControls_WebCompareValidator(xsp1TestCase):
             sel.type("Text1", "asdfer adf we")
             sel.type("Text2", "asdfer adf we")
 
-            if not mono.usexsp2:
-                checkButtonXPath = "_ctl4"
-                messageXPath = "//*[@id=\"_ctl3\"]"
-            else:
+            if mono.usexsp2 or mono.usexsp4:
                 checkButtonXPath = "ctl04"
                 messageXPath = "//*[@id=\"ctl03\"]"
+            else:
+                checkButtonXPath = "_ctl4"
+                messageXPath = "//*[@id=\"_ctl3\"]"
 
             sel.click(checkButtonXPath)
             sel.wait_for_page_to_load("30000")

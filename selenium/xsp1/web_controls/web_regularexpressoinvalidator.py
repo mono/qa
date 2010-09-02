@@ -12,18 +12,18 @@ class WebControls_WebRegularExpressionValidator(xsp1TestCase):
     xsp4TestCaseId = None
 
     def test(self):
-    
-        if not mono.usexsp2:
-            EnterButton = "_ctl11"
-            ctl4 = "_ctl4"
-            ctl7 = "_ctl7"
-            ctl10 = "_ctl10"
-        else:
+
+        if mono.usexsp2 or mono.usexsp4:
             EnterButton = "ctl11"
             ctl4 = "ctl04"
             ctl7 = "ctl07"
             ctl10 = "ctl10"
-            
+        else:
+            EnterButton = "_ctl11"
+            ctl4 = "_ctl4"
+            ctl7 = "_ctl7"
+            ctl10 = "_ctl10"
+
         if not self.canRun:
             return
         try:

@@ -21,10 +21,10 @@ class WebControls_Calendar(xsp1TestCase):
             sel.click("link=calendar")
             sel.wait_for_page_to_load("30000")
 
-            if not mono.usexsp2:
-                calendarXPath = "//form[@id='_ctl1']/h3"
-            else:
+            if mono.usexsp2 or mono.usexsp4:
                 calendarXPath = "//form[@id='ctl01']/h3"
+            else:
+                calendarXPath = "//form[@id='_ctl1']/h3"
 
             self.assertEqual("Calendar and properties", sel.get_text(calendarXPath))
             sel.click("link=14")

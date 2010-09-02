@@ -12,10 +12,10 @@ class WebControls_WebRepeater(xsp1TestCase):
     xsp4TestCaseId = None
     
     def ControlXPath(self, tr, td):
-        if not mono.usexsp2:
-            self.FormCtl = "_ctl1"
-        else:
+        if mono.usexsp2 or mono.usexsp4:
             self.FormCtl = "ctl01"
+        else:
+            self.FormCtl = "_ctl1"
         return "//form[@id='" + self.FormCtl + "']/table/tbody/tr[" + tr + "]/td[" + td + "]"
 
     def test(self):
