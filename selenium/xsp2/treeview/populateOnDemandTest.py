@@ -16,7 +16,7 @@ from selenium.xsp2.xsp2TestCase import xsp2TestCase
 class Treeview_PopulateOnDemand(xsp2TestCase):
     testcaseid = 865599
     __numFaults = 0
-    __maxTimeToPause = 0.100
+    __maxTimeToPause = 0.200
 
 
     def __waitForNodeToExpand(self, jsLocator):
