@@ -32,7 +32,11 @@ class ClassifiedsStarterKit_aa_CreateAd(apacheTestCase):
             sel.type("ctl00_Main_PostAdWizard_PriceTextBox", "200.00")
             sel.type("ctl00_Main_PostAdWizard_LocationDropDown_OtherLocationTextBox", "Salt Lake City")
             sel.select("ctl00_Main_PostAdWizard_NumDaysList", "label=14 days")
-            sel.click("ctl00_Main_PostAdWizard_FinishNavContainer_FinishButtonButton")
+            if sel.is_element_present("ctl00_Main_PostAdWizard_FinishNavContainer_FinishButtonButton"):
+                element = "ctl00_Main_PostAdWizard_FinishNavContainer_FinishButtonButton"
+            elif sel.is_element_present("ctl00_Main_PostAdWizard_FinishNavigationTemplateContainerID_FinishButton"):
+                element = "ctl00_Main_PostAdWizard_FinishNavigationTemplateContainerID_FinishButton"
+            sel.click(element)
             sel.wait_for_page_to_load("30000")
             sel.click("//a[@id='ctl00_TopMenuRepeater_ctl02_MenuLink']/span")
             sel.wait_for_page_to_load("30000")
