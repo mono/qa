@@ -27,7 +27,13 @@ class be_0400_createUserTest(apacheTestCase):
             sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_Password", "mono")
             sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_ConfirmPassword", "mono")
             sel.type("ctl00_cphAdmin_CreateUserWizard1_ctl02_Email", "mono@example.com")
-            sel.click("ctl00_cphAdmin_CreateUserWizard1_CustomNavContainer0_StepNextButtonButton")
+            if sel.is_element_present("ctl00_cphAdmin_CreateUserWizard1_CustomNavContainer0_StepNextButtonButton"):
+                element = "ctl00_cphAdmin_CreateUserWizard1_CustomNavContainer0_StepNextButtonButton"
+            elif sel.is_element_present("ctl00_cphAdmin_CreateUserWizard1_CustomNavigationTemplateContainerID0_StepNextButtonButton"):
+                element = "ctl00_cphAdmin_CreateUserWizard1_CustomNavigationTemplateContainerID0_StepNextButtonButton"
+            else:
+                element = "ctl00_cphAdmin_CreateUserWizard1_CustomNavContainer0_StepNextButtonButton"
+            sel.click(element)
             sel.wait_for_page_to_load("30000")
             
         except Exception,e:

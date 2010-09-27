@@ -23,18 +23,23 @@ class be_1100_ChangeUserProfileAsMonoUserTest(apacheTestCase):
             sel.wait_for_page_to_load("30000")
             for i in range(60):
                 try:
-                    if sel.is_element_present("//a/span[text()='profiles']"): break
+                    if sel.is_element_present("//a/span[text()='profiles']"):
+                        element_1 = "//a/span[text()='profiles']"
+                        break
+                    elif sel.is_element_present("//a/span[text()='Profiles']") :
+                        element_1 = "//a/span[text()='Profiles']"
+                        break
                 except: pass
                 time.sleep(1)
-            else: self.fail("time out")
-            sel.click("//a/span[text()='profiles']")
+            else: self.fail("time out" + "Could not find element" + element_1)
+            sel.click(element_1)
             sel.wait_for_page_to_load("30000")
             for i in range(60):
                 try:
                     if sel.is_element_present("//input[@id='ctl00_cphAdmin_tbDisplayName']"): break
                 except: pass
                 time.sleep(1)
-            else: self.fail("time out")
+            else: self.fail("time out" + "Could not find element //input[@id='ctl00_cphAdmin_tbDisplayName']")
             sel.type("//input[@id='ctl00_cphAdmin_tbDisplayName']", "Mono User")
             sel.type("ctl00_cphAdmin_tbFirstName", "Mono")
             sel.type("ctl00_cphAdmin_tbFirstName", "Rupert")

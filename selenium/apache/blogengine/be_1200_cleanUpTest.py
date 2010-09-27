@@ -56,7 +56,7 @@ class be_1200_cleanUpTest(apacheTestCase):
             else: self.fail("time out")
             sel.click("//a/span[text()='Categories']")
             sel.wait_for_page_to_load("30000")
-            sel.click("//table[@class='category']/tbody/tr/td[normalize-space(text())='Mono']/preceding-sibling::td/a[text()='Delete']")
+            sel.click("//tbody/tr/td[normalize-space(text())='Mono']/preceding-sibling::td/a[text()='Delete']")
             sel.wait_for_page_to_load("30000")
 ############
             mono.log("Delete the Mono Page")
