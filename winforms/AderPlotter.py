@@ -9,8 +9,8 @@ from winformsTestCase import winformsTestCase
 
 class WinForms_AderPlotterTest(winformsTestCase):
     testcaseid = 426249
-    #command = 'AderPlotter'
-    command = 'xeyes'
+    command = 'AderPlotter'
+    message = 'Add the Plot y=2*x'
 
 
 if __name__ == "__main__":

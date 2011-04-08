@@ -3,6 +3,7 @@ import sys
 import unittest
 import traceback
 import subprocess
+import Tkinter, tkMessageBox
 
 sys.path.append('..')
 import common.monotesting as mono
@@ -17,6 +18,9 @@ from common.monoTestCase import monoTestCase
 class winformsTestCase(monoTestCase):
     testcaseid = 0
     command = ''
+    global message
+    message = ''
+
     def __init__(self,methodname='runTest'):
         monoTestCase.__init__(self,methodname)
         self.verificationErrors = []
@@ -34,6 +38,9 @@ class winformsTestCase(monoTestCase):
         while i == 'r':
             # This works on osx 10.4
             proc = subprocess.Popen(self.command,shell=True) # This call breaks on my os 11.0 machine. Not sure why. Had to use popen2.Popen() instead
+            root = Tkinter.Tk()
+            root.withdraw()
+            tkMessageBox.showinfo("Test Instructions", self.message)
             proc.wait()
             i = raw_input("Did it pass? (y/n/r/I) ")
 
