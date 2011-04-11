@@ -96,6 +96,7 @@ def __loadargs(cmdargs):
     global graffiti_port, apache_port, verbose, logfile
     global usexsp2,usexsp4
     global username,password,failed
+    global message
 
     longargs = value_args.keys()
     shortargs = 'hvu:p:'

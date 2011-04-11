@@ -5,7 +5,12 @@ import traceback
 import subprocess
 import Tkinter, tkMessageBox
 
-sys.path.append('..')
+basepath = os.path.dirname(os.path.realpath(__file__))
+while not os.path.isfile(os.path.join(basepath,'common','monoTestCase.py')):
+    basepath = os.path.dirname(basepath)
+if not basepath in sys.path:
+    sys.path.append(basepath)
+
 import common.monotesting as mono
 from common.monoTestCase import monoTestCase
 
@@ -18,16 +23,16 @@ from common.monoTestCase import monoTestCase
 class winformsTestCase(monoTestCase):
     testcaseid = 0
     command = ''
-    global message
     message = ''
 
     def __init__(self,methodname='runTest'):
         monoTestCase.__init__(self,methodname)
         self.verificationErrors = []
+        self.canRun = True # This value is deprecated
 
     def setUp(self):
         mono.log("Setting up test case %d" % self.testcaseid)
-        self.canRun = self.isTestCaseInTestRun()
+        # self.canRun = self.isTestCaseInTestRun()
         if not self.canRun:
             mono.log("   Test case #%d is not found in the test run.... skipping" % self.testcaseid)
             return
@@ -53,6 +58,6 @@ class winformsTestCase(monoTestCase):
     def tearDown(self):
         if not self.canRun:
             return
-        self.updateTestCase(self.verificationErrors)
+        # self.updateTestCase(self.verificationErrors)
         self.assertEqual([], self.verificationErrors)
 
