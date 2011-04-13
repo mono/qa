@@ -7,7 +7,8 @@ from common.monotesting import *
 # sub directories
 # Add child test suites to test suite
 
-from aderplotter.alltests import *
+from AderPlotter426249 import *
+from AderPlotter426251 import *
 
 
 if __name__ == '__main__':

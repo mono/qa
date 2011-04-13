@@ -2,15 +2,15 @@
 
 import sys, unittest, time, re
 
-sys.path.append('../..')
+sys.path.append('..')
 import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_AderPlotter426249Test(winformsTestCase):
-    testcaseid = 426249
+class WinForms_AderPlotter426251Test(winformsTestCase):
+    testcaseid = 426251
     command = 'AderPlotter'
-    message = 'Add the Plot y=2*x'
+    message = 'Add the Plot y=sin(x)'
 
 
 if __name__ == "__main__":

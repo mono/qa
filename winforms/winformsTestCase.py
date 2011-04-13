@@ -1,5 +1,5 @@
 # vim:ts=4:expandtab:
-import sys
+import sys, os
 import unittest
 import traceback
 import subprocess
@@ -32,7 +32,6 @@ class winformsTestCase(monoTestCase):
 
     def setUp(self):
         mono.log("Setting up test case %d" % self.testcaseid)
-        # self.canRun = self.isTestCaseInTestRun()
         if not self.canRun:
             mono.log("   Test case #%d is not found in the test run.... skipping" % self.testcaseid)
             return
@@ -58,6 +57,5 @@ class winformsTestCase(monoTestCase):
     def tearDown(self):
         if not self.canRun:
             return
-        # self.updateTestCase(self.verificationErrors)
         self.assertEqual([], self.verificationErrors)
 

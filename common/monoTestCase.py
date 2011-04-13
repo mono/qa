@@ -15,10 +15,10 @@ import monotesting as mono
 
 class monoTestCase(unittest.TestCase):
 
-    def __init__(self,methodname="runTest"):
+    def __init__(self,methodname="runTest"):      
         unittest.TestCase.__init__(self,methodname)
         self.verificationErrors = []
-        self.testcaseid = 0
+        # self.testcaseid = 0
 
     #----------------------------------------------------------------------
     def isTestCaseInTestRun(self):
