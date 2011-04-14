@@ -38,17 +38,16 @@ class winformsTestCase(monoTestCase):
 
     def runTest(self):
         print "Executing script: %s" % self.command
-        i = 'r'
-        while i == 'r':
+        i = 2
+        while i == 2:
             # This works on osx 10.4
             proc = subprocess.Popen(self.command,shell=True) # This call breaks on my os 11.0 machine. Not sure why. Had to use popen2.Popen() instead
             root = Tkinter.Tk()
             root.withdraw()
-            tkMessageBox.showinfo("Test Instructions", self.message)
+            i = tkMessageBox._show(type='yesno', icon='warning', message=self.message + ' Did it pass?')
             proc.wait()
-            i = raw_input("Did it pass? (y/n/r/I) ")
 
-        if i == 'n':
+        if i == 1:
             self.verificationErrors.append('Did not pass')
 
 
@@ -58,4 +57,5 @@ class winformsTestCase(monoTestCase):
         if not self.canRun:
             return
         self.assertEqual([], self.verificationErrors)
+
 
