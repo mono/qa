@@ -44,7 +44,7 @@ class winformsTestCase(monoTestCase):
             proc = subprocess.Popen(self.command,shell=True) # This call breaks on my os 11.0 machine. Not sure why. Had to use popen2.Popen() instead
             root = Tkinter.Tk()
             root.withdraw()
-            i = tkMessageBox._show(type='yesno', icon='warning', message=self.message + ' Did it pass?')
+            i = tkMessageBox._show(type='yesno', icon='warning', message=self.message + '\nDid it pass?')
             proc.wait()
 
         if i == 1:
