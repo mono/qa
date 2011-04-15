@@ -10,7 +10,7 @@ from winformsTestCase import winformsTestCase
 class WinForms_SharpChess426283Test(winformsTestCase):
     testcaseid = 426283
     command = 'SharpChess'
-    message = 'Scramble then try to solve for one side'
+    message = 'Play a game against the computer'
 
 
 if __name__ == "__main__":

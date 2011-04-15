@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_PieChart426272Test(winformsTestCase):
-    testcaseid = 426272
-    command = 'PieChart'
-    message = 'Increase the value of a pie slice'
+class WinForms_GBrainy738631Test(winformsTestCase):
+    testcaseid = 738631
+    command = 'gbrainy'
+    message = 'Play a memory game'
 
 
 if __name__ == "__main__":
