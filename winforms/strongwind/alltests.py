@@ -1,13 +1,13 @@
 #!/usr/bin/python
 import sys
 
-sys.path.append('..')
+sys.path.append('../..')
 from common.monotesting import *
 
 # sub directories
 # Add child test suites to test suite
 
-from winforms.alltests import *
+from test import *
 
 
 if __name__ == '__main__':
