@@ -9,7 +9,7 @@ from winformsTestCase import winformsTestCase
 
 class WinForms_Monodoc429868Test(winformsTestCase):
     testcaseid = 429868
-    command = 'Monodoc'
+    command = 'monodoc'
     message = 'Look for Console.WriteLine in the index tab'
 
 

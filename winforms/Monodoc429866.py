@@ -9,7 +9,7 @@ from winformsTestCase import winformsTestCase
 
 class WinForms_Monodoc429866Test(winformsTestCase):
     testcaseid = 429866
-    command = 'Monodoc'
+    command = 'monodoc'
     message = 'Click the links in the right pane of the contents tab'
 
 

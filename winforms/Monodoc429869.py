@@ -9,7 +9,7 @@ from winformsTestCase import winformsTestCase
 
 class WinForms_Monodoc429869Test(winformsTestCase):
     testcaseid = 429869
-    command = 'Monodoc'
+    command = 'monodoc'
     message = 'Generate the searches using the search tab'
 
 

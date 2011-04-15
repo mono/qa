@@ -9,7 +9,7 @@ from winformsTestCase import winformsTestCase
 
 class WinForms_Monodoc429870Test(winformsTestCase):
     testcaseid = 429870
-    command = 'Monodoc'
+    command = 'monodoc'
     message = 'Search for WriteLine in the Search tab'
 
 

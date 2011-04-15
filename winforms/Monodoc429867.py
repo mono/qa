@@ -9,7 +9,7 @@ from winformsTestCase import winformsTestCase
 
 class WinForms_Monodoc429867Test(winformsTestCase):
     testcaseid = 429867
-    command = 'Monodoc'
+    command = 'monodoc'
     message = 'Generate the indexes using the index tab'
 
 
