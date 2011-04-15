@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
+class WinForms_Monodoc429867Test(winformsTestCase):
+    testcaseid = 429867
+    command = 'Monodoc'
+    message = 'Generate the indexes using the index tab'
 
 
 if __name__ == "__main__":

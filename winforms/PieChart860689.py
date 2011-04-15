@@ -7,11 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
-
+class WinForms_PieChart860689Test(winformsTestCase):
+    testcaseid = 860689
+    command = 'PieChart'
+    message = 'Print the pie chart to a non-default printer'
 
 if __name__ == "__main__":
     mono.monotesting_main()

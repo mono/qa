@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
+class WinForms_MonoCalendar426266Test(winformsTestCase):
+    testcaseid = 426266
+    command = 'MonoCalendar'
+    message = 'Create a multi-day appointment'
 
 
 if __name__ == "__main__":

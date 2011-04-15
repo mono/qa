@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
+class WinForms_myUML426288Test(winformsTestCase):
+    testcaseid = 426288
+    command = 'myUML'
+    message = 'Create a use case'
 
 
 if __name__ == "__main__":

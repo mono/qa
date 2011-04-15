@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
+class WinForms_SVGPad426281Test(winformsTestCase):
+    testcaseid = 426281
+    command = 'SVGPad'
+    message = 'Save the document'
 
 
 if __name__ == "__main__":

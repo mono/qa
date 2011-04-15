@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
+class WinForms_PolygonTriangulation426365Test(winformsTestCase):
+    testcaseid = 426365
+    command = 'PolygonTriangulation'
+    message = 'Draw a Polygon using mouse clicks'
 
 
 if __name__ == "__main__":

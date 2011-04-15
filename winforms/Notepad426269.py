@@ -7,10 +7,10 @@ import common.monotesting as mono
 from winformsTestCase import winformsTestCase
 
 
-class WinForms_MoMA496505Test(winformsTestCase):
-    testcaseid = 496505
-    command = 'echo "mono" | sudo -S mv -v /usr/lib/moma/Definitions/* /tmp/;moma'
-    message = 'Click Next\nClick on Check for newer version'
+class WinForms_Notepad426269Test(winformsTestCase):
+    testcaseid = 426269
+    command = 'Notepad'
+    message = 'Enter some text\nSave a test text file'
 
 
 if __name__ == "__main__":
